@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HogentX · 新加坡 / 马来西亚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&family=DM+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500&display=swap">
+<style>
+/* === THEME: navy / bone / antique gold — institutional briefing === */
+:root {
+  --stage-bg: #10162a;
+  --slide-bg: #1C2644;
+  --navy: #1C2644;
+  --cream: #F0ECE3;
+  --text-warm: #E2DCD0;
+  --muted: #8A96A8;
+  --hint: #4E5A6E;
+  --gold: #C8A870;
+  --border: rgba(226, 220, 208, 0.14);
+  --font-serif: 'Source Serif 4', 'Noto Serif SC', serif;
+  --font-body: 'DM Sans', 'Noto Sans SC', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Noto Sans SC', monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === FIXED STAGE (viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === TITLE SLIDE === */
+.slide { color: var(--text-warm); font-family: var(--font-body);
+  background-image: linear-gradient(rgba(226,220,208,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(226,220,208,0.035) 1px, transparent 1px);
+  background-size: 80px 80px; }
+.chrome { position: absolute; left: 120px; right: 120px; top: 72px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.12em; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+.chrome b { color: var(--gold); font-weight: 500; }
+.kicker { position: absolute; left: 120px; top: 230px; font-family: var(--font-mono); font-size: 24px; letter-spacing: 0.1em; color: var(--gold); }
+h1 { position: absolute; left: 120px; top: 290px; width: 1500px; font-family: var(--font-serif); font-weight: 900; font-size: 108px; line-height: 1.3; letter-spacing: 0; color: var(--cream); }
+h1 em { font-style: normal; color: var(--gold); }
+.rule { position: absolute; left: 120px; top: 612px; width: 160px; height: 2px; background: var(--gold); }
+.sub { position: absolute; left: 120px; top: 646px; width: 1300px; font-size: 32px; line-height: 1.6; color: var(--text-warm); opacity: 0.85; }
+.ledger { position: absolute; left: 120px; right: 120px; bottom: 96px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); }
+.cell { padding: 34px 40px 0 0; }
+.cell + .cell { padding-left: 40px; border-left: 1px solid var(--border); }
+.cell .n { font-family: var(--font-serif); font-weight: 600; font-size: 84px; line-height: 1; color: var(--gold); }
+.cell .n small { font-family: var(--font-mono); font-size: 30px; margin-left: 10px; }
+.cell .l { margin-top: 14px; font-size: 26px; color: var(--muted); line-height: 1.5; }
+
+/* === ANIMATION === */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); }
+.slide.visible .reveal { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.05s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.35s; } .d4 { transition-delay: 0.55s; }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+    <section class="slide active visible">
+      <div class="chrome reveal d1"><span><b>HOGENTX</b> · 酒店 AI 数字员工</span><span>新加坡 / 马来西亚 · 2026</span></div>
+      <p class="kicker reveal d2">投资人交流 · 寻找本地合作伙伴</p>
+      <h1 class="reveal d2">让每一间房，<br>卖出它<em>该有的价钱</em>。</h1>
+      <div class="rule reveal d3"></div>
+      <p class="sub reveal d3">已在自有品牌「住小叮」29 家门店日常运行的酒店经营助手，现进入新加坡与马来西亚。</p>
+      <div class="ledger reveal d4">
+        <div class="cell"><div class="n">10<small>项</small></div><div class="l">核心经营能力已上线</div></div>
+        <div class="cell"><div class="n">29<small>家</small></div><div class="l">自有门店日常使用</div></div>
+        <div class="cell"><div class="n">−64<small>%</small></div><div class="l">6 项日常任务用时（2 家门店实测）</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+/* === STAGE SCALE === */
+const stage = document.getElementById('deckStage');
+function fit() { const f = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `translate(${(innerWidth - 1920 * f) / 2}px, ${(innerHeight - 1080 * f) / 2}px) scale(${f})`; }
+fit(); addEventListener('resize', fit);
+</script>
+</body>
+</html>

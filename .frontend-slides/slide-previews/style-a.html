@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HogentX · 新加坡 / 马来西亚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+/* === THEME: HogentX brand blue (from hogentx.com, #2d60ff) === */
+:root {
+  --stage-bg: #e9edf7;
+  --slide-bg: #ffffff;
+  --brand: #2d60ff;
+  --brand-deep: #1a3fd1;
+  --ink: #0b1020;
+  --ink-soft: #4a5368;
+  --on-brand: #ffffff;
+  --font-display: 'Manrope', 'Noto Sans SC', sans-serif;
+  --font-body: 'Noto Sans SC', 'Manrope', sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === FIXED STAGE (viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === TITLE SLIDE === */
+.slide { font-family: var(--font-body); color: var(--ink); }
+.top { position: absolute; left: 0; top: 0; width: 1920px; height: 640px; padding: 72px 120px 0; }
+.brandmark { display: flex; align-items: center; gap: 18px; font-family: var(--font-display); font-weight: 800; font-size: 40px; letter-spacing: -0.5px; }
+.brandmark img { width: 56px; height: 56px; }
+.meta { position: absolute; right: 120px; top: 84px; font-size: 26px; color: var(--ink-soft); letter-spacing: 0.04em; }
+.kicker { margin-top: 92px; font-size: 30px; font-weight: 700; color: var(--brand); }
+h1 { margin-top: 22px; font-family: var(--font-body); font-weight: 900; font-size: 112px; line-height: 1.18; letter-spacing: 0; }
+.bottom { position: absolute; left: 0; top: 640px; width: 1920px; height: 440px; background: var(--brand); color: var(--on-brand); padding: 78px 120px 0; }
+.bottom::before { content: ''; position: absolute; left: 0; top: 0; width: 1920px; height: 10px; background: var(--brand-deep); }
+.stats { display: grid; grid-template-columns: 420px 480px 460px; gap: 60px; }
+.stat .n { font-family: var(--font-display); font-weight: 800; font-size: 120px; line-height: 1; letter-spacing: -2px; }
+.stat .n small { font-family: var(--font-body); font-size: 44px; font-weight: 700; margin-left: 8px; letter-spacing: 0; }
+.stat .l { margin-top: 18px; font-size: 30px; line-height: 1.45; opacity: 0.92; }
+.foot { position: absolute; left: 120px; bottom: 44px; font-size: 22px; opacity: 0.75; }
+.mascot { position: absolute; right: 120px; top: 470px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
+
+/* === ANIMATION === */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+.slide.visible .reveal { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.05s; } .d2 { transition-delay: 0.15s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.45s; } .d5 { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+    <section class="slide active visible">
+      <div class="top">
+        <div class="brandmark reveal d1"><img src="assets/favicon.svg" alt="">HogentX</div>
+        <div class="meta reveal d1">新加坡 · 马来西亚 合作交流 · 2026</div>
+        <p class="kicker reveal d2">懂经营的酒店 AI 数字员工</p>
+        <h1 class="reveal d3">让每一间房，<br>卖出它该有的价钱。</h1>
+      </div>
+      <div class="bottom">
+        <div class="stats">
+          <div class="stat reveal d4"><div class="n">10<small>项</small></div><div class="l">核心经营能力已上线</div></div>
+          <div class="stat reveal d4"><div class="n">29<small>家</small></div><div class="l">自有品牌「住小叮」门店<br>日常使用</div></div>
+          <div class="stat reveal d5"><div class="n">−64<small>%</small></div><div class="l">6 项日常任务用时<br>（2 家门店实测）</div></div>
+        </div>
+        <p class="foot">hogentx.com</p>
+      </div>
+      <img class="mascot reveal d5" src="assets/mascot-wave.png" alt="">
+    </section>
+  </main>
+</div>
+<script>
+/* === STAGE SCALE === */
+const stage = document.getElementById('deckStage');
+function fit() { const f = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `translate(${(innerWidth - 1920 * f) / 2}px, ${(innerHeight - 1080 * f) / 2}px) scale(${f})`; }
+fit(); addEventListener('resize', fit);
+</script>
+</body>
+</html>
