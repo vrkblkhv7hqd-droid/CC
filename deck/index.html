@@ -21,7 +21,7 @@
   --brand-line: #d6e0ff;
   --ink: #0b1020;
   --ink-soft: #4a5368;
-  --ink-mute: #7b8396;
+  --ink-mute: #5f6678;
   --line: #e4e8f1;
   --surface: #f7f8fb;
   --ok: #0e8a5f;
@@ -60,22 +60,24 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
    SHARED SLIDE FRAME: chrome (section + wordmark), body, footer
    =========================================== */
 .slide { font-family: var(--font-body); color: var(--ink); }
+.slide p, .slide li, .slide td, .slide h3, .slide h4 { text-wrap: pretty; }
 .chrome { position: absolute; left: 120px; right: 120px; top: 52px; height: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 22px; color: var(--ink-mute); letter-spacing: 0.04em; }
 .chrome .sec b { color: var(--brand); font-weight: 700; margin-right: 10px; font-family: var(--font-latin); }
 .chrome svg.wm { width: 124px; height: 31px; color: var(--ink); }
-.foot { position: absolute; left: 120px; right: 120px; bottom: 40px; display: flex; justify-content: space-between; font-size: 19px; color: var(--ink-mute); }
+.foot { position: absolute; left: 120px; right: 120px; bottom: 40px; display: flex; justify-content: space-between; font-size: 20px; color: var(--ink-mute); }
 .foot .pg { font-family: var(--font-latin); font-weight: 700; }
 .body { position: absolute; left: 120px; right: 120px; top: 128px; bottom: 100px; }
 .kicker { font-size: 26px; font-weight: 700; color: var(--brand); margin-bottom: 12px; }
 h2.t { font-size: 58px; line-height: 1.28; font-weight: 900; letter-spacing: 0; max-width: 1680px; }
 .lead { font-size: 29px; line-height: 1.6; color: var(--ink-soft); }
-.src { position: absolute; left: 120px; right: 120px; bottom: 76px; font-size: 18px; line-height: 1.5; color: var(--ink-mute); }
+.src { position: absolute; left: 120px; right: 120px; bottom: 76px; font-size: 20px; line-height: 1.5; color: var(--ink-mute); }
 .num { font-family: var(--font-latin); font-weight: 800; letter-spacing: -1px; }
 .pill { display: inline-flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 700; padding: 6px 16px; border-radius: 999px; }
 .pill::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
 .pill.ok { color: var(--ok); background: var(--ok-tint); }
 .pill.wip { color: var(--wip); background: var(--wip-tint); }
 .pill.co { color: var(--brand); background: var(--brand-tint); }
+.card.tint .pill.co { background: #fff; }
 .card { background: #fff; border: 1.5px solid var(--line); border-radius: 18px; padding: 36px 36px 32px; }
 .card.tint { background: var(--brand-tint); border-color: var(--brand-line); }
 .shot { border-radius: 16px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 24px 60px rgba(11, 16, 32, 0.12); background: #fff; }
@@ -112,7 +114,7 @@ html.static .deck-controls, html.static .edit-toggle, html.static .edit-hotzone 
 .cover .stat .n small { font-family: var(--font-body); font-size: 44px; font-weight: 700; margin-left: 8px; letter-spacing: 0; }
 .cover .stat .l { margin-top: 18px; font-size: 30px; line-height: 1.45; opacity: 0.92; }
 .cover .site { position: absolute; left: 120px; bottom: 44px; font-size: 22px; opacity: 0.78; font-family: var(--font-latin); }
-.cover .mascot { position: absolute; right: 120px; top: 470px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
+.cover .mascot { position: absolute; right: 120px; top: 364px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
 
 /* ===========================================
    02 ONE-PAGE SUMMARY
@@ -134,12 +136,12 @@ html.static .deck-controls, html.static .edit-toggle, html.static .edit-hotzone 
 .callout-big h4 { font-size: 32px; font-weight: 900; margin-top: 14px; }
 .callout-big p { font-size: 27px; line-height: 1.65; color: var(--ink-soft); margin-top: 18px; }
 .ledger h5 { display: flex; justify-content: space-between; font-size: 22px; font-weight: 700; color: var(--ink-mute); letter-spacing: 0.1em; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
-.lrow { display: grid; grid-template-columns: 60px 1fr 140px; align-items: center; height: 96px; border-bottom: 1px solid var(--line); }
+.lrow { display: grid; grid-template-columns: 60px 1fr 250px; align-items: center; height: 96px; border-bottom: 1px solid var(--line); }
 .lrow .i { font-family: var(--font-latin); font-weight: 700; font-size: 22px; color: var(--ink-mute); }
 .lrow .w { font-size: 30px; font-weight: 700; }
 .lrow .w s { text-decoration: none; color: var(--leak); margin-right: 10px; font-family: var(--font-latin); }
 .lrow .m { display: block; font-size: 21px; font-weight: 400; color: var(--ink-mute); margin-top: 4px; }
-.lrow .pill { justify-self: end; }
+.lrow .pill { justify-self: end; white-space: nowrap; }
 .lrow { opacity: 0; transform: translateX(24px); transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo); }
 .slide.visible .lrow { opacity: 1; transform: none; }
 .lrow:nth-of-type(1) { transition-delay: .25s } .lrow:nth-of-type(2) { transition-delay: .33s } .lrow:nth-of-type(3) { transition-delay: .41s }
@@ -157,7 +159,7 @@ html.static .lrow { transition: none !important; }
 .tile p { font-size: 22px; color: var(--ink-mute); margin-top: 8px; line-height: 1.55; }
 .market .takeaway { bottom: 40px; }
 /* 100% strip: SG room-tier mix / MY commission share. 2px surface gaps between segments. */
-.strip { position: absolute; left: 0; right: 0; top: 548px; }
+.strip { position: absolute; left: 0; right: 0; top: 500px; }
 .strip .cap2 { display: flex; justify-content: space-between; font-size: 22px; color: var(--ink-soft); margin-bottom: 12px; }
 .strip .cap2 b { color: var(--ink); }
 .strip .track { display: flex; gap: 2px; height: 56px; }
@@ -293,11 +295,11 @@ table.vs td.new { color: var(--ink); font-weight: 500; background: var(--brand-t
    14 WHAT WE BRING
    =========================================== */
 .give { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 46px; }
-.give .card { min-height: 560px; }
+.give .card { min-height: 600px; }
 .give .who { font-size: 24px; font-weight: 700; color: var(--brand); }
 .give h3 { font-size: 34px; font-weight: 900; margin: 10px 0 22px; line-height: 1.35; }
 .give ul { list-style: none; }
-.give li { font-size: 25px; line-height: 1.55; padding: 12px 0 12px 36px; position: relative; color: var(--ink-soft); }
+.give li { font-size: 24px; line-height: 1.55; padding: 12px 0 12px 36px; position: relative; color: var(--ink-soft); }
 .give li::before { content: '✓'; position: absolute; left: 0; top: 12px; color: var(--brand); font-weight: 900; }
 
 /* ===========================================
@@ -311,7 +313,7 @@ table.vs td.new { color: var(--ink); font-weight: 500; background: var(--brand-t
 .closing .contact .l { font-size: 22px; opacity: 0.8; }
 .closing .contact .v { font-family: var(--font-latin); font-size: 38px; font-weight: 800; margin-top: 8px; }
 .closing .contact .v.cn { font-family: var(--font-body); font-weight: 700; font-size: 34px; }
-.closing .mascot { position: absolute; right: 120px; top: 470px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
+.closing .mascot { position: absolute; right: 120px; top: 364px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
 .closing .sym-big { position: absolute; left: 120px; bottom: 56px; display: flex; gap: 18px; align-items: center; color: #fff; opacity: 0.9; }
 .closing .sym-big .sym { width: 30px; height: 35px; }
 .closing .sym-big .wm { width: 124px; height: 31px; }
@@ -331,14 +333,14 @@ table.mods td.p { width: 220px; }
 .tr { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; padding: 22px 26px; border-radius: 16px; background: var(--surface); }
 .tr h4 { font-size: 27px; font-weight: 900; }
 .tr p { font-size: 22px; line-height: 1.6; color: var(--ink-soft); margin-top: 6px; }
-.tr .pill { font-size: 19px; white-space: nowrap; }
+.tr .pill { font-size: 21px; white-space: nowrap; }
 table.land { width: 100%; border-collapse: collapse; margin-top: 36px; font-size: 24px; }
 table.land th { text-align: left; font-size: 21px; color: var(--ink-mute); padding: 0 20px 12px; border-bottom: 2px solid var(--ink); }
 table.land td { padding: 20px; border-bottom: 1px solid var(--line); line-height: 1.5; vertical-align: top; color: var(--ink-soft); }
 table.land td:first-child { font-weight: 700; color: var(--ink); width: 380px; }
 table.land tr.us td { background: var(--brand-tint); color: var(--ink); }
 table.land tr.us td:first-child { color: var(--brand); }
-.sources { columns: 2; column-gap: 60px; margin-top: 30px; font-size: 18.5px; line-height: 1.55; color: var(--ink-soft); }
+.sources { columns: 2; column-gap: 60px; margin-top: 30px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
 .sources p { break-inside: avoid; margin-bottom: 12px; }
 .sources b { color: var(--ink); }
 
@@ -377,53 +379,53 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
   <div class="band">
     <div class="stats">
       <div class="stat reveal d4"><div class="n">10<small>项</small></div><div class="l">核心经营能力已上线</div></div>
-      <div class="stat reveal d4"><div class="n">29<small>家</small></div><div class="l">自有品牌「住小叮」门店<br>日常使用</div></div>
-      <div class="stat reveal d5"><div class="n">−64<small>%</small></div><div class="l">6 项日常任务用时<br>（29 家自有门店实验）</div></div>
+      <div class="stat reveal d4"><div class="n">29<small>家</small></div><div class="l">自有品牌「住小叮」酒店<br>已全部用上</div></div>
+      <div class="stat reveal d5"><div class="n">−64<small>%</small></div><div class="l">6 项日常任务用时<br>（29 家自营酒店实验）</div></div>
     </div>
     <p class="site">hogentx.com</p>
   </div>
   <img class="mascot reveal d5" src="assets/site/mascot-wave.png" alt="">
-  <aside class="notes">【约 30 秒】开场。感谢时间。一句话介绍：HogentX 是我们在自己的连锁酒店里先跑通、再拿出来的酒店 AI 数字员工。今天不讲概念，只讲三件事：它解决什么问题、在我们自己的 29 家店里效果如何、在新马能为酒店和本地伙伴带来什么。</aside>
+  <aside class="notes">【约 30 秒】开场。感谢时间。一句话介绍：HogentX 是我们在自己的连锁酒店里先用出成效、再拿出来的酒店 AI 数字员工。今天不讲概念，只讲三件事：它解决什么问题、在我们自己的 29 家店里效果如何、在新马能为酒店和本地伙伴带来什么。</aside>
 </section>
 
 <!-- =========================================================
      02 · ONE-PAGE SUMMARY
      ========================================================= -->
 <section class="slide" data-label="一页看懂">
-  <header class="chrome"><span class="sec"><b>01</b>一页看懂</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">一页看懂</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">一页看懂</p>
-    <h2 class="t reveal d2">在自己酒店里跑通的 AI 数字员工，现在来到新马</h2>
+    <h2 class="t reveal d2">先在自家酒店用出成效，现在带到新马</h2>
     <div class="trio">
-      <div class="card reveal d3"><span class="no">01</span><h3>我们是谁</h3><p>HogentX 由新加坡公司 <b>Intent Computing</b> 打造，是酒店的 AI 数字员工：盯价格、盯房态、回点评、管质检，<b>一句话就能派活</b>。</p></div>
-      <div class="card reveal d4"><span class="no">02</span><h3>已经验证了什么</h3><p>在自有品牌「住小叮」<b>29 家门店</b>日常使用；<b>10 项</b>经营能力已上线；6 项日常任务用时减少约 <b>64%</b>。</p></div>
-      <div class="card tint reveal d5"><span class="no">03</span><h3>来新马做什么</h3><p>把已经跑通的能力带给新马酒店：<b>先免费用起来</b>，再与本地伙伴一起做好接入、培训和服务。</p></div>
+      <div class="card reveal d3"><span class="no">01</span><h3>我们是谁</h3><p>我们在中国经营连锁酒店「住小叮」。HogentX 是先给自家酒店用的 AI 数字员工：盯价格、盯房态、回点评、管质检，<b>一句话就能交代工作</b>。由新加坡公司 <b>Intent Computing</b> 打造。</p></div>
+      <div class="card reveal d4"><span class="no">02</span><h3>已经验证了什么</h3><p>自有品牌「住小叮」<b>29 家酒店</b>已全部用上；<b>10 项</b>经营能力已上线；6 项日常任务用时减少约 <b>64%</b>。</p></div>
+      <div class="card tint reveal d5"><span class="no">03</span><h3>来新马做什么</h3><p>把验证过的能力带给新马酒店：<b>先免费试用</b>，再与本地伙伴一起做好接入和服务。</p></div>
     </div>
     <div class="status-row reveal d6"><span class="pill ok">已上线 10 项能力</span><span class="pill wip">收益管理升级 · 验证中</span><span class="pill wip">AI 直销与免费官网 · 开发中</span></div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 1.5 分钟】用这一页把全场讲清楚，后面每一页都是展开。重点强调：①我们不是先做产品再找酒店，而是自己开酒店、自己先用；②29 家门店每天在用；③来新马的方式是"先让酒店用起来"，和本地伙伴一起服务。三个状态标签要说清楚：哪些已上线、哪些在验证、哪些在开发。</aside>
+  <aside class="notes">【约 1.5 分钟】用这一页把全场讲清楚，后面每一页都是展开。重点强调：①我们不是先做产品再找酒店，而是自己开酒店、自己先用；②29 家酒店每天在用；③来新马的方式是"先让酒店用起来"，和本地伙伴一起服务。三个状态标签要说清楚：哪些已上线、哪些在验证、哪些在开发。</aside>
 </section>
 
 <!-- =========================================================
      03 · PROBLEM: REVENUE LEAKS
      ========================================================= -->
 <section class="slide" data-label="问题">
-  <header class="chrome"><span class="sec"><b>02</b>问题</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">问题</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">问题</p>
-    <h2 class="t reveal d2">酒店的收入很少一次丢掉，而是每天一点点漏掉</h2>
+    <h2 class="t reveal d2">收入不是一次丢掉的，而是每天漏掉一点</h2>
     <div class="leak-grid">
       <div class="callout-big reveal d3">
         <div class="num">5<small>+</small></div>
-        <h4>店长每天要登录的后台</h4>
+        <h4>经理每天要登录的后台</h4>
         <p>订房平台、PMS、点评、质检……逐个打开、逐项检查。问题往往在被发现时，损失已经发生：房间空着、价格错了、差评没回。</p>
       </div>
       <div class="ledger">
-        <h5><span>收入流失的地方 · HogentX 对应能力</span><span>状态</span></h5>
-        <div class="lrow"><span class="i">01</span><span class="w"><s>−</s>未来空房发现太晚<span class="m">出租率与预订进度监测 · 小时级间夜监测</span></span><span class="pill ok">已上线</span></div>
+        <h5><span>收入流失的地方 · HogentX 对应能力</span><span>产品状态</span></h5>
+        <div class="lrow"><span class="i">01</span><span class="w"><s>−</s>未来空房发现太晚<span class="m">入住率与预订进度监测 · 每小时订房监测</span></span><span class="pill ok">已上线 · 新马需 PMS</span></div>
         <div class="lrow"><span class="i">02</span><span class="w"><s>−</s>价格偏高丢单、偏低少收<span class="m">竞品与划线价对比 · 调价建议</span></span><span class="pill ok">已上线</span></div>
-        <div class="lrow"><span class="i">03</span><span class="w"><s>−</s>有房漏卖、没房接单<span class="m">房态巡检：PMS 与订房平台开售状态核对</span></span><span class="pill ok">已上线</span></div>
+        <div class="lrow"><span class="i">03</span><span class="w"><s>−</s>有房漏卖、没房接单<span class="m">房态巡检：PMS 与订房平台开售状态核对</span></span><span class="pill ok">已上线 · 新马需 PMS</span></div>
         <div class="lrow"><span class="i">04</span><span class="w"><s>−</s>改价慢、平台漏改<span class="m">多平台一键改价（人工确认后执行）</span></span><span class="pill ok">已上线</span></div>
         <div class="lrow"><span class="i">05</span><span class="w"><s>−</s>差评拖累下单与房价<span class="m">点评回复 · 质检与整改跟进</span></span><span class="pill ok">已上线</span></div>
         <div class="lrow"><span class="i">06</span><span class="w"><s>−</s>订房平台佣金<span class="m">AI 直销 + 免费酒店官网</span></span><span class="pill wip">开发中</span></div>
@@ -438,15 +440,15 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
      04 · MARKET: SINGAPORE
      ========================================================= -->
 <section class="slide market" data-label="新加坡">
-  <header class="chrome"><span class="sec"><b>03</b>市场 · 新加坡</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">市场 · 新加坡</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">市场 · 新加坡</p>
-    <h2 class="t reveal d2">新加坡：房间不愁卖，难的是卖对价格、留住人手</h2>
+    <h2 class="t reveal d2">新加坡：房间不愁卖，难在定价与人手</h2>
     <div class="tiles">
       <div class="tile reveal d3"><div class="num">82.6<small>%</small></div><h4>酒店平均入住率</h4><p>2026 年 1–8 月；7、8 月超过 91%</p></div>
       <div class="tile reveal d3"><div class="num">64<small>%</small></div><h4>客房属于中档与经济型</h4><p>约 4.26 万 / 6.68 万间（STB 数据）</p></div>
       <div class="tile reveal d4"><div class="num">S$3,600</div><h4>S Pass 最低月薪</h4><p>2027 年 1 月起（现为 S$3,300），外籍人手成本持续上升</p></div>
-      <div class="tile reveal d4"><div class="num">2026.11</div><h4>酒店业专属补贴方案类别开放</h4><p>11 月 1 日起纳入 EDGE 计划，首批为 AI 数字礼宾</p></div>
+      <div class="tile reveal d4"><div class="num">2026.11</div><h4>EDGE 津贴新增酒店业类别</h4><p>11 月 1 日起开放，首批为 AI 数字礼宾方案</p></div>
     </div>
     <div class="strip reveal d5" role="img" aria-label="新加坡客房结构（STB 数据）：豪华 16.1%，高档 20.2%，中档 36.7%，经济型 27.0%">
       <div class="cap2"><span>新加坡酒店客房结构（按客房数，STB 数据）</span><span>约 6.68 万间</span></div>
@@ -456,20 +458,20 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
         <div class="seg hi" style="width:36.7%">中档 36.7%</div>
         <div class="seg hi2" style="width:27.0%">经济型 27.0%</div>
       </div>
-      <div class="brace"><span style="margin-left:36.3%;width:63.7%">中档 + 经济型 ≈ 64%：与住小叮同类型，HogentX 的主战场</span></div>
+      <div class="brace"><span style="margin-left:36.3%;width:63.7%">中档 + 经济型 ≈ 64%：HogentX 的主战场</span></div>
     </div>
-    <div class="takeaway reveal d5"><span class="arrow">→</span>入住率已经很高，增长空间主要来自价格与效率，这正是 HogentX 的强项</div>
+    <div class="takeaway reveal d5"><span class="arrow">→</span>入住率已高，增量在定价与效率：效率已有实测，定价升级正在验证</div>
   </div>
-  <p class="src">来源：SingStat 酒店月度统计 M550081（STB 数据）；CDL Hospitality Trusts 2024 年报（引 STB 数据）；新加坡 2026 年财政预算案；新加坡贸工部 SHA Hospitality Exchange 2026 致辞（2026.9）。</p>
+  <p class="src">来源：SingStat 酒店月度统计 M550081（STB 数据）；CDL Hospitality Trusts 2024 年报（引 STB 数据）；新加坡 2026 年财政预算案；贸工部政务部长致辞（2026.9）。</p>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】新加坡的特点：入住率已经很高，所以不是"把房间卖出去"的问题，而是"卖对价格、少用人"。三分之二的客房是中档和经济型，正好是我们在住小叮做的同类酒店。人手成本在持续上涨，政府也在补贴酒店用 AI。结论：价格和效率是新加坡酒店的主要增量。</aside>
+  <aside class="notes">【约 2 分钟】新加坡的特点：入住率已经很高，所以不是"把房间卖出去"的问题，而是"卖对价格、少用人"。三分之二的客房是中档和经济型，是我们的主战场。人手成本在持续上涨，政府也在用 EDGE 津贴推动酒店数字化（首批是 AI 数字礼宾方案，HogentX 目前不在名单内，被问到时如实说明）。结论：价格和效率是新加坡酒店的主要增量。</aside>
 </section>
 
 <!-- =========================================================
      05 · MARKET: MALAYSIA
      ========================================================= -->
 <section class="slide market" data-label="马来西亚">
-  <header class="chrome"><span class="sec"><b>04</b>市场 · 马来西亚</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">市场 · 马来西亚</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">市场 · 马来西亚</p>
     <h2 class="t reveal d2">马来西亚：客人来了，房间却没卖好</h2>
@@ -487,7 +489,7 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
       </div>
       <div class="brace"><span style="margin-left:80%;width:20%;color:var(--leak);border-color:var(--leak)">直销能省下的部分</span></div>
     </div>
-    <div class="takeaway reveal d5"><span class="arrow">→</span>需求在涨、平台依赖重、入住率偏低：收益管理和直销都有很大空间</div>
+    <div class="takeaway reveal d5"><span class="arrow">→</span>平台依赖重、入住率偏低：先管好 Agoda、Booking 上的价格与口碑，再做直销</div>
   </div>
   <p class="src">来源：马来西亚财政部；Tourism Malaysia 住宿业绩效调查（2025、2026 上半年）；MyBHA（Malay Mail 2026.3）；MyCC《OTA 市场审查》草案（2025.8，基于行业访谈）。</p>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
@@ -498,12 +500,12 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
      06 · PRODUCT: FOUR DIGITAL EMPLOYEES
      ========================================================= -->
 <section class="slide" data-label="产品">
-  <header class="chrome"><span class="sec"><b>05</b>产品</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">产品</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">产品</p>
-    <h2 class="t reveal d2">HogentX：一支数字员工团队，一句话就能派活</h2>
+    <h2 class="t reveal d2">四位数字员工，一句话就开工</h2>
     <div class="crew">
-      <div class="card reveal d3"><div class="ic"><img src="assets/site/employee-revenue.png" alt=""></div><h3>数字收益经理</h3><p class="role">盯价格、盯预订</p><ul><li>竞品价格对比</li><li>出租率与预订进度监测</li><li>调价建议</li><li>批量调价 · 多平台同步</li><li>价格围栏</li></ul></div>
+      <div class="card reveal d3"><div class="ic"><img src="assets/site/employee-revenue.png" alt=""></div><h3>数字收益经理</h3><p class="role">盯价格、盯预订</p><ul><li>竞品价格对比</li><li>入住率与预订进度监测</li><li>调价建议</li><li>批量调价 · 多平台同步</li><li>价格围栏</li></ul></div>
       <div class="card reveal d3"><div class="ic"><img src="assets/site/employee-relations.png" alt=""></div><h3>数字宾客关系专员</h3><p class="role">盯口碑</p><ul><li>关注宾客反馈</li><li>处理线上评价</li><li>差评回复生成与修改</li><li>确认后发布</li><li>回复状态跟踪</li></ul></div>
       <div class="card reveal d4"><div class="ic"><img src="assets/site/employee-quality.png" alt=""></div><h3>数字质检主管</h3><p class="role">盯服务品质</p><ul><li>质检模板与计划</li><li>检查任务派发</li><li>问题记录</li><li>整改跟进</li><li>验收与质检统计</li></ul></div>
       <div class="card reveal d4"><div class="ic"><img src="assets/site/employee-assistant.png" alt=""></div><h3>数字总经理助理</h3><p class="role">盯全局</p><ul><li>每日早安简报</li><li>重点事项汇总</li><li>异常提醒</li><li>处理进度查看</li></ul></div>
@@ -511,44 +513,44 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
     <div class="langs reveal d5">界面语言<span class="chip">中文</span><span class="chip">English</span><span class="chip">Bahasa Melayu</span><span class="chip">日本語</span><span class="chip">한국어</span><span style="margin-left:18px">Windows / macOS 客户端</span></div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】把 10 项能力翻译成酒店人熟悉的 4 个岗位。店长不需要学软件，像交代同事一样说一句话就能派活。界面支持中文、英文、马来文、日文、韩文，新马的华人老板和本地员工都能直接用。</aside>
+  <aside class="notes">【约 2 分钟】把 10 项能力翻译成酒店人熟悉的 4 个岗位。经理不需要学软件，像交代同事一样说一句话就能交代工作。界面支持中文、英文、马来文、日文、韩文，新马的华人老板和本地员工都能直接用。</aside>
 </section>
 
 <!-- =========================================================
      07 · HOW IT WORKS (human confirms)
      ========================================================= -->
 <section class="slide" data-label="工作方式">
-  <header class="chrome"><span class="sec"><b>06</b>工作方式</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">工作方式</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">工作方式</p>
-    <h2 class="t reveal d2">AI 负责发现和准备，店长负责拍板</h2>
+    <h2 class="t reveal d2">AI 负责发现和准备，经理负责拍板</h2>
     <div class="how">
       <div>
         <div class="steps">
           <div class="step reveal d3"><span class="k">1</span><div><h4>发现变化</h4><p>预订进度、每小时订房、竞品价格、房态异常，自动巡检</p></div></div>
           <div class="step reveal d3"><span class="k">2</span><div><h4>核查依据</h4><p>把触发原因、剩余房量、同期对比整理好，形成建议</p></div></div>
-          <div class="step me reveal d4"><span class="k">3</span><div><h4>店长确认</h4><p>逐条确认或保持现状；改价、发布回复都由人拍板</p></div></div>
-          <div class="step reveal d4"><span class="k">4</span><div><h4>跟踪结果</h4><p>平均房价、出租率、处理速度，复盘后进入下一轮</p></div></div>
+          <div class="step me reveal d4"><span class="k">3</span><div><h4>经理确认</h4><p>逐条确认或保持现状；改价、发布回复都由人拍板</p></div></div>
+          <div class="step reveal d4"><span class="k">4</span><div><h4>跟踪结果</h4><p>平均房价、入住率、处理速度，复盘后进入下一轮</p></div></div>
         </div>
       </div>
       <div class="reveal d4">
         <div class="shot"><img src="assets/site/screen-pricing.png" alt="HogentX 调价建议界面：每条建议附带触发条件与依据"></div>
-        <p class="cap">调价建议界面：每条建议都附带触发条件和依据，店长可逐条处理或保持现价（国内门店实拍界面）</p>
+        <p class="cap">调价建议界面：每条建议都附带触发条件和依据，可逐条处理或保持现价（中国版界面，渠道为中国平台；新马需接 PMS 后可用）</p>
       </div>
     </div>
     <div class="rule-line reveal d5"><b>产品硬约束</b><span>AI 不会直接改动任何平台上的价格或内容。涉及改价、发布回复等操作时，AI 只生成方案，最终提交始终由人确认。</span></div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】这一页回答"AI 会不会乱改价"。四步流程里，只有第 3 步需要人，而且必须有人。强调这是产品的硬约束，不是建议。截图是国内门店的真实界面，渠道名称是国内平台；在新马对应的是 Agoda、Booking。</aside>
+  <aside class="notes">【约 2 分钟】这一页回答"AI 会不会乱改价"。四步流程里，只有第 3 步需要人，而且必须有人。强调这是产品的硬约束，不是建议。截图是中国版系统界面，渠道是中国的平台。在新马，调价建议要先接通本地 PMS；Agoda、Booking 一键改价今天已可用。</aside>
 </section>
 
 <!-- =========================================================
      08 · A DAY IN THE LIFE (before / after)
      ========================================================= -->
-<section class="slide" data-label="店长的一天">
-  <header class="chrome"><span class="sec"><b>07</b>店长的一天</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+<section class="slide" data-label="酒店经理的一天">
+  <header class="chrome"><span class="sec">酒店经理的一天</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
-    <p class="kicker reveal d1">店长的一天</p>
+    <p class="kicker reveal d1">酒店经理的一天</p>
     <h2 class="t reveal d2">同样的工作量，换一种做法</h2>
     <table class="vs reveal d3">
       <thead><tr><th>运营动作</th><th>传统方式</th><th class="hx">用 HogentX</th></tr></thead>
@@ -558,7 +560,7 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
         <tr><td>回复一条差评</td><td class="old">30–60 分钟，主管审核后发布</td><td class="new">AI 10 秒出草稿，确认后发布</td></tr>
         <tr><td>每日巡查竞品价格</td><td class="old">每天约 1 小时，挨家看价格</td><td class="new">自动采集，异常时提醒</td></tr>
         <tr><td>下发质检任务</td><td class="old">群里发图、Excel 汇总</td><td class="new">后台派单、手机提交、一键验收</td></tr>
-        <tr><td>多门店执行追踪</td><td class="old">打电话、发消息催进度</td><td class="new">一张表看所有门店完成度</td></tr>
+        <tr><td>多酒店执行追踪</td><td class="old">打电话、发消息催进度</td><td class="new">一张表看所有酒店完成度</td></tr>
         <tr><td>经营日报</td><td class="old">手动汇总到 Excel，30–60 分钟</td><td class="new">AI 自动生成，图表化呈现</td></tr>
       </tbody>
     </table>
@@ -571,17 +573,17 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
      09 · PROOF (29 own hotels)
      ========================================================= -->
 <section class="slide" data-label="实测">
-  <header class="chrome"><span class="sec"><b>08</b>住小叮实测</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">住小叮实验</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
-    <p class="kicker reveal d1">住小叮实测</p>
-    <h2 class="t reveal d2">在自己的 29 家门店里，6 项日常任务用时减少约 64%</h2>
+    <p class="kicker reveal d1">住小叮实验</p>
+    <h2 class="t reveal d2">在自营的 29 家酒店里，6 项日常任务用时减少约 64%</h2>
     <div class="proof">
-      <div class="chart reveal d3" role="img" aria-label="6 项任务使用前后用时（分钟）：房态巡检 120→30，竞品监控 120→60，出租率监测 60→30，小时间夜监测 60→30，一键调价 60→12，划线价核查 60→12">
+      <div class="chart reveal d3" role="img" aria-label="6 项任务使用前后用时（分钟）：房态巡检 120→30，竞品监控 120→60，入住率监测 60→30，每小时订房监测 60→30，一键调价 60→12，划线价核查 60→12">
         <div class="legend"><span><i style="background:var(--bar-before)"></i>使用前</span><span><i style="background:var(--brand)"></i>使用 HogentX 后</span><span style="margin-left:auto;color:var(--ink-mute)">单位：分钟</span></div>
         <div class="row"><span class="lab">房态巡检</span><div class="bars"><div class="bw"><div class="bar b" style="--w:760px" title="房态巡检 · 使用前 120 分钟"></div><span class="v">120</span></div><div class="bw"><div class="bar a" style="--w:190px" title="房态巡检 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
         <div class="row"><span class="lab">竞品监控</span><div class="bars"><div class="bw"><div class="bar b" style="--w:760px" title="竞品监控 · 使用前 120 分钟"></div><span class="v">120</span></div><div class="bw"><div class="bar a" style="--w:380px" title="竞品监控 · 使用后 60 分钟"></div><span class="v a">60</span></div></div></div>
-        <div class="row"><span class="lab">出租率监测</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="出租率监测 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:190px" title="出租率监测 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
-        <div class="row"><span class="lab">小时间夜监测</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="小时间夜监测 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:190px" title="小时间夜监测 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
+        <div class="row"><span class="lab">入住率监测</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="入住率监测 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:190px" title="入住率监测 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
+        <div class="row"><span class="lab">每小时订房监测</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="每小时订房监测 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:190px" title="每小时订房监测 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
         <div class="row"><span class="lab">一键调价</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="一键调价 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:76px" title="一键调价 · 使用后 12 分钟"></div><span class="v a">12</span></div></div></div>
         <div class="row"><span class="lab">划线价核查</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="划线价核查 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:76px" title="划线价核查 · 使用后 12 分钟"></div><span class="v a">12</span></div></div></div>
       </div>
@@ -589,38 +591,38 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
         <div class="num">−64%</div>
         <h4>6 项日常任务合计用时</h4>
         <div class="tot"><span class="num">480</span> 分钟 → <span class="num" style="color:var(--brand)">174</span> 分钟</div>
-        <p class="note">实验范围：自有品牌「住小叮」29 家门店。<br>计量口径：店长管理 2 家门店时，6 项任务的合计用时；未覆盖店长全部工作。<br>来源：内部业务记录。</p>
+        <p class="note">实验范围：自有品牌「住小叮」29 家酒店（中国）。<br>计量口径：一位经理管理 2 家酒店时，6 项任务的合计用时；不含其他工作。<br>来源：内部业务反馈。</p>
       </div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2.5 分钟】全场最重要的一页。说清楚口径：这是我们自己 29 家门店的实验结果，按"一位店长管 2 家店"统计 6 项任务的合计用时，从 480 分钟降到 174 分钟。改价和划线价核查降得最多（60→12），因为原来要逐个后台操作。这只是省时间，还没算收益提升，收益在下一页。</aside>
+  <aside class="notes">【约 2.5 分钟】全场最重要的一页。说清楚口径：这是我们自己 29 家酒店的实验结果，按"一位经理管 2 家店"统计 6 项任务的合计用时，从 480 分钟降到 174 分钟。改价和划线价核查降得最多（60→12），因为原来要逐个后台操作。这只是省时间，还没算收益提升，收益在下一页。</aside>
 </section>
 
 <!-- =========================================================
      10 · REVENUE MANAGEMENT (validating)
      ========================================================= -->
 <section class="slide" data-label="收益管理">
-  <header class="chrome"><span class="sec"><b>09</b>正在验证</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">正在验证</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <div class="rm-head reveal d1"><p class="kicker" style="margin:0">正在验证</p><span class="pill wip">验证中 · 目标值，不是承诺</span></div>
-    <h2 class="t reveal d2">收益管理升级：目标让酒店收入再提升 10–20%</h2>
+    <h2 class="t reveal d2">收益管理升级：目标增收 10–20%</h2>
     <div class="rm">
-      <div class="card reveal d3"><h3>它做什么</h3><p>把预订进度、竞品价格、剩余房量放在一起，按日期、房型、平台给出更细的价格方案，店长确认后一键执行。</p></div>
-      <div class="card reveal d4"><h3>怎么衡量</h3><div class="metric">RevPAR<span>每间可售房收入</span></div><div class="metric">ADR<span>平均房价</span></div><div class="metric">OCC<span>出租率</span></div></div>
-      <div class="card tint reveal d5"><h3>何时分享</h3><p>正在住小叮门店验证。结果出来后，我们会把数据和方法第一时间与新马的伙伴同步。</p></div>
+      <div class="card reveal d3"><h3>它做什么</h3><p>把预订进度、竞品价格、剩余房量放在一起，按日期、房型、平台给出更细的价格方案，经理确认后一键执行。</p></div>
+      <div class="card reveal d4"><h3>怎么衡量</h3><div class="metric">RevPAR<span>每间可售房收入</span></div><div class="metric">ADR<span>平均房价</span></div><div class="metric">OCC<span>入住率</span></div></div>
+      <div class="card tint reveal d5"><h3>何时分享</h3><p>正在住小叮的酒店里验证。<br>结果出来后，欢迎一起看数据。</p></div>
     </div>
-    <div class="ref reveal d6"><span class="num">S$5,400 万</span><span>参考量级：新加坡 2025 年酒店客房收入约 S$53.7 亿，<b style="color:var(--ink)">每提升 1%</b>，全市场一年约多出 S$5,400 万。<br><span style="font-size:19px;color:var(--ink-mute)">测算依据：STB / SingStat 2025 年客房收入；仅为市场量级参考，不代表 HogentX 的效果承诺。</span></span></div>
+    <div class="ref reveal d6"><span class="num">S$5,400 万</span><span>参考量级：新加坡 2025 年酒店客房收入约 S$53.7 亿，<b style="color:var(--ink)">每提升 1%</b>，全市场一年约多出 S$5,400 万。<br><span style="font-size:21px;color:var(--ink-mute)">测算依据：STB / SingStat 2025 年客房收入；仅为市场量级参考，不代表 HogentX 的效果承诺。</span></span></div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 1.5 分钟】坦白说：这是正在验证的目标，不是已经拿到的结果。讲清楚怎么衡量（RevPAR、平均房价、出租率），以及结果出来会第一时间分享。下面的 S$5,400 万只是帮助理解市场量级：新加坡客房收入每提升 1% 的规模。</aside>
+  <aside class="notes">【约 1.5 分钟】坦白说：这是正在验证的目标，不是已经拿到的结果。讲清楚怎么衡量（RevPAR、平均房价、入住率），以及结果出来会第一时间分享。下面的 S$5,400 万只是帮助理解市场量级：新加坡客房收入每提升 1% 的规模。</aside>
 </section>
 
 <!-- =========================================================
      11 · AI DIRECT SALES (in development)
      ========================================================= -->
 <section class="slide" data-label="AI 直销">
-  <header class="chrome"><span class="sec"><b>10</b>下一步</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">下一步</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <div class="rm-head reveal d1"><p class="kicker" style="margin:0">下一步</p><span class="pill wip">开发中</span></div>
     <h2 class="t reveal d2">AI 直销：让酒店把更多房费留在自己手里</h2>
@@ -629,79 +631,79 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
         <div class="flow4">
           <div class="f reveal d3"><span class="k">1</span>旅客在 ChatGPT 等 AI 入口找酒店</div>
           <div class="f hl reveal d3"><span class="k">2</span>进入酒店的免费官网<small>由 HogentX 免费创建</small></div>
-          <div class="f reveal d4"><span class="k">3</span>直接预订、到店付款<small>原型设计：一期不收佣金</small></div>
+          <div class="f reveal d4"><span class="k">3</span>直接向酒店预订<small>不经第三方订房平台</small></div>
           <div class="f reveal d4"><span class="k">4</span>酒店在 HogentX 里统一管理订单</div>
         </div>
         <div class="facts reveal d5">
-          <div class="fact"><span class="num">26%</span><span>东南亚旅客规划行程时，生成式 AI 已是第二大工具（2026）</span></div>
-          <div class="fact"><span class="num">&lt;1%</span><span>但通过 AI 直接下单仍处早期（Booking 集团间夜占比）：我们选择提前就位</span></div>
+          <div class="fact"><span class="num">26%</span><span>东南亚 26% 的行程规划用到生成式 AI，已超过社交媒体（23%）</span></div>
+          <div class="fact"><span class="num">&lt;1%</span><span>但经 AI 直接下单仍在早期：Booking 集团来自 AI 的订房不到 1%，我们选择提前就位</span></div>
         </div>
       </div>
       <div class="reveal d4">
         <div class="shot"><img src="assets/product/ai-sales-website-prototype.png" alt="HogentX AI 销售：为酒店创建官网的页面原型，示例为吉隆坡虚构酒店"></div>
-        <p class="cap">页面原型：为酒店创建官网并实时预览。示例酒店与地址均为虚构。</p>
+        <p class="cap">页面原型（早期内部版本）：为酒店创建官网并实时预览。示例酒店与地址均为虚构。</p>
       </div>
     </div>
   </div>
   <p class="src">来源：Google、Temasek、Bain《e-Conomy SEA 2026》（2026.10）；Booking Holdings 2026 年第二季度业绩会（经媒体报道）。</p>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】这是正在开发的方向，讲清楚"开发中"。逻辑：马来西亚经济型酒店付 17–20% 佣金；旅客越来越多地用 AI 规划行程，但通过 AI 下单还很早期。所以我们的做法是先帮酒店免费建好官网、让 AI 能找到它，等这个入口起来时酒店已经就位。原型本身就是按马来西亚场景设计的（吉隆坡示例、WhatsApp 联系方式）。</aside>
+  <aside class="notes">【约 2 分钟】这是正在开发的方向，讲清楚"开发中"。逻辑：马来西亚经济型酒店付 17–20% 佣金；旅客越来越多地用 AI 规划行程，但通过 AI 下单还很早期。所以我们的做法是先帮酒店免费建好官网，同时验证让 AI 入口找到它的技术路径，等这个入口起来时酒店已经就位。原型用了马来西亚的示例场景（吉隆坡示例酒店、WhatsApp 联系方式）；收费与支付方式仍在验证。</aside>
 </section>
 
 <!-- =========================================================
      12 · READINESS FOR SG / MY
      ========================================================= -->
 <section class="slide" data-label="新马准备度">
-  <header class="chrome"><span class="sec"><b>11</b>新马准备度</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">新马准备度</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">新马准备度</p>
-    <h2 class="t reveal d2">已经具备的、正在做的、要和本地伙伴一起做的</h2>
+    <h2 class="t reveal d2">已经就绪、正在推进、和本地伙伴一起做</h2>
     <div class="ready">
       <div class="card reveal d3"><span class="pill ok">已具备</span><h3>今天就能用</h3><ul class="c-ok"><li><b>五种界面语言</b>：中文、English、Bahasa Melayu、日本語、한국어</li><li><b>已连接 Agoda、Booking.com</b>：马来西亚预订量最大的两家平台</li><li><b>竞品价格监测</b>可在当地运行</li><li><b>新加坡主体</b>：Intent Computing Pte. Ltd.</li></ul></div>
-      <div class="card reveal d4"><span class="pill wip">开发中</span><h3>正在推进</h3><ul class="c-wip"><li><b>更多订房平台</b>的连接</li><li><b>AI 直销与免费官网</b>：让酒店减少对平台的依赖</li><li><b>收益管理升级</b>：住小叮门店验证中</li></ul></div>
-      <div class="card tint reveal d5"><span class="pill co">与本地伙伴共建</span><h3>落地需要本地力量</h3><ul class="c-co"><li><b>对接本地 PMS</b>：打通后，出租率、房态巡检等能力全面可用</li><li><b>本地化接入与培训</b>：用酒店熟悉的语言和方式上手</li><li><b>就近服务</b>：离酒店更近，响应更及时</li></ul></div>
+      <div class="card reveal d4"><span class="pill wip">开发中</span><h3>正在推进</h3><ul class="c-wip"><li><b>更多订房平台</b>的连接</li><li><b>AI 直销与免费官网</b>：让酒店减少对平台的依赖</li><li><b>收益管理升级</b>：住小叮酒店验证中</li></ul></div>
+      <div class="card tint reveal d5"><span class="pill co">与本地伙伴共建</span><h3>落地需要本地力量</h3><ul class="c-co"><li><b>对接本地 PMS</b>：接通后，入住率、房态巡检等能力全面可用</li><li><b>本地化接入与培训</b>：用酒店熟悉的语言和方式上手</li><li><b>就近服务</b>：离酒店更近，响应更及时</li></ul></div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】主动把"还缺什么"讲出来，投资人最看重坦诚。已具备的四点里，Agoda 和 Booking 正好是马来西亚最大的两家平台，新加坡主体意味着合同、数据和服务都可以在本地完成。PMS 目前只接了国内的系统，新马的 PMS 对接需要和本地伙伴一起做，这也是我们最希望认识本地伙伴的原因（不必明说请求）。</aside>
+  <aside class="notes">【约 2 分钟】主动把"还缺什么"讲出来，投资人最看重坦诚。已具备的四点里，Agoda 和 Booking 正好是马来西亚最大的两家平台，新加坡主体意味着可以由本地公司签约；新马数据部署在新加坡正在规划中。PMS 目前只接了中国的系统，新马的 PMS 对接需要和本地伙伴一起做，这也是我们最希望认识本地伙伴的原因（不必明说请求）。</aside>
 </section>
 
 <!-- =========================================================
      13 · THREE-STEP PATH
      ========================================================= -->
 <section class="slide" data-label="落地路径">
-  <header class="chrome"><span class="sec"><b>12</b>落地路径</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">落地路径</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">落地路径</p>
-    <h2 class="t reveal d2">三步落地：先用起来，再打通，再增收</h2>
+    <h2 class="t reveal d2">三步落地：先用起来，再接通，再增收</h2>
     <div class="path">
       <div class="card on reveal d3"><span class="stepno">STEP 1 · 现在</span><h3>先用起来</h3><p class="sub">不需要对接 PMS，装好客户端、授权平台账号即可</p><div class="chips"><span class="chip">竞品与划线价监测</span><span class="chip">Agoda / Booking 一键改价</span><span class="chip">点评回复</span><span class="chip">质检与整改</span><span class="chip">早安简报</span></div></div>
       <div class="arr reveal d3">→</div>
-      <div class="card reveal d4"><span class="stepno">STEP 2</span><h3>打通本地 PMS</h3><p class="sub">与本地伙伴一起完成对接，10 项能力全面可用</p><div class="chips"><span class="chip">出租率与预订进度</span><span class="chip">小时级间夜监测</span><span class="chip">房态巡检</span><span class="chip">异常低价订单</span><span class="chip">调价建议</span></div></div>
+      <div class="card reveal d4"><span class="stepno">STEP 2</span><h3>接通本地 PMS</h3><p class="sub">对接本地 PMS（本地伙伴可协助），10 项能力全面可用</p><div class="chips"><span class="chip">入住率与预订进度</span><span class="chip">每小时订房监测</span><span class="chip">房态巡检</span><span class="chip">异常低价订单</span><span class="chip">调价建议</span></div></div>
       <div class="arr reveal d4">→</div>
-      <div class="card reveal d5"><span class="stepno">STEP 3</span><h3>直销增收</h3><p class="sub">免费官网 + AI 入口直订，降低对平台佣金的依赖</p><div class="chips"><span class="chip">免费酒店官网</span><span class="chip">AI 入口订房</span><span class="chip">订单统一管理</span><span class="chip">收益管理升级</span></div></div>
+      <div class="card reveal d5"><span class="stepno">STEP 3 · 开发 / 验证中</span><h3>直销与增收</h3><p class="sub">免费官网 + AI 入口直订，降低对平台佣金的依赖</p><div class="chips"><span class="chip">免费酒店官网</span><span class="chip">AI 入口订房</span><span class="chip">订单统一管理</span><span class="chip">收益管理升级</span></div></div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】第一步今天就能做：5 项能力不需要 PMS。第二步打通本地 PMS 后，剩下 5 项能力全部可用。第三步是直销和收益管理升级。让听众感到"门槛很低、可以马上开始"。</aside>
+  <aside class="notes">【约 2 分钟】第一步今天就能做：5 项能力不需要 PMS。第二步接通本地 PMS 后，剩下 5 项能力全部可用。第三步是直销和收益管理升级。让听众感到"门槛很低、可以马上开始"。</aside>
 </section>
 
 <!-- =========================================================
      14 · WHAT WE BRING
      ========================================================= -->
 <section class="slide" data-label="我们能带来什么">
-  <header class="chrome"><span class="sec"><b>13</b>我们能带来什么</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <header class="chrome"><span class="sec">我们能带来什么</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
     <p class="kicker reveal d1">我们能带来什么</p>
-    <h2 class="t reveal d2">我们希望先为新马酒店业做出实际贡献</h2>
+    <h2 class="t reveal d2">我们能为酒店、本地伙伴和您带来什么</h2>
     <div class="give">
-      <div class="card reveal d3"><p class="who">给酒店</p><h3>先免费用起来，<br>效果用数据说话</h3><ul><li>免费试用，装好即用</li><li>中文 / 英文 / 马来文上手培训</li><li>用住小叮同样的指标，一起复盘效果</li><li>改价、回复始终由酒店自己拍板</li></ul></div>
-      <div class="card reveal d4"><p class="who">给本地合作伙伴</p><h3>一套已经跑通的产品，<br>和长期的收入</h3><ul><li>已在 29 家门店日常使用的产品</li><li>长期收入分成</li><li>三语的销售与培训资料</li><li>产品与技术由我们负责，伙伴专注客户关系</li></ul></div>
-      <div class="card tint reveal d5"><p class="who">给关注酒店业的您</p><h3>第一手的<br>AI 落地经验</h3><ul><li>新马试点进展与数据，定期同步</li><li>收益管理验证结果，第一时间分享</li><li>随时欢迎来体验产品、看真实界面</li></ul></div>
+      <div class="card reveal d3"><p class="who">给酒店</p><h3>先免费试用，<br>效果用数据说话</h3><ul><li>免费试用，无需 PMS 即可先用 5 项能力</li><li>中文 / 英文 / 马来文界面，上手简单</li><li>用住小叮同样的指标（RevPAR、平均房价、入住率）衡量效果</li><li>改价、回复始终由酒店自己拍板</li></ul></div>
+      <div class="card reveal d4"><p class="who">给本地合作伙伴</p><h3>一套验证过的产品，<br>和一起开拓新马的机会</h3><ul><li>已在 29 家自营酒店用上的产品</li><li>五种语言的产品界面与演示</li><li>产品由我们负责，伙伴发挥本地客户与系统资源</li><li>合作方式可以一起商定</li><li>适合：PMS / 渠道管理系统服务商、酒店 IT 与运营服务公司</li></ul></div>
+      <div class="card tint reveal d5"><p class="who">给关注酒店业的您</p><h3>第一手的<br>AI 落地经验</h3><ul><li>新马落地进展，欢迎随时交流</li><li>收益管理验证结果出来后，欢迎一起看数据</li><li>随时欢迎来体验产品、看真实界面</li></ul></div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2.5 分钟】这一页只讲我们能给什么，不提要求。对酒店：免费试用、三语培训、用数据复盘。对本地伙伴：成熟产品 + 长期分成 + 我们负责产品技术。对在座的您：第一手的试点数据和经验。如果对方主动问"我能怎么帮你"，再自然地提：认识做酒店系统、酒店管理的本地朋友，以及愿意先试用的酒店。</aside>
+  <aside class="notes">【约 2.5 分钟】这一页只讲我们能给什么，不提要求。对酒店：免费试用、多语言界面、用数据衡量效果。对本地伙伴：在自营酒店验证过的产品，合作方式一起商量；"适合"那一行点到为止，不展开。对在座的您：落地进展和验证数据。如果对方主动问"我能怎么帮你"，再自然地提：认识做酒店系统、酒店管理的本地朋友，以及愿意先试用的酒店。</aside>
 </section>
 
 <!-- =========================================================
@@ -711,12 +713,12 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
   <div class="top">
     <div class="brandmark reveal d1"><svg class="sym"><use href="#hx-symbol"/></svg><svg class="wm"><use href="#hx-wordmark"/></svg></div>
     <h1 class="reveal d2">让每一间房，<br>卖出它该有的价钱。</h1>
-    <p class="sub reveal d3">欢迎随时来体验 HogentX；也欢迎把它介绍给关心收入与效率的酒店朋友。</p>
+    <p class="sub reveal d3">欢迎随时来体验 HogentX，也欢迎介绍关心酒店经营的朋友：酒店业主，或做酒店系统与服务的伙伴。</p>
   </div>
   <div class="band">
     <div class="contact reveal d4">
       <div><p class="l">邮箱</p><p class="v">hi@intent-computing.com</p></div>
-      <div><p class="l">官网</p><p class="v">hogentx.com</p></div>
+      <div><p class="l">官网（含英文、马来文版）</p><p class="v">hogentx.com</p></div>
       <div><p class="l">公司</p><p class="v cn">Intent Computing Pte. Ltd. · 新加坡</p></div>
     </div>
     <div class="sym-big"><svg class="sym"><use href="#hx-symbol"/></svg><svg class="wm"><use href="#hx-wordmark"/></svg></div>
@@ -735,8 +737,8 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
     <table class="mods">
       <thead><tr><th></th><th>能力</th><th>减少哪种收入损失</th><th>新马使用条件</th></tr></thead>
       <tbody>
-        <tr><td class="i">01</td><td class="n">出租率与预订进度监测</td><td class="l">未来日期卖得慢，发现太晚</td><td class="p need">需对接 PMS</td></tr>
-        <tr><td class="i">02</td><td class="n">小时级间夜监测</td><td class="l">需求突然变化，错过提价或促销时机</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">01</td><td class="n">入住率与预订进度监测</td><td class="l">未来日期卖得慢，发现太晚</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">02</td><td class="n">每小时订房监测</td><td class="l">需求突然变化，错过提价或促销时机</td><td class="p need">需对接 PMS</td></tr>
         <tr><td class="i">03</td><td class="n">房态巡检（PMS 与平台开售状态核对）</td><td class="l">有房漏卖、没房接单</td><td class="p need">需对接 PMS</td></tr>
         <tr><td class="i">04</td><td class="n">竞品与划线价对比</td><td class="l">价格偏高丢单、偏低少收</td><td class="p yes">今天即可用</td></tr>
         <tr><td class="i">05</td><td class="n">异常低价订单检查</td><td class="l">价格设置错误或活动叠加导致少收</td><td class="p need">需对接 PMS</td></tr>
@@ -761,11 +763,11 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
     <h2 class="t" style="font-size:48px">数据与合规：酒店的数据，始终由酒店做主</h2>
     <div class="trust">
       <div class="tr"><div><h4>人工确认每一次写入</h4><p>AI 只生成方案；改价、发布回复必须由人确认。与新加坡 IMDA《代理式 AI 治理框架》（2026）倡导的"关键操作需人工批准"一致。</p></div><span class="pill ok">已实现</span></div>
-      <div class="tr"><div><h4>新加坡主体签约</h4><p>由 Intent Computing Pte. Ltd. 与酒店签约，合同与服务在本地完成。</p></div><span class="pill ok">已具备</span></div>
-      <div class="tr"><div><h4>新马数据在新加坡部署</h4><p>新马酒店的数据部署在新加坡云区域，与国内业务数据分开。</p></div><span class="pill wip">规划中</span></div>
+      <div class="tr"><div><h4>新加坡主体签约</h4><p>可由新加坡主体 Intent Computing Pte. Ltd. 直接与酒店签约。</p></div><span class="pill ok">已具备</span></div>
+      <div class="tr"><div><h4>新马数据在新加坡部署</h4><p>新马酒店的数据部署在新加坡云区域，与中国业务数据分开。</p></div><span class="pill wip">规划中</span></div>
       <div class="tr"><div><h4>酒店是数据控制方，我们是处理方</h4><p>签署数据处理协议（DPA）；按新加坡 PDPA、马来西亚 PDPA（2024 修订）要求，及时配合酒店完成泄露通报。</p></div><span class="pill wip">规划中</span></div>
       <div class="tr"><div><h4>尽量不碰住客个人信息</h4><p>经营分析只用房量、价格等汇总数据；点评、订单中的姓名电话先脱敏再处理。</p></div><span class="pill wip">规划中</span></div>
-      <div class="tr"><div><h4>账号权限最小化</h4><p>只授权业务必需的平台账号与门店；操作全程留痕，可追溯到确认人。</p></div><span class="pill wip">规划中</span></div>
+      <div class="tr"><div><h4>账号权限最小化</h4><p>只授权业务必需的平台账号与酒店；操作全程留痕，可追溯到确认人。</p></div><span class="pill wip">规划中</span></div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
@@ -778,18 +780,18 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
 <section class="slide" data-label="附录 A3" data-appendix="A3">
   <header class="chrome"><span class="sec"><b>附录 A3</b>与现有工具的关系</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
   <div class="body">
-    <h2 class="t" style="font-size:48px">与现有工具的关系：我们做的是"跨平台的店长工作台"</h2>
+    <h2 class="t" style="font-size:48px">与现有工具的关系：我们做的是"跨平台的经理工作台"</h2>
     <table class="land">
-      <thead><tr><th>类型</th><th>擅长</th><th>对新马中小酒店的局限</th></tr></thead>
+      <thead><tr><th>类型</th><th>擅长</th><th>说明</th></tr></thead>
       <tbody>
         <tr><td>订房平台自带工具<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 Agoda Partner Portal（2026.8）</span></td><td>免费；评论摘要、与周边酒店对比、数据驱动的经营建议</td><td>只覆盖单一平台，无法跨平台核对房态与价格</td></tr>
-        <tr><td>国际收益管理系统<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 Lighthouse、RoomPriceGenie</span></td><td>定价模型与数据网络成熟</td><td>以定价为核心；界面以英文 / 欧洲语言为主；小酒店入门价每月约 100–250 美元（因地区与规模而异）</td></tr>
-        <tr><td>本地收益管理服务<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 ZUZU（新加坡）</span></td><td>收益管理 + 人工收益顾问</td><td>以定价与分销为主，不覆盖点评、质检等日常运营</td></tr>
-        <tr class="us"><td>HogentX</td><td>跨平台的店长工作台：价格、房态、点评、质检、简报一处完成</td><td>中 / 英 / 马来文界面；每一步人工确认；已在 29 家自有门店日常使用</td></tr>
+        <tr><td>国际收益管理系统<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 Lighthouse、RoomPriceGenie</span></td><td>定价模型与数据网络成熟；Lighthouse 已推出 ChatGPT 内直订应用（2026.3）</td><td>以定价与数据为核心；RoomPriceGenie 界面为英文与欧洲语言；Lighthouse 入门方案每月约 115–219（币种与价格因地区而异）</td></tr>
+        <tr><td>本地收益管理服务<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 ZUZU（新加坡）</span></td><td>收益管理 + 人工收益顾问</td><td>以收益管理与分销为核心，也提供 PMS、官网、点评管理；酒店质检、整改跟进不是重点</td></tr>
+        <tr class="us"><td>HogentX</td><td>跨平台的经理工作台：价格、房态、点评、质检、简报一处完成；五种界面语言；每一步人工确认</td><td>已在 29 家自营酒店用上；新马需先接通本地 PMS，才能全部 10 项可用</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="src">来源：Agoda Newsroom（2026.8.10）；Lighthouse 官网定价文章（2026.9）；RoomPriceGenie 官网；Wavemaker Partners 关于 ZUZU 的公告（2025.8）。</p>
+  <p class="src">来源：Agoda Newsroom（2026.8.10）；Lighthouse 官网定价文章（2026.9）；RoomPriceGenie 官网；Wavemaker Partners 关于 ZUZU 的公告（2025.8）；ZUZU 官网；The Hotels Network 新闻稿（2026.3）。</p>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
   <aside class="notes">问答备用："和 Agoda 自带工具、和 Lighthouse/ZUZU 有什么区别？"——我们不是另一个定价工具，而是把价格、房态、点评、质检放在一个工作台里，跨平台、多语言、人工确认。</aside>
 </section>
@@ -812,9 +814,9 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
       <p><b>MyBHA 规模</b>：MyBHA 会长受访，Malay Mail（2026.3）。</p>
       <p><b>马来西亚 OTA 份额与佣金</b>：马来西亚竞争委员会 MyCC《数字经济生态市场审查：OTA》草案终稿（2025.8），数据来自行业访谈与 MyCC 分析。</p>
       <p><b>生成式 AI 与旅行规划</b>：Google、Temasek、Bain《e-Conomy SEA 2026》（2026.10）。</p>
-      <p><b>AI 渠道间夜占比</b>：Booking Holdings 2026 年第二季度业绩会，经媒体报道。</p>
+      <p><b>AI 渠道订房占比</b>：Booking Holdings 2026 年第二季度业绩会，经媒体报道。</p>
       <p><b>数据合规</b>：新加坡 PDPC 指南；马来西亚 PDPA（2024 修订）；IMDA《代理式 AI 治理框架》（2026.1）。</p>
-      <p><b>住小叮实测</b>：HogentX 内部业务记录（2026.10）。</p>
+      <p><b>住小叮实测</b>：HogentX 内部业务反馈（2026.10）。</p>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
