@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HogentX 答问备用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+/* ===========================================
+   THEME: HogentX brand blue (#2d60ff, from hogentx.com)
+   Change these tokens to restyle the whole deck.
+   =========================================== */
+:root {
+  --stage-bg: #e9edf7;
+  --slide-bg: #ffffff;
+  --brand: #2d60ff;
+  --brand-deep: #1a3fd1;
+  --brand-tint: #f2f5ff;
+  --brand-line: #d6e0ff;
+  --ink: #0b1020;
+  --ink-soft: #4a5368;
+  --ink-mute: #5f6678;
+  --line: #e4e8f1;
+  --surface: #f7f8fb;
+  --ok: #0e8a5f;
+  --ok-tint: #e7f6ef;
+  --wip: #b45309;
+  --wip-tint: #fdf3e4;
+  --leak: #d93b3b;
+  --bar-before: #a9b4c8;
+  --font-latin: 'Manrope', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-body: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Manrope', sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE (frontend-slides viewport-base.css, in full)
+   =========================================== */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+.deck-controls { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 1000; }
+@media print {
+  html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+  .deck-viewport { position: static; overflow: visible; background: #fff; }
+  .deck-stage { position: static; width: auto; height: auto; transform: none !important; background: none; }
+  .slide { position: relative; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; width: 1920px; height: 1080px; break-after: page; page-break-after: always; }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .deck-controls, .notes-panel, .edit-hotzone, .edit-toggle { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* ===========================================
+   SHARED SLIDE FRAME: chrome (section + wordmark), body, footer
+   =========================================== */
+.slide { font-family: var(--font-body); color: var(--ink); }
+.slide p, .slide li, .slide td, .slide h3, .slide h4 { text-wrap: pretty; }
+.chrome { position: absolute; left: 120px; right: 120px; top: 52px; height: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 22px; color: var(--ink-mute); letter-spacing: 0.04em; }
+.chrome .sec b { color: var(--brand); font-weight: 700; margin-right: 10px; font-family: var(--font-latin); }
+.chrome svg.wm { width: 124px; height: 31px; color: var(--ink); }
+.foot { position: absolute; left: 120px; right: 120px; bottom: 40px; display: flex; justify-content: space-between; font-size: 20px; color: var(--ink-mute); }
+.foot .pg { font-family: var(--font-latin); font-weight: 700; }
+.body { position: absolute; left: 120px; right: 120px; top: 128px; bottom: 100px; }
+.kicker { font-size: 26px; font-weight: 700; color: var(--brand); margin-bottom: 12px; }
+h2.t { font-size: 58px; line-height: 1.28; font-weight: 900; letter-spacing: 0; max-width: 1680px; }
+.lead { font-size: 29px; line-height: 1.6; color: var(--ink-soft); }
+.src { position: absolute; left: 120px; right: 120px; bottom: 76px; font-size: 20px; line-height: 1.5; color: var(--ink-mute); }
+.num { font-family: var(--font-latin); font-weight: 800; letter-spacing: -1px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 700; padding: 6px 16px; border-radius: 999px; }
+.pill::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.pill.ok { color: var(--ok); background: var(--ok-tint); }
+.pill.wip { color: var(--wip); background: var(--wip-tint); }
+.pill.co { color: var(--brand); background: var(--brand-tint); }
+.card.tint .pill.co { background: #fff; }
+.card { background: #fff; border: 1.5px solid var(--line); border-radius: 18px; padding: 36px 36px 32px; }
+.card.tint { background: var(--brand-tint); border-color: var(--brand-line); }
+.shot { border-radius: 16px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 24px 60px rgba(11, 16, 32, 0.12); background: #fff; }
+.shot img { display: block; width: 100%; height: auto; max-height: none; }
+.cap { font-size: 20px; color: var(--ink-mute); margin-top: 14px; }
+.band { position: absolute; left: 0; right: 0; bottom: 0; background: var(--brand); color: #fff; }
+.takeaway { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; border-radius: 18px; background: var(--brand); color: #fff; display: flex; align-items: center; padding: 0 44px; font-size: 32px; font-weight: 700; gap: 20px; }
+.takeaway .arrow { font-family: var(--font-latin); font-size: 40px; }
+
+/* ===========================================
+   REVEAL ANIMATION (stagger with .d1–.d6)
+   =========================================== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+.slide.visible .reveal { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.05s; } .d2 { transition-delay: 0.15s; } .d3 { transition-delay: 0.28s; }
+.d4 { transition-delay: 0.4s; } .d5 { transition-delay: 0.52s; } .d6 { transition-delay: 0.64s; }
+html.static .reveal, html.static .bar, html.static .seg { transition: none !important; }
+html.static .deck-controls, html.static .edit-toggle, html.static .edit-hotzone { display: none !important; }
+
+/* ===========================================
+   01 COVER
+   =========================================== */
+.cover .top { position: absolute; left: 0; top: 0; width: 1920px; height: 640px; padding: 72px 120px 0; }
+.brandmark { display: flex; align-items: center; gap: 22px; color: var(--ink); }
+.brandmark .sym { width: 50px; height: 58px; color: var(--brand); }
+.brandmark .wm { width: 200px; height: 50px; }
+.cover .meta { position: absolute; right: 120px; top: 86px; font-size: 26px; color: var(--ink-soft); letter-spacing: 0.04em; }
+.cover .kick { margin-top: 92px; font-size: 30px; font-weight: 700; color: var(--brand); }
+.cover h1 { margin-top: 22px; font-weight: 900; font-size: 112px; line-height: 1.18; letter-spacing: 0; }
+.cover .band { top: 640px; height: 440px; padding: 78px 120px 0; }
+.cover .band::before { content: ''; position: absolute; left: 0; top: 0; width: 1920px; height: 10px; background: var(--brand-deep); }
+.cover .stats { display: grid; grid-template-columns: 420px 480px 520px; gap: 60px; }
+.cover .stat .n { font-family: var(--font-latin); font-weight: 800; font-size: 120px; line-height: 1; letter-spacing: -2px; }
+.cover .stat .n small { font-family: var(--font-body); font-size: 44px; font-weight: 700; margin-left: 8px; letter-spacing: 0; }
+.cover .stat .l { margin-top: 18px; font-size: 30px; line-height: 1.45; opacity: 0.92; }
+.cover .site { position: absolute; left: 120px; bottom: 44px; font-size: 22px; opacity: 0.78; font-family: var(--font-latin); }
+.cover .mascot { position: absolute; right: 120px; top: 364px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
+
+/* ===========================================
+   02 ONE-PAGE SUMMARY
+   =========================================== */
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
+.trio .card { min-height: 420px; }
+.trio .no { font-family: var(--font-latin); font-weight: 800; font-size: 26px; color: var(--brand); }
+.trio h3 { font-size: 36px; font-weight: 900; margin: 14px 0 20px; }
+.trio p { font-size: 28px; line-height: 1.65; color: var(--ink-soft); }
+.trio p b { color: var(--ink); }
+.status-row { display: flex; gap: 22px; margin-top: 40px; align-items: center; font-size: 26px; color: var(--ink-soft); }
+
+/* ===========================================
+   03 REVENUE-LEAK LEDGER
+   =========================================== */
+.leak-grid { display: grid; grid-template-columns: 560px 1fr; gap: 80px; margin-top: 46px; }
+.callout-big .num { font-size: 150px; line-height: 1; color: var(--brand); }
+.callout-big .num small { font-size: 60px; }
+.callout-big h4 { font-size: 32px; font-weight: 900; margin-top: 14px; }
+.callout-big p { font-size: 27px; line-height: 1.65; color: var(--ink-soft); margin-top: 18px; }
+.ledger h5 { display: flex; justify-content: space-between; font-size: 22px; font-weight: 700; color: var(--ink-mute); letter-spacing: 0.1em; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+.lrow { display: grid; grid-template-columns: 60px 1fr 250px; align-items: center; height: 96px; border-bottom: 1px solid var(--line); }
+.lrow .i { font-family: var(--font-latin); font-weight: 700; font-size: 22px; color: var(--ink-mute); }
+.lrow .w { font-size: 30px; font-weight: 700; }
+.lrow .w s { text-decoration: none; color: var(--leak); margin-right: 10px; font-family: var(--font-latin); }
+.lrow .m { display: block; font-size: 21px; font-weight: 400; color: var(--ink-mute); margin-top: 4px; }
+.lrow .pill { justify-self: end; white-space: nowrap; }
+.lrow { opacity: 0; transform: translateX(24px); transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo); }
+.slide.visible .lrow { opacity: 1; transform: none; }
+.lrow:nth-of-type(1) { transition-delay: .25s } .lrow:nth-of-type(2) { transition-delay: .33s } .lrow:nth-of-type(3) { transition-delay: .41s }
+.lrow:nth-of-type(4) { transition-delay: .49s } .lrow:nth-of-type(5) { transition-delay: .57s } .lrow:nth-of-type(6) { transition-delay: .65s }
+html.static .lrow { transition: none !important; }
+
+/* ===========================================
+   04–05 MARKET STAT TILES
+   =========================================== */
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 46px; }
+.tile { border-top: 5px solid var(--brand); padding-top: 24px; }
+.tile .num { font-size: 84px; line-height: 1.05; color: var(--ink); }
+.tile .num small { font-size: 36px; font-family: var(--font-body); font-weight: 700; margin-left: 4px; letter-spacing: 0; }
+.tile h4 { font-size: 28px; font-weight: 700; margin-top: 14px; line-height: 1.45; }
+.tile p { font-size: 22px; color: var(--ink-mute); margin-top: 8px; line-height: 1.55; }
+.market .takeaway { bottom: 40px; }
+/* 100% strip: SG room-tier mix / MY commission share. 2px surface gaps between segments. */
+.strip { position: absolute; left: 0; right: 0; top: 500px; }
+.strip .cap2 { display: flex; justify-content: space-between; font-size: 22px; color: var(--ink-soft); margin-bottom: 12px; }
+.strip .cap2 b { color: var(--ink); }
+.strip .track { display: flex; gap: 2px; height: 56px; }
+.seg { height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 21px; font-weight: 700; white-space: nowrap; color: #fff; transform-origin: left; transform: scaleX(0); transition: transform 0.9s var(--ease-out-expo); }
+.slide.visible .seg { transform: none; }
+.seg:first-child { border-radius: 4px 0 0 4px; } .seg:last-child { border-radius: 0 4px 4px 0; }
+.seg.mute { background: #c9d1df; color: var(--ink); } .seg.mute2 { background: #dde3ee; color: var(--ink); }
+.seg.hi { background: var(--brand); } .seg.hi2 { background: #6b8dff; }
+.seg.cut { background: repeating-linear-gradient(135deg, #e5484d 0 10px, #ef7477 10px 20px); }
+.strip .brace { display: flex; margin-top: 10px; font-size: 21px; color: var(--brand); font-weight: 700; }
+.strip .brace span { border-top: 3px solid var(--brand); padding-top: 8px; text-align: center; }
+
+/* ===========================================
+   06 FOUR DIGITAL EMPLOYEES
+   =========================================== */
+.crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 46px; }
+.crew .card { padding: 32px 30px; min-height: 470px; }
+.crew .ic { width: 64px; height: 64px; border-radius: 16px; background: var(--brand-tint); display: grid; place-items: center; }
+.crew .ic img { width: 46px; height: 46px; }
+.crew h3 { font-size: 31px; font-weight: 900; margin: 22px 0 6px; }
+.crew .role { font-size: 22px; color: var(--brand); font-weight: 700; margin-bottom: 18px; }
+.crew ul { list-style: none; }
+.crew li { font-size: 24px; line-height: 1.5; padding: 7px 0; color: var(--ink-soft); border-bottom: 1px dashed var(--line); }
+.crew li:last-child { border-bottom: 0; }
+.langs { display: flex; gap: 14px; align-items: center; margin-top: 34px; font-size: 24px; color: var(--ink-soft); }
+.chip { font-size: 22px; padding: 6px 16px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+
+/* ===========================================
+   07 HOW IT WORKS
+   =========================================== */
+.how { display: grid; grid-template-columns: 640px 1fr; gap: 70px; margin-top: 42px; }
+.steps { display: flex; flex-direction: column; gap: 14px; }
+.step { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; padding: 20px 24px; border-radius: 16px; background: var(--surface); }
+.step.me { background: var(--brand); color: #fff; }
+.step .k { width: 52px; height: 52px; border-radius: 50%; background: #fff; color: var(--brand); display: grid; place-items: center; font-family: var(--font-latin); font-weight: 800; font-size: 24px; border: 2px solid var(--brand-line); }
+.step h4 { font-size: 29px; font-weight: 900; }
+.step p { font-size: 23px; line-height: 1.5; color: var(--ink-soft); margin-top: 4px; }
+.step.me p { color: rgba(255,255,255,0.88); }
+.rule-line { margin-top: 26px; display: flex; gap: 18px; align-items: flex-start; font-size: 25px; line-height: 1.6; color: var(--ink); padding: 22px 28px; border-left: 6px solid var(--brand); background: var(--brand-tint); border-radius: 0 14px 14px 0; }
+.rule-line b { color: var(--brand); white-space: nowrap; }
+
+/* ===========================================
+   08 BEFORE / AFTER TABLE
+   =========================================== */
+table.vs { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 26px; }
+table.vs th { text-align: left; font-size: 22px; color: var(--ink-mute); font-weight: 700; padding: 0 24px 14px; border-bottom: 2px solid var(--ink); }
+table.vs th.hx { color: var(--brand); }
+table.vs td { padding: 17px 24px; border-bottom: 1px solid var(--line); line-height: 1.4; }
+table.vs td:first-child { font-weight: 700; width: 420px; }
+table.vs td.old { color: var(--ink-mute); width: 560px; }
+table.vs td.new { color: var(--ink); font-weight: 500; background: var(--brand-tint); }
+
+/* ===========================================
+   09 PROOF CHART (paired horizontal bars)
+   =========================================== */
+.proof { display: grid; grid-template-columns: 1120px 1fr; gap: 80px; margin-top: 34px; }
+.legend { display: flex; gap: 30px; font-size: 22px; color: var(--ink-soft); margin-bottom: 18px; }
+.legend i { display: inline-block; width: 18px; height: 18px; border-radius: 4px; vertical-align: -2px; margin-right: 10px; }
+.chart .row { display: grid; grid-template-columns: 200px 1fr; align-items: center; height: 88px; }
+.chart .lab { font-size: 26px; font-weight: 700; }
+.chart .bars { display: flex; flex-direction: column; gap: 2px; }
+.chart .bw { display: flex; align-items: center; gap: 12px; height: 24px; }
+.bar { height: 24px; border-radius: 0 4px 4px 0; width: 0; transition: width 0.9s var(--ease-out-expo); }
+.bar.b { background: var(--bar-before); }
+.bar.a { background: var(--brand); }
+.slide.visible .bar { width: var(--w); }
+.chart .v { font-family: var(--font-latin); font-size: 22px; font-weight: 700; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.chart .v.a { color: var(--ink); }
+.chart .axis { margin-left: 200px; border-top: 1px solid var(--line); margin-top: 6px; }
+.hero .num { font-size: 168px; line-height: 1; color: var(--brand); }
+.hero h4 { font-size: 34px; font-weight: 900; margin-top: 10px; }
+.hero .tot { margin-top: 34px; font-size: 30px; color: var(--ink-soft); }
+.hero .tot .num { font-size: 54px; color: var(--ink); letter-spacing: 0; }
+.hero .note { margin-top: 34px; font-size: 21px; line-height: 1.7; color: var(--ink-mute); border-top: 1px solid var(--line); padding-top: 22px; }
+
+/* ===========================================
+   10 REVENUE MANAGEMENT (in validation)
+   =========================================== */
+.rm-head { display: flex; align-items: center; gap: 24px; margin-bottom: 8px; }
+.rm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 46px; }
+.rm .card { min-height: 360px; }
+.rm .card h3 { font-size: 30px; font-weight: 900; margin-bottom: 18px; }
+.rm .card p { font-size: 26px; line-height: 1.65; color: var(--ink-soft); }
+.metric { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px dashed var(--line); padding: 12px 0; font-size: 26px; }
+.metric span { color: var(--ink-mute); font-size: 22px; }
+.ref { margin-top: 34px; display: flex; gap: 26px; align-items: center; padding: 26px 34px; border-radius: 18px; background: var(--surface); font-size: 25px; color: var(--ink-soft); line-height: 1.6; }
+.ref .num { font-size: 52px; color: var(--ink); white-space: nowrap; letter-spacing: 0; }
+
+/* ===========================================
+   11 AI DIRECT SALES (in development)
+   =========================================== */
+.ai { display: grid; grid-template-columns: 760px 1fr; gap: 64px; margin-top: 36px; }
+.flow4 { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.f { display: flex; align-items: center; gap: 18px; font-size: 26px; font-weight: 700; padding: 16px 22px; border-radius: 14px; background: var(--surface); }
+.f .k { font-family: var(--font-latin); color: var(--brand); font-weight: 800; width: 32px; }
+.f.hl { background: var(--brand); color: #fff; }
+.f.hl .k { color: #fff; }
+.f small { font-weight: 400; font-size: 21px; color: var(--ink-mute); margin-left: auto; }
+.f.hl small { color: rgba(255,255,255,0.85); }
+.facts { margin-top: 28px; display: grid; gap: 14px; }
+.fact { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: center; font-size: 23px; line-height: 1.5; color: var(--ink-soft); }
+.fact .num { font-size: 50px; color: var(--ink); letter-spacing: 0; }
+
+/* ===========================================
+   12 READINESS (three columns)
+   =========================================== */
+.ready { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 46px; }
+.ready .card { min-height: 560px; }
+.ready h3 { margin: 18px 0 22px; font-size: 32px; font-weight: 900; }
+.ready ul { list-style: none; }
+.ready li { font-size: 25px; line-height: 1.5; padding: 14px 0 14px 34px; position: relative; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.ready li:last-child { border-bottom: 0; }
+.ready li b { color: var(--ink); }
+.ready li::before { content: ''; position: absolute; left: 4px; top: 26px; width: 12px; height: 12px; border-radius: 50%; background: var(--c, var(--brand)); }
+.ready .c-ok { --c: var(--ok); } .ready .c-wip { --c: var(--wip); } .ready .c-co { --c: var(--brand); }
+
+/* ===========================================
+   13 THREE-STEP PATH
+   =========================================== */
+.path { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: stretch; margin-top: 50px; }
+.path .arr { display: grid; place-items: center; font-family: var(--font-latin); font-size: 46px; color: var(--brand); }
+.path .card { min-height: 540px; }
+.path .stepno { font-family: var(--font-latin); font-weight: 800; font-size: 24px; color: var(--brand); letter-spacing: 0.08em; }
+.path h3 { font-size: 34px; font-weight: 900; margin: 12px 0 8px; }
+.path .sub { font-size: 23px; color: var(--ink-mute); margin-bottom: 22px; line-height: 1.5; }
+.path .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.path .chips .chip { font-size: 22px; }
+.path .card.on { background: var(--brand); border-color: var(--brand); color: #fff; }
+.path .card.on .stepno, .path .card.on .sub { color: rgba(255,255,255,0.88); }
+.path .card.on .chip { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.3); color: #fff; }
+
+/* ===========================================
+   14 WHAT WE BRING
+   =========================================== */
+.give { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 46px; }
+.give .card { min-height: 600px; }
+.give .who { font-size: 24px; font-weight: 700; color: var(--brand); }
+.give h3 { font-size: 34px; font-weight: 900; margin: 10px 0 22px; line-height: 1.35; }
+.give ul { list-style: none; }
+.give li { font-size: 24px; line-height: 1.55; padding: 12px 0 12px 36px; position: relative; color: var(--ink-soft); }
+.give li::before { content: '✓'; position: absolute; left: 0; top: 12px; color: var(--brand); font-weight: 900; }
+
+/* ===========================================
+   15 CLOSING
+   =========================================== */
+.closing .top { position: absolute; left: 0; top: 0; width: 1920px; height: 640px; padding: 72px 120px 0; }
+.closing h1 { margin-top: 150px; font-weight: 900; font-size: 92px; line-height: 1.22; }
+.closing .sub { margin-top: 30px; font-size: 32px; line-height: 1.6; color: var(--ink-soft); max-width: 1300px; }
+.closing .band { top: 640px; height: 440px; padding: 84px 120px 0; }
+.closing .contact { display: grid; grid-template-columns: repeat(3, auto); gap: 90px; justify-content: start; }
+.closing .contact .l { font-size: 22px; opacity: 0.8; }
+.closing .contact .v { font-family: var(--font-latin); font-size: 38px; font-weight: 800; margin-top: 8px; }
+.closing .contact .v.cn { font-family: var(--font-body); font-weight: 700; font-size: 34px; }
+.closing .mascot { position: absolute; right: 120px; top: 364px; width: 300px; filter: drop-shadow(0 18px 30px rgba(11,16,32,0.25)); }
+.closing .sym-big { position: absolute; left: 120px; bottom: 56px; display: flex; gap: 18px; align-items: center; color: #fff; opacity: 0.9; }
+.closing .sym-big .sym { width: 30px; height: 35px; }
+.closing .sym-big .wm { width: 124px; height: 31px; }
+
+/* ===========================================
+   APPENDIX
+   =========================================== */
+table.mods { width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 24px; }
+table.mods th { text-align: left; font-size: 21px; color: var(--ink-mute); padding: 0 18px 12px; border-bottom: 2px solid var(--ink); }
+table.mods td { padding: 12px 18px; border-bottom: 1px solid var(--line); }
+table.mods td.i { font-family: var(--font-latin); font-weight: 800; color: var(--brand); width: 70px; }
+table.mods td.n { font-weight: 700; width: 520px; }
+table.mods td.l { color: var(--ink-soft); }
+table.mods td.p { width: 220px; }
+.yes { color: var(--ok); font-weight: 700; } .need { color: var(--wip); font-weight: 700; }
+.trust { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; margin-top: 40px; }
+.tr { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; padding: 22px 26px; border-radius: 16px; background: var(--surface); }
+.tr h4 { font-size: 27px; font-weight: 900; }
+.tr p { font-size: 22px; line-height: 1.6; color: var(--ink-soft); margin-top: 6px; }
+.tr .pill { font-size: 21px; white-space: nowrap; }
+table.land { width: 100%; border-collapse: collapse; margin-top: 36px; font-size: 24px; }
+table.land th { text-align: left; font-size: 21px; color: var(--ink-mute); padding: 0 20px 12px; border-bottom: 2px solid var(--ink); }
+table.land td { padding: 20px; border-bottom: 1px solid var(--line); line-height: 1.5; vertical-align: top; color: var(--ink-soft); }
+table.land td:first-child { font-weight: 700; color: var(--ink); width: 380px; }
+table.land tr.us td { background: var(--brand-tint); color: var(--ink); }
+table.land tr.us td:first-child { color: var(--brand); }
+.sources { columns: 2; column-gap: 60px; margin-top: 30px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
+.sources p { break-inside: avoid; margin-bottom: 12px; }
+.sources b { color: var(--ink); }
+
+/* ===========================================
+   V2 LAYOUT: title on top, content centred in the remaining height
+   =========================================== */
+.body { display: flex; flex-direction: column; }
+.fill { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; padding-bottom: 10px; }
+.cover .bigsym { position: absolute; right: 150px; top: 112px; width: 330px; height: 384px; color: #e6ecff; }
+.trio { margin-top: 0; }
+.trio .card { min-height: 380px; padding: 40px 40px 36px; }
+.trio .no { display: block; font-family: var(--font-body); font-weight: 900; font-size: 34px; color: var(--ink); margin-bottom: 22px; }
+.trio .card.tint .no { color: var(--brand); }
+.trio p { font-size: 29px; line-height: 1.7; }
+.leak-grid { margin-top: 0; }
+.lrow { grid-template-columns: 60px 1fr 400px; }
+.lrow > .m { display: block; font-size: 24px; font-weight: 500; color: var(--brand); text-align: right; margin: 0; }
+.ledger h5 span:last-child { text-align: right; }
+.opp { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.opp .card { padding: 44px 44px 40px; }
+.opp h3 { font-size: 32px; font-weight: 900; line-height: 1.4; }
+.kv2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 36px; }
+.kv2 .num { font-size: 92px; line-height: 1.05; color: var(--brand); }
+.kv2 .num small { font-size: 40px; font-family: var(--font-body); font-weight: 700; margin-left: 4px; letter-spacing: 0; }
+.kv2 p { font-size: 26px; font-weight: 700; line-height: 1.5; margin-top: 12px; }
+.kv2 p span { font-size: 22px; font-weight: 400; color: var(--ink-mute); }
+.crew { margin-top: 0; }
+.crew .card { min-height: 0; padding: 36px 32px; }
+.crew li { font-size: 26px; padding: 10px 0; }
+.how { margin-top: 0; }
+.proof { grid-template-columns: 1180px 1fr; margin-top: 0; align-items: center; }
+.chart .row { grid-template-columns: 240px 1fr; height: 92px; }
+.chart .lab { font-size: 27px; }
+.chart .v { font-size: 24px; }
+.hero .num { font-size: 200px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.two .card { padding: 40px 44px; }
+.two h3 { font-size: 36px; font-weight: 900; margin: 20px 0 10px; }
+.two .pre { font-size: 26px; color: var(--ink-soft); }
+.two .big { font-size: 132px; line-height: 1.05; color: var(--brand); margin: 4px 0 18px; }
+.two p { font-size: 25px; line-height: 1.65; color: var(--ink-soft); }
+.flow3 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 6px 0 20px; font-size: 23px; font-weight: 700; }
+.flow3 span { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; }
+.flow3 b { color: var(--brand); font-family: var(--font-latin); }
+.shot.small img { height: 300px; object-fit: cover; object-position: top; }
+.path { margin-top: 0; }
+.path .card { min-height: 430px; }
+.readybar { display: flex; gap: 16px; margin-top: 30px; font-size: 24px; color: var(--ink); }
+.readybar span { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 999px; background: var(--ok-tint); }
+.readybar span::before { content: '✓'; color: var(--ok); font-weight: 900; }
+.give { margin-top: 0; }
+.give .card { min-height: 0; padding: 40px 40px 36px; }
+.give li { font-size: 25px; }
+
+/* ===========================================
+   PRESENTER CHROME (outside the stage): counter, notes panel, edit toggle
+   =========================================== */
+.deck-controls { display: flex; gap: 10px; align-items: center; font: 600 13px/1 'Manrope', sans-serif; color: #4a5368; background: rgba(255,255,255,0.85); padding: 8px 14px; border-radius: 999px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); opacity: 0.35; transition: opacity .3s; }
+body:hover .deck-controls { opacity: 1; }
+.deck-controls button { border: 0; background: none; font: inherit; color: inherit; cursor: pointer; padding: 2px 6px; }
+.notes-panel { position: fixed; left: 0; right: 0; bottom: 0; max-height: 42vh; overflow: auto; z-index: 1001; background: rgba(11,16,32,0.94); color: #e8ecf6; font: 16px/1.7 'Noto Sans SC', sans-serif; padding: 18px 28px 22px; display: none; }
+.notes-panel.on { display: block; }
+.notes-panel h6 { font: 700 13px/1 'Manrope', sans-serif; letter-spacing: .12em; color: #8ea6ff; margin-bottom: 10px; }
+.notes { display: none; }
+.edit-hotzone { position: fixed; top: 0; left: 0; width: 80px; height: 80px; z-index: 10000; cursor: pointer; }
+.edit-toggle { position: fixed; top: 16px; left: 16px; z-index: 10001; border: 0; border-radius: 10px; padding: 8px 12px; font: 600 13px 'Noto Sans SC', sans-serif; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.12); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+.edit-toggle.active { background: var(--brand); color: #fff; }
+body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed rgba(45,96,255,0.45); outline-offset: 4px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="hx-symbol" viewBox="0 0 1077 1252"><path fill="currentColor" fill-rule="evenodd" d="M849.2,1246.9L846.9,1246.0L845.9,1243.4L845.0,1240.8L845.0,939.9L845.0,639.0L843.0,637.0L841.1,635.1L838.3,635.9L835.5,636.7L720.0,695.2L604.5,753.7L481.5,816.0L358.5,878.2L297.5,909.1L236.5,940.0L234.0,942.5L231.5,945.0L231.0,1093.6L230.5,1242.1L228.1,1244.0L225.7,1246.0L117.3,1246.0L8.9,1246.0L6.4,1243.5L4.0,1241.0L4.0,624.4L4.0,7.8L5.0,5.9L6.0,4.0L8.4,4.0L10.7,4.0L37.8,21.7L64.9,39.5L104.5,65.5L144.2,91.5L155.0,98.5L165.9,105.5L195.2,124.7L224.5,143.9L227.5,147.0L230.5,150.1L231.0,534.8L231.5,919.5L232.3,920.7L233.1,922.0L235.7,922.0L238.3,922.0L291.4,895.1L344.5,868.3L478.5,800.5L612.5,732.7L615.0,730.3L617.5,727.9L618.0,367.2L618.5,6.5L619.3,5.2L620.1,4.0L622.6,4.0L625.1,4.0L717.3,64.3L809.5,124.6L825.5,135.1L841.5,145.6L843.5,147.9L845.5,150.2L846.0,385.5L846.5,620.9L850.0,624.3L853.5,627.8L923.5,673.5L993.5,719.3L1028.5,742.2L1063.5,765.1L1066.6,767.2L1069.8,769.4L1071.4,772.1L1073.0,774.8L1073.0,1008.9L1073.0,1243.0L1070.5,1245.5L1068.0,1248.0L959.8,1247.9L851.5,1247.8L849.2,1246.9Z"/></symbol><symbol id="hx-wordmark" viewBox="0 0 3018 753"><path fill="currentColor" fill-rule="evenodd" d="M1153.5,747.5C1115.6,743.2 1081.8,730.7 1053.3,710.3C1030.7,694.1 1001.7,661.5 989.6,638.6C985.4,630.7 985.1,628.6 988.2,626.5C990.1,625.2 996.3,625.0 1035.6,625.0C1064.2,625.0 1081.8,625.3 1083.5,626.0C1085.0,626.6 1088.8,629.3 1091.8,632.2C1105.1,644.3 1119.6,652.6 1137.7,658.5C1152.1,663.2 1163.7,664.9 1180.5,664.9C1197.2,664.9 1209.0,663.2 1222.5,658.6C1240.0,652.7 1250.4,646.8 1265.1,634.3C1269.9,630.3 1275.0,626.5 1276.4,626.0C1278.1,625.3 1296.3,625.0 1324.4,625.0C1364.4,625.0 1370.0,625.1 1371.4,626.5C1374.0,629.2 1373.2,632.1 1367.0,642.6C1346.7,676.9 1313.1,709.4 1281.5,725.2C1241.8,745.0 1198.8,752.5 1153.5,747.5Z M1631.5,578.3C1582.6,574.4 1532.2,549.4 1493.3,509.8C1480.4,496.6 1476.0,491.0 1467.1,476.6C1449.2,447.8 1438.1,418.1 1432.9,384.5C1430.2,367.6 1430.2,337.3 1432.9,319.4C1439.8,273.2 1459.1,233.2 1489.3,202.1C1519.6,171.0 1566.2,147.2 1613.0,138.8C1646.2,132.9 1685.3,136.5 1717.7,148.5C1749.6,160.4 1774.4,176.4 1797.6,200.1C1815.9,219.0 1828.4,237.0 1841.5,263.4C1850.5,281.5 1851.5,285.5 1847.9,288.8C1846.8,289.8 1831.2,297.3 1813.2,305.5C1795.2,313.6 1771.9,324.2 1761.5,329.0C1728.7,344.0 1599.7,402.6 1567.0,417.5C1543.6,428.0 1542.0,429.2 1544.0,434.6C1545.5,438.6 1559.1,455.0 1566.3,461.5C1583.7,477.3 1607.3,489.0 1630.3,493.5C1642.9,495.9 1664.2,495.4 1677.1,492.5C1709.1,485.3 1738.3,465.5 1760.2,436.2C1769.6,423.7 1773.6,415.4 1778.8,398.0C1781.7,388.3 1783.5,383.9 1785.2,382.4C1786.5,381.3 1795.8,376.7 1806.0,372.1C1816.1,367.5 1830.1,361.1 1837.0,358.0C1856.7,348.9 1863.7,346.0 1865.3,346.0C1866.2,346.0 1867.7,347.1 1868.6,348.5C1870.0,350.6 1870.1,352.7 1869.5,363.2C1867.4,399.6 1858.1,436.0 1844.2,462.0C1827.7,492.9 1801.3,521.0 1770.5,540.5C1759.3,547.5 1734.4,559.7 1722.9,563.8C1709.0,568.7 1689.3,573.7 1675.9,575.9C1663.5,577.9 1641.1,579.1 1631.5,578.3Z M648.2,575.4C613.7,571.8 580.4,559.8 551.5,540.5C535.5,529.8 526.8,522.6 513.9,509.3C473.6,467.9 451.9,414.2 452.0,355.8C452.0,305.7 467.3,260.4 497.8,220.6C532.2,175.6 584.2,145.2 641.4,136.9C654.3,135.0 659.2,134.8 678.4,135.2C708.1,135.9 727.4,139.6 752.8,149.5C783.1,161.3 808.4,178.3 831.8,202.4C864.2,235.9 884.0,275.8 891.6,323.0C894.1,338.9 894.2,371.8 891.6,388.0C880.2,461.1 835.9,521.7 770.5,553.9C732.4,572.7 691.5,579.9 648.2,575.4Z M1139.3,575.4C1125.3,573.8 1098.5,567.5 1085.5,562.6C1054.7,551.1 1028.8,532.5 1004.2,504.5C976.3,472.6 960.5,440.9 952.9,401.5C947.9,375.7 947.7,343.2 952.4,318.5C955.5,302.6 956.2,299.3 959.6,288.5C968.6,259.0 981.7,236.3 1005.1,209.5C1046.6,161.9 1102.1,137.1 1167.3,137.0C1189.2,136.9 1217.9,141.4 1238.3,148.0C1248.6,151.4 1268.7,160.8 1279.4,167.4C1289.1,173.2 1290.4,173.6 1292.4,170.8C1293.6,169.0 1294.0,165.9 1294.0,156.9C1294.0,146.6 1294.2,144.9 1296.0,142.6L1298.1,140.0L1339.1,140.0L1380.0,140.0L1382.5,142.4L1385.0,144.9L1384.9,257.7C1384.9,362.6 1384.8,371.5 1383.0,386.0C1382.0,394.5 1379.8,406.9 1378.2,413.5C1365.6,464.2 1332.9,510.7 1287.5,542.2C1268.1,555.6 1244.1,565.6 1215.5,572.4C1197.2,576.7 1163.6,578.0 1139.3,575.4Z M6.4,564.5L4.0,562.0L4.0,289.0L4.0,15.9L6.4,13.4L8.9,10.9L48.4,11.2C84.7,11.4 88.0,11.6 89.7,13.2C91.4,14.9 91.5,21.0 92.0,120.0C92.4,219.0 92.6,225.0 94.2,226.7C95.9,228.4 101.9,228.5 205.4,228.7C312.0,229.0 314.8,228.9 317.1,227.1L319.5,225.1L320.0,120.1C320.4,21.0 320.6,14.9 322.2,13.2C323.9,11.6 327.1,11.4 362.8,11.2C400.0,10.9 401.8,11.0 404.1,12.8L406.5,14.8L406.5,289.0L406.5,563.1L404.1,565.0C401.9,566.9 399.7,567.0 363.3,567.0L324.9,567.0L322.4,564.5L320.0,562.0L320.0,441.5L320.0,320.9L317.5,318.4L315.0,316.0L206.0,316.0L96.9,316.0L94.4,318.4L92.0,320.9L92.0,441.5L92.0,562.0L89.5,564.5L87.0,567.0L48.0,567.0L8.9,567.0L6.4,564.5Z M1918.4,564.5L1916.0,562.0L1916.0,434.8C1916.0,301.3 1916.3,291.9 1920.5,274.5C1929.6,236.9 1945.0,209.0 1971.5,182.3C2003.4,150.1 2041.3,131.7 2085.5,126.9C2101.8,125.1 2129.4,126.3 2144.0,129.4C2216.8,144.8 2274.1,199.8 2290.9,270.4C2296.0,292.0 2296.0,289.9 2296.0,430.7L2296.0,562.0L2293.5,564.5L2291.0,567.0L2252.6,567.0C2216.3,567.0 2214.0,566.9 2211.8,565.0L2209.5,563.1L2208.9,430.8L2208.4,298.5L2205.7,289.0C2200.4,270.8 2193.1,258.2 2179.6,244.2C2172.0,236.3 2160.5,227.7 2151.4,223.2C2143.7,219.3 2129.4,215.1 2119.6,213.9C2066.6,207.3 2018.6,240.6 2005.7,292.8C2003.6,301.4 2003.5,302.8 2003.0,432.3L2002.5,563.1L2000.1,565.0C1997.9,566.9 1995.6,567.0 1959.3,567.0L1920.9,567.0L1918.4,564.5Z M2407.8,565.0L2405.5,563.1L2405.0,396.1C2404.5,237.5 2404.4,228.9 2402.7,227.2C2401.1,225.6 2397.9,225.4 2370.7,224.9C2354.1,224.6 2340.4,224.2 2340.2,224.1C2340.1,224.0 2339.3,222.6 2338.5,221.0C2337.2,218.5 2337.0,212.7 2337.0,185.0L2337.0,151.9L2339.4,149.4L2341.9,147.0L2370.8,147.0C2398.4,147.0 2399.8,146.9 2402.3,144.9L2404.9,142.8L2405.2,75.3L2405.5,7.8L2407.8,5.9C2410.0,4.1 2412.3,4.0 2448.0,4.0L2485.8,4.0L2487.9,6.6C2489.9,9.2 2490.0,10.0 2490.0,75.6L2490.0,142.0L2492.4,144.5L2494.9,147.0L2529.3,147.0C2562.6,147.0 2563.8,147.0 2566.3,149.0L2569.0,151.1L2569.0,185.4C2569.0,217.7 2568.8,219.9 2567.0,222.1L2565.1,224.5L2529.5,225.0L2493.8,225.5L2491.9,227.8C2490.0,230.1 2490.0,234.3 2490.0,396.1L2490.0,562.0L2487.5,564.5L2485.0,567.0L2447.6,567.0C2412.2,567.0 2410.0,566.8 2407.8,565.0Z M2567.7,565.9C2565.6,564.6 2565.5,561.8 2567.4,558.2C2568.1,556.7 2574.0,546.9 2580.5,536.5C2586.9,526.0 2599.5,505.5 2608.5,491.0C2617.4,476.4 2629.3,457.0 2634.9,448.0C2640.6,438.9 2649.4,424.7 2654.5,416.5C2659.6,408.2 2669.1,392.7 2675.7,382.1C2689.4,360.0 2692.3,356.0 2694.9,356.0C2697.0,356.0 2700.7,359.9 2711.0,373.3C2715.1,378.7 2723.6,389.7 2729.8,397.8C2745.9,418.6 2749.0,423.3 2749.0,427.1C2749.0,429.3 2746.9,433.7 2742.1,441.4C2738.3,447.5 2730.8,459.7 2725.4,468.5C2720.0,477.3 2709.5,494.4 2702.0,506.5C2694.5,518.6 2683.7,536.0 2678.0,545.1C2672.3,554.3 2666.6,562.9 2665.3,564.1L2662.8,566.5L2616.1,566.7C2585.3,566.8 2568.9,566.6 2567.7,565.9Z M2917.0,566.2C2912.5,564.6 2913.3,565.8 2875.7,504.5C2863.9,485.2 2845.6,455.3 2834.9,438.0C2824.3,420.6 2812.1,400.8 2807.9,394.0C2803.7,387.1 2795.2,373.1 2789.0,363.0C2782.7,352.8 2774.0,338.4 2769.5,331.0C2765.0,323.5 2758.4,312.7 2754.8,307.0C2751.2,301.2 2740.2,283.4 2730.4,267.5C2720.7,251.5 2708.1,231.0 2702.4,222.0C2689.6,201.2 2663.4,158.6 2647.4,132.5C2640.7,121.5 2629.5,103.2 2622.5,92.0C2615.5,80.7 2604.0,62.0 2597.0,50.5C2590.0,38.9 2582.6,26.9 2580.6,23.8C2576.5,17.4 2576.0,13.6 2578.9,12.0C2580.1,11.3 2596.9,11.0 2626.4,11.0C2664.0,11.0 2672.5,11.2 2674.8,12.4C2676.6,13.4 2683.0,22.8 2695.4,43.1C2705.3,59.3 2717.4,79.0 2722.3,87.0C2727.2,94.9 2736.1,109.3 2741.9,119.0C2780.3,181.9 2786.1,191.0 2788.7,191.6C2792.3,192.5 2795.0,189.2 2807.1,169.3C2812.3,160.6 2827.4,136.1 2840.5,115.0C2853.6,93.8 2872.6,63.0 2882.7,46.5C2892.8,30.0 2902.2,15.3 2903.6,14.0L2906.0,11.5L2952.8,11.2C2997.7,10.9 2999.8,11.0 3002.0,12.8C3004.9,15.2 3004.6,16.0 2995.5,30.5C2992.0,36.0 2982.4,51.5 2974.2,65.0C2965.9,78.4 2955.0,96.2 2949.9,104.5C2944.8,112.7 2937.6,124.4 2933.9,130.5C2930.3,136.5 2914.1,162.8 2898.0,189.0C2840.3,282.5 2842.6,278.4 2844.0,283.0C2844.4,284.6 2848.5,291.8 2853.0,299.2C2857.5,306.5 2864.9,318.5 2869.4,326.0C2874.0,333.4 2892.6,363.8 2911.0,393.5C2943.6,446.4 2957.1,468.2 2987.9,518.5C2996.4,532.2 3005.7,547.3 3008.6,552.0C3011.5,556.7 3014.0,561.3 3014.0,562.2C3014.0,563.1 3013.0,564.5 3011.7,565.4C3009.8,566.8 3003.7,566.9 2964.0,566.9C2938.9,566.8 2917.8,566.6 2917.0,566.2Z M700.5,497.5C759.2,485.4 805.0,438.5 814.9,380.0C820.2,349.5 815.9,320.9 801.9,292.5C793.7,275.8 785.9,265.0 772.2,251.7C745.1,225.6 710.2,211.5 672.5,211.6C642.1,211.6 611.2,221.8 587.5,239.6C553.0,265.5 532.9,301.6 528.9,345.0C525.3,383.7 540.3,425.4 568.4,454.8C592.1,479.6 620.4,493.9 656.5,499.3C663.0,500.3 692.7,499.1 700.5,497.5Z M1194.4,490.9C1207.3,488.2 1224.9,481.5 1235.0,475.3C1251.8,465.2 1268.2,448.2 1279.6,429.3C1304.4,388.0 1305.2,332.3 1281.8,291.3C1260.3,253.9 1224.4,228.4 1184.7,222.5C1179.2,221.6 1171.9,221.0 1168.5,221.0C1146.8,221.0 1117.8,228.9 1101.5,239.4C1081.0,252.5 1058.2,277.3 1049.0,296.3C1032.4,330.6 1030.3,372.4 1043.4,407.5C1051.4,428.8 1061.0,443.2 1077.4,458.8C1107.1,486.9 1153.3,499.6 1194.4,490.9Z M1548.2,339.3C1561.0,333.5 1575.7,326.8 1581.0,324.4C1586.2,322.1 1611.8,310.4 1638.0,298.5C1664.1,286.6 1694.1,272.9 1704.7,268.2C1724.6,259.3 1728.0,257.2 1728.0,254.0C1728.0,248.6 1702.3,231.4 1686.3,226.0C1671.4,221.1 1646.3,219.6 1626.5,222.4C1592.6,227.3 1558.7,247.4 1540.0,273.7C1526.3,292.9 1519.2,312.8 1518.2,334.7C1517.7,348.0 1518.2,350.0 1522.6,350.0C1523.8,350.0 1535.4,345.2 1548.2,339.3Z"/></symbol></defs></svg>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+<!-- =========================================================
+     A1 · APPENDIX: 10 LIVE CAPABILITIES
+     ========================================================= -->
+<section class="slide" data-label="附录 A1" data-appendix="A1">
+  <header class="chrome"><span class="sec"><b>附录 A1</b>10 项已上线能力</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <h2 class="t" style="font-size:48px">10 项已上线能力，以及在新马是否需要先对接 PMS</h2>
+    <table class="mods">
+      <thead><tr><th></th><th>能力</th><th>减少哪种收入损失</th><th>新马使用条件</th></tr></thead>
+      <tbody>
+        <tr><td class="i">01</td><td class="n">入住率与预订进度监测</td><td class="l">未来日期卖得慢，发现太晚</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">02</td><td class="n">每小时订房监测</td><td class="l">需求突然变化，错过提价或促销时机</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">03</td><td class="n">房态巡检（PMS 与平台开售状态核对）</td><td class="l">有房漏卖、没房接单</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">04</td><td class="n">竞品与划线价对比</td><td class="l">价格偏高丢单、偏低少收</td><td class="p yes">今天即可用</td></tr>
+        <tr><td class="i">05</td><td class="n">异常低价订单检查</td><td class="l">价格设置错误或活动叠加导致少收</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">06</td><td class="n">调价建议</td><td class="l">低价出售、高需求日期少收</td><td class="p need">需对接 PMS</td></tr>
+        <tr><td class="i">07</td><td class="n">多平台一键改价</td><td class="l">改价慢、平台漏改错改</td><td class="p yes">今天即可用</td></tr>
+        <tr><td class="i">08</td><td class="n">点评回复与跟进</td><td class="l">差评影响下单与房价</td><td class="p yes">今天即可用</td></tr>
+        <tr><td class="i">09</td><td class="n">质检与整改</td><td class="l">服务问题反复发生，客人流失</td><td class="p yes">今天即可用</td></tr>
+        <tr><td class="i">10</td><td class="n">早安简报与待办提醒</td><td class="l">影响收入的事项无人跟进</td><td class="p yes">今天即可用<span style="color:var(--ink-mute);font-weight:400">（部分内容）</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
+  <aside class="notes">问答备用：哪些能力在新马今天就能用、哪些要等 PMS 对接。</aside>
+</section>
+
+<!-- =========================================================
+     A2 · APPENDIX: DATA & COMPLIANCE
+     ========================================================= -->
+<section class="slide" data-label="附录 A2" data-appendix="A2">
+  <header class="chrome"><span class="sec"><b>附录 A2</b>数据与合规</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <h2 class="t" style="font-size:48px">数据与合规：酒店的数据，始终由酒店做主</h2>
+    <div class="trust">
+      <div class="tr"><div><h4>人工确认每一次写入</h4><p>AI 只生成方案；改价、发布回复必须由人确认。与新加坡 IMDA《代理式 AI 治理框架》（2026）倡导的"关键操作需人工批准"一致。</p></div><span class="pill ok">已实现</span></div>
+      <div class="tr"><div><h4>新加坡主体签约</h4><p>可由新加坡主体 Intent Computing Pte. Ltd. 直接与酒店签约。</p></div><span class="pill ok">已具备</span></div>
+      <div class="tr"><div><h4>新马数据在新加坡部署</h4><p>新马酒店的数据部署在新加坡云区域，与中国业务数据分开。</p></div><span class="pill wip">规划中</span></div>
+      <div class="tr"><div><h4>酒店是数据控制方，我们是处理方</h4><p>签署数据处理协议（DPA）；按新加坡 PDPA、马来西亚 PDPA（2024 修订）要求，及时配合酒店完成泄露通报。</p></div><span class="pill wip">规划中</span></div>
+      <div class="tr"><div><h4>尽量不碰住客个人信息</h4><p>经营分析只用房量、价格等汇总数据；点评、订单中的姓名电话先脱敏再处理。</p></div><span class="pill wip">规划中</span></div>
+      <div class="tr"><div><h4>账号权限最小化</h4><p>只授权业务必需的平台账号与酒店；操作全程留痕，可追溯到确认人。</p></div><span class="pill wip">规划中</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
+  <aside class="notes">问答备用：数据放在哪里、谁负责、AI 会不会乱操作。注意"规划中"的条目以实际落地为准。</aside>
+</section>
+
+<!-- =========================================================
+     A3 · APPENDIX: LANDSCAPE
+     ========================================================= -->
+<section class="slide" data-label="附录 A3" data-appendix="A3">
+  <header class="chrome"><span class="sec"><b>附录 A3</b>与现有工具的关系</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <h2 class="t" style="font-size:48px">与现有工具的关系：我们做的是"跨平台的经理工作台"</h2>
+    <table class="land">
+      <thead><tr><th>类型</th><th>擅长</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>订房平台自带工具<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 Agoda Partner Portal（2026.8）</span></td><td>免费；评论摘要、与周边酒店对比、数据驱动的经营建议</td><td>只覆盖单一平台，无法跨平台核对房态与价格</td></tr>
+        <tr><td>国际收益管理系统<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 Lighthouse、RoomPriceGenie</span></td><td>定价模型与数据网络成熟；Lighthouse 已推出 ChatGPT 内直订应用（2026.3）</td><td>以定价与数据为核心；RoomPriceGenie 界面为英文与欧洲语言；Lighthouse 入门方案每月约 115–219（币种与价格因地区而异）</td></tr>
+        <tr><td>本地收益管理服务<br><span style="font-weight:400;font-size:21px;color:var(--ink-mute)">如 ZUZU（新加坡）</span></td><td>收益管理 + 人工收益顾问</td><td>以收益管理与分销为核心，也提供 PMS、官网、点评管理；酒店质检、整改跟进不是重点</td></tr>
+        <tr class="us"><td>HogentX</td><td>跨平台的经理工作台：价格、房态、点评、质检、简报一处完成；五种界面语言；每一步人工确认</td><td>已在 29 家自营酒店用上；新马需先接通本地 PMS，才能全部 10 项可用</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src">来源：Agoda Newsroom（2026.8.10）；Lighthouse 官网定价文章（2026.9）；RoomPriceGenie 官网；Wavemaker Partners 关于 ZUZU 的公告（2025.8）；ZUZU 官网；The Hotels Network 新闻稿（2026.3）。</p>
+  <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
+  <aside class="notes">问答备用："和 Agoda 自带工具、和 Lighthouse/ZUZU 有什么区别？"——我们不是另一个定价工具，而是把价格、房态、点评、质检放在一个工作台里，跨平台、多语言、人工确认。</aside>
+</section>
+
+<!-- =========================================================
+     A4 · APPENDIX: SOURCES
+     ========================================================= -->
+<section class="slide" data-label="附录 A4" data-appendix="A4">
+  <header class="chrome"><span class="sec"><b>附录 A4</b>数据来源</span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <h2 class="t" style="font-size:48px">数据来源</h2>
+    <div class="sources">
+      <p><b>新加坡入住率与客房收入（2025；2026 年 1–8 月）</b>：SingStat 表 M550081（STB 数据）；STB 新闻稿（2026.2）。</p>
+      <p><b>新加坡客房结构</b>：CDL Hospitality Trusts 2024 年报，引 STB 数据。</p>
+      <p><b>新加坡人手政策</b>：新加坡 2026 年财政预算案 D 章；人力部（MOM）国会书面答复（2026.9）。</p>
+      <p><b>新加坡酒店业补贴方案类别</b>：贸工部政务部长在 SHA Hospitality Exchange 2026 的致辞（2026.9）。</p>
+      <p><b>马来西亚国际旅客（2025）与大马旅游年</b>：马来西亚财政部《2027 经济展望》（The Star，2026.10）；Tourism Malaysia（The Vibes / NST，2026.9）。</p>
+      <p><b>马来西亚入住率与酒店数量</b>：Tourism Malaysia 住宿业绩效调查信息图（2025 年 1–12 月；2026 年 1–6 月）。</p>
+      
+      <p><b>MyBHA 规模</b>：MyBHA 会长受访，Malay Mail（2026.3）。</p>
+      <p><b>马来西亚 OTA 份额与佣金</b>：马来西亚竞争委员会 MyCC《数字经济生态市场审查：OTA》草案终稿（2025.8），数据来自行业访谈与 MyCC 分析。</p>
+      <p><b>生成式 AI 与旅行规划</b>：Google、Temasek、Bain《e-Conomy SEA 2026》（2026.10）。</p>
+      <p><b>AI 渠道订房占比</b>：Booking Holdings 2026 年第二季度业绩会，经媒体报道。</p>
+      <p><b>数据合规</b>：新加坡 PDPC 指南；马来西亚 PDPA（2024 修订）；IMDA《代理式 AI 治理框架》（2026.1）。</p>
+      <p><b>住小叮实测</b>：HogentX 内部业务反馈（2026.10）。</p>
+    </div>
+  </div>
+  <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
+  <aside class="notes">问答备用：所有外部数据的出处。</aside>
+</section>
+
+</main>
+</div>
+
+<!-- Presenter chrome (outside the slide stage) -->
+<nav class="deck-controls" aria-label="翻页"><button id="prevBtn" aria-label="上一页">←</button><span id="counter"></span><button id="nextBtn" aria-label="下一页">→</button><button id="notesBtn" aria-label="讲稿">讲稿 N</button></nav>
+<div class="notes-panel" id="notesPanel"><h6 id="notesTitle"></h6><div id="notesBody"></div></div>
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle" title="编辑模式 (E)">✏️ 编辑</button>
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   Arrows / Space / PageUp-Down / wheel / swipe; #n deep links;
+   N toggles presenter notes; E toggles inline editing; ?static disables animation.
+   =========================================== */
+class SlidePresentation {
+  constructor() {
+    this.slides = [...document.querySelectorAll('.slide')];
+    this.stage = document.getElementById('deckStage');
+    this.mainCount = this.slides.filter(s => !s.dataset.appendix).length;
+    if (/[?&]static\b/.test(location.search)) document.documentElement.classList.add('static');
+    this.labelPages();
+    this.setupStageScale();
+    this.setupNav();
+    const start = parseInt(location.hash.slice(1), 10);
+    this.show(Number.isFinite(start) ? start - 1 : 0);
+  }
+  labelPages() {
+    this.slides.forEach((s, i) => {
+      const pg = s.querySelector('.pg');
+      if (pg) pg.textContent = s.dataset.appendix ? `附录 ${s.dataset.appendix}` : `${String(i + 1).padStart(2, '0')} / ${this.mainCount}`;
+    });
+  }
+  setupStageScale() {
+    const fit = () => {
+      const f = Math.min(innerWidth / 1920, innerHeight / 1080);
+      this.stage.style.transform = `translate(${(innerWidth - 1920 * f) / 2}px, ${(innerHeight - 1080 * f) / 2}px) scale(${f})`;
+    };
+    fit(); addEventListener('resize', fit);
+  }
+  setupNav() {
+    addEventListener('keydown', e => {
+      if (document.body.classList.contains('editing') && e.target.isContentEditable) return;
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); this.show(this.i + 1); }
+      if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); this.show(this.i - 1); }
+      if (e.key === 'Home') this.show(0);
+      if (e.key === 'End') this.show(this.slides.length - 1);
+      if (e.key === 'n' || e.key === 'N') this.toggleNotes();
+    });
+    let lock = false;
+    addEventListener('wheel', e => {
+      if (lock || Math.abs(e.deltaY) < 30) return;
+      lock = true; setTimeout(() => lock = false, 700);
+      this.show(this.i + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: true });
+    let x0 = null;
+    addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) this.show(this.i + (dx < 0 ? 1 : -1));
+    });
+    document.getElementById('prevBtn').onclick = () => this.show(this.i - 1);
+    document.getElementById('nextBtn').onclick = () => this.show(this.i + 1);
+    document.getElementById('notesBtn').onclick = () => this.toggleNotes();
+    addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1), 10); if (Number.isFinite(n) && n - 1 !== this.i) this.show(n - 1); });
+  }
+  show(i) {
+    this.i = Math.max(0, Math.min(i, this.slides.length - 1));
+    this.slides.forEach((s, k) => { s.classList.toggle('active', k === this.i); s.classList.toggle('visible', k === this.i); });
+    const s = this.slides[this.i];
+    document.getElementById('counter').textContent = s.dataset.appendix ? `附录 ${s.dataset.appendix}` : `${this.i + 1} / ${this.mainCount}`;
+    history.replaceState(null, '', `#${this.i + 1}`);
+    this.renderNotes();
+  }
+  toggleNotes() { document.getElementById('notesPanel').classList.toggle('on'); this.renderNotes(); }
+  renderNotes() {
+    const s = this.slides[this.i], n = s.querySelector('.notes');
+    document.getElementById('notesTitle').textContent = `讲稿 · ${s.dataset.label || ''}`;
+    document.getElementById('notesBody').textContent = n ? n.textContent : '';
+  }
+}
+
+/* ===========================================
+   INLINE EDITING (E key or top-left hotzone)
+   Edits auto-save to this browser; Ctrl/Cmd+S downloads the edited HTML.
+   =========================================== */
+class InlineEditor {
+  constructor() {
+    this.isActive = false;
+    this.key = 'hogentx-sgmy-qa-v1';
+    this.targets = () => document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide h4, .slide p, .slide li, .slide td, .slide th, .slide .lab, .slide .w');
+    this.restore();
+    const btn = document.getElementById('editToggle'), zone = document.getElementById('editHotzone');
+    let t = null;
+    const showBtn = () => { clearTimeout(t); btn.classList.add('show'); };
+    const hideBtn = () => { t = setTimeout(() => { if (!this.isActive) btn.classList.remove('show'); }, 400); };
+    zone.addEventListener('mouseenter', showBtn); zone.addEventListener('mouseleave', hideBtn);
+    btn.addEventListener('mouseenter', showBtn); btn.addEventListener('mouseleave', hideBtn);
+    zone.addEventListener('click', () => this.toggle()); btn.addEventListener('click', () => this.toggle());
+    addEventListener('keydown', e => {
+      if ((e.key === 'e' || e.key === 'E') && !e.target.isContentEditable) this.toggle();
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); this.download(); }
+    });
+    document.addEventListener('input', () => this.save());
+  }
+  toggle() {
+    this.isActive = !this.isActive;
+    document.body.classList.toggle('editing', this.isActive);
+    document.getElementById('editToggle').classList.toggle('active', this.isActive);
+    this.targets().forEach(el => el.contentEditable = this.isActive ? 'true' : 'false');
+  }
+  save() { try { localStorage.setItem(this.key, JSON.stringify([...this.targets()].map(el => el.innerHTML))); } catch (e) {} }
+  restore() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(this.key) || 'null'), els = [...this.targets()];
+      if (saved && saved.length === els.length) els.forEach((el, k) => el.innerHTML = saved[k]);
+    } catch (e) {}
+  }
+  download() {
+    if (this.isActive) this.toggle();
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([html], { type: 'text/html' })), download: 'hogentx-sgmy-deck-edited.html' });
+    a.click();
+  }
+}
+
+new SlidePresentation();
+new InlineEditor();
+</script>
+</body>
+</html>

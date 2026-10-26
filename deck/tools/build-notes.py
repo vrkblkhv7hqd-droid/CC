@@ -18,7 +18,7 @@ for i, (label, appendix, body) in enumerate(slides, 1):
         total += float(m.group(1)) / (60 if m.group(2) == '秒' else 1)
     head = f'附录 {appendix}' if appendix else f'第 {i} 页'
     lines += [f'## {head} · {label}', '', f'**页面标题**：{title}' if title else '', '', note, '']
-lines.insert(4, f'正文合计约 **{total:.0f} 分钟**，留出几分钟给开场寒暄和问答；附录只在被问到时使用。')
+lines.insert(4, f'正文合计约 **{total:.0f} 分钟**，其余时间留给交流；答问备用（qa-backup.html）只在被问到时打开。')
 lines.insert(5, '')
 (deck / 'speaker-notes.md').write_text('\n'.join(l for l in lines) + '\n', encoding='utf-8')
 print('slides', len(slides), 'main minutes', round(total, 1))
