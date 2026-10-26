@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const deckDir = path.resolve(__dirname, '..');
-const out = path.resolve(process.argv[2] || path.join(deckDir, 'HogentX-新马合作交流.pdf'));
+const out = path.resolve(process.argv[2] || path.join(deckDir, 'HogentX-SGMY-Investor-Deck.pdf'));
 const types = { '.html': 'text/html; charset=utf-8', '.png': 'image/png', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg' };
 
 const server = http.createServer((req, res) => {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HogentX · 新加坡 / 马来西亚 合作交流</title>
+<title>HogentX 新马合作交流</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
@@ -347,7 +347,7 @@ table.land tr.us td:first-child { color: var(--brand); }
 /* ===========================================
    PRESENTER CHROME (outside the stage): counter, notes panel, edit toggle
    =========================================== */
-.deck-controls { display: flex; gap: 10px; align-items: center; font: 600 13px/1 'Manrope', sans-serif; color: #4a5368; background: rgba(255,255,255,0.85); padding: 8px 14px; border-radius: 999px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); opacity: 0; transition: opacity .3s; }
+.deck-controls { display: flex; gap: 10px; align-items: center; font: 600 13px/1 'Manrope', sans-serif; color: #4a5368; background: rgba(255,255,255,0.85); padding: 8px 14px; border-radius: 999px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); opacity: 0.35; transition: opacity .3s; }
 body:hover .deck-controls { opacity: 1; }
 .deck-controls button { border: 0; background: none; font: inherit; color: inherit; cursor: pointer; padding: 2px 6px; }
 .notes-panel { position: fixed; left: 0; right: 0; bottom: 0; max-height: 42vh; overflow: auto; z-index: 1001; background: rgba(11,16,32,0.94); color: #e8ecf6; font: 16px/1.7 'Noto Sans SC', sans-serif; padding: 18px 28px 22px; display: none; }
@@ -578,8 +578,8 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
     <p class="kicker reveal d1">住小叮实验</p>
     <h2 class="t reveal d2">在自营的 29 家酒店里，6 项日常任务用时减少约 64%</h2>
     <div class="proof">
-      <div class="chart reveal d3" role="img" aria-label="6 项任务使用前后用时（分钟）：房态巡检 120→30，竞品监控 120→60，入住率监测 60→30，每小时订房监测 60→30，一键调价 60→12，划线价核查 60→12">
-        <div class="legend"><span><i style="background:var(--bar-before)"></i>使用前</span><span><i style="background:var(--brand)"></i>使用 HogentX 后</span><span style="margin-left:auto;color:var(--ink-mute)">单位：分钟</span></div>
+      <div class="chart reveal d3" role="img" aria-label="6 项任务使用前后每周用时（分钟）：房态巡检 120→30，竞品监控 120→60，入住率监测 60→30，每小时订房监测 60→30，一键调价 60→12，划线价核查 60→12">
+        <div class="legend"><span><i style="background:var(--bar-before)"></i>使用前</span><span><i style="background:var(--brand)"></i>使用 HogentX 后</span><span style="margin-left:auto;color:var(--ink-mute)">单位：分钟 / 周</span></div>
         <div class="row"><span class="lab">房态巡检</span><div class="bars"><div class="bw"><div class="bar b" style="--w:760px" title="房态巡检 · 使用前 120 分钟"></div><span class="v">120</span></div><div class="bw"><div class="bar a" style="--w:190px" title="房态巡检 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
         <div class="row"><span class="lab">竞品监控</span><div class="bars"><div class="bw"><div class="bar b" style="--w:760px" title="竞品监控 · 使用前 120 分钟"></div><span class="v">120</span></div><div class="bw"><div class="bar a" style="--w:380px" title="竞品监控 · 使用后 60 分钟"></div><span class="v a">60</span></div></div></div>
         <div class="row"><span class="lab">入住率监测</span><div class="bars"><div class="bw"><div class="bar b" style="--w:380px" title="入住率监测 · 使用前 60 分钟"></div><span class="v">60</span></div><div class="bw"><div class="bar a" style="--w:190px" title="入住率监测 · 使用后 30 分钟"></div><span class="v a">30</span></div></div></div>
@@ -589,14 +589,14 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
       </div>
       <div class="hero reveal d4">
         <div class="num">−64%</div>
-        <h4>6 项日常任务合计用时</h4>
+        <h4>6 项日常任务每周合计用时</h4>
         <div class="tot"><span class="num">480</span> 分钟 → <span class="num" style="color:var(--brand)">174</span> 分钟</div>
-        <p class="note">实验范围：自有品牌「住小叮」29 家酒店（中国）。<br>计量口径：一位经理管理 2 家酒店时，6 项任务的合计用时；不含其他工作。<br>来源：内部业务反馈。</p>
+        <p class="note">实验范围：自有品牌「住小叮」29 家酒店（中国）。<br>计量口径：一位经理管理 2 家酒店时，6 项任务每周的合计用时；不含其他工作。<br>来源：内部业务反馈。</p>
       </div>
     </div>
   </div>
   <footer class="foot"><span>HogentX · 新加坡 / 马来西亚 合作交流</span><span class="pg"></span></footer>
-  <aside class="notes">【约 2.5 分钟】全场最重要的一页。说清楚口径：这是我们自己 29 家酒店的实验结果，按"一位经理管 2 家店"统计 6 项任务的合计用时，从 480 分钟降到 174 分钟。改价和划线价核查降得最多（60→12），因为原来要逐个后台操作。这只是省时间，还没算收益提升，收益在下一页。</aside>
+  <aside class="notes">【约 2.5 分钟】全场最重要的一页。说清楚口径：这是我们自己 29 家酒店的实验结果，按"一位经理管 2 家酒店"统计 6 项任务每周的合计用时，从 480 分钟降到 174 分钟，相当于每周省下 5 个多小时。改价和划线价核查降得最多（60→12），因为原来要逐个后台操作。这只是省时间，还没算收益提升，收益在下一页。</aside>
 </section>
 
 <!-- =========================================================

@@ -14,7 +14,7 @@
 
 ```bash
 cd deck
-node tools/export-pdf.js            # 生成 HogentX-新马合作交流.pdf
+node tools/export-pdf.js            # 生成 HogentX-SGMY-Investor-Deck.pdf
 ```
 
 导出需要安装 Playwright（Chromium）。生成的 PDF 是矢量文字，每页 1920×1080，动画以最终状态呈现。
@@ -25,7 +25,7 @@ node tools/export-pdf.js            # 生成 HogentX-新马合作交流.pdf
 deck/
   index.html                 演示稿（单文件，样式与脚本都在内）
   speaker-notes.md           讲稿与时间分配（由 index.html 里的讲稿生成）
-  HogentX-新马合作交流.pdf    PDF 版
+  HogentX-SGMY-Investor-Deck.pdf    PDF 版
   assets/brand/              商标矢量图（据商标注册申请图样描摹）
   assets/site/               官网截图、吉祥物、数字员工图标
   assets/product/            AI 直销官网的页面原型截图
