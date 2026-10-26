@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HogentX 新马一页纸</title>
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
+<style>
+/* 一页纸摘要：A4 竖版，与幻灯片同一套配色与字体。会后转发用。 */
+:root {
+    --ink: #10213a; --paper: #ffffff; --paper-2: #eef2f8; --accent: #2b61fe; --accent-ink: #1d49cf; --accent-soft: #e4ebff;
+    --muted: #5d6d86; --line: #c9d2e0; --pos: #0f8a5f; --warn: #b7791f;
+    --font-display: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    --font-body: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-num: 'Fraunces', 'Noto Serif SC', serif;
+    --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: A4; margin: 0; }
+html, body { background: #e9edf4; }
+body { font-family: var(--font-body); color: var(--ink); font-size: 9.2pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--paper); padding: 8mm 11mm 7mm; display: flex; flex-direction: column; gap: 2.6mm; }
+@media print { html, body { background: #fff; } .page { margin: 0; } }
+.top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 3mm; }
+.brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9pt; letter-spacing: 0.12em; color: var(--muted); }
+.brand img { width: 22px; height: 22px; }
+.top .date { font-family: var(--font-mono); font-size: 8.5pt; color: var(--muted); letter-spacing: 0.06em; }
+h1 { font-family: var(--font-display); font-weight: 900; font-size: 17pt; line-height: 1.25; letter-spacing: 0.01em; }
+h1 em { font-style: normal; color: var(--accent-ink); }
+.lede { font-size: 9.2pt; color: var(--muted); margin-top: 1.2mm; }
+.lede strong { color: var(--ink); font-weight: 500; }
+h2 { font-family: var(--font-mono); font-size: 7.4pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 1.6mm; }
+h2::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+.formula { font-family: var(--font-display); font-weight: 700; font-size: 10.2pt; display: flex; flex-wrap: wrap; gap: 2px 6px; align-items: baseline; }
+.formula .op { font-family: var(--font-num); color: var(--accent-ink); }
+.formula .v { border-bottom: 2px solid var(--accent); padding: 0 3px; }
+.formula .v.neg { border-bottom-color: var(--warn); }
+p, li { font-size: 8.6pt; }
+ul { list-style: none; display: flex; flex-direction: column; gap: 0.9mm; }
+ul li { padding-left: 11px; position: relative; }
+ul li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 2px; background: var(--accent); }
+.stat { display: flex; flex-direction: column; }
+.stat .n { font-family: var(--font-num); font-weight: 700; font-size: 19pt; line-height: 1; color: var(--ink); white-space: nowrap; }
+.stat .n.accent { color: var(--accent-ink); }
+.stat .n small { font-size: 0.42em; color: var(--muted); font-weight: 600; margin-left: 2px; }
+.stat .c { font-size: 7.9pt; color: var(--muted); line-height: 1.35; margin-top: 1mm; }
+.stat .c strong { color: var(--ink); font-weight: 500; }
+.box { background: var(--paper-2); border-radius: 4px; padding: 2.4mm 3mm; }
+.box.accent { background: var(--accent-soft); }
+.box.ink { background: var(--ink); color: #fff; }
+.box.ink h2 { color: #9fb3d6; }
+.box.ink p, .box.ink li { color: #fff; }
+.box.ink ul li::before { background: #9db6ff; }
+.roles { display: flex; flex-direction: column; gap: 1mm; }
+.role { display: grid; grid-template-columns: 34mm 1fr; gap: 2mm; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 1mm; }
+.role b { font-family: var(--font-display); font-size: 9pt; }
+.role span { font-size: 8.3pt; color: var(--muted); line-height: 1.35; }
+.rule { font-size: 8.3pt; padding: 1.6mm 2.5mm; border-left: 3px solid var(--accent); background: var(--paper-2); margin-top: 1.8mm; }
+table { width: 100%; border-collapse: collapse; font-size: 8.3pt; }
+th, td { text-align: left; padding: 1.1mm 1.6mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; }
+td.hi { color: var(--accent-ink); font-weight: 500; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 1.5mm; }
+.tag { font-family: var(--font-mono); font-size: 7.5pt; padding: 2px 6px; border-radius: 3px; background: var(--paper-2); color: var(--muted); }
+.tag.ok { background: #dff3ea; color: var(--pos); }
+.tag.plan { background: #fff1d6; color: #8a5a0e; }
+.foot { margin-top: auto; border-top: 1px solid var(--line); padding-top: 2mm; font-family: var(--font-mono); font-size: 6.8pt; color: var(--muted); line-height: 1.5; display: flex; justify-content: space-between; gap: 6mm; }
+.foot .r { white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div class="brand"><img src="assets/favicon.svg" alt=""><span>HOGENTX · 懂经营的酒店数字员工</span></div>
+    <div class="date">新加坡 · 马来西亚 · 一页纸 · 2026 年 10 月</div>
+  </div>
+
+  <div>
+    <h1>一家先在自己酒店跑通、<em>正在找本地伙伴</em>的新加坡公司</h1>
+    <p class="lede">公司在新加坡，中国是开发中心。给酒店店长配一支<strong>只读采集、人工确认</strong>的数字员工队伍：AI 负责发现和核查，人负责判断和确认。桌面客户端，不换现有 PMS。界面语言：中文、English、Bahasa Melayu、日本語、한국어。</p>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2>问题：酒店的收入只有一个公式，每一项都可能没人盯</h2>
+      <div class="formula"><span>收入</span><span class="op">=</span><span class="v">可售房晚</span><span class="op">×</span><span class="v">入住率</span><span class="op">×</span><span class="v">房价</span><span class="op">−</span><span class="v neg">渠道成本</span><span class="op">−</span><span class="v neg">人力</span></div>
+      <ul style="margin-top:2mm">
+        <li>店长每天登录 5+ 后台逐项检查；79% 的酒店每周花 11 小时以上在可自动化的任务上（SiteMinder 2025）</li>
+        <li>收益经理月薪：新加坡 S$4,500–6,000，马来西亚 RM5,500–8,000；新加坡住宿业职位空缺率 4.3%，高于全经济 3.1%</li>
+        <li>收益工具贵且只管价格（Lighthouse €99–189、RoomPriceGenie €198–440 每店每月）；在我们对比的约 20 家厂商中，没有一家把八项能力放进一个产品</li>
+      </ul>
+    </div>
+    <div>
+      <h2>答案：四个数字员工，一个闭环</h2>
+      <div class="roles">
+        <div class="role"><b>数字收益经理</b><span>竞品比价 · 预订进度 · 调价提议 · 批量调价</span></div>
+        <div class="role"><b>数字宾客关系专员</b><span>评价处理 · 差评回复草稿 · 确认发布</span></div>
+        <div class="role"><b>数字质检主管</b><span>检查计划 · 问题记录 · 整改跟进</span></div>
+        <div class="role"><b>数字总经理助理</b><span>今日简报 · 重点事项 · 异常提醒</span></div>
+      </div>
+      <div class="rule">发现变化 → 核查与判断 → <strong>店长确认并处理</strong> → 跟踪经营结果。「AI 只能读取数据，不会直接修改任何平台内容……最终提交始终由人工确认。」（hogentx.com）</div>
+    </div>
+  </div>
+
+  <div>
+    <h2>验证：先拿自己的酒店当实验室（住小叮，创始人自有品牌，全部免费使用）</h2>
+    <div class="grid3" style="grid-template-columns: 1fr 1fr 1fr 1.6fr">
+      <div class="stat"><span class="n accent">29</span><span class="c">家店已开业；含签约和筹建中共 <strong>53 家</strong>，总房间数不到 4,000 间</span></div>
+      <div class="stat"><span class="n">−64<small>%</small></span><span class="c">两家门店六项日常任务合计 <strong>480 → 174 分钟/天</strong>（内部口径，未覆盖店长全部工作）</span></div>
+      <div class="stat"><span class="n">10–20<small>%</small></span><span class="c">收益管理<strong>预计</strong>提升，正在验证，暂无早期数据</span></div>
+      <div class="box"><p style="font-size:9pt"><strong>阶段如实说：</strong>外部付费客户暂无，正在从自用走向外部商业验证。业态为无独立卫浴单人间、人均约 4 ㎡，是房价最低、利润最薄、人手最少的业态之一。品牌与数据可公开核验。</p></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div>
+      <h2>新加坡 · 卖「省人」</h2>
+      <ul>
+        <li>285 家 gazetted hotels，2025 年入住率 81.9%，RevPAR S$224.04（−0.4%）</li>
+        <li>经济型 RevPAR 跌幅最大（全年 −6.2%）；人手比房紧</li>
+        <li>公司所在地，EDGE Grant 合规锚点</li>
+      </ul>
+    </div>
+    <div>
+      <h2>马来西亚 · 卖「增收」</h2>
+      <ul>
+        <li>5,390 家酒店、349,580 间客房，入住率 56.8%</li>
+        <li>MyBHA 覆盖约 2,900 家三星及以下酒店；绝大多数无正式星级</li>
+        <li>2025 年外国游客 4,220 万，2026 年目标 4,700 万</li>
+      </ul>
+    </div>
+    <div>
+      <h2>两地共同点 · 订单在 OTA 手里</h2>
+      <ul>
+        <li>亚太 OTA 约占预订 83%；Agoda 20.9% 居第一（D-EDGE 2026）</li>
+        <li>已接入 Agoda、Booking.com、携程、美团、飞猪；Expedia、Trip.com 国际版、Traveloka 后续接入</li>
+        <li>PMS 目前仅接入别样红（中国），海外 PMS 按试点酒店排优先级</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2>为什么必须有本地代理商：信任、补贴、支持</h2>
+      <ul>
+        <li><strong>信任</strong>：酒店把 OTA 与 PMS 授权交给谁，取决于谁在本地找得到人</li>
+        <li><strong>补贴</strong>：新加坡 EDGE Grant（2026-09-30 起取代 PSG/EDG/MRA）中小企业最高 70%，供应商经 IMDA 预审，转售商可自持资格；马来西亚中小企业数字化补贴只能经 MDEC 注册的本地 TSP 申领。补贴到位后酒店实付可打 3–7 折</li>
+        <li><strong>支持</strong>：中 / 英 / 马来语一线支持与培训，必须有人在当地</li>
+        <li><strong>数据</strong>（建议方案，尚未落地）：新马客户数据托管新加坡，与中国数据物理分离；最小化采集，不需要客人身份信息；签 DPA、设 DPO，按两地 PDPA 通报要求设计</li>
+      </ul>
+    </div>
+    <div>
+      <h2>合作框架建议（非定稿，细节与代理商直接谈）</h2>
+      <table>
+        <thead><tr><th>酒店付什么</th><th>代理商得什么</th></tr></thead>
+        <tbody>
+          <tr><td>推广价 68 元/账号/月（≈ S$12.5 / RM 40），首批 100 家，有时限、有名额</td><td class="hi">订阅分成首年 40%、续费 20%</td></tr>
+          <tr><td>标准价按门店分档：S$99 / 199 / 299，RM 199 / 399 / 599 每店每月</td><td class="hi">实施、培训、配置服务费 S$300–500/店，100% 归代理商</td></tr>
+          <tr><td>补贴后实付可打 3–7 折</td><td class="hi">持有补贴资格（IMDA 预审 / MDEC TSP）；首家可谈 12 个月区域独家</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h2>要找的代理商</h2>
+      <ul>
+        <li>已服务 50 家以上酒店的 PMS / 渠道管理代理商，或酒店 IT 集成商</li>
+        <li>与 SHA、MAH、MyBHA 等协会关联的服务商；有 Agoda / Booking.com 市场团队关系者更佳</li>
+        <li>能做中 / 英 / 马来语本地一线支持。产品叠加在现有系统之上，不替换、不冲突</li>
+      </ul>
+    </div>
+    <div class="box ink">
+      <h2>请两位帮三件事 · 我们承诺三件事</h2>
+      <ul>
+        <li>介绍符合画像的本地代理商，演示由我们亲自做；介绍愿意试点的酒店；把关本地化</li>
+        <li>我们对介绍对象如实讲阶段，提供远程二线支持，验证数据可公开核验</li>
+        <li>不用两位的名义做任何超出今天介绍的承诺，两位不承担义务。hi@intent-computing.com · hogentx.com</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>来源：hogentx.com；HogentX 产品说明与住小叮内部 POC（2026-10）；STB / data.gov.sg（2026-06）；EdgeProp（2025-12）；Tourism Malaysia 2025；MOTAC；Malay Mail；Bernama；D-EDGE 2026；Jobstreet 2026；hotelcadence 2026；LODGING Magazine（2025-08）；Capterra 2026；grants.sg / EnterpriseSG（2026-10）；BSN。外部数字为搜索摘要口径，上会前逐条核验。</span>
+    <span class="r">数据以来源为准 · 2026 年 10 月整理</span>
+  </div>
+</div>
+</body>
+</html>
