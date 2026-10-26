@@ -1,0 +1,75 @@
+<template>
+  <style>
+
+@font-face { font-family: 'Noto Serif SC'; font-weight: 900; font-style: normal; src: url('assets/fonts/NotoSerifSC-Black.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Serif SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSerifSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; font-style: normal; src: url('assets/fonts/NotoSansSC-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 500; font-style: normal; src: url('assets/fonts/NotoSansSC-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-weight: 700; font-style: normal; src: url('assets/fonts/Fraunces-Bold.woff2') format('woff2'); }
+
+#root { position: absolute; inset: 0; overflow: hidden; background: #10213a; color: #f4f6fa;
+  font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; }
+#root * { box-sizing: border-box; margin: 0; }
+.clip { position: absolute; inset: 0; }
+.at { inset: auto; }
+.serif { font-family: 'Noto Serif SC', serif; font-weight: 900; }
+.num { font-family: 'Fraunces', 'Noto Serif SC', serif; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.eyebrow { font-size: 30px; font-weight: 500; letter-spacing: 0.22em; color: #8fb0ff; text-transform: uppercase; }
+.en { font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; font-weight: 400; color: #b8c4d9; }
+.ground { position: absolute; inset: 0; background:
+  radial-gradient(1200px 700px at 30% 20%, rgba(43,97,254,0.22), transparent 60%),
+  radial-gradient(900px 600px at 85% 90%, rgba(43,97,254,0.14), transparent 60%), #10213a; }
+.grid { position: absolute; inset: 0; background-image:
+  linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 96px 96px; }
+
+
+#w-title { position: absolute; left: 160px; top: 150px; font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 64px; line-height: 1.2; }
+.shot { position: absolute; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 30px 60px rgba(0,0,0,0.45); background: #0b1730; }
+.shot img { display: block; width: 100%; height: auto; }
+#w-dim { position: absolute; inset: 0; background: rgba(16,33,58,0.78); }
+#w-big { position: absolute; left: 0; right: 0; top: 400px; text-align: center; font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 128px; line-height: 1.1; letter-spacing: 0.04em; }
+#w-sub { position: absolute; left: 0; right: 0; top: 580px; text-align: center; font-size: 32px; color: #b8c4d9; letter-spacing: 0.1em; }
+
+  </style>
+  <div id="root" data-composition-id="watch" data-width="1920" data-height="1080" >
+
+    <div id="w-ground" class="clip ground" data-start="0" data-duration="7.342"></div>
+    <div id="w-title" class="clip at" data-start="0" data-duration="7.342">不是店长不上心<br/>是没有人能盯住五个后台</div>
+    <div id="w-shots" class="clip" data-start="0" data-duration="7.342" data-layout-allow-overlap>
+      <div class="shot" id="sh1" style="left:120px; top:150px; width:620px;"><img src="assets/workbench-home.jpg" alt="" /></div>
+      <div class="shot" id="sh2" style="left:780px; top:110px; width:560px;"><img src="assets/screen-pricing.jpg" alt="" /></div>
+      <div class="shot" id="sh3" style="left:1380px; top:170px; width:440px;"><img src="assets/screen-reviews.jpg" alt="" /></div>
+      <div class="shot" id="sh4" style="left:330px; top:560px; width:520px;"><img src="assets/screen-inspection.jpg" alt="" /></div>
+      <div class="shot" id="sh5" style="left:980px; top:520px; width:640px;"><img src="assets/shot-occupancy.jpg" alt="" /></div>
+    </div>
+    <div id="w-over" class="clip" data-start="5.097" data-duration="2.245">
+      <div id="w-dim"></div>
+      <div id="w-big">每小时 · 每天</div>
+      <div id="w-sub">EVERY HOUR · EVERY DAY</div>
+    </div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const EASE_IN = "expo.out";
+      tl.fromTo('#w-title', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE_IN }, 0.543);
+      tl.to('#w-title', { opacity: 0, filter: 'blur(6px)', duration: 0.3, ease: 'power3.in' }, 3.668);
+      tl.fromTo('#sh1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 3.868);
+      tl.fromTo('#sh2', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 3.988);
+      tl.fromTo('#sh3', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 4.108);
+      tl.fromTo('#sh4', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 4.228);
+      tl.fromTo('#sh5', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 4.348);
+      tl.fromTo('#w-dim', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, 5.197);
+      tl.fromTo('#w-big', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.45, ease: EASE_IN }, 5.247);
+      tl.fromTo('#w-sub', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: EASE_IN }, 5.503);
+      tl.to('#w-title, #w-shots > *, #w-big, #w-sub', { opacity: 0, filter: 'blur(6px)', duration: 0.25, ease: 'power3.in' }, 7.042);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["watch"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,74 @@
+<template>
+  <style>
+
+@font-face { font-family: 'Noto Serif SC'; font-weight: 900; font-style: normal; src: url('assets/fonts/NotoSerifSC-Black.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Serif SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSerifSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; font-style: normal; src: url('assets/fonts/NotoSansSC-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 500; font-style: normal; src: url('assets/fonts/NotoSansSC-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-weight: 700; font-style: normal; src: url('assets/fonts/Fraunces-Bold.woff2') format('woff2'); }
+
+#root { position: absolute; inset: 0; overflow: hidden; background: #10213a; color: #f4f6fa;
+  font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; }
+#root * { box-sizing: border-box; margin: 0; }
+.clip { position: absolute; inset: 0; }
+.at { inset: auto; }
+.serif { font-family: 'Noto Serif SC', serif; font-weight: 900; }
+.num { font-family: 'Fraunces', 'Noto Serif SC', serif; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.eyebrow { font-size: 30px; font-weight: 500; letter-spacing: 0.22em; color: #8fb0ff; text-transform: uppercase; }
+.en { font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; font-weight: 400; color: #b8c4d9; }
+.ground { position: absolute; inset: 0; background:
+  radial-gradient(1200px 700px at 30% 20%, rgba(43,97,254,0.22), transparent 60%),
+  radial-gradient(900px 600px at 85% 90%, rgba(43,97,254,0.14), transparent 60%), #10213a; }
+.grid { position: absolute; inset: 0; background-image:
+  linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 96px 96px; }
+
+
+#m-left { position: absolute; left: 160px; top: 300px; width: 640px; }
+#m-logo { width: 96px; height: auto; margin-bottom: 36px; }
+#m-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 72px; line-height: 1.2; }
+#m-sub { margin-top: 22px; font-size: 28px; color: #b8c4d9; line-height: 1.5; }
+#m-cards { position: absolute; left: 900px; top: 230px; width: 860px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.role { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 34px 32px; min-height: 270px; display: flex; flex-direction: column; gap: 14px; }
+.role svg { width: 52px; height: 52px; color: #8fb0ff; }
+.role .zh { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 42px; line-height: 1.2; margin-top: 12px; white-space: nowrap; }
+.role .en { font-size: 28px; }
+
+  </style>
+  <div id="root" data-composition-id="team" data-width="1920" data-height="1080" >
+
+    <div id="m-ground" class="clip ground" data-start="0" data-duration="13.51"></div>
+    <div id="m-grid" class="clip grid" data-start="0" data-duration="13.51" data-layout-ignore></div>
+    <div id="m-left" class="clip at" data-start="0" data-duration="13.51">
+      <img id="m-logo" src="assets/logo-mark-white.png" alt="HogentX" />
+      <div id="m-title">给每一家酒店<br/>一支数字员工队伍</div>
+      <div id="m-sub">A team of digital employees<br/>for every hotel</div>
+    </div>
+    <div id="m-cards" class="clip at" data-start="0" data-duration="13.51">
+        <div class="role" id="r1"><svg viewBox="0 0 52 52"><path d="M6 40h40M10 32l10-10 8 8 14-16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="zh">收益经理</div><div class="en">Revenue manager</div></div>
+        <div class="role" id="r2"><svg viewBox="0 0 52 52"><path d="M8 10h36v22H22l-10 8v-8H8z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/></svg><div class="zh">宾客关系专员</div><div class="en">Guest relations</div></div>
+        <div class="role" id="r3"><svg viewBox="0 0 52 52"><path d="M10 8h32v36H10zM17 20l5 5 10-10M17 34h18" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="zh">质检主管</div><div class="en">Quality inspector</div></div>
+        <div class="role" id="r4"><svg viewBox="0 0 52 52"><path d="M6 16h40v26H6zM18 16v-6h16v6M6 28h40" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/></svg><div class="zh">总经理助理</div><div class="en">General manager's assistant</div></div>
+    </div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const EASE_IN = "expo.out";
+      tl.fromTo('#m-logo', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE_IN }, 0.57);
+      tl.fromTo('#m-title', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE_IN }, 1.753);
+      tl.fromTo('#m-sub', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE_IN }, 3.176);
+      tl.fromTo('#r1', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: EASE_IN }, 5.706);
+      tl.fromTo('#r2', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: EASE_IN }, 7.182);
+      tl.fromTo('#r3', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: EASE_IN }, 9.549);
+      tl.fromTo('#r4', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: EASE_IN }, 11.544);
+      tl.to('#m-left > *, #m-cards > *', { opacity: 0, filter: 'blur(6px)', duration: 0.25, ease: 'power3.in' }, 13.21);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["team"] = tl;
+    })();
+  </script>
+</template>
