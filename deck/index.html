@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HogentX 新马市场介绍</title>
+<link rel="icon" href="assets/favicon.svg">
+<!-- 字体：中文衬线做标题，中文无衬线做正文，Fraunces 做大数字，IBM Plex Mono 做脚注与标签。
+     离线时回退到系统中文字体，版式不变。 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap">
+<style>
+/* ===========================================
+   主题变量（改这里即可换整套配色与字号）
+   布局概念：左上角"账本页眉"（章节标签）+ 结论式标题 + 正文区 + 底部来源脚注，
+   整页像一页经营账本，蓝色只用在"需要注意的数字"上。
+   =========================================== */
+:root {
+    --ink: #10213a;          /* 深海军蓝，正文与深色页背景 */
+    --ink-2: #1b3257;        /* 深色页上的面板 */
+    --paper: #f4f6fa;        /* 冷白纸面 */
+    --paper-2: #e8edf5;      /* 纸面上的次级面板 */
+    --card: #ffffff;
+    --accent: #2b61fe;       /* HogentX 品牌蓝 */
+    --accent-ink: #1d49cf;   /* 浅底上可读的蓝色文字 */
+    --accent-soft: #e4ebff;  /* 蓝色底纹 */
+    --muted: #5d6d86;        /* 次级文字 */
+    --line: #c9d2e0;         /* 分隔线 */
+    --before: #64748b;       /* 图表：使用前 */
+    --after: #2b61fe;        /* 图表：使用后 */
+    --pos: #0f8a5f;          /* 正向变化 */
+    --warn: #b7791f;         /* 需要注意 */
+
+    --font-display: 'Noto Serif SC', 'Songti SC', 'SimSun', 'WenQuanYi Zen Hei', serif;
+    --font-body: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Zen Hei', sans-serif;
+    --font-num: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+    --font-mono: 'IBM Plex Mono', 'Menlo', 'Consolas', 'WenQuanYi Zen Hei Mono', monospace;
+
+    --title-size: 64px;
+    --key-size: 32px;
+    --body-size: 30px;
+    --small-size: 24px;
+    --foot-size: 20px;
+
+    --pad-x: 120px;
+    --pad-top: 84px;
+    --pad-bottom: 76px;
+    --gap: 32px;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 0.7s;
+
+    --stage-bg: #0b1526;
+    --slide-bg: var(--paper);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* ===========================================
+   基础排版
+   =========================================== */
+body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    font-size: var(--body-size);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+.slide {
+    transition: opacity 0.45s ease;
+    font-variant-numeric: tabular-nums;
+}
+/* 账本底纹：每 48px 一条极淡的横线，只在浅色内容页出现 */
+.slide:not(.dark):not(.cover)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0 47px, rgba(16, 33, 58, 0.045) 47px 48px);
+    pointer-events: none;
+}
+.slide-inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    row-gap: 28px;
+}
+
+/* 页眉：章节标签（等宽字体）+ 蓝色方块 */
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    display: inline-block;
+}
+
+/* 标题区：结论句 + 核心句 */
+.title-block h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--title-size);
+    line-height: 1.22;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    max-width: 1500px;
+}
+.title-block .key {
+    margin-top: 14px;
+    font-size: var(--key-size);
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 1500px;
+    line-height: 1.5;
+}
+.title-block .key strong { color: var(--accent-ink); font-weight: 500; }
+
+/* 正文区 */
+.slide-body {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+.cols { display: grid; grid-template-columns: var(--cols, 1fr 1fr); gap: var(--gap); align-items: start; min-height: 0; }
+.cols > * { min-width: 0; }
+.cards { display: grid; grid-template-columns: var(--cols, repeat(3, 1fr)); gap: 24px; }
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.3;
+}
+.card p, .card li { font-size: 26px; line-height: 1.5; color: var(--ink); }
+.card .label {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+.card.accent { border-color: var(--accent); background: var(--accent-soft); }
+.card.ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.card.ink p, .card.ink li, .card.ink h3 { color: var(--paper); }
+.card.ink .label { color: #9fb3d6; }
+
+ul.points { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+ul.points li {
+    position: relative;
+    padding-left: 44px;
+    font-size: var(--body-size);
+    line-height: 1.5;
+}
+ul.points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 22px;
+    height: 3px;
+    background: var(--accent);
+}
+ul.points li strong { font-weight: 700; }
+ul.points.tight { gap: 10px; }
+ul.points.tight li { font-size: 27px; }
+
+/* 大数字：Fraunces */
+.big {
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-variation-settings: "opsz" 144;
+    font-size: 200px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+.big .unit { font-size: 0.32em; font-weight: 600; margin-left: 10px; color: var(--muted); letter-spacing: 0; }
+.big.accent { color: var(--accent-ink); }
+.stat { display: flex; flex-direction: column; gap: 6px; }
+.stat .big { font-size: 128px; }
+.stat .cap { font-size: var(--small-size); color: var(--muted); line-height: 1.4; }
+
+/* 脚注与页码 */
+.foot {
+    font-family: var(--font-mono);
+    font-size: var(--foot-size);
+    color: var(--muted);
+    line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+}
+.foot .src { max-width: 1500px; }
+.foot .num { flex: none; }
+
+/* 表格 */
+table.tbl { width: 100%; border-collapse: collapse; font-size: 25px; line-height: 1.4; }
+table.tbl th, table.tbl td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.tbl th { font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; text-transform: uppercase; }
+table.tbl td.hi { color: var(--accent-ink); font-weight: 500; }
+table.tbl td.dim { color: var(--muted); }
+
+/* 截图 */
+.shot {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 18px 50px rgba(16, 33, 58, 0.14);
+    background: #fff;
+    overflow: hidden;
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot.fit { display: flex; align-items: center; justify-content: center; }
+.shot.fit img { width: auto; max-height: 100%; }
+.caption { font-size: 22px; color: var(--muted); line-height: 1.45; }
+
+/* 深色章节页 */
+.slide.dark { --slide-bg: var(--ink); background: var(--ink); color: var(--paper); }
+.slide.dark .eyebrow { color: #9fb3d6; }
+.slide.dark .title-block h2 { color: var(--paper); }
+.slide.dark .title-block .key { color: #b9c7e2; }
+.slide.dark .big { color: var(--paper); }
+.slide.dark .foot { color: #8aa0c6; }
+.slide.dark ul.points li { color: var(--paper); }
+.slide.dark .card { background: var(--ink-2); border-color: #2a4675; }
+.slide.dark .card h3, .slide.dark .card p, .slide.dark .card li { color: var(--paper); }
+.slide.dark .card .label { color: #9fb3d6; }
+.slide.dark table.tbl td, .slide.dark table.tbl th { border-color: #2a4675; color: var(--paper); }
+.slide.dark table.tbl th { color: #9fb3d6; }
+
+/* 封面 */
+.slide.cover { --slide-bg: var(--ink); background: var(--ink); color: var(--paper); }
+.slide.cover .slide-inner { grid-template-rows: auto 1fr auto; }
+.cover .brand { display: flex; align-items: center; gap: 22px; font-family: var(--font-mono); font-size: 24px; letter-spacing: 0.14em; color: #9fb3d6; }
+.cover .brand img { width: 56px; height: 56px; }
+.cover h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 1.18;
+    letter-spacing: 0.01em;
+    color: var(--paper);
+    max-width: 1600px;
+}
+.cover h1 em { font-style: normal; color: #7d9de8; }
+.cover .sub { margin-top: 34px; font-size: 36px; color: #b9c7e2; line-height: 1.5; max-width: 1300px; }
+.cover .meta { font-family: var(--font-mono); font-size: 22px; color: #8aa0c6; letter-spacing: 0.08em; display: flex; gap: 48px; }
+
+/* 流程图：横向步骤 */
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.flow .step { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 26px 28px; display: flex; flex-direction: column; gap: 10px; }
+.flow .step .n { font-family: var(--font-num); font-weight: 700; font-size: 44px; color: var(--accent-ink); line-height: 1; }
+.flow .step h3 { font-family: var(--font-display); font-size: 30px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+.flow .step p { font-size: 24px; color: var(--muted); line-height: 1.45; }
+.flow .step .n { color: var(--accent-ink); }
+.flow .step.hot { border-color: var(--accent); background: var(--accent-soft); }
+.flow .step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: var(--accent);
+    z-index: 2;
+}
+
+/* 条形图（纯 HTML）：使用前 / 使用后 */
+.bars { display: grid; grid-template-columns: 220px 1fr 110px; row-gap: 18px; column-gap: 20px; align-items: center; }
+.bars .lab { font-size: 26px; font-weight: 500; }
+.bars .track { display: flex; flex-direction: column; gap: 4px; }
+.bars .bar { height: 22px; border-radius: 0 4px 4px 0; position: relative; }
+/* "使用前"用斜纹空心条（形状编码），"使用后"用实心品牌蓝，色弱也能分辨 */
+.bars .bar.before { background: repeating-linear-gradient(135deg, rgba(93, 109, 134, 0.55) 0 3px, transparent 3px 9px); border: 1.5px solid var(--before); border-left: 0; }
+.bars .bar.after { background: var(--after); }
+.bars .val { font-family: var(--font-mono); font-size: 22px; line-height: 1.2; display: flex; flex-direction: column; gap: 4px; }
+.bars .val .b { color: var(--before); }
+.bars .val .a { color: var(--accent-ink); font-weight: 500; }
+.legend { display: flex; gap: 36px; font-family: var(--font-mono); font-size: 20px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 26px; height: 12px; margin-right: 10px; vertical-align: middle; border-radius: 2px; }
+.legend .lb::before { background: repeating-linear-gradient(135deg, rgba(93, 109, 134, 0.55) 0 3px, transparent 3px 9px); border: 1.5px solid var(--before); height: 10px; }
+.legend .la::before { background: var(--after); }
+
+/* 标签/徽章 */
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 19px; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 6px; background: var(--paper-2); color: var(--muted); }
+.tag.ok { background: #dff3ea; color: var(--pos); }
+.tag.plan { background: #fff1d6; color: #8a5a0e; }
+.tag.blue { background: var(--accent-soft); color: var(--accent-ink); }
+
+/* 演讲者备注：藏在幻灯片里，由脚本读出显示到舞台外的面板 */
+.notes { display: none; }
+
+/* ===========================================
+   入场动画：.reveal 元素在当前页可见时依次上浮
+   =========================================== */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); transition-delay: calc(0.08s + var(--i, 0) * 0.09s); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+
+/* ===========================================
+   舞台外的演示控件（进度条、页码、备注面板、编辑按钮）
+   =========================================== */
+.progress { position: fixed; left: 0; bottom: 0; height: 4px; width: 0; background: var(--accent); z-index: 1001; transition: width 0.3s ease; }
+.counter { position: fixed; right: 18px; bottom: 14px; font-family: var(--font-mono); font-size: 13px; color: #8aa0c6; z-index: 1001; letter-spacing: 0.08em; }
+.help { position: fixed; left: 18px; bottom: 14px; font-family: var(--font-mono); font-size: 12px; color: #5b6f94; z-index: 1001; letter-spacing: 0.04em; }
+.notes-panel {
+    position: fixed; right: 0; top: 0; bottom: 0; width: 360px; padding: 24px 24px 60px;
+    background: #0b1526; color: #d6e0f2; border-left: 1px solid #22365a; z-index: 1002;
+    font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow: auto; display: none;
+}
+.notes-panel.show { display: block; }
+.notes-panel h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; color: #8aa0c6; margin-bottom: 12px; text-transform: uppercase; }
+.edit-hotzone { position: fixed; top: 0; left: 0; width: 80px; height: 80px; z-index: 10000; cursor: pointer; }
+.edit-toggle {
+    position: fixed; top: 14px; left: 14px; z-index: 10001; width: 40px; height: 40px; border-radius: 20px;
+    border: 1px solid #2a4675; background: #0b1526; color: #d6e0f2; font-size: 18px; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+.edit-toggle.active { background: var(--accent); border-color: var(--accent); }
+body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.6); outline-offset: 4px; cursor: text; }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage" aria-label="幻灯片">
+
+<!-- ===== 样板页 1：封面 ===== -->
+<section class="slide cover active">
+  <div class="slide-inner">
+    <div class="brand reveal" style="--i:0"><img src="assets/favicon.svg" alt="HogentX"><span>HOGENTX · 懂经营的酒店数字员工</span></div>
+    <div>
+      <h1 class="reveal" style="--i:1">让每一家酒店，<br>都有一支<em>懂经营</em>的数字员工队伍</h1>
+      <p class="sub reveal" style="--i:2">新加坡 · 马来西亚市场介绍</p>
+    </div>
+    <div class="meta reveal" style="--i:3"><span>2026 年 10 月</span><span>hogentx.com</span></div>
+  </div>
+  <aside class="notes">封面备注。</aside>
+</section>
+
+<!-- ===== 样板页 2：内容页 ===== -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow reveal" style="--i:0">01 · 问题</div>
+    <div class="title-block reveal" style="--i:1">
+      <h2>每一家酒店，每天都在不知不觉地少赚钱</h2>
+      <p class="key">收入 = 可售房晚 × 入住率 × 房价 − 渠道成本 − 人力成本。<strong>每一项都在漏。</strong></p>
+    </div>
+    <div class="slide-body">
+      <div class="cards reveal" style="--i:2">
+        <div class="card"><span class="label">漏点一</span><h3>空房没提前发现</h3><p>等到入住前一天才知道卖不够，已经来不及调整。</p></div>
+        <div class="card"><span class="label">漏点二</span><h3>定价偏高丢单、偏低少收</h3><p>周边改了价，自己没看见。</p></div>
+        <div class="card accent"><span class="label">漏点三</span><h3>决定了，却漏改平台</h3><p>五个后台逐个改，改慢了、改漏了。</p></div>
+      </div>
+      <ul class="points reveal" style="--i:3">
+        <li>店长每天要登录 <strong>5 个以上后台</strong>，逐项检查。</li>
+        <li>79% 的酒店每周花 11 小时以上在可自动化的任务上。</li>
+      </ul>
+    </div>
+    <div class="foot"><span class="src">来源：SiteMinder 2025 年 700 家酒店调研（LODGING Magazine，2025-08）</span><span class="num">02</span></div>
+  </div>
+  <aside class="notes">样板内容页备注。</aside>
+</section>
+
+<!-- ===== 样板页 3：图表页 ===== -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow reveal" style="--i:0">03 · 验证</div>
+    <div class="title-block reveal" style="--i:1">
+      <h2>六项日常任务，从 480 分钟降到 174 分钟</h2>
+      <p class="key">两家门店合计，每天。内部业务反馈口径，未覆盖店长全部工作。</p>
+    </div>
+    <div class="slide-body">
+      <div class="cols" style="--cols: 1fr 420px">
+        <div class="reveal" style="--i:2">
+          <div class="legend" style="margin-bottom:22px"><span class="lb">使用前</span><span class="la">使用后</span></div>
+          <div class="bars">
+            <div class="lab">房态巡检</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">120</span><span class="a">30</span></div>
+            <div class="lab">竞品监控</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:50%"></div></div><div class="val"><span class="b">120</span><span class="a">60</span></div>
+            <div class="lab">出租率监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
+            <div class="lab">小时间夜监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
+            <div class="lab">一键调价</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
+            <div class="lab">划线价核查</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
+          </div>
+        </div>
+        <div class="stat reveal" style="--i:3">
+          <div class="big accent">−64<span class="unit">%</span></div>
+          <div class="cap">480 → 174 分钟 / 天<br>单位：分钟；两店六项任务合计</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span class="src">来源：住小叮内部 POC 数据，2026 年 10 月</span><span class="num">03</span></div>
+  </div>
+  <aside class="notes">图表页备注。</aside>
+</section>
+
+<!-- ===== 样板页 4：深色章节页 ===== -->
+<section class="slide dark">
+  <div class="slide-inner">
+    <div class="eyebrow reveal" style="--i:0">02 · 答案</div>
+    <div class="title-block reveal" style="--i:1">
+      <h2>把"盯"交给数字员工，把"决定"留给人</h2>
+      <p class="key">只读采集，AI 判断，人确认执行。这是产品的硬约束，不是建议。</p>
+    </div>
+    <div class="slide-body">
+      <div class="flow reveal" style="--i:2">
+        <div class="step"><div class="n">1</div><h3>发现变化</h3><p>已订房间比例、每小时订房变化、房间可卖情况、价格</p></div>
+        <div class="step"><div class="n">2</div><h3>核查与判断</h3><p>需求、剩余房间、订房平台与价格，形成待确认事项</p></div>
+        <div class="step hot"><div class="n">3</div><h3>店长确认并处理</h3><p>调价执行、订房平台核查、评价与问题改进跟进</p></div>
+        <div class="step"><div class="n">4</div><h3>跟踪经营结果</h3><p>房费收入、平均房费、房间卖出比例、处理速度与异常数量</p></div>
+      </div>
+    </div>
+    <div class="foot"><span class="src">来源：HogentX 产品说明，2026 年 10 月</span><span class="num">04</span></div>
+  </div>
+  <aside class="notes">章节页备注。</aside>
+</section>
+
+</main>
+</div>
+
+<!-- 舞台外控件 -->
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">1 / 1</div>
+<div class="help">← → 翻页 · N 备注 · F 全屏 · E 编辑</div>
+<aside class="notes-panel" id="notesPanel"><h4>演讲者备注</h4><div id="notesBody"></div></aside>
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle" title="编辑模式 (E)">✎</button>
+
+<script>
+/* ===========================================
+   幻灯片控制器：缩放舞台、翻页、备注、编辑
+   =========================================== */
+class SlidePresentation {
+    constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.stage = document.getElementById('deckStage');
+        this.current = 0;
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.setupNotes();
+        this.setupEditing();
+        const fromHash = parseInt(location.hash.replace('#', ''), 10);
+        this.go(isNaN(fromHash) ? 0 : fromHash - 1);
+        window.addEventListener('hashchange', () => {
+            const n = parseInt(location.hash.replace('#', ''), 10);
+            if (!isNaN(n) && n - 1 !== this.current) this.go(n - 1);
+        });
+    }
+
+    /* 舞台按窗口等比缩放，留黑边，不重排内容 */
+    setupStageScale() {
+        const scale = () => {
+            const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+            const x = (window.innerWidth - 1920 * factor) / 2;
+            const y = (window.innerHeight - 1080 * factor) / 2;
+            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+    }
+
+    setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+            if (e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') return;
+            switch (e.key) {
+                case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': e.preventDefault(); this.next(); break;
+                case 'ArrowLeft': case 'ArrowUp': case 'PageUp': e.preventDefault(); this.prev(); break;
+                case 'Home': e.preventDefault(); this.go(0); break;
+                case 'End': e.preventDefault(); this.go(this.slides.length - 1); break;
+                case 'n': case 'N': this.toggleNotes(); break;
+                case 'f': case 'F': this.toggleFullscreen(); break;
+            }
+        });
+    }
+
+    setupTouchNav() {
+        let x0 = null, y0 = null;
+        document.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            if (x0 === null) return;
+            const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? this.next() : this.prev(); }
+            x0 = y0 = null;
+        }, { passive: true });
+    }
+
+    setupWheelNav() {
+        let lock = false;
+        document.addEventListener('wheel', (e) => {
+            if (document.body.classList.contains('editing')) return;
+            if (lock || Math.abs(e.deltaY) < 20) return;
+            lock = true; setTimeout(() => lock = false, 900);
+            e.deltaY > 0 ? this.next() : this.prev();
+        }, { passive: true });
+    }
+
+    /* 备注面板：读取当前页 <aside class="notes"> */
+    setupNotes() {
+        this.panel = document.getElementById('notesPanel');
+        this.notesBody = document.getElementById('notesBody');
+    }
+    toggleNotes() { this.panel.classList.toggle('show'); this.renderNotes(); }
+    renderNotes() {
+        const n = this.slides[this.current].querySelector('.notes');
+        this.notesBody.textContent = n ? n.textContent.trim() : '（本页无备注）';
+    }
+    toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+        else document.exitFullscreen && document.exitFullscreen();
+    }
+
+    /* 行内编辑：E 键或左上角热区，Ctrl+S 保存为新 HTML 文件，草稿自动存 localStorage */
+    setupEditing() {
+        const hotzone = document.getElementById('editHotzone');
+        const toggle = document.getElementById('editToggle');
+        let hideTimeout = null;
+        this.isEditing = false;
+        const show = () => { clearTimeout(hideTimeout); toggle.classList.add('show'); };
+        const hide = () => { hideTimeout = setTimeout(() => { if (!this.isEditing) toggle.classList.remove('show'); }, 400); };
+        hotzone.addEventListener('mouseenter', show);
+        hotzone.addEventListener('mouseleave', hide);
+        toggle.addEventListener('mouseenter', show);
+        toggle.addEventListener('mouseleave', hide);
+        hotzone.addEventListener('click', () => this.toggleEditMode());
+        toggle.addEventListener('click', () => this.toggleEditMode());
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'e' || e.key === 'E') && !(e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true')) this.toggleEditMode();
+            if ((e.ctrlKey || e.metaKey) && e.key === 's' && this.isEditing) { e.preventDefault(); this.saveFile(); }
+        });
+        try {
+            const saved = localStorage.getItem('hogentx-deck-draft');
+            if (saved) { const stage = document.getElementById('deckStage'); stage.innerHTML = saved; this.slides = Array.from(document.querySelectorAll('.slide')); }
+        } catch (err) { /* 浏览器禁用存储时忽略 */ }
+    }
+    toggleEditMode() {
+        this.isEditing = !this.isEditing;
+        document.body.classList.toggle('editing', this.isEditing);
+        document.getElementById('editToggle').classList.toggle('active', this.isEditing);
+        document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide p, .slide li, .slide td, .slide th, .slide .cap, .slide .big, .slide .src, .slide .eyebrow, .slide .notes')
+            .forEach(el => el.setAttribute('contenteditable', this.isEditing ? 'true' : 'false'));
+        if (!this.isEditing) {
+            try { localStorage.setItem('hogentx-deck-draft', document.getElementById('deckStage').innerHTML); } catch (err) { /* ignore */ }
+        }
+    }
+    saveFile() {
+        document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+        const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = 'hogentx-deck-edited.html'; a.click();
+        this.toggleEditMode(); this.toggleEditMode();
+    }
+
+    next() { this.go(this.current + 1); }
+    prev() { this.go(this.current - 1); }
+    go(i) {
+        this.current = Math.max(0, Math.min(i, this.slides.length - 1));
+        this.slides.forEach((s, k) => { s.classList.toggle('active', k === this.current); s.classList.toggle('visible', k === this.current); });
+        document.getElementById('counter').textContent = `${this.current + 1} / ${this.slides.length}`;
+        document.getElementById('progress').style.width = `${((this.current + 1) / this.slides.length) * 100}%`;
+        if (history.replaceState) history.replaceState(null, '', `#${this.current + 1}`);
+        if (this.panel && this.panel.classList.contains('show')) this.renderNotes();
+    }
+}
+window.__deck = new SlidePresentation();
+</script>
+</body>
+</html>
