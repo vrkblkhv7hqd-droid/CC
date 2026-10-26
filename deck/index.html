@@ -379,7 +379,7 @@ table.land tr.us td:first-child { color: var(--brand); }
 .chart .row { grid-template-columns: 240px 1fr; height: 92px; }
 .chart .lab { font-size: 27px; }
 .chart .v { font-size: 24px; }
-.hero .num { font-size: 200px; }
+.hero .num { font-size: 176px; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .two .card { padding: 40px 44px; }
 .two h3 { font-size: 34px; font-weight: 900; margin: 16px 0 8px; }
@@ -398,6 +398,23 @@ table.land tr.us td:first-child { color: var(--brand); }
 .give { margin-top: 0; }
 .give .card { min-height: 0; padding: 40px 40px 36px; }
 .give li { font-size: 25px; }
+
+.crew2 { display: grid; grid-template-columns: 600px 1fr; gap: 56px; align-items: center; }
+.emps { display: flex; flex-direction: column; gap: 14px; }
+.emp { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: center; padding: 18px 22px; border-radius: 16px; background: var(--surface); }
+.emp .ic { width: 64px; height: 64px; border-radius: 16px; background: var(--brand-tint); display: grid; place-items: center; }
+.emp .ic img { width: 46px; height: 46px; }
+.emp h3 { font-size: 28px; font-weight: 900; }
+.emp p { font-size: 22px; color: var(--ink-soft); margin-top: 4px; line-height: 1.5; }
+figure { margin: 0; min-width: 0; }
+figcaption { font-size: 22px; color: var(--ink-soft); margin-top: 14px; line-height: 1.5; }
+figcaption b { color: var(--ink); font-weight: 900; margin-right: 12px; }
+.duo { display: grid; grid-template-columns: 1.899fr 1.507fr; gap: 40px; align-items: start; }
+.statbar { margin-top: 30px; display: flex; align-items: center; gap: 26px; padding: 20px 30px; border-radius: 16px; background: var(--brand-tint); font-size: 26px; color: var(--ink-soft); }
+.statbar b { font-weight: 900; color: var(--brand); white-space: nowrap; }
+.statbar em { font-style: normal; font-family: var(--font-latin); font-weight: 800; font-size: 34px; color: var(--ink); }
+.act { display: grid; grid-template-columns: 1fr 640px; gap: 40px; align-items: start; }
+.act .stack { display: flex; flex-direction: column; gap: 22px; }
 
 /* ===========================================
    PRESENTER CHROME (outside the stage): counter, notes panel, edit toggle
@@ -527,7 +544,7 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
 </section>
 
 <!-- =========================================================
-     05 · PRODUCT: FOUR DIGITAL EMPLOYEES
+     05 · PRODUCT: FOUR DIGITAL EMPLOYEES + REAL WORKBENCH
      ========================================================= -->
 <section class="slide" data-label="产品">
   <header class="chrome"><span class="sec"></span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
@@ -535,17 +552,23 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
     <p class="kicker reveal d1">HogentX 是什么</p>
     <h2 class="t reveal d2">四位数字员工，一句话就开工</h2>
     <div class="fill">
-      <div class="crew">
-        <div class="card reveal d3"><div class="ic"><img src="assets/site/employee-revenue.png" alt=""></div><h3>数字收益经理</h3><p class="role">盯价格、盯预订</p><ul><li>竞品价格对比</li><li>入住率与预订进度监测</li><li>调价建议、多平台改价</li></ul></div>
-        <div class="card reveal d3"><div class="ic"><img src="assets/site/employee-relations.png" alt=""></div><h3>数字宾客关系专员</h3><p class="role">盯口碑</p><ul><li>关注宾客反馈</li><li>起草差评回复</li><li>确认后发布并跟踪</li></ul></div>
-        <div class="card reveal d4"><div class="ic"><img src="assets/site/employee-quality.png" alt=""></div><h3>数字质检主管</h3><p class="role">盯服务品质</p><ul><li>质检计划与任务</li><li>问题记录与整改跟进</li><li>验收与统计</li></ul></div>
-        <div class="card reveal d4"><div class="ic"><img src="assets/site/employee-assistant.png" alt=""></div><h3>数字总经理助理</h3><p class="role">盯全局</p><ul><li>每日早安简报</li><li>重点事项与异常提醒</li><li>处理进度查看</li></ul></div>
+      <div class="crew2">
+        <div class="emps">
+          <div class="emp reveal d3"><div class="ic"><img src="assets/site/employee-revenue.png" alt=""></div><div><h3>数字收益经理</h3><p>竞品价格对比 · 预订进度监测 · 调价与多平台改价</p></div></div>
+          <div class="emp reveal d3"><div class="ic"><img src="assets/site/employee-relations.png" alt=""></div><div><h3>数字宾客关系专员</h3><p>关注宾客反馈 · 起草差评回复 · 确认后发布</p></div></div>
+          <div class="emp reveal d4"><div class="ic"><img src="assets/site/employee-quality.png" alt=""></div><div><h3>数字质检主管</h3><p>质检计划与任务 · 整改跟进 · 验收与统计</p></div></div>
+          <div class="emp reveal d4"><div class="ic"><img src="assets/site/employee-assistant.png" alt=""></div><div><h3>数字总经理助理</h3><p>每日早安简报 · 重点事项与异常提醒</p></div></div>
+        </div>
+        <figure class="reveal d4">
+          <div class="shot"><img src="assets/site/workbench-home.png" alt="HogentX 工作台早安简报：调价建议、差评回复、质检整改、订单价格异常集中呈现"></div>
+          <figcaption><b>早安简报</b>每天早上的第一屏：四位数字员工的待办汇总在一起（中国版界面）</figcaption>
+        </figure>
       </div>
       <div class="langs reveal d5">界面语言<span class="chip">中文</span><span class="chip">English</span><span class="chip">Bahasa Melayu</span><span class="chip">日本語</span><span class="chip">한국어</span></div>
     </div>
   </div>
   <footer class="foot"><span></span><span class="pg"></span></footer>
-  <aside class="notes">【约 2 分钟】把 10 项能力翻译成酒店人熟悉的 4 个岗位。经理不需要学软件，像交代同事一样说一句话就能开工。界面支持中文、英文、马来文、日文、韩文。</aside>
+  <aside class="notes">【约 2 分钟】把 10 项能力翻译成酒店人熟悉的 4 个岗位。右边是真实的工作台：经理每天早上打开，调价建议、差评回复、质检整改、订单价格异常都在一屏里，点进去就能处理。界面支持中文、英文、马来文、日文、韩文。</aside>
 </section>
 
 <!-- =========================================================
@@ -574,6 +597,50 @@ body.editing .slide.active [contenteditable="true"]:hover { outline: 2px dashed 
   </div>
   <footer class="foot"><span></span><span class="pg"></span></footer>
   <aside class="notes">【约 2 分钟】这一页回答"AI 会不会乱改价"。四步里只有第 3 步需要人，而且必须有人，这是产品原则。截图是中国版界面，渠道是中国的平台；被问到时说明，在新马对应的是 Agoda、Booking。</aside>
+</section>
+
+<!-- =========================================================
+     07 · PRODUCT TOUR: SPOTTING ISSUES (real screens)
+     ========================================================= -->
+<section class="slide" data-label="实拍：发现问题">
+  <header class="chrome"><span class="sec"></span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <p class="kicker reveal d1">产品实拍 · 发现问题</p>
+    <h2 class="t reveal d2">变化一出现，就能看到</h2>
+    <div class="fill">
+      <div class="duo">
+        <figure class="reveal d3"><div class="shot"><img src="assets/product/occupancy-monitor.png" alt="入住率监测：未来每天的已售率与趋势"></div><figcaption><b>入住率监测</b>未来每天卖出多少、还剩多少，按房型查看</figcaption></figure>
+        <figure class="reveal d4"><div class="shot"><img src="assets/product/competitor-calendar.png" alt="竞品价格日历：本店与周边酒店每日起价对比"></div><figcaption><b>竞品价格日历</b>本店与周边酒店每天的起价对比，竞品低于本店时标红</figcaption></figure>
+      </div>
+      <div class="statbar reveal d5"><b>房态巡检</b><span>一次巡检 <em>630</em> 个房型 × 日期组合、<em>1,890</em> 条平台记录，发现 <em>413</em> 条“有房却已关房”</span></div>
+    </div>
+  </div>
+  <p class="src">以上均为 HogentX 中国版系统实拍界面（住小叮酒店，2026 年 10 月）。</p>
+  <footer class="foot"><span></span><span class="pg"></span></footer>
+  <aside class="notes">【约 1.5 分钟】让大家看到真实的产品。左边是入住率监测：未来每一天卖了多少、还剩多少，卖得慢的日期提前看到。右边是竞品价格日历：本店和周边酒店每天的起价放在一起，竞品比我们低就标红。下面这条是房态巡检的真实结果：一家店一次巡检就找出 413 条"明明有房、平台上却关了房"，这些都是白白漏掉的生意。</aside>
+</section>
+
+<!-- =========================================================
+     08 · PRODUCT TOUR: ACTING ON ISSUES (real screens)
+     ========================================================= -->
+<section class="slide" data-label="实拍：处理问题">
+  <header class="chrome"><span class="sec"></span><svg class="wm"><use href="#hx-wordmark"/></svg></header>
+  <div class="body">
+    <p class="kicker reveal d1">产品实拍 · 处理问题</p>
+    <h2 class="t reveal d2">一句话交代，确认后执行</h2>
+    <div class="fill">
+      <div class="act">
+        <figure class="reveal d3"><div class="shot"><img src="assets/product/batch-rate-update.png" alt="批量改价：系统按描述填好日期、房型、平台与调价方式"></div><figcaption><b>批量改价</b>说出改价要求，系统填好日期、房型、平台和调价方式，经理核对后再执行</figcaption></figure>
+        <div class="stack">
+          <figure class="reveal d4"><div class="shot"><img src="assets/product/review-replies.png" alt="待回复评价清单：好评可批量回复，差评逐条确认"></div><figcaption><b>点评回复</b>待回复评价统一处理：好评可批量回复，差评逐条确认</figcaption></figure>
+          <figure class="reveal d5"><div class="shot"><img src="assets/product/inspection.png" alt="质检整改：整改提交后复核，通过或驳回"></div><figcaption><b>质检整改</b>整改提交后复核，通过或驳回，全程留痕</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="src">以上为 HogentX 中国版界面，渠道为中国的订房平台；在新马对应 Agoda、Booking.com。</p>
+  <footer class="foot"><span></span><span class="pg"></span></footer>
+  <aside class="notes">【约 1.5 分钟】发现问题之后怎么处理。改价：经理说一句要求，系统把日期、房型、平台、调价方式都填好，核对后再执行，不用逐个后台改。点评：所有待回复的评价在一张清单里，好评批量回，差评逐条确认。质检：整改提交后复核，通过或驳回都有记录。每一步都是人确认后才执行。</aside>
 </section>
 
 <!-- =========================================================

@@ -1,6 +1,6 @@
 # HogentX · 新加坡 / 马来西亚 合作交流演示稿
 
-面向新马投资人的中文演示稿，共 11 页，正文约 20 分钟，留出交流时间。另有一份不投屏的“答问备用”。
+面向新马投资人的中文演示稿，共 13 页（含 2 页产品实拍），正文约 23 分钟，留出交流时间。另有一份不投屏的“答问备用”。
 
 ## 怎么打开、怎么讲
 
@@ -23,13 +23,13 @@ node tools/export-pdf.js            # 生成 HogentX-SGMY-Investor-Deck.pdf
 
 ```
 deck/
-  index.html                 演示稿（11 页，单文件，样式与脚本都在内）
+  index.html                 演示稿（13 页，单文件，样式与脚本都在内）
   qa-backup.html             答问备用（不投屏）：10 项能力明细、数据与合规、同类工具对比、数据来源
   speaker-notes.md           讲稿与时间分配（由 index.html 里的讲稿生成）
   HogentX-SGMY-Investor-Deck.pdf    PDF 版
   assets/brand/              商标矢量图（据商标注册申请图样描摹）
   assets/site/               官网截图、吉祥物、数字员工图标
-  assets/product/            AI 直销官网的页面原型截图
+  assets/product/            产品实拍截图（入住率监测、竞品价格、批量改价、点评、质检）与 AI 直销原型
   tools/export-pdf.js        PDF 导出脚本
   video/STORYLINES.md        60 秒开场视频的三个故事方向（待选）
 ```
