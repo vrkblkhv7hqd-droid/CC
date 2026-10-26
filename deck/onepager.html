@@ -22,7 +22,7 @@
 @page { size: A4; margin: 0; }
 html, body { background: #e9edf4; }
 body { font-family: var(--font-body); color: var(--ink); font-size: 9.2pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-.page { width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--paper); padding: 7mm 11mm 6mm; display: flex; flex-direction: column; gap: 1.9mm; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--paper); padding: 6.5mm 11mm 5.5mm; display: flex; flex-direction: column; gap: 1.6mm; }
 @media print { html, body { background: #fff; } .page { margin: 0; } }
 .top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 3mm; }
 .brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9pt; letter-spacing: 0.12em; color: var(--muted); }
@@ -41,12 +41,12 @@ h2::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
 .formula .op { font-family: var(--font-num); color: var(--accent-ink); }
 .formula .v { border-bottom: 2px solid var(--accent); padding: 0 3px; }
 .formula .v.neg { border-bottom-color: var(--warn); }
-p, li { font-size: 8.5pt; }
+p, li { font-size: 8.3pt; }
 ul { list-style: none; display: flex; flex-direction: column; gap: 0.9mm; }
 ul li { padding-left: 11px; position: relative; }
 ul li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 2px; background: var(--accent); }
 .stat { display: flex; flex-direction: column; }
-.stat .n { font-family: var(--font-num); font-weight: 700; font-size: 19pt; line-height: 1; color: var(--ink); white-space: nowrap; }
+.stat .n { font-family: var(--font-num); font-weight: 700; font-size: 17pt; line-height: 1; color: var(--ink); white-space: nowrap; }
 .stat .n.accent { color: var(--accent-ink); }
 .stat .n small { font-size: 0.42em; color: var(--muted); font-weight: 600; margin-left: 2px; }
 .stat .c { font-size: 7.9pt; color: var(--muted); line-height: 1.35; margin-top: 1mm; }
@@ -83,7 +83,7 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
 
   <div>
     <h1>懂经营的酒店数字员工：<em>先在自己 29 家酒店跑通</em>，现在走向新马</h1>
-    <p class="lede">意图计算私人有限公司（Intent Computing Pte. Ltd.）在新加坡，中国是开发中心。给酒店店长配一支<strong>只读采集、人工确认</strong>的数字员工队伍：AI 负责发现和核查，人负责判断和确认。桌面客户端，不换现有 PMS。界面语言：中文、English、Bahasa Melayu、日本語、한국어。</p>
+    <p class="lede">意图计算私人有限公司（Intent Computing Pte. Ltd.）在新加坡，中国是开发中心。给酒店店长配一支<strong>只读采集、人工确认</strong>的数字员工队伍：AI 负责发现和核查，人负责判断和确认。桌面客户端，不换现有 PMS；界面语言中、英、马来、日、韩五种。</p>
   </div>
 
   <div class="grid2">
@@ -136,11 +136,11 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
       </ul>
     </div>
     <div>
-      <h2>两地共同点 · 订单在 OTA 手里</h2>
+      <h2>两地共同点 · 八成订单来自 OTA</h2>
       <ul>
         <li>亚太 OTA 约占预订 83%；Agoda 20.9% 居第一（D-EDGE 2026）</li>
         <li>已接入 Agoda、Booking.com、携程、美团、飞猪；Expedia、Trip.com 国际版、Traveloka 后续接入</li>
-        <li>PMS 目前仅接入别样红（中国），海外 PMS 按试点酒店排优先级</li>
+        <li>PMS 目前仅接入别样红（中国），按试点酒店所用的系统逐家对接；首批试点先用订房平台侧的功能</li>
       </ul>
     </div>
   </div>
@@ -160,8 +160,8 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
       <table>
         <thead><tr><th>酒店</th><th>本地伙伴获得</th></tr></thead>
         <tbody>
-          <tr><td>推广价 68 元/账号/月（≈ S$12.5 / RM 40），首批 100 家，有时限、有名额</td><td class="hi">实施与培训服务费</td></tr>
-          <tr><td>标准价（拟）按门店分档：S$99 / 199 / 299，RM 199 / 399 / 599 每店每月</td><td class="hi">订阅收入分成，续费同样有分成</td></tr>
+          <tr><td>推广价 ≈ S$12.5 / RM40 每账号每月（人民币 68 元），首批 100 家，有时限、有名额</td><td class="hi">实施与培训服务费</td></tr>
+          <tr><td>标准价（拟）按门店分档：S$99 / 199 / 299，RM199 / 399 / 599 每店每月</td><td class="hi">订阅收入分成，续费同样有分成</td></tr>
           <tr><td>补贴后实付可打 3–7 折</td><td class="hi">持有本地补贴资格（IMDA 预审供应商 / MDEC 注册 TSP）</td></tr>
         </tbody>
       </table>
@@ -174,15 +174,15 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
       <ul>
         <li><strong>酒店经营者</strong>：首批 100 家推广价，产品演示由我们亲自做，以 Agoda、Booking.com 为主渠道即可开始</li>
         <li><strong>本地伙伴</strong>（已在给酒店做 PMS、渠道管理或 IT 集成）：叠加不替换的新收入线，服务费 + 订阅分成，持有补贴资格；二线支持与中 / 英 / 马来语材料由我们提供</li>
-        <li><strong>引荐与投资</strong>：验证数据可公开核验，对介绍对象如实讲阶段；首批试点酒店与本地伙伴的引荐，我们亲自跟进</li>
+        <li><strong>引荐与投资</strong>：介绍时一句话就够，先在自有 29 家酒店跑通、正在新马做外部验证的新加坡公司；阶段与数据可到店核验，不需要替我们担保；引荐的酒店与伙伴由创始人亲自对接</li>
       </ul>
     </div>
     <div class="box ink">
-      <h2>下一步 60 天 · 我们要拿到的三样东西</h2>
+      <h2>60 天内，我们完成三件事</h2>
       <ul>
-        <li>新马首批试点酒店：以 Agoda、Booking.com 为主渠道，OTA 侧模块先上</li>
+        <li>新马首批试点酒店：以 Agoda、Booking.com 为主渠道，先用订房平台侧的功能</li>
         <li>首个本地伙伴落地：实施、一线支持与补贴资格由本地伙伴承接；新加坡数据区域上线，与中国数据区物理分离</li>
-        <li>我们承诺：对介绍对象如实讲阶段，验证数据可公开核验，欢迎到住小叮看真实运行。hi@intent-computing.com · hogentx.com</li>
+        <li>回到开头的公式：空房、定价、低价、口碑四个漏点，现在有人天天看管。验证数据可公开核验，欢迎到住小叮看真实运行。hi@intent-computing.com · hogentx.com</li>
       </ul>
     </div>
   </div>
