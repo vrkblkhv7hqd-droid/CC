@@ -338,7 +338,8 @@ table.tbl.compact td, table.tbl.compact th { padding: 9px 14px; font-size: 23px;
 .slide.cover .slide-inner { grid-template-rows: auto 1fr auto; }
 .cover .bg { position: absolute; right: -40px; bottom: -40px; width: 1040px; opacity: 0.10; filter: grayscale(1); pointer-events: none; }
 .cover .brand { display: flex; align-items: center; gap: 22px; font-family: var(--font-mono); font-size: 23px; letter-spacing: 0.14em; color: #9fb3d6; }
-.cover .brand img { width: 56px; height: 56px; }
+.cover .brand .mark { height: 66px; width: auto; }
+.cover .brand .word { height: 38px; width: auto; margin-left: 4px; margin-right: 14px; }
 .cover h1 { font-family: var(--font-display); font-weight: 900; font-size: 104px; line-height: 1.18; letter-spacing: 0.01em; color: var(--paper); max-width: 1600px; }
 .cover h1 em { font-style: normal; color: #7d9de8; }
 .cover .sub { margin-top: 30px; font-size: 38px; color: #b9c7e2; line-height: 1.5; max-width: 1300px; }
@@ -505,13 +506,13 @@ body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.
 <section class="slide cover active">
   <img class="bg" src="assets/workbench-home.jpg" alt="">
   <div class="slide-inner">
-    <div class="brand reveal" style="--i:0"><img src="assets/favicon.svg" alt="HogentX"><span>HOGENTX · hogentx.com</span></div>
+    <div class="brand reveal" style="--i:0"><img class="mark" src="assets/logo-mark-white.png" alt=""><img class="word" src="assets/logo-word-white.png" alt="HogentX"><span>hogentx.com</span></div>
     <div>
       <h1 class="reveal" style="--i:1">懂经营的<em>酒店数字员工</em></h1>
       <p class="sub reveal" style="--i:2">新加坡 · 马来西亚市场介绍 · 面向引荐人的 30 分钟</p>
       <div class="agenda reveal" style="--i:3"><span>产品与验证</span><span>为什么新马要靠本地代理</span><span>想请两位介绍谁</span></div>
     </div>
-    <div class="meta reveal" style="--i:4"><span>公司在新加坡 · 中国是开发中心</span><span>hi@intent-computing.com</span><span>2026 年 10 月</span></div>
+    <div class="meta reveal" style="--i:4"><span>意图计算私人有限公司 · Intent Computing Pte. Ltd. · 新加坡</span><span>中国是开发中心</span><span>hi@intent-computing.com</span><span>2026 年 10 月</span></div>
   </div>
   <img class="mascot reveal" style="--i:4" src="assets/mascot-wave.png" alt="HogentX 吉祥物小酒">
   <aside class="notes">两位好，我是 HogentX 的创始人。今天不是路演，也不签代理，只做一次介绍。三十分钟讲三件事：我们做什么、在自己的酒店验证到哪一步；为什么新马落地必须靠本地代理商；以及想请两位把我们介绍给谁。有问题随时打断，不用等到最后。</aside>
@@ -841,7 +842,7 @@ body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.
     <div class="eyebrow reveal" style="--i:0">04 · 验证 <span class="badge">内部口径</span></div>
     <div class="title-block reveal" style="--i:1">
       <h2>六项日常任务每天少花约 64% 时间</h2>
-      <p class="key">两家门店六项任务合计：480 分钟/天 → 174 分钟/天。内部业务反馈，未覆盖店长全部工作。</p>
+      <p class="key">住小叮 29 家在营门店实验；计量口径为一名店长管理两家门店的六项日常任务合计：480 → 174 分钟/天。内部业务反馈，未覆盖店长全部工作。</p>
     </div>
     <div class="slide-body">
       <div class="cols" style="--cols: 1fr 440px">
@@ -857,14 +858,14 @@ body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.
           </div>
         </div>
         <div style="display:flex; flex-direction:column; gap:26px">
-          <div class="stat reveal" style="--i:3"><div class="big accent">−64<span class="unit">%</span></div><div class="cap"><strong>480 → 174 分钟 / 天</strong><br>两店六项任务合计</div></div>
-          <div class="card soft reveal" style="--i:4"><span class="label">口径</span><p>管理两家门店的六项日常任务合计，内部业务反馈；未覆盖店长全部工作，不代表整体人力节省。</p></div>
+          <div class="stat reveal" style="--i:3"><div class="big accent">−64<span class="unit">%</span></div><div class="cap"><strong>480 → 174 分钟 / 天</strong><br>29 家门店实验 · 店长管两店口径</div></div>
+          <div class="card soft reveal" style="--i:4"><span class="label">口径</span><p>29 家在营门店实验；按一名店长管理两家门店的六项日常任务合计计量，内部业务反馈；未覆盖店长全部工作，不代表整体人力节省。</p></div>
         </div>
       </div>
     </div>
     <div class="foot"><span class="src">来源：住小叮内部 POC（内部业务反馈，2026-10）</span><span class="num">13</span></div>
   </div>
-  <aside class="notes">这是我们目前唯一一组测量过的数字，先把口径说清楚：管理两家门店、六项日常任务、内部业务反馈，不是第三方审计，也没有覆盖店长全部工作。六项合计从每天四百八十分钟降到一百七十四分钟，少了约六成四，降得最多的是调价和划线价核查，从一小时到十二分钟。给两位看真实口径，介绍出去才不会被打脸。</aside>
+  <aside class="notes">这是我们目前唯一一组测量过的数字，先把口径说清楚：二十九家在营门店都在用，计量口径是一名店长管理两家门店的六项日常任务、内部业务反馈，不是第三方审计，也没有覆盖店长全部工作。六项合计从每天四百八十分钟降到一百七十四分钟，少了约六成四，降得最多的是调价和划线价核查，从一小时到十二分钟。给两位看真实口径，介绍出去才不会被打脸。</aside>
 </section>
 
 <!-- ===================== S14 阶段 ===================== -->
@@ -877,7 +878,7 @@ body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.
     </div>
     <div class="slide-body">
       <div class="stages reveal" style="--i:2">
-        <div class="stage done"><span class="k">已测量</span><h3>六项任务时间减少约 64%</h3><p>内部口径，两家门店</p></div>
+        <div class="stage done"><span class="k">已测量</span><h3>六项任务时间减少约 64%</h3><p>内部口径，29 家门店实验</p></div>
         <div class="stage doing"><span class="k">正在验证</span><h3>收益管理预计提升 10–20%</h3><p>目前没有早期数据，只写预计</p></div>
         <div class="stage next"><span class="k">下一步</span><h3>新马首批试点酒店 + 本地代理商</h3><p>外部付费客户暂无，正在从自用走向外部商业验证</p></div>
       </div>
@@ -1232,7 +1233,8 @@ body.editing [contenteditable="true"] { outline: 2px dashed rgba(43, 97, 254, 0.
           </ul>
         </div>
       </div>
-      <div class="quote reveal" style="--i:4; background: var(--ink-2); color: var(--paper)">可直接转述的一句话：产品叠加在现有 PMS / 渠道管理之上，不替换系统；代理商拿实施服务费 100% 加订阅分成，并持有本地补贴资格；条款由 HogentX 与代理商直接谈。<span class="who" style="color:#9fb3d6">hi@intent-computing.com · hogentx.com · 欢迎到住小叮看真实运行</span></div>
+      <div class="quote reveal" style="--i:4; background: var(--ink-2); color: var(--paper)">可直接转述的一句话：产品叠加在现有 PMS / 渠道管理之上，不替换系统；代理商拿实施服务费 100% 加订阅分成，并持有本地补贴资格；条款由 HogentX 与代理商直接谈。<span class="who" style="color:#9fb3d6">Intent Computing Pte. Ltd. · 27B Club Street, Singapore 069413 · hi@intent-computing.com · hogentx.com · 欢迎到住小叮看真实运行</span></div>
+      <img class="reveal" style="--i:5; position:absolute; right:120px; top:80px; height:72px; width:auto; opacity:0.9" src="assets/logo-mark-white.png" alt="">
     </div>
     <div class="foot"><span class="src">数据以来源为准，2026 年 10 月整理。外部市场数字均标注来源，上会前逐条核验。</span><span class="num">24</span></div>
   </div>

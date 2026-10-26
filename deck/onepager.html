@@ -26,7 +26,8 @@ body { font-family: var(--font-body); color: var(--ink); font-size: 9.2pt; line-
 @media print { html, body { background: #fff; } .page { margin: 0; } }
 .top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 3mm; }
 .brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9pt; letter-spacing: 0.12em; color: var(--muted); }
-.brand img { width: 22px; height: 22px; }
+.brand .mark { height: 26px; width: auto; }
+.brand .word { height: 15px; width: auto; margin-right: 4px; }
 .top .date { font-family: var(--font-mono); font-size: 8.5pt; color: var(--muted); letter-spacing: 0.06em; }
 h1 { font-family: var(--font-display); font-weight: 900; font-size: 17pt; line-height: 1.25; letter-spacing: 0.01em; }
 h1 em { font-style: normal; color: var(--accent-ink); }
@@ -76,7 +77,7 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
 <body>
 <div class="page">
   <div class="top">
-    <div class="brand"><img src="assets/favicon.svg" alt=""><span>HOGENTX · 懂经营的酒店数字员工</span></div>
+    <div class="brand"><img class="mark" src="assets/logo-mark-black.png" alt=""><img class="word" src="assets/logo-word-black.png" alt="HogentX"><span>懂经营的酒店数字员工</span></div>
     <div class="date">新加坡 · 马来西亚 · 一页纸 · 2026 年 10 月</div>
   </div>
 
@@ -111,7 +112,7 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
     <h2>验证：先拿自己的酒店当实验室（住小叮，创始人自有品牌，全部免费使用）</h2>
     <div class="grid3" style="grid-template-columns: 1fr 1fr 1fr 1.6fr">
       <div class="stat"><span class="n accent">29</span><span class="c">家店已开业；含签约和筹建中共 <strong>53 家</strong>，总房间数不到 4,000 间</span></div>
-      <div class="stat"><span class="n">−64<small>%</small></span><span class="c">两家门店六项日常任务合计 <strong>480 → 174 分钟/天</strong>（内部口径，未覆盖店长全部工作）</span></div>
+      <div class="stat"><span class="n">−64<small>%</small></span><span class="c">29 家门店实验，店长管两店口径：六项日常任务 <strong>480 → 174 分钟/天</strong>（内部口径，未覆盖店长全部工作）</span></div>
       <div class="stat"><span class="n">10–20<small>%</small></span><span class="c">收益管理<strong>预计</strong>提升，正在验证，暂无早期数据</span></div>
       <div class="box"><p style="font-size:9pt"><strong>阶段如实说：</strong>外部付费客户暂无，正在从自用走向外部商业验证。业态为无独立卫浴单人间、人均约 4 ㎡，是房价最低、利润最薄、人手最少的业态之一。品牌与数据可公开核验。</p></div>
     </div>
@@ -188,7 +189,7 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
 
   <div class="foot">
     <span>来源：hogentx.com；HogentX 产品说明与住小叮内部 POC（2026-10）；STB / data.gov.sg（2026-06）；EdgeProp（2025-12）；Tourism Malaysia 2025；MOTAC；Malay Mail；Bernama；D-EDGE 2026；Jobstreet 2026；hotelcadence 2026；LODGING Magazine（2025-08）；Capterra 2026；grants.sg / EnterpriseSG（2026-10）；BSN。外部数字为搜索摘要口径，上会前逐条核验。</span>
-    <span class="r">数据以来源为准 · 2026 年 10 月整理</span>
+    <span class="r">Intent Computing Pte. Ltd. · 新加坡<br>数据以来源为准 · 2026 年 10 月整理</span>
   </div>
 </div>
 </body>
