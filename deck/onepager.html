@@ -22,7 +22,7 @@
 @page { size: A4; margin: 0; }
 html, body { background: #e9edf4; }
 body { font-family: var(--font-body); color: var(--ink); font-size: 9.2pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-.page { width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--paper); padding: 8mm 11mm 7mm; display: flex; flex-direction: column; gap: 2.6mm; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--paper); padding: 7mm 11mm 6mm; display: flex; flex-direction: column; gap: 1.9mm; }
 @media print { html, body { background: #fff; } .page { margin: 0; } }
 .top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 3mm; }
 .brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9pt; letter-spacing: 0.12em; color: var(--muted); }
@@ -31,7 +31,7 @@ body { font-family: var(--font-body); color: var(--ink); font-size: 9.2pt; line-
 .top .date { font-family: var(--font-mono); font-size: 8.5pt; color: var(--muted); letter-spacing: 0.06em; }
 h1 { font-family: var(--font-display); font-weight: 900; font-size: 17pt; line-height: 1.25; letter-spacing: 0.01em; }
 h1 em { font-style: normal; color: var(--accent-ink); }
-.lede { font-size: 9.2pt; color: var(--muted); margin-top: 1.2mm; }
+.lede { font-size: 8.9pt; color: var(--muted); margin-top: 1mm; }
 .lede strong { color: var(--ink); font-weight: 500; }
 h2 { font-family: var(--font-mono); font-size: 7.4pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 1.6mm; }
 h2::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
@@ -41,7 +41,7 @@ h2::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
 .formula .op { font-family: var(--font-num); color: var(--accent-ink); }
 .formula .v { border-bottom: 2px solid var(--accent); padding: 0 3px; }
 .formula .v.neg { border-bottom-color: var(--warn); }
-p, li { font-size: 8.6pt; }
+p, li { font-size: 8.5pt; }
 ul { list-style: none; display: flex; flex-direction: column; gap: 0.9mm; }
 ul li { padding-left: 11px; position: relative; }
 ul li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 2px; background: var(--accent); }
@@ -82,8 +82,8 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
   </div>
 
   <div>
-    <h1>一家先在自己酒店跑通、<em>正在找本地伙伴</em>的新加坡公司</h1>
-    <p class="lede">公司在新加坡，中国是开发中心。给酒店店长配一支<strong>只读采集、人工确认</strong>的数字员工队伍：AI 负责发现和核查，人负责判断和确认。桌面客户端，不换现有 PMS。界面语言：中文、English、Bahasa Melayu、日本語、한국어。</p>
+    <h1>懂经营的酒店数字员工：<em>先在自己 29 家酒店跑通</em>，现在走向新马</h1>
+    <p class="lede">意图计算私人有限公司（Intent Computing Pte. Ltd.）在新加坡，中国是开发中心。给酒店店长配一支<strong>只读采集、人工确认</strong>的数字员工队伍：AI 负责发现和核查，人负责判断和确认。桌面客户端，不换现有 PMS。界面语言：中文、English、Bahasa Melayu、日本語、한국어。</p>
   </div>
 
   <div class="grid2">
@@ -114,7 +114,7 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
       <div class="stat"><span class="n accent">29</span><span class="c">家店已开业；含签约和筹建中共 <strong>53 家</strong>，总房间数不到 4,000 间</span></div>
       <div class="stat"><span class="n">−64<small>%</small></span><span class="c">29 家门店实验，店长管两店口径：六项日常任务 <strong>480 → 174 分钟/天</strong>（内部口径，未覆盖店长全部工作）</span></div>
       <div class="stat"><span class="n">10–20<small>%</small></span><span class="c">收益管理<strong>预计</strong>提升，正在验证，暂无早期数据</span></div>
-      <div class="box"><p style="font-size:9pt"><strong>阶段如实说：</strong>外部付费客户暂无，正在从自用走向外部商业验证。业态为无独立卫浴单人间、人均约 4 ㎡，是房价最低、利润最薄、人手最少的业态之一。品牌与数据可公开核验。</p></div>
+      <div class="box"><p style="font-size:9pt"><strong>当前阶段：</strong>已测量的是时间节省；收益提升为预计值，正在验证；外部付费客户从新马首批试点开始。业态为无独立卫浴单人间、人均约 4 ㎡，是房价最低、利润最薄、人手最少的业态之一。品牌与数据可公开核验。</p></div>
     </div>
   </div>
 
@@ -147,22 +147,22 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
 
   <div class="grid2">
     <div>
-      <h2>为什么必须有本地代理商：信任、补贴、支持</h2>
+      <h2>产品可以远程交付，信任、补贴、支持要靠本地</h2>
       <ul>
         <li><strong>信任</strong>：酒店把 OTA 与 PMS 授权交给谁，取决于谁在本地找得到人</li>
         <li><strong>补贴</strong>：新加坡 EDGE Grant（2026-09-30 起取代 PSG/EDG/MRA）中小企业最高 70%，供应商经 IMDA 预审，转售商可自持资格；马来西亚中小企业数字化补贴只能经 MDEC 注册的本地 TSP 申领。补贴到位后酒店实付可打 3–7 折</li>
         <li><strong>支持</strong>：中 / 英 / 马来语一线支持与培训，必须有人在当地</li>
-        <li><strong>数据</strong>（建议方案，尚未落地）：新马客户数据托管新加坡，与中国数据物理分离；最小化采集，不需要客人身份信息；签 DPA、设 DPO，按两地 PDPA 通报要求设计</li>
+        <li><strong>数据</strong>（方案阶段，随首批试点落实）：新马客户数据拟托管新加坡，与中国数据物理分离；最小化采集，大部分能力不需要客人身份信息；签 DPA、设 DPO，按两地 PDPA 通报要求设计</li>
       </ul>
     </div>
     <div>
-      <h2>合作框架建议（非定稿，细节与代理商直接谈）</h2>
+      <h2>价格与合作方式（框架供参考，条款与各家伙伴单独商定）</h2>
       <table>
-        <thead><tr><th>酒店付什么</th><th>代理商得什么</th></tr></thead>
+        <thead><tr><th>酒店</th><th>本地伙伴获得</th></tr></thead>
         <tbody>
-          <tr><td>推广价 68 元/账号/月（≈ S$12.5 / RM 40），首批 100 家，有时限、有名额</td><td class="hi">订阅分成首年 40%、续费 20%</td></tr>
-          <tr><td>标准价按门店分档：S$99 / 199 / 299，RM 199 / 399 / 599 每店每月</td><td class="hi">实施、培训、配置服务费 S$300–500/店，100% 归代理商</td></tr>
-          <tr><td>补贴后实付可打 3–7 折</td><td class="hi">持有补贴资格（IMDA 预审 / MDEC TSP）；首家可谈 12 个月区域独家</td></tr>
+          <tr><td>推广价 68 元/账号/月（≈ S$12.5 / RM 40），首批 100 家，有时限、有名额</td><td class="hi">实施与培训服务费</td></tr>
+          <tr><td>标准价（拟）按门店分档：S$99 / 199 / 299，RM 199 / 399 / 599 每店每月</td><td class="hi">订阅收入分成，续费同样有分成</td></tr>
+          <tr><td>补贴后实付可打 3–7 折</td><td class="hi">持有本地补贴资格（IMDA 预审供应商 / MDEC 注册 TSP）</td></tr>
         </tbody>
       </table>
     </div>
@@ -170,25 +170,25 @@ td.hi { color: var(--accent-ink); font-weight: 500; }
 
   <div class="grid2">
     <div class="box">
-      <h2>要找的代理商</h2>
+      <h2>三种参与方式</h2>
       <ul>
-        <li>已服务 50 家以上酒店的 PMS / 渠道管理代理商，或酒店 IT 集成商</li>
-        <li>与 SHA、MAH、MyBHA 等协会关联的服务商；有 Agoda / Booking.com 市场团队关系者更佳</li>
-        <li>能做中 / 英 / 马来语本地一线支持。产品叠加在现有系统之上，不替换、不冲突</li>
+        <li><strong>酒店经营者</strong>：首批 100 家推广价，演示与配置由我们亲自上门做，以 Agoda、Booking.com 为主渠道即可开始</li>
+        <li><strong>本地伙伴</strong>（已在给酒店做 PMS、渠道管理或 IT 集成）：叠加不替换的新收入线，服务费 + 订阅分成，持有补贴资格；二线支持与中 / 英 / 马来语材料由我们提供</li>
+        <li><strong>引荐与投资</strong>：验证数据可公开核验，对介绍对象如实讲阶段；首批试点酒店与本地伙伴的引荐，我们亲自跟进</li>
       </ul>
     </div>
     <div class="box ink">
-      <h2>请两位帮三件事 · 我们承诺三件事</h2>
+      <h2>下一步 60 天 · 我们要拿到的三样东西</h2>
       <ul>
-        <li>介绍符合画像的本地代理商，演示由我们亲自做；介绍愿意试点的酒店；把关本地化</li>
-        <li>我们对介绍对象如实讲阶段，提供远程二线支持，验证数据可公开核验</li>
-        <li>不用两位的名义做任何超出今天介绍的承诺，两位不承担义务。hi@intent-computing.com · hogentx.com</li>
+        <li>新马首批试点酒店：以 Agoda、Booking.com 为主渠道，OTA 侧模块先上</li>
+        <li>首个本地伙伴落地：实施、一线支持与补贴资格由本地伙伴承接；新加坡数据区域上线，与中国数据区物理分离</li>
+        <li>我们承诺：对介绍对象如实讲阶段，验证数据可公开核验，欢迎到住小叮看真实运行。hi@intent-computing.com · hogentx.com</li>
       </ul>
     </div>
   </div>
 
   <div class="foot">
-    <span>来源：hogentx.com；HogentX 产品说明与住小叮内部 POC（2026-10）；STB / data.gov.sg（2026-06）；EdgeProp（2025-12）；Tourism Malaysia 2025；MOTAC；Malay Mail；Bernama；D-EDGE 2026；Jobstreet 2026；hotelcadence 2026；LODGING Magazine（2025-08）；Capterra 2026；grants.sg / EnterpriseSG（2026-10）；BSN。外部数字为搜索摘要口径，上会前逐条核验。</span>
+    <span>来源：hogentx.com；HogentX 产品说明与住小叮内部 POC（2026-10）；STB / data.gov.sg（2026-06）；EdgeProp（2025-12）；Tourism Malaysia 2025；MOTAC；Malay Mail；Bernama；D-EDGE 2026；Jobstreet 2026；hotelcadence 2026；LODGING Magazine（2025-08）；Capterra 2026；grants.sg / EnterpriseSG（2026-10）；BSN。外部数字以标注来源为准。</span>
     <span class="r">Intent Computing Pte. Ltd. · 新加坡<br>数据以来源为准 · 2026 年 10 月整理</span>
   </div>
 </div>
