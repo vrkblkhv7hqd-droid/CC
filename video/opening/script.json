@@ -2,86 +2,50 @@
   "voice": "en-US-AndrewMultilingualNeural",
   "rate": "-6%",
   "gap_s": 0.55,
+  "brand_token": "Hojent",
+  "_note": "en = English voiceover (TTS-only; the brand is spelled 'Hojent X' so the voice reads it as ho-jent-X). zh = Chinese subtitle groups, no trailing punctuation. zh_onscreen = groups whose text is already the on-screen headline, so no subtitle bar is shown. hold_s = silence held after the segment before the next one.",
   "segments": [
     {
       "id": "s01",
       "scene": "formula",
       "en": "Every hotel runs on one formula. Available rooms, times occupancy, times rate. Minus channel cost. Minus labour.",
-      "zh": [
-        "每一家酒店都靠同一个公式运转：",
-        "可售房晚 × 入住率 × 房价，",
-        "减去渠道成本，减去人力。"
-      ]
+      "zh": ["每一家酒店都靠同一个公式运转", "可售房晚 × 入住率 × 房价", "减去渠道成本，减去人力"]
     },
     {
       "id": "s02",
       "scene": "leaks",
       "en": "And every day, a little of it leaks away. Empty rooms nobody saw coming. Prices set wrong. A low rate left online overnight. A bad review that costs the next booking.",
-      "zh": [
-        "每一天，收入都在悄悄流失：",
-        "没提前看到的空房，定错的价格，",
-        "挂了一夜的低价，赶走下一单的差评。"
-      ]
+      "zh": ["每一天，收入都在悄悄流失", "没提前看到的空房，定错的价格", "挂了一夜的低价，赶走下一位客人的差评"]
     },
     {
       "id": "s03",
       "scene": "watch",
-      "en": "Not because managers don't care. Because no one can watch five back offices, every hour, every day.",
-      "zh": [
-        "不是店长不上心，",
-        "而是没有人能每小时盯着五个后台。"
-      ]
+      "hold_s": 0.8,
+      "en": "Not because managers don't care. Because no one can watch five separate systems, every hour, every day.",
+      "zh": ["不是店长不用心", "而是没有人能每小时盯住五个后台"],
+      "zh_onscreen": [0, 1]
     },
     {
       "id": "s04",
-      "scene": "team",
-      "en": "Hogent X gives every hotel a team of digital employees. A revenue manager. A guest relations specialist. A quality inspector. And a general manager's assistant.",
-      "zh": [
-        "HogentX 给每一家酒店配一支数字员工队伍：",
-        "收益经理、宾客关系专员、",
-        "质检主管、总经理助理。"
-      ]
+      "scene": "own",
+      "hold_s": 0.6,
+      "en": "We know. We run twenty-nine hotels ourselves.",
+      "zh": ["我们知道，因为我们自己也经营着 29 家酒店"]
     },
     {
       "id": "s05",
-      "scene": "rule",
-      "en": "They read the hotel's booking platforms around the clock. They spot the change, check it, and prepare the action. And one rule never changes: the AI only reads. Every price change, every reply, is confirmed by a person.",
-      "zh": [
-        "它们全天候读取各订房平台，",
-        "发现变化、核查、准备方案。",
-        "一条规则始终不变：AI 只读取数据，",
-        "每一次改价、每一条回复，都由人工确认。"
-      ]
+      "scene": "question",
+      "hold_s": 2.0,
+      "en": "Back to that formula. Which of these variables is nobody watching?",
+      "zh": ["回到那个公式", "这些变量里，哪一个没人管？"],
+      "zh_onscreen": [1]
     },
     {
       "id": "s06",
-      "scene": "proof",
-      "en": "We tested it in our own hotels first. Twenty-nine properties, in one of the thinnest-margin segments in the business. Six daily tasks went from four hundred and eighty minutes a day to one hundred and seventy-four. About sixty-four percent less time, measured in-house.",
-      "zh": [
-        "我们先在自己的酒店验证：",
-        "29 家门店，利润最薄的业态之一。",
-        "六项日常任务从每天 480 分钟降到 174 分钟，",
-        "减少约 64%，内部口径。"
-      ]
-    },
-    {
-      "id": "s07",
-      "scene": "sgmy",
-      "en": "Now we are bringing it to Singapore and Malaysia. Five languages. Agoda and Booking dot com are already connected. And we plan to host hotel data in Singapore.",
-      "zh": [
-        "现在，我们把它带到新加坡和马来西亚：",
-        "五种语言，已接入 Agoda 与 Booking.com，",
-        "数据拟托管于新加坡。"
-      ]
-    },
-    {
-      "id": "s08",
       "scene": "close",
-      "en": "Fewer people, watching more. Revenue risks, seen in time. Hogent X. The hotel digital employee that understands the business.",
-      "zh": [
-        "用更少的人，提前看到收入风险。",
-        "HogentX，懂经营的酒店数字员工。"
-      ]
+      "en": "Hojent X. Digital employees that understand the hotel business.",
+      "zh": ["HogentX，懂经营的酒店数字员工"],
+      "zh_onscreen": [0]
     }
   ]
 }

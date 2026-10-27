@@ -258,7 +258,7 @@
  {
   "id": "s03",
   "file": "assets/voice/s03.mp3",
-  "duration": 6.792,
+  "duration": 7.344,
   "words": [
    {
     "text": "Not",
@@ -268,82 +268,82 @@
    {
     "text": "because",
     "start": 0.265958,
-    "end": 0.678208
+    "end": 0.611708
    },
    {
     "text": "managers",
-    "start": 0.678208,
-    "end": 1.369666
+    "start": 0.625,
+    "end": 1.263291
    },
    {
     "text": "don't",
-    "start": 1.369666,
-    "end": 1.675499
+    "start": 1.263291,
+    "end": 1.515957
    },
    {
     "text": "care",
-    "start": 1.675541,
-    "end": 2.127666
+    "start": 1.52925,
+    "end": 1.981375
    },
    {
     "text": "Because",
-    "start": 2.553208,
-    "end": 2.832458
+    "start": 2.406916,
+    "end": 2.672874
    },
    {
     "text": "no",
-    "start": 2.84575,
-    "end": 2.992041
+    "start": 2.672875,
+    "end": 2.84575
    },
    {
     "text": "one",
-    "start": 2.992041,
-    "end": 3.085124
+    "start": 2.84575,
+    "end": 2.965416
    },
    {
     "text": "can",
-    "start": 3.085125,
-    "end": 3.178208
+    "start": 2.965416,
+    "end": 3.071791
    },
    {
     "text": "watch",
-    "start": 3.178208,
-    "end": 3.417541
+    "start": 3.071791,
+    "end": 3.351041
    },
    {
     "text": "five",
-    "start": 3.417541,
-    "end": 3.776582
+    "start": 3.364375,
+    "end": 3.8165
    },
    {
-    "text": "back",
-    "start": 3.789875,
-    "end": 4.02925
+    "text": "separate",
+    "start": 3.8165,
+    "end": 4.215416
    },
    {
-    "text": "offices",
-    "start": 4.042541,
-    "end": 4.667541
+    "text": "systems",
+    "start": 4.215416,
+    "end": 4.933499
    },
    {
     "text": "every",
-    "start": 4.747333,
-    "end": 5.053166
+    "start": 5.21275,
+    "end": 5.518583
    },
    {
     "text": "hour",
-    "start": 5.053208,
-    "end": 5.478749
+    "start": 5.518625,
+    "end": 5.97075
    },
    {
     "text": "every",
-    "start": 5.731375,
-    "end": 5.944125
+    "start": 6.276583,
+    "end": 6.529249
    },
    {
     "text": "day",
-    "start": 5.957458,
-    "end": 6.396291
+    "start": 6.52925,
+    "end": 6.954791
    }
   ],
   "sentences": []
@@ -351,132 +351,42 @@
  {
   "id": "s04",
   "file": "assets/voice/s04.mp3",
-  "duration": 12.96,
+  "duration": 3.696,
   "words": [
    {
-    "text": "Hogent",
-    "start": 0.119666,
-    "end": 0.505291
+    "text": "We",
+    "start": 0.106375,
+    "end": 0.226041
    },
    {
-    "text": "X",
-    "start": 0.518625,
-    "end": 1.063833
+    "text": "know",
+    "start": 0.239375,
+    "end": 0.571833
    },
    {
-    "text": "gives",
-    "start": 1.303208,
-    "end": 1.715458
+    "text": "We",
+    "start": 1.010625,
+    "end": 1.156916
    },
    {
-    "text": "every",
-    "start": 1.901583,
-    "end": 2.180833
+    "text": "run",
+    "start": 1.170208,
+    "end": 1.462749
    },
    {
-    "text": "hotel",
-    "start": 2.180833,
-    "end": 2.659541
+    "text": "twenty-nine",
+    "start": 1.476083,
+    "end": 2.101083
    },
    {
-    "text": "a",
-    "start": 2.672875,
-    "end": 2.726083
+    "text": "hotels",
+    "start": 2.101083,
+    "end": 2.566499
    },
    {
-    "text": "team",
-    "start": 2.726083,
-    "end": 3.191499
-   },
-   {
-    "text": "of",
-    "start": 3.444166,
-    "end": 3.603707
-   },
-   {
-    "text": "digital",
-    "start": 3.603708,
-    "end": 4.002624
-   },
-   {
-    "text": "employees",
-    "start": 4.002666,
-    "end": 4.813832
-   },
-   {
-    "text": "A",
-    "start": 5.252666,
-    "end": 5.305832
-   },
-   {
-    "text": "revenue",
-    "start": 5.305833,
-    "end": 5.691458
-   },
-   {
-    "text": "manager",
-    "start": 5.6915,
-    "end": 6.289916
-   },
-   {
-    "text": "A",
-    "start": 6.728708,
-    "end": 6.781916
-   },
-   {
-    "text": "guest",
-    "start": 6.781916,
-    "end": 7.074457
-   },
-   {
-    "text": "relations",
-    "start": 7.08775,
-    "end": 7.686166
-   },
-   {
-    "text": "specialist",
-    "start": 7.792541,
-    "end": 8.656916
-   },
-   {
-    "text": "A",
-    "start": 9.09575,
-    "end": 9.135625
-   },
-   {
-    "text": "quality",
-    "start": 9.148916,
-    "end": 9.667541
-   },
-   {
-    "text": "inspector",
-    "start": 9.680833,
-    "end": 10.398916
-   },
-   {
-    "text": "And",
-    "start": 10.83775,
-    "end": 10.957416
-   },
-   {
-    "text": "a",
-    "start": 11.063833,
-    "end": 11.130333
-   },
-   {
-    "text": "general",
-    "start": 11.143625,
-    "end": 11.502666
-   },
-   {
-    "text": "manager's",
-    "start": 11.502666,
-    "end": 11.941499
-   },
-   {
-    "text": "assistant",
-    "start": 11.9415,
-    "end": 12.553208
+    "text": "ourselves",
+    "start": 2.5665,
+    "end": 3.324458
    }
   ],
   "sentences": []
@@ -484,197 +394,62 @@
  {
   "id": "s05",
   "file": "assets/voice/s05.mp3",
-  "duration": 16.656,
+  "duration": 4.608,
   "words": [
    {
-    "text": "They",
+    "text": "Back",
     "start": 0.106375,
-    "end": 0.172875
+    "end": 0.252666
    },
    {
-    "text": "read",
-    "start": 0.186166,
-    "end": 0.372332
+    "text": "to",
+    "start": 0.252666,
+    "end": 0.319166
    },
    {
-    "text": "the",
-    "start": 0.372333,
-    "end": 0.438833
+    "text": "that",
+    "start": 0.319166,
+    "end": 0.478707
    },
    {
-    "text": "hotel's",
-    "start": 0.438833,
-    "end": 0.984041
+    "text": "formula",
+    "start": 0.478708,
+    "end": 1.143583
    },
    {
-    "text": "booking",
-    "start": 0.984041,
-    "end": 1.343082
+    "text": "Which",
+    "start": 1.582458,
+    "end": 1.688833
    },
    {
-    "text": "platforms",
-    "start": 1.356375,
-    "end": 2.101041
+    "text": "of",
+    "start": 1.688833,
+    "end": 1.742041
    },
    {
-    "text": "around",
-    "start": 2.234041,
-    "end": 2.526582
+    "text": "these",
+    "start": 1.742041,
+    "end": 1.901582
    },
    {
-    "text": "the",
-    "start": 2.526583,
-    "end": 2.579791
-   },
-   {
-    "text": "clock",
-    "start": 2.579791,
-    "end": 3.085124
-   },
-   {
-    "text": "They",
-    "start": 3.497333,
-    "end": 3.563833
-   },
-   {
-    "text": "spot",
-    "start": 3.577125,
-    "end": 3.922875
-   },
-   {
-    "text": "the",
-    "start": 3.922875,
-    "end": 4.002666
-   },
-   {
-    "text": "change",
-    "start": 4.002666,
-    "end": 4.680874
-   },
-   {
-    "text": "check",
-    "start": 4.920208,
-    "end": 5.226041
-   },
-   {
-    "text": "it",
-    "start": 5.239375,
-    "end": 5.398958
-   },
-   {
-    "text": "and",
-    "start": 5.917541,
-    "end": 5.997332
-   },
-   {
-    "text": "prepare",
-    "start": 5.997333,
-    "end": 6.422874
-   },
-   {
-    "text": "the",
-    "start": 6.422875,
-    "end": 6.515958
-   },
-   {
-    "text": "action",
-    "start": 6.515958,
-    "end": 7.021291
-   },
-   {
-    "text": "And",
-    "start": 7.460125,
-    "end": 7.606375
-   },
-   {
-    "text": "one",
-    "start": 7.606375,
-    "end": 7.872333
-   },
-   {
-    "text": "rule",
-    "start": 7.872333,
-    "end": 8.151583
-   },
-   {
-    "text": "never",
-    "start": 8.164875,
-    "end": 8.484041
-   },
-   {
-    "text": "changes",
-    "start": 8.497333,
-    "end": 9.148916
-   },
-   {
-    "text": "the",
-    "start": 9.561166,
-    "end": 9.694124
-   },
-   {
-    "text": "AI",
-    "start": 9.78725,
-    "end": 10.385666
-   },
-   {
-    "text": "only",
-    "start": 10.492041,
-    "end": 10.877666
-   },
-   {
-    "text": "reads",
-    "start": 10.877666,
-    "end": 11.542541
-   },
-   {
-    "text": "Every",
-    "start": 11.968083,
-    "end": 12.180833
-   },
-   {
-    "text": "price",
-    "start": 12.194166,
-    "end": 12.579791
-   },
-   {
-    "text": "change",
-    "start": 12.579791,
-    "end": 13.191499
-   },
-   {
-    "text": "every",
-    "start": 13.497333,
-    "end": 13.763291
-   },
-   {
-    "text": "reply",
-    "start": 13.776583,
-    "end": 14.361708
+    "text": "variables",
+    "start": 1.901583,
+    "end": 2.672874
    },
    {
     "text": "is",
-    "start": 14.800541,
-    "end": 14.906916
+    "start": 2.805833,
+    "end": 3.045208
    },
    {
-    "text": "confirmed",
-    "start": 14.920208,
-    "end": 15.531916
+    "text": "nobody",
+    "start": 3.0585,
+    "end": 3.630291
    },
    {
-    "text": "by",
-    "start": 15.531916,
-    "end": 15.678207
-   },
-   {
-    "text": "a",
-    "start": 15.678208,
-    "end": 15.731374
-   },
-   {
-    "text": "person",
-    "start": 15.731375,
-    "end": 16.263291
+    "text": "watching",
+    "start": 3.643625,
+    "end": 4.202125
    }
   ],
   "sentences": []
@@ -682,353 +457,52 @@
  {
   "id": "s06",
   "file": "assets/voice/s06.mp3",
-  "duration": 17.52,
+  "duration": 4.704,
   "words": [
    {
-    "text": "We",
-    "start": 0.093083,
-    "end": 0.186166
-   },
-   {
-    "text": "tested",
-    "start": 0.199458,
-    "end": 0.598374
-   },
-   {
-    "text": "it",
-    "start": 0.598416,
-    "end": 0.731374
-   },
-   {
-    "text": "in",
-    "start": 0.731375,
-    "end": 0.864333
-   },
-   {
-    "text": "our",
-    "start": 0.877666,
-    "end": 1.037249
-   },
-   {
-    "text": "own",
-    "start": 1.143625,
-    "end": 1.396291
-   },
-   {
-    "text": "hotels",
-    "start": 1.396291,
-    "end": 1.968082
-   },
-   {
-    "text": "first",
-    "start": 1.981375,
-    "end": 2.606375
-   },
-   {
-    "text": "Twenty-nine",
-    "start": 3.018625,
-    "end": 3.550541
-   },
-   {
-    "text": "properties",
-    "start": 3.550541,
-    "end": 4.255332
-   },
-   {
-    "text": "in",
-    "start": 4.521291,
-    "end": 4.640957
-   },
-   {
-    "text": "one",
-    "start": 4.65425,
-    "end": 4.787208
-   },
-   {
-    "text": "of",
-    "start": 4.78725,
-    "end": 4.840416
-   },
-   {
-    "text": "the",
-    "start": 4.840416,
-    "end": 4.933499
-   },
-   {
-    "text": "thinnest-margin",
-    "start": 4.946791,
-    "end": 5.890957
-   },
-   {
-    "text": "segments",
-    "start": 5.890958,
-    "end": 6.555833
-   },
-   {
-    "text": "in",
-    "start": 6.555833,
-    "end": 6.675499
-   },
-   {
-    "text": "the",
-    "start": 6.688833,
-    "end": 6.755333
-   },
-   {
-    "text": "business",
-    "start": 6.768625,
-    "end": 7.473416
-   },
-   {
-    "text": "Six",
-    "start": 7.898916,
-    "end": 8.151582
-   },
-   {
-    "text": "daily",
-    "start": 8.164875,
-    "end": 8.497333
-   },
-   {
-    "text": "tasks",
-    "start": 8.497333,
-    "end": 9.215416
-   },
-   {
-    "text": "went",
-    "start": 9.228708,
-    "end": 9.428166
-   },
-   {
-    "text": "from",
-    "start": 9.428208,
-    "end": 9.640958
-   },
-   {
-    "text": "four",
-    "start": 9.640958,
-    "end": 10.026583
-   },
-   {
-    "text": "hundred",
-    "start": 10.026583,
-    "end": 10.226041
-   },
-   {
-    "text": "and",
-    "start": 10.226083,
-    "end": 10.305874
-   },
-   {
-    "text": "eighty",
-    "start": 10.425541,
-    "end": 10.611707
-   },
-   {
-    "text": "minutes",
-    "start": 10.611708,
-    "end": 10.877666
-   },
-   {
-    "text": "a",
-    "start": 10.877666,
-    "end": 10.917541
-   },
-   {
-    "text": "day",
-    "start": 10.917541,
-    "end": 11.276582
-   },
-   {
-    "text": "to",
-    "start": 11.449458,
-    "end": 11.595749
-   },
-   {
-    "text": "one",
-    "start": 11.609041,
-    "end": 11.861707
-   },
-   {
-    "text": "hundred",
-    "start": 11.861708,
-    "end": 12.180833
-   },
-   {
-    "text": "and",
-    "start": 12.180833,
-    "end": 12.234041
-   },
-   {
-    "text": "seventy-four",
-    "start": 12.234041,
-    "end": 13.111707
-   },
-   {
-    "text": "About",
-    "start": 13.53725,
-    "end": 13.789875
-   },
-   {
-    "text": "sixty-four",
-    "start": 13.789875,
-    "end": 14.45475
-   },
-   {
-    "text": "percent",
-    "start": 14.454791,
-    "end": 14.960124
-   },
-   {
-    "text": "less",
-    "start": 14.973416,
-    "end": 15.292541
-   },
-   {
-    "text": "time",
-    "start": 15.292541,
-    "end": 15.731374
-   },
-   {
-    "text": "measured",
-    "start": 16.010625,
-    "end": 16.369666
-   },
-   {
-    "text": "in-house",
-    "start": 16.369666,
-    "end": 17.127624
-   }
-  ],
-  "sentences": []
- },
- {
-  "id": "s07",
-  "file": "assets/voice/s07.mp3",
-  "duration": 11.328,
-  "words": [],
-  "sentences": [
-   {
-    "text": "Now we are bringing it to Singapore and Malaysia.",
-    "start": 0.05,
-    "end": 2.6063829
-   },
-   {
-    "text": "Five languages.",
-    "start": 2.6063829,
-    "end": 4.0691488
-   },
-   {
-    "text": "Agoda and Booking dot com are already connected.",
-    "start": 4.0691489,
-    "end": 7.8457446
-   },
-   {
-    "text": "And we plan to host hotel data in Singapore.",
-    "start": 7.8457447,
-    "end": 11.2765957
-   }
-  ]
- },
- {
-  "id": "s08",
-  "file": "assets/voice/s08.mp3",
-  "duration": 10.2,
-  "words": [
-   {
-    "text": "Fewer",
-    "start": 0.146291,
-    "end": 0.385666
-   },
-   {
-    "text": "people",
-    "start": 0.398916,
-    "end": 0.824457
-   },
-   {
-    "text": "watching",
-    "start": 1.130333,
-    "end": 1.515958
-   },
-   {
-    "text": "more",
-    "start": 1.515958,
-    "end": 1.888291
-   },
-   {
-    "text": "Revenue",
-    "start": 2.300541,
-    "end": 2.659582
-   },
-   {
-    "text": "risks",
-    "start": 2.672875,
-    "end": 3.324458
-   },
-   {
-    "text": "seen",
-    "start": 3.550541,
-    "end": 3.776582
-   },
-   {
-    "text": "in",
-    "start": 3.776583,
-    "end": 3.882958
-   },
-   {
-    "text": "time",
-    "start": 3.882958,
-    "end": 4.281874
-   },
-   {
-    "text": "Hogent",
-    "start": 4.734041,
-    "end": 5.199457
+    "text": "Hojent",
+    "start": 0.119666,
+    "end": 0.452124
    },
    {
     "text": "X",
-    "start": 5.359041,
-    "end": 5.837749
+    "start": 0.452125,
+    "end": 0.944166
    },
    {
-    "text": "The",
-    "start": 6.276583,
-    "end": 6.329791
+    "text": "Digital",
+    "start": 1.196791,
+    "end": 1.609041
    },
    {
-    "text": "hotel",
-    "start": 6.329791,
-    "end": 6.861707
-   },
-   {
-    "text": "digital",
-    "start": 6.968083,
-    "end": 7.460124
-   },
-   {
-    "text": "employee",
-    "start": 7.460125,
-    "end": 8.138333
+    "text": "employees",
+    "start": 1.609041,
+    "end": 2.327124
    },
    {
     "text": "that",
-    "start": 8.218083,
-    "end": 8.377666
+    "start": 2.340416,
+    "end": 2.460082
    },
    {
-    "text": "understands",
-    "start": 8.390958,
-    "end": 9.002666
+    "text": "understand",
+    "start": 2.473416,
+    "end": 3.111707
    },
    {
     "text": "the",
-    "start": 9.015958,
-    "end": 9.095749
+    "start": 3.125,
+    "end": 3.178208
+   },
+   {
+    "text": "hotel",
+    "start": 3.178208,
+    "end": 3.670208
    },
    {
     "text": "business",
-    "start": 9.09575,
-    "end": 9.827125
+    "start": 3.670208,
+    "end": 4.308499
    }
   ],
   "sentences": []

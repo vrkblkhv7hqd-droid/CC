@@ -1,0 +1,88 @@
+<template>
+  <style>
+
+@font-face { font-family: 'Noto Serif SC'; font-weight: 900; font-style: normal; src: url('assets/fonts/NotoSerifSC-Black.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Serif SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSerifSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 400; font-style: normal; src: url('assets/fonts/NotoSansSC-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 500; font-style: normal; src: url('assets/fonts/NotoSansSC-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-weight: 700; font-style: normal; src: url('assets/fonts/Fraunces-Bold.woff2') format('woff2'); }
+
+#root { position: absolute; inset: 0; overflow: hidden; background: #10213a; color: #f4f6fa;
+  font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; }
+#root * { box-sizing: border-box; margin: 0; }
+.clip { position: absolute; inset: 0; }
+.at { inset: auto; }
+.eyebrow { font-size: 30px; font-weight: 500; letter-spacing: 0.22em; color: #8fb0ff; text-transform: uppercase; }
+.en { font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; font-weight: 400; color: #b8c4d9; }
+.ground { position: absolute; inset: 0; background:
+  radial-gradient(1200px 700px at 30% 20%, rgba(43,97,254,0.22), transparent 60%),
+  radial-gradient(900px 600px at 85% 90%, rgba(43,97,254,0.14), transparent 60%), #10213a; }
+.grid { position: absolute; inset: 0; background-image:
+  linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 96px 96px; }
+
+
+#f-wrap { position: absolute; left: 160px; right: 160px; top: 0; bottom: 0; }
+#f-eyebrow { position: absolute; top: 300px; left: 0; }
+#f-line { position: absolute; top: 420px; left: 0; right: 0; display: flex; align-items: flex-start; gap: 36px; }
+.term { display: flex; flex-direction: column; gap: 14px; }
+.term .zh { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 92px; line-height: 1; white-space: nowrap; }
+.term .en { font-size: 28px; letter-spacing: 0.04em; white-space: nowrap; }
+.op { font-family: 'Fraunces', serif; font-weight: 700; font-size: 84px; line-height: 1.1; color: #8fb0ff; padding: 0 4px; }
+.op.minus { color: #ffb02e; }
+#f-line2 { position: absolute; top: 620px; left: 0; display: flex; align-items: flex-start; gap: 36px; }
+
+#q-title { position: absolute; left: 0; top: 250px; font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 84px; line-height: 1.2; }
+
+  </style>
+  <div id="root" data-composition-id="question" data-width="1920" data-height="1080">
+
+    <div id="q-ground" class="clip ground" data-start="0" data-duration="7.158"></div>
+    <div id="q-grid" class="clip grid" data-start="0" data-duration="7.158" data-layout-ignore></div>
+    <div id="f-wrap" class="clip" data-start="0" data-duration="7.158" data-hold>
+      <div id="q-title">这些变量里，哪一个没人管？</div>
+      <div id="f-line">
+        <div class="term" id="t-rooms"><div class="zh">可售房晚</div><div class="en">Available rooms</div></div>
+        <div class="op" id="o1">×</div>
+        <div class="term" id="t-occ"><div class="zh">入住率</div><div class="en">Occupancy</div></div>
+        <div class="op" id="o2">×</div>
+        <div class="term" id="t-rate"><div class="zh">房价</div><div class="en">Rate</div></div>
+      </div>
+      <div id="f-line2">
+        <div class="op minus" id="o3">−</div>
+        <div class="term" id="t-channel"><div class="zh">渠道成本</div><div class="en">Channel cost</div></div>
+        <div class="op minus" id="o4">−</div>
+        <div class="term" id="t-labour"><div class="zh">人力</div><div class="en">Labour</div></div>
+      </div>
+
+    </div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const EASE_IN = "expo.out";
+      tl.fromTo('#t-rooms', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.0);
+      tl.fromTo('#o1', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.06);
+      tl.fromTo('#t-occ', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.12);
+      tl.fromTo('#o2', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.18);
+      tl.fromTo('#t-rate', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.24);
+      tl.fromTo('#o3', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.3);
+      tl.fromTo('#t-channel', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.36);
+      tl.fromTo('#o4', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.42);
+      tl.fromTo('#t-labour', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out', immediateRender: false }, 0.48);
+      tl.fromTo('#q-title', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE_IN }, 2.032);
+      tl.to('#t-rooms', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 2.352);
+      tl.to('#t-occ', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 2.788);
+      tl.to('#t-rate', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 3.223);
+      tl.to('#t-channel', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 3.659);
+      tl.to('#t-labour', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 4.094);
+      tl.to('#f-wrap > *', { opacity: 0, filter: 'blur(6px)', duration: 0.25, ease: 'power3.in' }, 6.858);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["question"] = tl;
+    })();
+  </script>
+</template>

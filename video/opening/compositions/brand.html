@@ -8,13 +8,11 @@
 @font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
 @font-face { font-family: 'Fraunces'; font-weight: 700; font-style: normal; src: url('assets/fonts/Fraunces-Bold.woff2') format('woff2'); }
 
-#root { position: absolute; inset: 0; overflow: hidden; background: transparent; color: #f4f6fa;
+#root { position: absolute; inset: 0; overflow: hidden; background: #10213a; color: #f4f6fa;
   font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; }
 #root * { box-sizing: border-box; margin: 0; }
 .clip { position: absolute; inset: 0; }
 .at { inset: auto; }
-.serif { font-family: 'Noto Serif SC', serif; font-weight: 900; }
-.num { font-family: 'Fraunces', 'Noto Serif SC', serif; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
 .eyebrow { font-size: 30px; font-weight: 500; letter-spacing: 0.22em; color: #8fb0ff; text-transform: uppercase; }
 .en { font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif; font-weight: 400; color: #b8c4d9; }
 .ground { position: absolute; inset: 0; background:
@@ -26,14 +24,15 @@
   background-size: 96px 96px; }
 
 
+#root { background: transparent; }
 #b-wrap { position: absolute; left: 72px; top: 52px; display: flex; align-items: center; gap: 18px; }
 #b-mark { width: 44px; height: auto; }
 #b-word { width: 130px; height: auto; opacity: 0.9; }
 
   </style>
-  <div id="root" data-composition-id="brand" data-width="1920" data-height="1080" >
+  <div id="root" data-composition-id="brand" data-width="1920" data-height="1080">
 
-    <div id="b-wrap" class="clip at" data-start="0" data-duration="92.48" data-layout-ignore><img id="b-mark" src="assets/logo-mark-white.png" alt="" /><img id="b-word" src="assets/logo-word-white.png" alt="HogentX" /></div>
+    <div id="b-wrap" class="clip at" data-start="0" data-duration="45.172" data-layout-ignore><img id="b-mark" src="assets/logo-mark-white.png" alt="" /><img id="b-word" src="assets/logo-word-white.png" alt="HogentX" /></div>
 
   </div>
   <script>
@@ -41,7 +40,7 @@
       const tl = gsap.timeline({ paused: true });
       const EASE_IN = "expo.out";
       tl.fromTo('#b-wrap', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.4);
-      tl.to('#b-wrap', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 92.13);
+      tl.to('#b-wrap', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 44.822);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["brand"] = tl;
