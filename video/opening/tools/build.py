@@ -446,13 +446,9 @@ script += f"      tl.fromTo('#v-img', {{ scale: 1.04 }}, {{ scale: 1.14, duratio
 script += reveal('#v-eyebrow', L('tested'), dur=0.5)
 script += rise('#v-stores', L('Twenty-nine') - 0.05, dur=0.6, y=30)
 script += reveal('#v-task', L('Six'), dur=0.4)
-script += rise('#v-count', L('four') - 0.05, dur=0.5, y=30)
-script += (f"      const cnt = {{ v: 480 }};\n"
-           f"      const paint = () => {{ document.getElementById('v-count').textContent = Math.round(cnt.v); }};\n"
-           f"      tl.fromTo(cnt, {{ v: 480 }}, {{ v: 174, duration: {r3(L('seventy-four') - L('four') + 0.4)}, ease: 'power2.inOut', immediateRender: false, onUpdate: paint }}, {L('four')});\n"
-           f"      tl.eventCallback('onUpdate', paint);\n")
+script += rise('#v-count', L('four') - 0.05, dur=0.5, y=30)   # left figure is a static 480
 script += reveal('#v-mins .arrow', L('to'), dur=0.3)
-script += rise('#v-174', L('seventy-four') - 0.1, dur=0.5, y=30)
+script += rise('#v-174', L('seventy-four') - 0.1, dur=0.5, y=30)  # 174 lands on the spoken word
 script += reveal('#v-mins .unit', L('seventy-four') + 0.2, dur=0.4)
 script += f"      tl.fromTo('#v-pct-n', {{ opacity: 0, scale: 0.85 }}, {{ opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.2)' }}, {L('About')});\n"
 script += reveal('#v-pct .zh', L('percent'), dur=0.4)

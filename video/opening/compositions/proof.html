@@ -64,10 +64,6 @@
       tl.fromTo('#v-stores', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: EASE_IN }, 3.419);
       tl.fromTo('#v-task', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: EASE_IN }, 8.349);
       tl.fromTo('#v-count', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE_IN }, 10.041);
-      const cnt = { v: 480 };
-      const paint = () => { document.getElementById('v-count').textContent = Math.round(cnt.v); };
-      tl.fromTo(cnt, { v: 480 }, { v: 174, duration: 2.993, ease: 'power2.inOut', immediateRender: false, onUpdate: paint }, 10.091);
-      tl.eventCallback('onUpdate', paint);
       tl.fromTo('#v-mins .arrow', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.3, ease: EASE_IN }, 11.899);
       tl.fromTo('#v-174', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE_IN }, 12.584);
       tl.fromTo('#v-mins .unit', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: EASE_IN }, 12.884);
