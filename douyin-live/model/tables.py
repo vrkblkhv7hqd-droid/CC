@@ -292,6 +292,7 @@ T["B2M_HQSOLD_M12"] = wan(m12("总部直播间与投流售出 GMV", 1), 0)
 # 打平所需月售出 GMV（总部口径）：稳态月成本差 ÷ 每元售出 GMV 的总部增量收入
 _take_sold = float(T["S_TAKE"]) * base("REDEEM")
 T["BREAKEVEN_SOLD_MONTH"] = wan((m12("总部成本合计", 3) - m12("总部成本合计", 1)) / _take_sold, 0)
+T["BREAKEVEN_SOLD_MONTH_B2"] = wan((m12("总部成本合计", 2) - m12("总部成本合计", 1)) / _take_sold, 0)
 T["HQ_ADS_BREAKEVEN_ROI"] = f"{1/_take_sold:.0f}"
 # 敏感性矩阵最大值
 def grid_max(hdr_label):
