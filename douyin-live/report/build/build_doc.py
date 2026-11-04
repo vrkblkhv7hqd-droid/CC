@@ -43,6 +43,22 @@ def fix_tables(md):
             outl.append(lines[i]); i += 1
     return "\n".join(outl)
 out = fix_tables(out)
+# 中文引号：把成对的半角直引号转为全角引号（YAML 标题块除外）
+def cn_quotes(md):
+    m = re.match(r"---\n.*?\n---\n", md, re.S)
+    head, body = (m.group(0), md[m.end():]) if m else ("", md)
+    lines = []
+    for ln in body.split("\n"):
+        if ln.count('"') % 2 == 0 and '"' in ln and not ln.lstrip().startswith("```"):
+            out_chars, open_q = [], True
+            for ch in ln:
+                if ch == '"':
+                    out_chars.append("“" if open_q else "”"); open_q = not open_q
+                else: out_chars.append(ch)
+            ln = "".join(out_chars)
+        lines.append(ln)
+    return head + "\n".join(lines)
+out = cn_quotes(out)
 # pandoc 源（含 YAML 标题块）
 PANDOC_MD = f"{BASE}/build/pandoc_source.md"
 open(PANDOC_MD, "w", encoding="utf-8").write(out)

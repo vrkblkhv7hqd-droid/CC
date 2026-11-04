@@ -24,7 +24,7 @@ C_BLUE, C_ORANGE, C_AQUA, C_YELLOW, C_VIOLET = "#2a78d6", "#eb6834", "#1baf7a", 
 C_GRAY, C_GRID, C_AXIS, C_INK, C_INK2, C_MUTED = "#b5b4ad", "#e1e0d9", "#c3c2b7", "#0b0b0b", "#52514e", "#898781"
 SURFACE = "#ffffff"
 OPT_COLORS = {"A": C_GRAY, "B1": C_BLUE, "B2": C_ORANGE, "B2M": C_VIOLET, "C": C_AQUA}
-OPT_NAMES = {"A": "方案一A 门店自播·现状延续", "B1": "方案一B 规范化门店直播", "B2": "方案二 总部直播团队（现有分成）", "B2M": "方案二+ 总部团队 + 配套机制", "C": "方案三 外包服务商（参照）"}
+OPT_NAMES = {"A": "方案一A 现状延续", "B1": "方案一B 规范化门店直播", "B2": "方案二 总部直播团队（现有分成）", "B2M": "方案二+ 总部直播团队（配套机制）", "C": "方案三 外包服务商（参照）"}
 CODES = ["A", "B1", "B2", "B2M", "C"]
 
 wb = load_workbook(MODEL, data_only=True)
@@ -191,7 +191,7 @@ for ax, (lab, ttl) in zip(axes, [("边际：方案二（现有分成）相对方
     ax.set_title(ttl, loc="left", color=C_INK, fontsize=11, fontweight="bold")
 axes[0].set_ylabel("相对方案一B 的 12 个月差额（万元）", color=C_INK2)
 axes[0].legend(frameon=False, loc="upper left", fontsize=9)
-fig.suptitle("集中团队多带来的价值在总部与门店之间怎么分", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
+fig.suptitle("总部直播团队多带来的价值在总部与门店之间怎么分", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
 fig.tight_layout(); fig.savefig(f"{OUT}/chart6_marginal_split.png", facecolor=SURFACE); plt.close(fig)
 
 print("charts written to", OUT)

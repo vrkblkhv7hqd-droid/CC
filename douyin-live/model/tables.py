@@ -35,7 +35,7 @@ OPTS = ["方案一A 门店自播，现状延续", "方案一B 规范化门店直
 _d = rows_by_label(ws)
 scen_rows = {sn: _d[f"{sn}情景"][0] + 1 for sn in ["基准", "悲观", "乐观"]}
 NOPT = len(OPTS)
-SHORT = ["一A 现状延续", "一B 规范化门店直播", "二 总部团队（现有分成）", "二+ 总部团队 + 机制", "三 外包（参照）"]
+SHORT = ["一A 现状延续", "一B 规范化门店直播", "二 总部直播团队（现有分成）", "二+ 总部直播团队（配套机制）", "三 外包服务商（参照）"]
 for sn, r0 in scen_rows.items():
     rows = []
     for i in range(NOPT):
@@ -43,13 +43,13 @@ for sn, r0 in scen_rows.items():
         rows.append([SHORT[i], wan(ws.cell(row=r, column=3).value, 0), wan(ws.cell(row=r, column=6).value, 1), wan(ws.cell(row=r, column=7).value, 1),
                      wan(ws.cell(row=r, column=8).value, 1), ws.cell(row=r, column=9).value if isinstance(ws.cell(row=r, column=9).value, str) else f"第 {ws.cell(row=r, column=9).value} 月",
                      wan(ws.cell(row=r, column=10).value, 0), wan(ws.cell(row=r, column=11).value, 0)])
-    T[f"TABLE_SCEN_{sn}"] = md(["方案", "核销 GMV（万）", "总部增量收入（万）", "总部成本（万）", "总部净收益（万）", "相对现状转正", "门店端变化（万）", "系统合计（万）"], rows)
+    T[f"TABLE_SCEN_{sn}"] = md(["方案", "核销 GMV（万元）", "总部增量收入（万元）", "总部成本（万元）", "总部净收益（万元）", "相对现状转正", "门店端变化（万元）", "系统合计（万元）"], rows)
 # 三情景总部净收益汇总
 rows = []
 for i, o in enumerate(OPTS):
     rows.append([SHORT[i]] + [wan(ws.cell(row=scen_rows[sn] + i, column=8).value, 1) for sn in ["悲观", "基准", "乐观"]] +
                 [wan(ws.cell(row=scen_rows[sn] + i, column=11).value, 0) for sn in ["悲观", "基准", "乐观"]])
-T["TABLE_SCEN_SUMMARY"] = md(["方案", "总部净收益 悲观（万）", "总部净收益 基准（万）", "总部净收益 乐观（万）", "系统合计 悲观（万）", "系统合计 基准（万）", "系统合计 乐观（万）"], rows)
+T["TABLE_SCEN_SUMMARY"] = md(["方案", "总部净收益 悲观（万元）", "总部净收益 基准（万元）", "总部净收益 乐观（万元）", "系统合计 悲观（万元）", "系统合计 基准（万元）", "系统合计 乐观（万元）"], rows)
 # 边际
 d = rows_by_label(ws)
 for key, lab in [("TABLE_MARGINAL", "边际：方案二（现有分成）相对方案一B"), ("TABLE_MARGINAL_M", "边际：方案二+（配套机制）相对方案一B")]:
@@ -57,7 +57,7 @@ for key, lab in [("TABLE_MARGINAL", "边际：方案二（现有分成）相对�
     rows = []
     for r in range(r0 + 1, r0 + 4):
         rows.append([ws.cell(row=r, column=2).value] + [wan(ws.cell(row=r, column=c).value, 1) for c in range(3, 10)])
-    T[key] = md(["情景", "多售出 GMV（万）", "多核销 GMV（万）", "总部多增收入（万）", "总部多成本（万）", "总部净收益差（万）", "门店端差（万）", "系统合计差（万）"], rows)
+    T[key] = md(["情景", "多售出 GMV（万元）", "多核销 GMV（万元）", "总部多增收入（万元）", "总部多成本（万元）", "总部净收益差（万元）", "门店端差（万元）", "系统合计差（万元）"], rows)
 
 # ---- 单位经济 ----
 u = wb["单位经济"]
@@ -191,7 +191,7 @@ T["BASE_SOLD0"] = wan(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("BASE_REDEEM
 T["BASE_RED0"] = wan(base("BASE_HQ_COMM") / base("HQ_TAKE"), 0)
 T["BASE_VOUCHERS0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("BASE_REDEEM_EST") / base("P1_PRICE"))
 T["BASE_NIGHTS0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE"))
-T["TEAM_SAL"] = wan((base("B_SAL_LEAD") + base("B_SAL_HOST") + base("B_SAL_CTRL") + base("B_SAL_ADS")) * (1 + base("SOCIAL")), 1)
+T["TEAM_SAL"] = wan((base("B_SAL_LEAD") + base("B_SAL_HOST") + base("B_SAL_CTRL") + base("B_SAL_ADS")) * (1 + base("SOCIAL")) + base("B_BACKUP_HOST"), 1)
 T["BRAND_CREDIT"] = wan(base("BRAND_BUDGET") + base("BRAND_SALARY") * (1 + base("SOCIAL")), 1)
 
 # ---- 文档正文用的单值占位符 ----
@@ -204,7 +204,7 @@ for sn, r0 in scen_rows.items():
         T[f"STORE_{code}_{sn}"] = wan(ws.cell(row=r, column=10).value, 0)
         T[f"SYS_{code}_{sn}"] = wan(ws.cell(row=r, column=11).value, 0)
     T[f"DIFF_B1_A_{sn}"] = wan(ws.cell(row=r0 + 1, column=8).value - ws.cell(row=r0, column=8).value, 1)
-    T[f"DIFF_B1_A_ST_{sn}"] = wan(ws.cell(row=r0 + 1, column=10).value - ws.cell(row=r0, column=10).value, 0)
+    T[f"DIFF_B1_A_ST_{sn}"] = f"{round(ws.cell(row=r0 + 1, column=10).value / 10000) - round(ws.cell(row=r0, column=10).value / 10000):,}"
 ds = rows_by_label(ws)
 for key, lab in [("B2", "边际：方案二（现有分成）相对方案一B"), ("B2M", "边际：方案二+（配套机制）相对方案一B")]:
     r0 = ds[lab][0]
@@ -225,7 +225,7 @@ _red = base("BASE_HQ_COMM") / base("HQ_TAKE")
 _inc_any = u.cell(row=25, column=2).value
 T["RETRO_STORE"] = wan(_nights * u.cell(row=27, column=3).value, 1)
 T["RETRO_HQ"] = wan(_nights * u.cell(row=29, column=3).value, 1)
-T["RETRO_DYFEE"] = wan(_red * (1 - base("DY_FEE") - base("HQ_TAKE")) * base("MGMT_FEE"), 1)
+T["RETRO_DYFEE"] = wan(_red * (base("MGMT_FEE") if base("MGMT_BASE") == 1 else (1 - base("DY_FEE") - base("DY_PAY_FEE") - base("HQ_TAKE")) * base("MGMT_FEE")), 1)
 T["RETRO_SUBFEE"] = wan(_nights * (1 - _inc_any) * u.cell(row=18, column=2).value, 1)
 T["ST_PL_WD_P3"] = num(s.cell(row=14, column=4).value); T["ST_PL_ANY_P1"] = num(s.cell(row=13, column=2).value)
 # ---- 补充占位符 ----
@@ -254,6 +254,7 @@ for sn in ["基准", "悲观", "乐观"]:
     T[f"CHANNEL_FEE_1PCT_{sn}"] = wan(ws.cell(row=r0 + 1, column=3).value * (1 - base("DY_FEE") - base("DY_PAY_FEE") - base("HQ_TAKE")) * 0.01, 1)
 T["CHANNEL_FEE_1PCT"] = T["CHANNEL_FEE_1PCT_基准"]
 T["C_HOURS"] = num(base("C_HOURS"))
+T["COST_B2M_INCR_基准"] = wan(ws.cell(row=scen_rows["基准"] + 3, column=7).value - ws.cell(row=scen_rows["基准"] + 1, column=7).value, 1)
 T["ST_PL_WD_P1"] = num(s.cell(row=14, column=2).value)
 T["ST_DN0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE") / base("STORES0"))
 T["ST_SHARE0"] = pct(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE") / base("STORES0") / (base("ROOMS") * base("OCC") * base("DAYS")), 1)
