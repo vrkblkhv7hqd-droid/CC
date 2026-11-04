@@ -43,8 +43,18 @@ def fix_tables(md):
             outl.append(lines[i]); i += 1
     return "\n".join(outl)
 out = fix_tables(out)
-open(OUT_MD, "w", encoding="utf-8").write(out)
-print("md written:", OUT_MD, len(out), "chars")
-cmd = ["pandoc", OUT_MD, "-o", OUT_DOCX, "--reference-doc", f"{BASE}/build/reference.docx", "--resource-path", BASE]
+# pandoc 源（含 YAML 标题块）
+PANDOC_MD = f"{BASE}/build/pandoc_source.md"
+open(PANDOC_MD, "w", encoding="utf-8").write(out)
+# 飞书友好的 Markdown：去掉 YAML，改为一级标题
+m = re.match(r"---\n(.*?)\n---\n", out, re.S)
+feishu = out
+if m:
+    meta = dict(re.findall(r'^(\w+):\s*"(.*)"$', m.group(1), re.M))
+    head = f"# {meta.get('title','')}\n\n**{meta.get('subtitle','')}**　{meta.get('date','')}\n\n"
+    feishu = head + out[m.end():]
+open(OUT_MD, "w", encoding="utf-8").write(feishu)
+print("md written:", OUT_MD, len(feishu), "chars")
+cmd = ["pandoc", PANDOC_MD, "-o", OUT_DOCX, "--reference-doc", f"{BASE}/build/reference.docx", "--resource-path", BASE]
 subprocess.run(cmd, check=True)
 print("docx written:", OUT_DOCX)
