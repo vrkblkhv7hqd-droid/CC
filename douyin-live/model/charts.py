@@ -23,10 +23,10 @@ plt.rcParams["font.size"] = 11
 C_BLUE, C_ORANGE, C_AQUA, C_YELLOW, C_VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#6250d6"
 C_GRAY, C_GRID, C_AXIS, C_INK, C_INK2, C_MUTED = "#b5b4ad", "#e1e0d9", "#c3c2b7", "#0b0b0b", "#52514e", "#898781"
 SURFACE = "#ffffff"
-OPT_COLORS = {"A": C_GRAY, "B1": C_BLUE, "P": C_AQUA, "V": C_YELLOW, "B2": C_ORANGE, "B2M": C_VIOLET, "C": "#898781"}
-OPT_NAMES = {"A": "一A 现状延续", "B1": "一B 规范化门店直播", "P": "二P 总部直播试点（现有人员）", "V": "二V 总部主导、按单付费", "B2": "二 总部直播团队（现有分成）", "B2M": "二+ 总部直播团队（配套机制）", "C": "三 外包服务商（参照）"}
-CODES = ["A", "B1", "P", "V", "B2", "B2M", "C"]
-REL_CODES = ["B1", "P", "V", "B2", "B2M", "C"]
+OPT_COLORS = {"A": C_GRAY, "B1": C_BLUE, "P": C_AQUA, "V": C_YELLOW, "VH": "#d03b3b", "B2": C_ORANGE, "B2M": C_VIOLET, "C": "#898781"}
+OPT_NAMES = {"A": "一A 现状延续", "B1": "一B 规范化门店直播", "P": "二P 总部直播试点（现有人员）", "V": "二V 总部主导、按单付费", "VH": "二H 总部付费主播（按小时）", "B2": "二 总部直播团队（现有分成）", "B2M": "二+ 总部直播团队（配套机制）", "C": "三 外包服务商（参照）"}
+CODES = ["A", "B1", "P", "V", "VH", "B2", "B2M", "C"]
+REL_CODES = ["B1", "P", "V", "VH", "B2", "B2M", "C"]
 CIDX = {c: i for i, c in enumerate(CODES)}
 COL = {"sold": 2, "red": 3, "n": 4, "inc": 5, "hqgross": 6, "hqinc": 7, "cost": 8, "net": 9, "relnet": 10, "paidrel": 11, "share12": 12, "store": 13, "sys": 14, "trough": 15, "paidm": 16}
 
@@ -77,10 +77,10 @@ codes = REL_CODES
 fig, ax = plt.subplots(figsize=(10, 4.8), dpi=200)
 style_ax(ax)
 scens = ["悲观", "基准", "乐观"]
-width = 0.13
+width = 0.115
 for i, code in enumerate(codes):
     vals = [wan(ws.cell(row=scen_rows[s] + CIDX[code], column=COL["relnet"]).value) for s in scens]
-    xs = [j + (i - 2.5) * width for j in range(3)]
+    xs = [j + (i - 3) * width for j in range(3)]
     bars = ax.bar(xs, vals, width=width - 0.02, color=OPT_COLORS[code], label=OPT_NAMES[code])
     for x, v in zip(xs, vals):
         ax.annotate(f"{v:.0f}", (x, v), textcoords="offset points", xytext=(0, 4 if v >= 0 else -12), ha="center", fontsize=9, color=C_INK2)
@@ -139,33 +139,33 @@ ax.set_title("门店视角：抖音间夜的增量比例超过盈亏平衡点，
 ax.legend(frameon=False, loc="upper left", fontsize=9.5)
 fig.tight_layout(); fig.savefig(f"{OUT}/chart4_store_breakeven.png", facecolor=SURFACE); plt.close(fig)
 
-# ---------- 图5：方案二边际净收益热力图（每小时 GMV × ROI）----------
+# ---------- 图5：总部直播间每小时经济（每小时 GMV × 分成与付费方式 → 总部每小时净得）----------
 s = wb["敏感性"]
 d = rows_by_label(s)
-hdr = d["每小时 GMV \\ ROI"][0]
-rois = [s.cell(row=hdr, column=c).value for c in range(2, 8)]
+hdr = d["每小时 GMV \\ 分成与付费"][0]
+cols_lab = [s.cell(row=hdr, column=c).value for c in range(2, 7)]
 gphs, grid = [], []
 r = hdr + 1
 while s.cell(row=r, column=1).value is not None and isinstance(s.cell(row=r, column=1).value, (int, float)):
     gphs.append(s.cell(row=r, column=1).value)
-    grid.append([wan(s.cell(row=r, column=c).value) for c in range(2, 8)])
+    grid.append([s.cell(row=r, column=c).value for c in range(2, 7)])
     r += 1
 import numpy as np
-arr = np.array(grid)
+arr = np.array(grid, dtype=float)
 vmax = max(abs(arr.min()), abs(arr.max()))
 from matplotlib.colors import LinearSegmentedColormap
 cmap = LinearSegmentedColormap.from_list("div", ["#d03b3b", "#f0efec", "#2a78d6"])
-fig, ax = plt.subplots(figsize=(8.6, 5.2), dpi=200)
+fig, ax = plt.subplots(figsize=(9.2, 5.2), dpi=200)
 im = ax.imshow(arr, cmap=cmap, vmin=-vmax, vmax=vmax, aspect="auto")
-ax.set_xticks(range(len(rois))); ax.set_xticklabels([f"ROI {r:g}" for r in rois], color=C_INK2)
+ax.set_xticks(range(len(cols_lab))); ax.set_xticklabels(cols_lab, color=C_INK2, fontsize=8.5)
 ax.set_yticks(range(len(gphs))); ax.set_yticklabels([f"{g:,.0f} 元/小时" for g in gphs], color=C_INK2)
 for i in range(len(gphs)):
-    for j in range(len(rois)):
+    for j in range(len(cols_lab)):
         v = arr[i, j]
-        ax.text(j, i, f"{v:+.1f}", ha="center", va="center", fontsize=9.5, color=("#ffffff" if abs(v) > vmax * 0.55 else C_INK))
-ax.set_xlabel("投流 ROI（售出 GMV / 投流花费）", color=C_INK2)
-ax.set_ylabel("总部直播间成熟期每小时售出 GMV", color=C_INK2)
-ax.set_title("方案二相对方案一B 的稳态每月边际净收益（总部口径，万元）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+        ax.text(j, i, f"{v:+.0f}", ha="center", va="center", fontsize=9.5, color=("#ffffff" if abs(v) > vmax * 0.55 else C_INK))
+ax.set_xlabel("总部分成 × 主播付费方式", color=C_INK2)
+ax.set_ylabel("成熟期每小时售出 GMV（九折口径）", color=C_INK2)
+ax.set_title("总部直播间的每小时经济：总部每小时净得（扣主播成本与对门店自播的挤占，元）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
 for sp in ax.spines.values(): sp.set_visible(False)
 ax.tick_params(length=0)
 cb = fig.colorbar(im, ax=ax, fraction=0.04, pad=0.02); cb.outline.set_visible(False); cb.ax.tick_params(colors=C_INK2, length=0)
@@ -230,5 +230,25 @@ ax.legend(frameon=False, fontsize=9, loc="upper left")
 ticks = [v[0] * 100 for v in blocks[sts[0]]]
 ax.set_xticks(ticks); ax.set_xticklabels([f"{x:.0f}%" for x in ticks])
 fig.tight_layout(); fig.savefig(f"{OUT}/chart7_share_vs_cost.png", facecolor=SURFACE); plt.close(fig)
+
+
+# ---------- 图8：推荐路线（二V）相对现状延续的总部累计净现金，三情景；对照专职团队（二+）----------
+fig, ax = plt.subplots(figsize=(9, 4.8), dpi=200)
+style_ax(ax)
+months = list(range(1, 13))
+for sheet, lab, ls in [("月度_悲观", "悲观", (0, (3, 3))), ("月度_基准", "基准", "-"), ("月度_乐观", "乐观", (0, (6, 2)))]:
+    ys = [wan(v) for v in monthly_series(sheet, "相对现状延续的累计净收益", CIDX["V"])]
+    ax.plot(months, ys, color=C_YELLOW, linewidth=2.2, linestyle=ls, marker="o", markersize=3.5, label=f"二V 总部主导、按单付费：{lab}")
+    ax.annotate(f"{ys[-1]:+.0f}", (12, ys[-1]), textcoords="offset points", xytext=(6, 0), va="center", fontsize=9.5, color=C_INK2)
+for sheet, lab, ls in [("月度_基准", "基准", "-"), ("月度_乐观", "乐观", (0, (6, 2)))]:
+    ys = [wan(v) for v in monthly_series(sheet, "相对现状延续的累计净收益", CIDX["B2M"])]
+    ax.plot(months, ys, color=C_VIOLET, linewidth=1.8, linestyle=ls, marker="s", markersize=3, label=f"二+ 专职团队 + 机制：{lab}")
+    ax.annotate(f"{ys[-1]:+.0f}", (12, ys[-1]), textcoords="offset points", xytext=(6, 0), va="center", fontsize=9.5, color=C_INK2)
+ax.axhline(0, color=C_AXIS, linewidth=0.8)
+ax.set_xticks(months); ax.set_xticklabels([f"第{m}月" for m in months])
+ax.set_ylabel("相对现状延续的总部累计净现金（万元）", color=C_INK2)
+ax.set_title("推荐路线与专职团队：三种情景下总部累计净现金的走势", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=9)
+fig.tight_layout(); fig.savefig(f"{OUT}/chart8_path_scenarios.png", facecolor=SURFACE); plt.close(fig)
 
 print("charts written to", OUT)
