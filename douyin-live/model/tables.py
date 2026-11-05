@@ -31,28 +31,36 @@ def rows_by_label(ws):
 
 # ---- 情景对比（三情景）----
 ws = wb["情景对比"]
-OPTS = ["方案一A 门店自播，现状延续", "方案一B 规范化门店直播", "方案二 总部直播团队（现有分成）", "方案二+ 总部直播团队 + 配套机制", "方案三 外包服务商（参照）"]
+OPTS = ["方案一A 门店自播，现状延续", "方案一B 规范化门店直播", "方案二P 总部直播试点（现有人员）", "方案二V 总部主导、按单付费", "方案二 总部直播团队（现有分成）", "方案二+ 总部直播团队（配套机制）", "方案三 外包服务商（参照）"]
+# 情景对比表列号（v2 指标顺序）
+COL = {"sold": 2, "red": 3, "n": 4, "inc": 5, "hqgross": 6, "hqinc": 7, "cost": 8, "net": 9, "relnet": 10, "paidrel": 11, "share12": 12, "store": 13, "sys": 14, "trough": 15, "paidm": 16}
+CODES = ["A", "B1", "P", "V", "B2", "B2M", "C"]
+CIDX = {c: i for i, c in enumerate(CODES)}
 _d = rows_by_label(ws)
 scen_rows = {sn: _d[f"{sn}情景"][0] + 1 for sn in ["基准", "悲观", "乐观"]}
 NOPT = len(OPTS)
-SHORT = ["一A 现状延续", "一B 规范化门店直播", "二 总部直播团队（现有分成）", "二+ 总部直播团队（配套机制）", "三 外包服务商（参照）"]
+SHORT = ["一A 现状延续", "一B 规范化门店直播", "二P 总部直播试点（现有人员）", "二V 总部主导、按单付费", "二 总部直播团队（现有分成）", "二+ 总部直播团队（配套机制）", "三 外包服务商（参照）"]
 for sn, r0 in scen_rows.items():
     rows = []
     for i in range(NOPT):
         r = r0 + i
-        rows.append([SHORT[i], wan(ws.cell(row=r, column=3).value, 0), wan(ws.cell(row=r, column=6).value, 1), wan(ws.cell(row=r, column=7).value, 1),
-                     wan(ws.cell(row=r, column=8).value, 1), ws.cell(row=r, column=9).value if isinstance(ws.cell(row=r, column=9).value, str) else f"第 {ws.cell(row=r, column=9).value} 月",
-                     wan(ws.cell(row=r, column=10).value, 0), wan(ws.cell(row=r, column=11).value, 0)])
-    T[f"TABLE_SCEN_{sn}"] = md(["方案", "核销 GMV（万元）", "总部增量收入（万元）", "总部成本（万元）", "总部净收益（万元）", "相对现状转正", "门店端变化（万元）", "系统合计（万元）"], rows)
+        pb = ws.cell(row=r, column=COL["paidrel"]).value
+        rows.append([SHORT[i], wan(ws.cell(row=r, column=COL["red"]).value, 0), wan(ws.cell(row=r, column=COL["hqgross"]).value, 1), wan(ws.cell(row=r, column=COL["hqinc"]).value, 1), wan(ws.cell(row=r, column=COL["cost"]).value, 1),
+                     wan(ws.cell(row=r, column=COL["net"]).value, 1), wan(ws.cell(row=r, column=COL["relnet"]).value, 1), ("—" if i == 0 else (pb if isinstance(pb, str) else f"第 {pb} 月")), pct(ws.cell(row=r, column=COL["share12"]).value, 1),
+                     wan(ws.cell(row=r, column=COL["store"]).value, 0), wan(ws.cell(row=r, column=COL["sys"]).value, 0)])
+    rows = [[x[0], x[1], x[3], x[4], x[5], x[6], x[7], x[9], x[10]] for x in rows]
+    T[f"TABLE_SCEN_{sn}"] = md(["方案", "核销 GMV（万元）", "总部增量收入（万元）", "总部成本（万元）", "总部净收益（万元）", "相对现状（万元）", "回本月", "门店端变化（万元）", "系统合计（万元）"], rows)
 # 三情景总部净收益汇总
 rows = []
 for i, o in enumerate(OPTS):
-    rows.append([SHORT[i]] + [wan(ws.cell(row=scen_rows[sn] + i, column=8).value, 1) for sn in ["悲观", "基准", "乐观"]] +
-                [wan(ws.cell(row=scen_rows[sn] + i, column=11).value, 0) for sn in ["悲观", "基准", "乐观"]])
-T["TABLE_SCEN_SUMMARY"] = md(["方案", "总部净收益 悲观（万元）", "总部净收益 基准（万元）", "总部净收益 乐观（万元）", "系统合计 悲观（万元）", "系统合计 基准（万元）", "系统合计 乐观（万元）"], rows)
+    rows.append([SHORT[i]] + [wan(ws.cell(row=scen_rows[sn] + i, column=COL["relnet"]).value, 1) for sn in ["悲观", "基准", "乐观"]] +
+                [(lambda v: "—" if i == 0 else (v if isinstance(v, str) else f"第 {v} 月"))(ws.cell(row=scen_rows[sn] + i, column=COL["paidrel"]).value) for sn in ["悲观", "基准", "乐观"]] +
+                [wan(ws.cell(row=scen_rows[sn] + i, column=COL["sys"]).value, 0) for sn in ["悲观", "基准", "乐观"]])
+rows = [[x[0], x[1], x[2], x[3], x[5], x[8]] for x in rows]
+T["TABLE_SCEN_SUMMARY"] = md(["方案", "相对现状的总部净收益 悲观（万元）", "基准（万元）", "乐观（万元）", "回本月（基准）", "系统合计 基准（万元）"], rows)
 # 边际
 d = rows_by_label(ws)
-for key, lab in [("TABLE_MARGINAL", "边际：方案二（现有分成）相对方案一B"), ("TABLE_MARGINAL_M", "边际：方案二+（配套机制）相对方案一B")]:
+for key, lab in [("TABLE_MARGINAL", "边际：方案二（现有分成）相对方案一B"), ("TABLE_MARGINAL_M", "边际：方案二+（配套机制）相对方案一B"), ("TABLE_MARGINAL_P", "边际：方案二P（试点）相对方案一B"), ("TABLE_MARGINAL_V", "边际：方案二V（按单付费）相对方案一B")]:
     r0 = d[lab][0]
     rows = []
     for r in range(r0 + 1, r0 + 4):
@@ -145,23 +153,28 @@ def series(label, idx):
 # 月度表转置：行 = 月份
 def tcol(lab, idx, f): return [f(v) for v in series(lab, idx)]
 cols = [("门店数", tcol("门店数（月末）", 0, lambda v: num(v))),
-        ("一A 总部净收益", tcol("总部增量净收益", 0, lambda v: wan(v, 1))),
-        ("一B 总部净收益", tcol("总部增量净收益", 1, lambda v: wan(v, 1))),
-        ("二 总部净收益", tcol("总部增量净收益", 2, lambda v: wan(v, 1))),
-        ("二+ 总部净收益", tcol("总部增量净收益", 3, lambda v: wan(v, 1))),
-        ("三 总部净收益", tcol("总部增量净收益", 4, lambda v: wan(v, 1))),
-        ("一B 累计", tcol("累计净收益（第 1 月起）", 1, lambda v: wan(v, 1))),
-        ("二+ 累计", tcol("累计净收益（第 1 月起）", 3, lambda v: wan(v, 1)))]
+        ("一A 总部净收益", tcol("总部增量净收益", CIDX["A"], lambda v: wan(v, 1))),
+        ("一B 总部净收益", tcol("总部增量净收益", CIDX["B1"], lambda v: wan(v, 1))),
+        ("二P 总部净收益", tcol("总部增量净收益", CIDX["P"], lambda v: wan(v, 1))),
+        ("二V 总部净收益", tcol("总部增量净收益", CIDX["V"], lambda v: wan(v, 1))),
+        ("二+ 总部净收益", tcol("总部增量净收益", CIDX["B2M"], lambda v: wan(v, 1))),
+        ("一B 相对现状累计", tcol("相对现状延续的累计净收益", CIDX["B1"], lambda v: wan(v, 1))),
+        ("二V 相对现状累计", tcol("相对现状延续的累计净收益", CIDX["V"], lambda v: wan(v, 1))),
+        ("二+ 相对现状累计", tcol("相对现状延续的累计净收益", CIDX["B2M"], lambda v: wan(v, 1)))]
 rows = [[f"第 {i+1} 月"] + [c[1][i] for c in cols] for i in range(12)]
 T["TABLE_MONTHLY_BASE"] = md(["月份（万元）"] + [c[0] for c in cols], rows)
 def block_table(idx):
-    cols = [("售出 GMV", tcol("售出 GMV（券面）", idx, lambda v: wan(v, 0))), ("核销 GMV", tcol("核销 GMV（结算口径）", idx, lambda v: wan(v, 0))),
-            ("总部增量收入", tcol("总部增量收入", idx, lambda v: wan(v, 1))), ("总部成本", tcol("总部成本合计", idx, lambda v: wan(v, 1))),
-            ("总部净收益", tcol("总部增量净收益", idx, lambda v: wan(v, 1))), ("门店端变化", tcol("门店端净收益变化（全系统）", idx, lambda v: wan(v, 1)))]
+    cols = [("核销 GMV", tcol("核销 GMV（结算口径）", idx, lambda v: wan(v, 0))),
+            ("份额", tcol("抖音份额（核销间夜 ÷ 系统间夜）", idx, lambda v: pct(v, 1))),
+            ("总部增量收入", tcol("总部增量收入（扣被替代订单原有管理费）", idx, lambda v: wan(v, 1))), ("总部成本", tcol("总部成本合计", idx, lambda v: wan(v, 1))),
+            ("总部净收益", tcol("总部增量净收益", idx, lambda v: wan(v, 1))), ("相对现状累计", tcol("相对现状延续的累计净收益", idx, lambda v: wan(v, 1))), ("门店端变化", tcol("门店端净收益变化（全系统）", idx, lambda v: wan(v, 1)))]
     rows = [[f"第 {i+1} 月"] + [c[1][i] for c in cols] for i in range(12)]
     return md(["月份（万元）"] + [c[0] for c in cols], rows)
-T["TABLE_B2_MONTHLY"] = block_table(2)
-T["TABLE_B2M_MONTHLY"] = block_table(3)
+T["TABLE_B2_MONTHLY"] = block_table(CIDX["B2"])
+T["TABLE_B2M_MONTHLY"] = block_table(CIDX["B2M"])
+T["TABLE_P_MONTHLY"] = block_table(CIDX["P"])
+T["TABLE_V_MONTHLY"] = block_table(CIDX["V"])
+T["TABLE_B1_MONTHLY"] = block_table(CIDX["B1"])
 
 # ---- 假设表（附录）----
 a = wb["假设"]
@@ -187,26 +200,44 @@ def base(key):
         if a.cell(row=r, column=2).value == key: return a.cell(row=r, column=4).value
 T["SYS_REV_MONTH"] = wan(base("STORES0") * base("ROOMS") * base("ADR") * base("OCC") * base("DAYS"), 0)
 T["HQ_FEE_MONTH"] = wan(m.cell(row=d["总部管理费基线（无抖音）"][0], column=3).value, 1)
-T["BASE_SOLD0"] = wan(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("BASE_REDEEM_EST"), 0)
-T["BASE_RED0"] = wan(base("BASE_HQ_COMM") / base("HQ_TAKE"), 0)
-T["BASE_VOUCHERS0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("BASE_REDEEM_EST") / base("P1_PRICE"))
-T["BASE_NIGHTS0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE"))
+_nights_sys0 = base("STORES0") * base("ROOMS") * base("OCC") * base("DAYS")
+_red0 = (base("SHARE0") * _nights_sys0 * base("P1_PRICE")) if base("CAL_MODE") == 1 else base("BASE_HQ_COMM") / base("HQ_TAKE")
+T["BASE_SOLD0"] = wan(_red0 / base("REDEEM"), 0)
+T["BASE_RED0"] = wan(_red0, 0)
+T["BASE_VOUCHERS0"] = num(_red0 / base("REDEEM") / base("P1_PRICE"))
+T["BASE_NIGHTS0"] = num(_red0 / base("P1_PRICE"))
+T["SHARE0"] = pct(base("SHARE0"), 0)
+T["SYS_NIGHTS0"] = num(_nights_sys0)
+T["BASE_HQ_TAKE0"] = wan(_red0 * base("HQ_TAKE"), 1)
+T["BASE_HQ_FEE0"] = wan(_red0 * base("MGMT_FEE"), 1)
+T["BASE_HQ_TOTAL0"] = wan(_red0 * (base("HQ_TAKE") + base("MGMT_FEE")), 1)
+T["BASE_HQ_COMM"] = wan(base("BASE_HQ_COMM"), 1)
+T["OLD_RED0"] = wan(base("BASE_HQ_COMM") / base("HQ_TAKE"), 0)
+T["OLD_SHARE0"] = pct(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE") / _nights_sys0, 1)
 T["TEAM_SAL"] = wan((base("B_SAL_LEAD") + base("B_SAL_HOST") + base("B_SAL_CTRL") + base("B_SAL_ADS")) * (1 + base("SOCIAL")) + base("B_BACKUP_HOST"), 1)
 T["BRAND_CREDIT"] = wan(base("BRAND_BUDGET") + base("BRAND_SALARY") * (1 + base("SOCIAL")), 1)
 
 # ---- 文档正文用的单值占位符 ----
-CODES = ["A", "B1", "B2", "B2M", "C"]
 for sn, r0 in scen_rows.items():
     for i, code in enumerate(CODES):
         r = r0 + i
-        T[f"NET_{code}_{sn}"] = wan(ws.cell(row=r, column=8).value, 1)
-        T[f"COST_{code}_{sn}"] = wan(ws.cell(row=r, column=7).value, 1)
-        T[f"STORE_{code}_{sn}"] = wan(ws.cell(row=r, column=10).value, 0)
-        T[f"SYS_{code}_{sn}"] = wan(ws.cell(row=r, column=11).value, 0)
-    T[f"DIFF_B1_A_{sn}"] = wan(ws.cell(row=r0 + 1, column=8).value - ws.cell(row=r0, column=8).value, 1)
-    T[f"DIFF_B1_A_ST_{sn}"] = f"{round(ws.cell(row=r0 + 1, column=10).value / 10000) - round(ws.cell(row=r0, column=10).value / 10000):,}"
+        T[f"NET_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["net"]).value, 1)
+        T[f"REL_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["relnet"]).value, 1)
+        T[f"GROSS_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["hqgross"]).value, 1)
+        T[f"COST_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["cost"]).value, 1)
+        T[f"STORE_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["store"]).value, 0)
+        T[f"SYS_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["sys"]).value, 0)
+        T[f"SHARE12_{code}_{sn}"] = pct(ws.cell(row=r, column=COL["share12"]).value, 1)
+        _pb = ws.cell(row=r, column=COL["paidrel"]).value
+        T[f"PB_{code}_{sn}"] = "—" if code == "A" else (_pb if isinstance(_pb, str) else f"第 {_pb} 月")
+        T[f"STOREDIFF_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["store"]).value - ws.cell(row=r0, column=COL["store"]).value, 0)
+        T[f"TROUGH_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["trough"]).value or 0, 1)
+        _pm = ws.cell(row=r, column=COL["paidm"]).value
+        T[f"PBM_{code}_{sn}"] = "—" if code == "A" else (_pm if isinstance(_pm, str) else f"第 {_pm} 月")
+    T[f"DIFF_B1_A_{sn}"] = wan(ws.cell(row=r0 + 1, column=COL["net"]).value - ws.cell(row=r0, column=COL["net"]).value, 1)
+    T[f"DIFF_B1_A_ST_{sn}"] = f"{round(ws.cell(row=r0 + 1, column=COL['store']).value / 10000) - round(ws.cell(row=r0, column=COL['store']).value / 10000):,}"
 ds = rows_by_label(ws)
-for key, lab in [("B2", "边际：方案二（现有分成）相对方案一B"), ("B2M", "边际：方案二+（配套机制）相对方案一B")]:
+for key, lab in [("B2", "边际：方案二（现有分成）相对方案一B"), ("B2M", "边际：方案二+（配套机制）相对方案一B"), ("P", "边际：方案二P（试点）相对方案一B"), ("V", "边际：方案二V（按单付费）相对方案一B")]:
     r0 = ds[lab][0]
     for r in range(r0 + 1, r0 + 4):
         sn = ws.cell(row=r, column=2).value
@@ -220,8 +251,8 @@ T["B2_MARGIN_MONTHLY"] = wan(team_month, 1)
 T["STORE_MONTH_P1"] = wan(p.cell(row=13, column=2).value, 1)
 T["HQ_MONTH_P1"] = wan(p.cell(row=12, column=2).value, 1)
 # 上月复盘（不限日期券口径）
-_nights = base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE")
-_red = base("BASE_HQ_COMM") / base("HQ_TAKE")
+_nights = _red0 / base("P1_PRICE")
+_red = _red0
 _inc_any = u.cell(row=25, column=2).value
 T["RETRO_STORE"] = wan(_nights * u.cell(row=27, column=3).value, 1)
 T["RETRO_HQ"] = wan(_nights * u.cell(row=29, column=3).value, 1)
@@ -248,16 +279,16 @@ _months_active = 12 - int(base("B_START")) + 1
 T["BRAND_CREDIT_12M"] = wan((base("BRAND_BUDGET") + base("BRAND_SALARY") * (1 + base("SOCIAL"))) * _months_active, 1)
 for sn in ["基准", "悲观", "乐观"]:
     r0 = scen_rows[sn]
-    net_b2m = ws.cell(row=r0 + 3, column=8).value
+    net_b2m = ws.cell(row=r0 + CIDX["B2M"], column=COL["net"]).value
     T[f"NET_B2M_{sn}_NOABSORB"] = wan(net_b2m - (base("BRAND_BUDGET") + base("BRAND_SALARY") * (1 + base("SOCIAL"))) * _months_active, 1)
-    T[f"RED_B1_{sn}"] = wan(ws.cell(row=r0 + 1, column=3).value, 0)
-    T[f"CHANNEL_FEE_1PCT_{sn}"] = wan(ws.cell(row=r0 + 1, column=3).value * (1 - base("DY_FEE") - base("DY_PAY_FEE") - base("HQ_TAKE")) * 0.01, 1)
+    T[f"RED_B1_{sn}"] = wan(ws.cell(row=r0 + 1, column=COL["red"]).value, 0)
+    T[f"CHANNEL_FEE_1PCT_{sn}"] = wan(ws.cell(row=r0 + 1, column=COL["red"]).value * 0.01, 1)
 T["CHANNEL_FEE_1PCT"] = T["CHANNEL_FEE_1PCT_基准"]
 T["C_HOURS"] = num(base("C_HOURS"))
-T["COST_B2M_INCR_基准"] = wan(ws.cell(row=scen_rows["基准"] + 3, column=7).value - ws.cell(row=scen_rows["基准"] + 1, column=7).value, 1)
+T["COST_B2M_INCR_基准"] = wan(ws.cell(row=scen_rows["基准"] + CIDX["B2M"], column=COL["cost"]).value - ws.cell(row=scen_rows["基准"] + 1, column=COL["cost"]).value, 1)
 T["ST_PL_WD_P1"] = num(s.cell(row=14, column=2).value)
-T["ST_DN0"] = num(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE") / base("STORES0"))
-T["ST_SHARE0"] = pct(base("BASE_HQ_COMM") / base("HQ_TAKE") / base("P1_PRICE") / base("STORES0") / (base("ROOMS") * base("OCC") * base("DAYS")), 1)
+T["ST_DN0"] = num(_red0 / base("P1_PRICE") / base("STORES0"))
+T["ST_SHARE0"] = pct(_red0 / base("P1_PRICE") / _nights_sys0, 1)
 T["ST_PL_ANY_P3"] = num(s.cell(row=13, column=4).value)
 # 达人代播参照：每个核销间夜（九折券 90 元，达人佣金 15% 按核销结算）
 _price = base("P1_PRICE"); _kol = 0.15
@@ -275,24 +306,34 @@ def read_variant(path, tag):
     vrows = {sn: vd[f"{sn}情景"][0] + 1 for sn in ["基准", "悲观", "乐观"]}
     for sn, r0 in vrows.items():
         for i, code in enumerate(CODES):
-            T[f"NET_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=8).value, 1)
-            T[f"SYS_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=11).value, 0)
-            T[f"STORE_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=10).value, 0)
-read_variant("/home/user/CC/douyin-live/report/build/variant_phased.xlsx", "PHASED")
-read_variant("/home/user/CC/douyin-live/report/build/variant_noabsorb.xlsx", "NOABSORB")
-read_variant("/home/user/CC/douyin-live/report/build/variant_tier3.xlsx", "T3")
+            T[f"NET_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["net"]).value, 1)
+            T[f"REL_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["relnet"]).value, 1)
+            T[f"SYS_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["sys"]).value, 0)
+            T[f"STORE_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["store"]).value, 0)
+            T[f"COST_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["cost"]).value, 1)
+            T[f"TROUGH_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["trough"]).value or 0, 1)
+            _pb = vs.cell(row=r0 + i, column=COL["paidrel"]).value
+            T[f"PB_{code}_{sn}_{tag}"] = "—" if code == "A" else (_pb if isinstance(_pb, str) else f"第 {_pb} 月")
+VDIR = os.environ.get("VARIANT_DIR", "/home/user/CC/douyin-live/report/build")
+read_variant(f"{VDIR}/variant_phased.xlsx", "PHASED")
+read_variant(f"{VDIR}/variant_noabsorb.xlsx", "NOABSORB")
+read_variant(f"{VDIR}/variant_tier3.xlsx", "T3")
+read_variant(f"{VDIR}/variant_chfee.xlsx", "CHFEE")
+read_variant(f"{VDIR}/variant_zero.xlsx", "ZERO")
+read_variant(f"{VDIR}/variant_sup.xlsx", "SUP")
 # 方案二+ 相对一B 的第 12 月成本差、方案三第 12 月成本
 dm = rows_by_label(m)
 def m12(label, idx):
     return m.cell(row=dm[label][idx], column=15).value or 0
-T["B2M_MARGIN_COST_M12"] = wan(m12("总部成本合计", 3) - m12("总部成本合计", 1), 1)
-T["B2_MARGIN_COST_M12"] = wan(m12("总部成本合计", 2) - m12("总部成本合计", 1), 1)
-T["C_COST_M12"] = wan(m12("总部成本合计", 4), 1)
+T["B2M_MARGIN_COST_M12"] = wan(m12("总部成本合计", CIDX["B2M"]) - m12("总部成本合计", 1), 1)
+T["B2_MARGIN_COST_M12"] = wan(m12("总部成本合计", CIDX["B2"]) - m12("总部成本合计", 1), 1)
+T["C_COST_M12"] = wan(m12("总部成本合计", CIDX["C"]), 1)
+T["V_COST_M12"] = wan(m12("总部成本合计", CIDX["V"]), 1); T["P_COST_M12"] = wan(m12("总部成本合计", CIDX["P"]), 1); T["B1_COST_M12"] = wan(m12("总部成本合计", 1), 1)
 T["B2M_HQSOLD_M12"] = wan(m12("总部直播间与投流售出 GMV", 1), 0)
 # 打平所需月售出 GMV（总部口径）：稳态月成本差 ÷ 每元售出 GMV 的总部增量收入
 _take_sold = float(T["S_TAKE"]) * base("REDEEM")
-T["BREAKEVEN_SOLD_MONTH"] = wan((m12("总部成本合计", 3) - m12("总部成本合计", 1)) / _take_sold, 0)
-T["BREAKEVEN_SOLD_MONTH_B2"] = wan((m12("总部成本合计", 2) - m12("总部成本合计", 1)) / _take_sold, 0)
+T["BREAKEVEN_SOLD_MONTH"] = wan((m12("总部成本合计", CIDX["B2M"]) - m12("总部成本合计", 1)) / _take_sold, 0)
+T["BREAKEVEN_SOLD_MONTH_B2"] = wan((m12("总部成本合计", CIDX["B2"]) - m12("总部成本合计", 1)) / _take_sold, 0)
 T["HQ_ADS_BREAKEVEN_ROI"] = f"{1/_take_sold:.0f}"
 # 敏感性矩阵最大值
 def grid_max(hdr_label):
@@ -325,5 +366,117 @@ if _os.path.exists(_vp):
     for _name, _key in [("VER_COR_CONF", "confirmed"), ("VER_COR_ADJ", "adjust"), ("VER_COR_REF", "refuted"), ("VER_COR_UNV", "unverifiable")]:
         T[_name] = str(sum(1 for v in _vd if v.get("verdict") == _key))
     T["VER_SEARCHES"] = str(_V.get("searches", 0))
+
+def payback(v):
+    if isinstance(v, (int, float)): return f"第 {int(v)} 月"
+    return "12 个月内未回本"
+# ---- 总部决策 ----
+ws = wb["总部决策"]
+ue = {}
+for r in range(5, 12):
+    lab = ws.cell(row=r, column=1).value; val = ws.cell(row=r, column=2).value
+    if lab: ue[lab] = val
+T["HQ_SUB_GAIN"] = num(ue["总部每替代间夜净得（现有 4% 分成）"], 1)
+T["HQ_INC_GAIN"] = num(ue["总部每增量间夜净得（现有 4% 分成）"], 1)
+T["HQ_SUB_GAIN_M"] = num(ue["总部每替代间夜净得（总部主导订单分成）"], 1)
+T["HQ_INC_GAIN_M"] = num(ue["总部每增量间夜净得（总部主导订单分成）"], 1)
+T["HQ_PER_PT_30"] = num(ue["份额每提升 1 个百分点的总部月净得（当前门店数，替代口径）"], 0)
+T["HQ_PER_PT_12"] = num(ue["份额每提升 1 个百分点的总部月净得（第 12 月门店数，替代口径）"], 0)
+T["PAYBACK_RULE"] = str(int(ue["回本规则：通过线（月）"]))
+# 决策表
+hdr_row = None
+for r in range(10, 16):
+    if ws.cell(row=r, column=1).value == "方案": hdr_row = r; break
+rows = []; rows2 = []
+r = hdr_row + 1
+SHORT_DEC = {"方案一B 规范化门店直播": "一B 规范化门店直播", "方案二P 总部直播试点（现有人员）": "二P 总部直播试点（现有人员）", "方案二V 总部主导、按单付费": "二V 总部主导、按单付费",
+         "方案二 总部直播团队（现有分成）": "二 总部直播团队（现有分成）", "方案二+ 总部直播团队（配套机制）": "二+ 总部直播团队（配套机制）", "方案三 外包服务商（参照）": "三 外包服务商（参照）"}
+DEC = {}
+while ws.cell(row=r, column=1).value:
+    v = [ws.cell(row=r, column=c).value for c in range(1, 24)]
+    code_lab = SHORT_DEC.get(v[0], v[0])
+    DEC[code_lab] = v
+    ctype = "固定" if "固定人头" in str(v[18]) else "变动"
+    rows.append(f"| {code_lab} | {ctype} | {wan(v[1],1)} | {wan(v[2],1)} | {payback(v[9])} | {payback(v[10])} | {payback(v[11])} | {wan(v[20],1)} | {v[17]} |")
+    rows2.append(f"| {code_lab} | {wan(v[6],1)} | {wan(v[7],1)} | {wan(v[8],1)} | {pct(v[13])} | {pct(v[15])} | {pct(v[16])} |")
+    r += 1
+T["TABLE_HQ_DECISION"] = "\n".join(["| 方案 | 成本 | 一次性投入（万元） | 稳态月成本（万元） | 回本月 悲观 | 回本月 基准 | 回本月 乐观 | 现金谷底 基准（万元） | 规则判定 |",
+                                      "|---|---|---:|---:|---|---|---|---:|---|"] + rows)
+T["TABLE_HQ_DECISION2"] = "\n".join(["| 方案 | 相对现状 悲观（万元） | 相对现状 基准（万元） | 相对现状 乐观（万元） | 第 12 月份额（基准） | 月度打平所需份额提升：30 家店 | 第 12 月门店数 |",
+                                       "|---|---:|---:|---:|---:|---:|---:|"] + rows2)
+# 关键标量
+DEC_KEYS = {"一B 规范化门店直播": "B1", "二P 总部直播试点（现有人员）": "P", "二V 总部主导、按单付费": "V", "二 总部直播团队（现有分成）": "B2", "二+ 总部直播团队（配套机制）": "B2M", "三 外包服务商（参照）": "C"}
+for lab, key in DEC_KEYS.items():
+    v = DEC[lab]
+    T[f"DEC_{key}_ONEOFF"] = wan(v[1], 1); T[f"DEC_{key}_MCOST"] = wan(v[2], 1)
+    for i, sc in enumerate(["悲观", "基准", "乐观"]):
+        T[f"DEC_{key}_REL_{sc}"] = wan(v[6+i], 1); T[f"DEC_{key}_PB_{sc}"] = payback(v[9+i]); T[f"DEC_{key}_SH12_{sc}"] = pct(v[12+i])
+    T[f"DEC_{key}_BE30"] = pct(v[15]); T[f"DEC_{key}_BE12"] = pct(v[16]); T[f"DEC_{key}_RULE"] = v[17]
+    T[f"DEC_{key}_CTYPE"] = v[18]; T[f"DEC_{key}_TROUGH_悲观"] = wan(v[19], 1); T[f"DEC_{key}_TROUGH_基准"] = wan(v[20], 1); T[f"DEC_{key}_PBM_基准"] = payback(v[21]); T[f"DEC_{key}_RULE_MONTHS"] = str(int(v[22]))
+    for i, sc in enumerate(["悲观", "基准", "乐观"]):
+        T[f"DEC_{key}_REL_{sc}_ABS"] = wan(abs(v[6+i]), 1)
+# ---- 份额情景 ----
+ws = wb["份额情景"]
+r = 4
+blocks = {}
+while r <= ws.max_row:
+    if ws.cell(row=r, column=1).value == "门店数：":
+        st = int(ws.cell(row=r, column=2).value); r += 2; rows = []
+        while isinstance(ws.cell(row=r, column=1).value, (int, float)):
+            v = [ws.cell(row=r, column=c).value for c in range(1, 12)]
+            rows.append(v); r += 1
+        blocks[st] = rows
+    else: r += 1
+for st, rows in blocks.items():
+    lines = ["| 份额 | 抖音间夜/月 | 总部 4% 分成/月（万元） | 总部抖音收入合计/月（万元） | 总部月增量：替代口径（万元） | 总部月增量：新增部分按 8%（万元） | 门店端月变化（万元） | 新增间夜占空房 |", "|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    for v in rows:
+        lines.append(f"| {pct(v[0],0)} | {num(v[1])} | {wan(v[3],1)} | {wan(v[4],1)} | {wan(v[5],1)} | {wan(v[7],1)} | {wan(v[9],1)} | {pct(v[10],0)} |")
+    T[f"TABLE_SHARE_{st}"] = "\n".join(lines)
+    for v in rows:
+        tag = f"{int(round(v[0]*100))}"
+        T[f"SH{st}_{tag}_HQTAKE"] = wan(v[3], 1); T[f"SH{st}_{tag}_HQGROSS"] = wan(v[4], 1); T[f"SH{st}_{tag}_DSUB"] = wan(v[5], 1); T[f"SH{st}_{tag}_DMIX"] = wan(v[6], 1); T[f"SH{st}_{tag}_DM8"] = wan(v[7], 1); T[f"SH{st}_{tag}_STORE"] = wan(v[9], 1); T[f"SH{st}_{tag}_EMPTY"] = pct(v[10], 0); T[f"SH{st}_{tag}_NIGHTS"] = num(v[1])
+# ---- 基线校准（基准月度表派生区）----
+ws = wb["月度_基准"]
+D = {}
+for r in range(1, 200):
+    lab = ws.cell(row=r, column=1).value
+    if lab: D[lab] = ws.cell(row=r, column=2).value
+T["BASE_RED0_V2"] = wan(D["基线：当前每月抖音核销 GMV"], 0)
+T["BASE_SOLD0_V2"] = wan(D["基线：对应的每月售出 GMV（按本情景核销率倒推）"], 0)
+
+# 变体的总部决策表（渠道费 1%、新招督导）
+for _tag, _fn in [("CHFEE", "variant_chfee.xlsx"), ("SUP", "variant_sup.xlsx"), ("ZERO", "variant_zero.xlsx")]:
+    _vch = f"{VDIR}/{_fn}"
+    if not os.path.exists(_vch): continue
+    _wb2 = load_workbook(_vch, data_only=True); _ws2 = _wb2["总部决策"]
+    _hr = None
+    for _r in range(10, 16):
+        if _ws2.cell(row=_r, column=1).value == "方案": _hr = _r; break
+    _r = _hr + 1
+    while _ws2.cell(row=_r, column=1).value:
+        _v = [_ws2.cell(row=_r, column=c).value for c in range(1, 24)]
+        _lab = SHORT_DEC.get(_v[0], _v[0]); _key = DEC_KEYS.get(_lab)
+        if _key:
+            T[f"DEC_{_key}_MCOST_{_tag}"] = wan(_v[2], 1); T[f"DEC_{_key}_BE30_{_tag}"] = pct(_v[15]); T[f"DEC_{_key}_BE12_{_tag}"] = pct(_v[16]); T[f"DEC_{_key}_RULE_{_tag}"] = _v[17]
+            T[f"DEC_{_key}_TROUGH_基准_{_tag}"] = wan(_v[20], 1); T[f"DEC_{_key}_TROUGH_悲观_{_tag}"] = wan(_v[19], 1); T[f"DEC_{_key}_PBM_基准_{_tag}"] = payback(_v[21])
+            for _i, _sc in enumerate(["悲观", "基准", "乐观"]):
+                T[f"DEC_{_key}_REL_{_sc}_{_tag}"] = wan(_v[6+_i], 1); T[f"DEC_{_key}_PB_{_sc}_{_tag}"] = payback(_v[9+_i]); T[f"DEC_{_key}_REL_{_sc}_ABS_{_tag}"] = wan(abs(_v[6+_i]), 1)
+        _r += 1
+# 督导与团队的盈亏平衡份额（替代口径）
+_sup_cost = base("AP_SUP_SALARY") * (1 + base("SOCIAL"))
+_hq_sub_gain = float(T["HQ_SUB_GAIN"].replace(",", ""))
+T["SUP_COST"] = wan(_sup_cost, 1)
+T["SUP_BE30"] = pct(_sup_cost / (_nights_sys0 * _hq_sub_gain), 1)
+_stores12 = base("STORES0") + base("NEW_PM") * 12
+T["STORES12"] = num(round(_stores12))
+T["SUP_BE12"] = pct(_sup_cost / (round(_stores12) * base("ROOMS") * base("OCC") * base("DAYS") * _hq_sub_gain), 1)
+T["TEAM_COST_GROSS"] = wan((base("B_SAL_LEAD") + base("B_SAL_HOST") + base("B_SAL_CTRL") + base("B_SAL_ADS")) * (1 + base("SOCIAL")) + base("B_BACKUP_HOST") + base("B_EQUIP") / base("B_EQUIP_MONTHS") + base("B_SPACE") + base("B_ADS"), 1)
+T["V_COMM_BASE"] = pct(base("V_COMM"), 0); T["V_HOURS_BASE"] = num(base("V_HOURS")); T["V_GPH_BASE"] = num(base("V_GPH"))
+T["PILOT_HOURS_BASE"] = num(base("PILOT_HOURS")); T["PILOT_GPH_BASE"] = num(base("PILOT_GPH")); T["PILOT_EQUIP"] = wan(base("PILOT_EQUIP"), 1)
+T["B_HQ_TAKE_ROOM"] = pct(base("B_HQ_TAKE_ROOM"), 0)
+T["V_START"] = num(base("V_START")); T["PRESALE_V_BASE"] = num(base("PRESALE_V")); T["PRESALE_V_PESS"] = num(pess("PRESALE_V")); T["PRESALE_V_OPT"] = num(opt("PRESALE_V")); T["PRESALE_INC_BASE"] = pct(base("PRESALE_INC"), 0)
+T["PAYBACK_RULE_VAR"] = str(int(base("PAYBACK_RULE_VAR"))); T["TROUGH_RULE"] = wan(abs(base("TROUGH_RULE")), 0); T["PESS_LOSS_RULE"] = wan(abs(base("PESS_LOSS_RULE")), 0)
+T["SHARE_VPO"] = num(base("SHARE_VPO"), 1)
+T["A_DRIFT_PESS"] = pct(abs(pess("A_DRIFT")), 0)
 json.dump(T, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("tables:", len(T), "->", OUT)

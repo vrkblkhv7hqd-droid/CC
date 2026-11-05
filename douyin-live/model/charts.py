@@ -23,9 +23,12 @@ plt.rcParams["font.size"] = 11
 C_BLUE, C_ORANGE, C_AQUA, C_YELLOW, C_VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#6250d6"
 C_GRAY, C_GRID, C_AXIS, C_INK, C_INK2, C_MUTED = "#b5b4ad", "#e1e0d9", "#c3c2b7", "#0b0b0b", "#52514e", "#898781"
 SURFACE = "#ffffff"
-OPT_COLORS = {"A": C_GRAY, "B1": C_BLUE, "B2": C_ORANGE, "B2M": C_VIOLET, "C": C_AQUA}
-OPT_NAMES = {"A": "方案一A 现状延续", "B1": "方案一B 规范化门店直播", "B2": "方案二 总部直播团队（现有分成）", "B2M": "方案二+ 总部直播团队（配套机制）", "C": "方案三 外包服务商（参照）"}
-CODES = ["A", "B1", "B2", "B2M", "C"]
+OPT_COLORS = {"A": C_GRAY, "B1": C_BLUE, "P": C_AQUA, "V": C_YELLOW, "B2": C_ORANGE, "B2M": C_VIOLET, "C": "#898781"}
+OPT_NAMES = {"A": "一A 现状延续", "B1": "一B 规范化门店直播", "P": "二P 总部直播试点（现有人员）", "V": "二V 总部主导、按单付费", "B2": "二 总部直播团队（现有分成）", "B2M": "二+ 总部直播团队（配套机制）", "C": "三 外包服务商（参照）"}
+CODES = ["A", "B1", "P", "V", "B2", "B2M", "C"]
+REL_CODES = ["B1", "P", "V", "B2", "B2M", "C"]
+CIDX = {c: i for i, c in enumerate(CODES)}
+COL = {"sold": 2, "red": 3, "n": 4, "inc": 5, "hqgross": 6, "hqinc": 7, "cost": 8, "net": 9, "relnet": 10, "paidrel": 11, "share12": 12, "store": 13, "sys": 14, "trough": 15, "paidm": 16}
 
 wb = load_workbook(MODEL, data_only=True)
 
@@ -55,36 +58,36 @@ def wan(v): return v / 10000.0
 fig, ax = plt.subplots(figsize=(9, 4.8), dpi=200)
 style_ax(ax)
 months = list(range(1, 13))
-for i, code in enumerate(CODES):
-    ys = [wan(v) for v in monthly_series("月度_基准", "累计净收益（第 1 月起）", i)]
+for code in REL_CODES:
+    ys = [wan(v) for v in monthly_series("月度_基准", "相对现状延续的累计净收益", CIDX[code])]
     ax.plot(months, ys, color=OPT_COLORS[code], linewidth=2.2, marker="o", markersize=4.5, label=OPT_NAMES[code])
-    ax.annotate(f"{ys[-1]:.0f}", (12, ys[-1]), textcoords="offset points", xytext=(6, 0), va="center", fontsize=10, color=C_INK2)
+    ax.annotate(f"{ys[-1]:+.0f}", (12, ys[-1]), textcoords="offset points", xytext=(6, 0), va="center", fontsize=10, color=C_INK2)
 ax.axhline(0, color=C_AXIS, linewidth=0.8)
 ax.set_xticks(months); ax.set_xticklabels([f"第{m}月" for m in months])
-ax.set_ylabel("总部累计增量净收益（万元）", color=C_INK2)
-ax.set_title("基准情景：五个方案的总部累计增量净收益（第 1 到 12 月）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
-ax.legend(frameon=False, loc="upper left", fontsize=9.5)
+ax.set_ylabel("相对现状延续的总部累计净收益（万元）", color=C_INK2)
+ax.set_title("基准情景：各方案相对现状延续的总部累计净收益（回本 = 曲线转正且不再转负）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=9.5)
 fig.tight_layout(); fig.savefig(f"{OUT}/chart1_cum_net_base.png", facecolor=SURFACE); plt.close(fig)
 
 # ---------- 图2：三情景 × 四方案 总部 12 个月净收益 ----------
 ws = wb["情景对比"]
 _d = rows_by_label(ws)
 scen_rows = {sn: _d[f"{sn}情景"][0] + 1 for sn in ["悲观", "基准", "乐观"]}
-codes = CODES
-fig, ax = plt.subplots(figsize=(9.5, 4.8), dpi=200)
+codes = REL_CODES
+fig, ax = plt.subplots(figsize=(10, 4.8), dpi=200)
 style_ax(ax)
 scens = ["悲观", "基准", "乐观"]
-width = 0.16
+width = 0.13
 for i, code in enumerate(codes):
-    vals = [wan(ws.cell(row=scen_rows[s] + i, column=8).value) for s in scens]
-    xs = [j + (i - 2) * width for j in range(3)]
+    vals = [wan(ws.cell(row=scen_rows[s] + CIDX[code], column=COL["relnet"]).value) for s in scens]
+    xs = [j + (i - 2.5) * width for j in range(3)]
     bars = ax.bar(xs, vals, width=width - 0.02, color=OPT_COLORS[code], label=OPT_NAMES[code])
     for x, v in zip(xs, vals):
         ax.annotate(f"{v:.0f}", (x, v), textcoords="offset points", xytext=(0, 4 if v >= 0 else -12), ha="center", fontsize=9, color=C_INK2)
 ax.axhline(0, color=C_AXIS, linewidth=0.8)
 ax.set_xticks(range(3)); ax.set_xticklabels([f"{s}情景" for s in scens])
-ax.set_ylabel("12 个月总部增量净收益（万元）", color=C_INK2)
-ax.set_title("三种情景下五个方案的 12 个月总部增量净收益", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+ax.set_ylabel("相对现状延续的 12 个月总部净收益（万元）", color=C_INK2)
+ax.set_title("三种情景下各方案相对现状延续的 12 个月总部净收益", loc="left", color=C_INK, fontsize=12, fontweight="bold")
 ax.legend(frameon=False, loc="upper left", fontsize=9.5)
 fig.tight_layout(); fig.savefig(f"{OUT}/chart2_scenarios.png", facecolor=SURFACE); plt.close(fig)
 
@@ -173,7 +176,7 @@ ws = wb["情景对比"]
 d = rows_by_label(ws)
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.4), dpi=200, sharey=True)
 scens = ["悲观", "基准", "乐观"]
-for ax, (lab, ttl) in zip(axes, [("边际：方案二（现有分成）相对方案一B", "方案二：现有分成"), ("边际：方案二+（配套机制）相对方案一B", "方案二+：配套机制后")]):
+for ax, (lab, ttl) in zip(axes, [("边际：方案二V（按单付费）相对方案一B", "方案二V：总部主导、按单付费"), ("边际：方案二+（配套机制）相对方案一B", "方案二+：专职团队 + 配套机制")]):
     style_ax(ax)
     r0 = d[lab][0]
     rows = {ws.cell(row=r, column=2).value: r for r in range(r0 + 1, r0 + 4)}
@@ -191,7 +194,41 @@ for ax, (lab, ttl) in zip(axes, [("边际：方案二（现有分成）相对方
     ax.set_title(ttl, loc="left", color=C_INK, fontsize=11, fontweight="bold")
 axes[0].set_ylabel("相对方案一B 的 12 个月差额（万元）", color=C_INK2)
 axes[0].legend(frameon=False, loc="upper left", fontsize=9)
-fig.suptitle("总部直播团队多带来的价值在总部与门店之间怎么分", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
+fig.suptitle("总部主导直播多带来的价值在总部与门店之间怎么分（相对一B）", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
 fig.tight_layout(); fig.savefig(f"{OUT}/chart6_marginal_split.png", facecolor=SURFACE); plt.close(fig)
+
+
+# ---------- 图7：份额提升带给总部的月收益 vs 固定成本 ----------
+ws = wb["份额情景"]
+blocks = {}; r = 4
+while r <= ws.max_row:
+    if ws.cell(row=r, column=1).value == "门店数：":
+        st = int(ws.cell(row=r, column=2).value); r += 2; rows_ = []
+        while isinstance(ws.cell(row=r, column=1).value, (int, float)):
+            rows_.append([ws.cell(row=r, column=c).value for c in range(1, 12)]); r += 1
+        blocks[st] = rows_
+    else: r += 1
+wa = wb["假设"]; A = {}
+for rr in range(5, wa.max_row + 1):
+    k = wa.cell(row=rr, column=2).value
+    if k: A[k] = wa.cell(row=rr, column=4).value
+sup = A["AP_SUP_SALARY"] * (1 + A["SOCIAL"])
+team = (A["B_SAL_LEAD"] + A["B_SAL_HOST"] + A["B_SAL_CTRL"] + A["B_SAL_ADS"]) * (1 + A["SOCIAL"]) + A["B_BACKUP_HOST"] + A["B_EQUIP"] / A["B_EQUIP_MONTHS"] + A["B_SPACE"] + A["B_ADS"] - A["ABSORB_BRAND"] * (A["BRAND_BUDGET"] + A["BRAND_SALARY"] * (1 + A["SOCIAL"]))
+fig, ax = plt.subplots(figsize=(9, 5), dpi=200)
+style_ax(ax)
+sts = sorted(blocks.keys())
+for st, color in zip([sts[0], sts[-1]], (C_BLUE, C_ORANGE)):
+    xs = [v[0] * 100 for v in blocks[st]]
+    ax.plot(xs, [wan(v[5]) for v in blocks[st]], color=color, linewidth=2.2, marker="o", markersize=4, label=f"{st} 家店：现有 4% 分成，替代口径")
+    ax.plot(xs, [wan(v[7]) for v in blocks[st]], color=color, linewidth=2.0, linestyle="--", marker="s", markersize=4, label=f"{st} 家店：新增部分按 8% 分成")
+xmax = max(v[0] for v in blocks[sts[0]]) * 100
+for y, lab, col in ((wan(sup), f"新招督导 1 人约 {wan(sup):.1f} 万/月", C_MUTED), (wan(team), f"专职团队（扣品牌预算抵减）约 {wan(team):.1f} 万/月", C_VIOLET)):
+    ax.axhline(y, color=col, linewidth=1.2, linestyle=":"); ax.text(xmax + 0.3, y + 0.15, lab, color=col, fontsize=9, ha="right")
+ax.set_xlabel("抖音份额（核销间夜占系统间夜）", color=C_INK2); ax.set_ylabel("相对当前份额，总部每月多得（万元）", color=C_INK2)
+ax.set_title("份额提升带给总部的月收益，与固定成本的对照（基准参数，稳态）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+ax.legend(frameon=False, fontsize=9, loc="upper left")
+ticks = [v[0] * 100 for v in blocks[sts[0]]]
+ax.set_xticks(ticks); ax.set_xticklabels([f"{x:.0f}%" for x in ticks])
+fig.tight_layout(); fig.savefig(f"{OUT}/chart7_share_vs_cost.png", facecolor=SURFACE); plt.close(fig)
 
 print("charts written to", OUT)

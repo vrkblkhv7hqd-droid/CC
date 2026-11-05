@@ -70,7 +70,6 @@ P("DY_FEE", "抖音平台综合费率", 0.08, "%", "决策人提供：平台 8%�
 P("DY_PAY_FEE", "抖音支付手续费（8% 之外另扣部分）", 0.0, "%", "核验：0.6% 支付手续费已包含在公示的 8% 综合费率内，不在 8% 之外另收，故默认 0；若财务结算单显示另扣，改为 0.006", FMT_PCT, key_cell=True)
 P("HQ_TAKE", "总部分成", 0.04, "%", "决策人提供：总部 4%，门店到账 88%", FMT_PCT)
 P("REDEEM", "核销率", [0.45, 0.55, 0.65], "%", "决策人估计 60%；行业参照：酒旅团购核销率不足 50%（虎嗅 2026-03）、国信证券估算约 30%（含达人与度假囤券）、搜索型 68% 到 75%；三份核验建议基准 50% 到 55%，取 55%，公司自估落在基准与乐观之间；以来客后台成熟批次数据替换", FMT_PCT, key_cell=True)
-P("BASE_REDEEM_EST", "倒推上月用的核销率", 0.6, "%", "仅用于把上月 4 万分成倒推为售出 GMV", FMT_PCT)
 P("LAG0", "核销时间分布：售出当月", 0.5, "%", "假设：90 天有效期下的核销节奏", FMT_PCT)
 P("LAG1", "核销时间分布：次月", 0.3, "%", "假设", FMT_PCT)
 P("LAG2", "核销时间分布：第三月", 0.2, "%", "假设", FMT_PCT)
@@ -78,7 +77,17 @@ P("SOLDOUT_ANY", "不限日期券核销落在满房日的比例", [0.35, 0.30, 0
 P("SOLDOUT_WD", "工作日券核销落在满房日的比例", [0.08, 0.05, 0.03], "%", "假设：周日至周四可用，偶有满房", FMT_PCT)
 P("CAP_SHARE", "抖音增量间夜可占用的空房比例上限", [0.6, 0.7, 0.8], "%", "假设：空房集中在平日，抖音增量不可能把全部空房填满；增量间夜 = MIN(核销间夜 × 增量比例, 空房间夜 × 该比例)", FMT_PCT)
 P("WOULD_BOOK", "抖音买家中原本就会订本品牌的比例", [0.7, 0.5, 0.35], "%", "关键假设：替代率核心。参照：度假与高星酒店直播核销客新客占比 71% 到 80%（洲际 2026、Club Med 2025）；经济型连锁按平日核销中 50% 为真实增量（区间 40% 到 70%）推断；叠加满房日后不限日期券总体增量约 35%（情景区间 20% 到 49%）", FMT_PCT, key_cell=True)
-P("BASE_HQ_COMM", "上月总部抖音分成（实际）", 40000, "元", "决策人提供：纯 4%，按核销结算，无投流", FMT_INT)
+P("BASE_HQ_COMM", "上月总部抖音相关收入（实际）", 40000, "元", "决策人提供：上月总部抖音收入 4 万；按 7% 份额校准时对应「4% 分成 + 3.5% 管理费」合计约 7.5% × 核销 GMV（见说明表的口径核对）；仅校准方式 2 用它倒推", FMT_INT)
+P("SHARE0", "当前抖音核销间夜占系统间夜比例", 0.07, "%", "决策人提供：当前抖音订单占比约 7%；校准方式 1 用它定基线", FMT_PCT, key_cell=True)
+P("SHARE_VPO", "份额口径换算：每个抖音订单对应的间夜数", 1.0, "倍", "决策人的 7% 为「订单占比」；若一个抖音订单平均含多张券或多晚，填实际倍数（例如 1.5）把订单份额换算为间夜份额；默认 1", FMT_DEC)
+P("N0_ACTUAL", "实测当前每月抖音核销间夜（校准方式 3 用）", 0, "间夜", "从来客后台导出上月核销券数后填入；校准方式 3 直接用它定基线", FMT_INT)
+P("CAL_MODE", "基线校准方式", 1, "开关", "1 = 按 7% 份额 × 每订单间夜数校准（默认）；2 = 按上月 4 万 ÷ 4% 倒推核销 GMV（旧口径，份额约 14.5%）；3 = 按实测核销间夜", FMT_INT, key_cell=True)
+P("PAYBACK_RULE", "回本规则：含固定人头的方案（月）", 3, "月", "决策人：12 个月才能回本一定不投；本文建议含固定人头（不可逆）的投入以 3 个月为通过线：相对现状延续的总部累计净现金在第 N 月转正且此后不再转负", FMT_INT, key_cell=True)
+P("PAYBACK_RULE_VAR", "回本规则：零固定成本的方案（月）", 6, "月", "按单付费、现有人员兼任等可随时停止的投入，以 6 个月为通过线", FMT_INT, key_cell=True)
+P("TROUGH_RULE", "回本规则：允许的现金谷底（元）", -100000, "元", "相对现状延续的累计净现金最低点不得低于此值（约为当前总部一年抖音分成的三分之一）", FMT_INT)
+P("PESS_LOSS_RULE", "回本规则：悲观情景 12 个月允许的最大亏损（元）", -50000, "元", "悲观情景相对现状延续的 12 个月累计净现金不得低于此值", FMT_INT)
+P("PRESALE_V", "每家新店开业预售券数（总部主导直播）", [150, 300, 500], "张/店", "关键假设：新店开业前后由总部直播间与按单付费主播预售，新店爬坡期空房多，这部分是最接近纯增量的间夜；参照华住等集团的开业预售做法，数值为假设", FMT_INT, key_cell=True)
+P("PRESALE_INC", "新店预售券的增量比例", [0.7, 0.85, 1.0], "%", "新店开业前三个月入住率低，预售间夜大部分填补空房；仍受空房上限约束", FMT_PCT)
 P("STORE_HOURS", "门店每月直播小时数", [20, 16, 12], "小时/店/月", "假设：每周 2 场 × 2 小时", FMT_INT)
 P("WEEKDAY_VOL", "改为工作日券后的销量系数", [0.75, 0.85, 0.95], "倍", "关键假设：取消周五周六可用会流失偏好周末的买家；按不限日期券核销落在满房日的比例（约 30%）为上限校准，建议用后台周末核销占比替换", FMT_DEC, key_cell=True)
 
@@ -94,20 +103,35 @@ P("P3_VOL", "平价加权益券销量系数", [0.8, 0.95, 1.1], "倍", "关键�
 P("P3_PERK", "平价加权益券权益成本", [3, 2.5, 2], "元/间夜", "假设：延迟退房（仅非满房日提供，机会成本约 0）、行李寄存、饮用水等低现金成本权益", FMT_DEC)
 
 S("四、方案一：门店直播（现状延续 / 规范化）")
-P("A_DRIFT", "现状延续：单店产出月变化率", [-0.05, -0.02, 0.0], "%/月", "假设：无总部支持时的新鲜感衰减与人员流动", FMT_PCT, key_cell=True)
+P("A_DRIFT", "现状延续：单店产出月变化率", [-0.03, 0.0, 0.01], "%/月", "假设：无总部支持时，悲观按新鲜感衰减与人员流动每月 -3%，基准持平，乐观略增；上月是唯一数据点，无趋势信息", FMT_PCT, key_cell=True)
 P("AP_DRIFT", "规范化后：单店产出月变化率", [-0.01, 0.0, 0.01], "%/月", "假设：有督导与激励时基本稳定", FMT_PCT)
 P("AP_UPLIFT", "规范化后单店产出提升倍数", [1.15, 1.3, 1.5], "倍", "关键假设：培训、SOP、激励带来的提升；研究区间见文档", FMT_DEC, key_cell=True)
 P("AP_RAMP", "提升达成所需月数", [4, 3, 2], "月", "假设", FMT_INT)
-P("AP_SUP_SALARY", "直播督导月薪（1 人）", [14000, 12500, 12500], "元/月", "北京抖音直播运营 55.3% 在 8,000 到 15,000 元，1 到 3 年经验约 1.27 万元（职友集近一年统计，截至 2026-11-05）；督导取区间上端", FMT_INT)
+P("SUP_HIRE", "一B 是否新增直播督导岗", 0, "开关", "1 = 新招 1 名直播督导（固定成本）；0 = 由运营部现有人员（抖音运营副总监与片区负责人）兼任，不增加现金成本（默认，符合回本规则）", FMT_INT, key_cell=True)
+P("AP_SUP_SALARY", "直播督导月薪（若新招，1 人）", [14000, 12500, 12500], "元/月", "北京抖音直播运营 55.3% 在 8,000 到 15,000 元，1 到 3 年经验约 1.27 万元（职友集近一年统计，截至 2026-11-05）；督导取区间上端", FMT_INT)
 P("SOCIAL", "社保公积金等综合系数", 0.42, "%", "北京 2025 年度单位社保约 26.3% + 工伤 + 公积金 5% 到 12%，法定附加约 31.5% 到 40%，加招聘培训等杂项取全口径 1.42；社保基数 2025 年度 7,162 到 35,811 元、2026 年 7 月起 7,270 到 36,348 元，最低工资 2,540 元（已核对人社局原文）", FMT_PCT)
 P("AP_TRAIN_ONEOFF", "一次性培训与 SOP 建设", 20000, "元", "假设：外部讲师、话术库、脚本", FMT_INT)
 P("AP_TRAIN_MONTHLY", "每月持续培训与巡检", 3000, "元/月", "假设", FMT_INT)
-P("AP_STORE_KIT", "每店直播设备补贴", 800, "元/店", "假设：补光灯、支架、麦克风", FMT_INT)
+P("AP_STORE_KIT", "每店直播设备补贴（总部承担部分）", 0, "元/店", "补光灯、支架、麦克风约 800 元/店，建议门店自购；若总部补贴填 800", FMT_INT)
 P("AP_COMM", "开播门店或员工提成（按核销 GMV）", 0.025, "%", "行业建议员工直播提成按核销计 2% 到 5%，跨店来源奖励 1% 到 3%；按核销而非售出计提，避免为过期退款的券付提成", FMT_PCT, key_cell=True)
 P("COMM_BY_STORE", "提成由门店承担的比例", 1.0, "%", "机制设计：提成从核销门店到账中划转，总部只做清分；设 0 则由总部从 4% 分成中支付", FMT_PCT, key_cell=True)
+P("CH_FEE", "渠道运营费（按门店抖音核销 GMV 向门店收取）", 0.0, "%", "机制选项：总部为覆盖督导、培训、清分成本向参与门店收取的渠道费，默认 0；文档测算 1% 的情形；现状延续不收", FMT_PCT, key_cell=True)
 P("COMM_TO_STAFF", "提成中付给员工的比例", 1.0, "%", "付给开播员工的部分是全系统的真实成本；门店之间的划转在全系统口径下抵销。默认全部付给员工（保守）", FMT_PCT)
 
 S("五、方案二：总部直播团队（含门店赋能）")
+P("MECH_ON", "总部主导订单是否执行提高分成（8%）", 1, "开关", "1 = 总部直播间、按单付费主播与投流带来的订单总部分成按下方「总部主导订单分成」执行；0 = 仍按 4%", FMT_INT, key_cell=True)
+P("PILOT_START", "总部直播试点开播月份", 2, "第几月", "第 1 月筹备（账号、脚本、设备），第 2 月开播", FMT_INT)
+P("PILOT_HOURS", "试点每月开播小时（现有品牌人员）", [40, 60, 80], "小时/月", "假设：品牌营销人员每周 3 到 5 场、每场 3 到 4 小时；不新增人力", FMT_INT)
+P("PILOT_GPH", "试点成熟期每小时售出 GMV（九折口径）", [1500, 2500, 3500], "元/小时", "关键假设：比专职团队低（兼顾品牌工作、无投流）；参照门店自播与同业冷启动区间", FMT_INT, key_cell=True)
+P("PILOT_RAMP", "试点达到成熟所需月数", 3, "月", "假设", FMT_INT)
+P("PILOT_EQUIP", "试点设备一次性投入", 15000, "元", "手机、灯光、声卡、背景；独立来源显示 1 到 2 万元即可", FMT_INT)
+P("PILOT_CONTENT", "试点每月内容与杂费", 3000, "元/月", "假设：从现有品牌预算内调剂，若视为新增成本则计入", FMT_INT)
+P("V_START", "按单付费主播开播月份", 3, "第几月", "试点跑通后，第 3 月起引入兼职主播或达人按单付费", FMT_INT)
+P("V_HOURS", "按单付费主播每月开播小时", [60, 100, 150], "小时/月", "假设：2 到 4 名兼职主播轮播；按人数可调", FMT_INT)
+P("V_GPH", "按单付费主播成熟期每小时售出 GMV（九折口径）", [2000, 3000, 4000], "元/小时", "关键假设：兼职或达人主播有带货经验，略高于试点、低于专职团队", FMT_INT, key_cell=True)
+P("V_RAMP", "按单付费主播达到成熟所需月数", 3, "月", "假设", FMT_INT)
+P("V_COMM", "按单付费主播佣金（按核销 GMV，从门店到账中划转）", [0.15, 0.12, 0.10], "%", "达人与兼职主播常见佣金 10% 到 20%；按核销结算，不占用总部现金", FMT_PCT, key_cell=True)
+P("V_COORD", "按单付费模式总部协调成本", [3000, 2000, 1000], "元/月", "假设：排班、素材、结算清分的杂费；人力由现有品牌与运营人员兼任", FMT_INT)
 P("B_START", "团队到位月份", 2, "第几月", "第 1 月招聘，第 2 月开播", FMT_INT)
 P("B_RECRUIT", "一次性招聘费用", 10000, "元", "假设", FMT_INT)
 P("B_SAL_LEAD", "直播运营负责人月薪", [15000, 13000, 13000], "元/月", "北京抖音直播运营 55.3% 在 8,000 到 15,000 元（职友集近一年统计）；负责人取区间上端略高", FMT_INT)
@@ -128,7 +152,7 @@ P("B_ROI", "投流 ROI（售出 GMV / 投流）", [3, 5, 7], "倍", "关键假�
 P("B_ADS_START", "投流开始月份", [3, 2, 2], "第几月", "假设", FMT_INT)
 P("B_CANNIB", "总部直播间对门店自播的挤占比例", [0.25, 0.15, 0.1], "%", "假设：总部直播间每卖 1 张券，门店自播少卖的张数；同一抖音流量池", FMT_PCT)
 P("BRAND_BUDGET", "现有品牌营销月预算", 20000, "元/月", "决策人提供", FMT_INT)
-P("B_HQ_TAKE_ROOM", "方案二+：团队直播间订单的总部分成", 0.08, "%", "机制设计：谁投入谁分成；总部直播间与投流带来的订单总部分成从 4% 提至 8%，门店到账 84%", FMT_PCT, key_cell=True)
+P("B_HQ_TAKE_ROOM", "总部主导订单的总部分成（方案二+、试点、按单付费）", 0.08, "%", "机制设计：谁投入谁分成；总部直播间、按单付费主播与投流带来的订单总部分成从 4% 提至 8%，门店到账 84%", FMT_PCT, key_cell=True)
 P("B_ADS_STORE_SHARE", "方案二+：门店分担投流的比例", 0.5, "%", "机制设计：投流基金由门店按抖音到账分担一半；按总部直播间订单的核销到账折算", FMT_PCT, key_cell=True)
 P("BRAND_SALARY", "现有品牌营销人员月薪", 10000, "元/月", "假设：决策人未提供", FMT_INT)
 
@@ -165,6 +189,8 @@ ws_m = {}
 for name in ["月度_基准", "月度_悲观", "月度_乐观"]:
     ws_m[name] = wb.create_sheet(name)
 ws_s = wb.create_sheet("情景对比")
+ws_dec = wb.create_sheet("总部决策")
+ws_sh = wb.create_sheet("份额情景")
 ws_sens = wb.create_sheet("敏感性")
 ws_store = wb.create_sheet("门店损益")
 
@@ -303,7 +329,16 @@ def build_monthly(ws, scen_idx, scen_name):
     D("INC_ANY", "增量比例（不限日期券，现状口径）", f"=(1-{L['SOLDOUT_ANY']})*(1-{L['WOULD_BOOK']})", FMT_PCT)
     D("STORE_INC_CONTRIB", "增量一夜门店贡献", f"={L['DY_STORE_NET']}-{L['PERK']}-{L['VAR_COST']}")
     D("STORE_SUB_LOSS", "替代一夜门店损失", f"={L['CF_STORE_NET']}-{L['DY_STORE_NET']}+{L['PERK']}")
-    D("BASE_SOLD0", "倒推上月售出 GMV", f"={L['BASE_HQ_COMM']}/{L['HQ_TAKE']}/{L['BASE_REDEEM_EST']}", FMT_INT)
+    D("BASE_RED0", "基线：当前每月抖音核销 GMV", f"=CHOOSE({L['CAL_MODE']},{L['SHARE0']}*{L['SHARE_VPO']}*{L['STORES0']}*{L['ROOMS']}*{L['OCC']}*{L['DAYS']}*{L['P1_PRICE']},{L['BASE_HQ_COMM']}/{L['HQ_TAKE']},{L['N0_ACTUAL']}*{L['P1_PRICE']})", FMT_INT)
+    D("CAL_GAP", "校准缺口：基线隐含的 4% 分成 ÷ 上月实际收入 − 1", f"={L['BASE_RED0']}*{L['HQ_TAKE']}/{L['BASE_HQ_COMM']}-1", FMT_PCT)
+    D("CAL_GAP2", "校准核对：基线隐含的「分成 + 管理费」÷ 上月实际收入 − 1", f"={L['BASE_RED0']}*({L['HQ_TAKE']}+{L['MGMT_FEE']})/{L['BASE_HQ_COMM']}-1", FMT_PCT)
+    D("BASE_SOLD0", "基线：对应的每月售出 GMV（按本情景核销率倒推）", f"={L['BASE_RED0']}/{L['REDEEM']}", FMT_INT)
+    D("HQ_TAKE_M", "总部主导订单实际分成", f"=IF({L['MECH_ON']}=1,{L['B_HQ_TAKE_ROOM']},{L['HQ_TAKE']})", FMT_PCT)
+    D("HQ_SUB_GAIN", "总部每替代间夜净得（4% 分成）", f"={L['DY_HQ_NIGHT']}-{L['CF_HQ_NIGHT']}")
+    D("HQ_INC_GAIN", "总部每增量间夜净得（4% 分成）", f"={L['DY_HQ_NIGHT']}")
+    D("HQ_SUB_GAIN_M", "总部每替代间夜净得（总部主导订单分成）", f"={L['HQ_SUB_GAIN']}+({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*{L['PRICE']}")
+    D("HQ_INC_GAIN_M", "总部每增量间夜净得（总部主导订单分成）", f"={L['HQ_INC_GAIN']}+({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*{L['PRICE']}")
+    D("HQ_PER_PT", "份额每提升 1 个百分点总部月净得（当前门店数，替代口径）", f"={L['STORES0']}*{L['ROOMS']}*{L['OCC']}*{L['DAYS']}*0.01*{L['HQ_SUB_GAIN']}", FMT_INT)
     D("BASE_VPS", "倒推单店月售出券数（九折）", f"={L['BASE_SOLD0']}/{L['P1_PRICE']}/{L['STORES0']}", FMT_DEC)
     D("MGR_HOURLY", "店长小时成本", f"={L['MGR_SALARY']}/{L['WORK_HOURS']}")
     D("TEAM_SAL", "团队月薪合计（含社保与兼职备播）", f"=({L['B_SAL_LEAD']}+{L['B_SAL_HOST']}+{L['B_SAL_CTRL']}+{L['B_SAL_ADS']})*(1+{L['SOCIAL']})+{L['B_BACKUP_HOST']}", FMT_INT)
@@ -357,20 +392,30 @@ def build_monthly(ws, scen_idx, scen_name):
     mrow("hqfee_base", "总部管理费基线（无抖音）", "元", lambda m, c, p, pp: f"={ref('nights', c)}*{L['CF_HQ_NIGHT']}")
 
     def option_block(code, title, vouch_fn, cost_fns, store_hours_fn, extra_income_fn=None, extra_store_fn=None, store_comm=False, inc_ref=None):
-        """vouch_fn(m,c,p,pp) -> 售出券数公式（含子项行自行添加后再汇总）"""
+        """vouch_fn(m,c,p,pp) -> 售出券数公式（含子项行自行添加后再汇总）；若辅助行里已有 {code}_prev（新店预售券），自动按预售口径计算增量"""
         inc_ref = inc_ref or L['INC']
+        presale = f"{code}_prev" in R
         section(title)
+        if presale:
+            def pren_fn(m, c, p, pp):
+                if m == 0: return "=0"
+                return f"={L['REDEEM']}*({L['LAG0']}*{ref(f'{code}_prev', c)}+{L['LAG1']}*{ref(f'{code}_prev', p)}+{L['LAG2']}*{ref(f'{code}_prev', pp)})"
+            mrow(f"{code}_pren", "其中：新店预售券核销间夜", "间夜", pren_fn)
         mrow(f"{code}_v", "售出券数", "张", vouch_fn)
         mrow(f"{code}_sold", "售出 GMV（券面）", "元", lambda m, c, p, pp: f"={ref(f'{code}_v', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref(f'{code}_v', c)}*{L['PRICE']}")
         def redeem_fn(m, c, p, pp):
-            if m == 0: return f"={L['BASE_HQ_COMM']}/{L['HQ_TAKE']}"
+            if m == 0: return f"={L['BASE_RED0']}"
             return f"={L['REDEEM']}*({L['LAG0']}*{ref(f'{code}_sold', c)}+{L['LAG1']}*{ref(f'{code}_sold', p)}+{L['LAG2']}*{ref(f'{code}_sold', pp)})"
         mrow(f"{code}_red", "核销 GMV（结算口径）", "元", redeem_fn)
         def rednights_fn(m, c, p, pp):
-            if m == 0: return f"={L['BASE_HQ_COMM']}/{L['HQ_TAKE']}/{L['P1_PRICE']}"
+            if m == 0: return f"={L['BASE_RED0']}/{L['P1_PRICE']}"
             return f"={L['REDEEM']}*({L['LAG0']}*{ref(f'{code}_v', c)}+{L['LAG1']}*{ref(f'{code}_v', p)}+{L['LAG2']}*{ref(f'{code}_v', pp)})"
         mrow(f"{code}_n", "核销间夜", "间夜", rednights_fn)
-        mrow(f"{code}_inc", "其中：增量间夜（受空房上限约束）", "间夜", lambda m, c, p, pp: f"=MIN({ref(f'{code}_n', c)}*{inc_ref},{ref('empty', c)}*{L['CAP_SHARE']})")
+        mrow(f"{code}_share", "抖音份额（核销间夜 ÷ 系统间夜）", "%", lambda m, c, p, pp: f"={ref(f'{code}_n', c)}/{ref('nights', c)}", FMT_PCT)
+        if presale:
+            mrow(f"{code}_inc", "其中：增量间夜（受空房上限约束；新店预售按预售增量比例）", "间夜", lambda m, c, p, pp: f"=MIN(({ref(f'{code}_n', c)}-{ref(f'{code}_pren', c)})*{inc_ref}+{ref(f'{code}_pren', c)}*{L['PRESALE_INC']},{ref('empty', c)}*{L['CAP_SHARE']})")
+        else:
+            mrow(f"{code}_inc", "其中：增量间夜（受空房上限约束）", "间夜", lambda m, c, p, pp: f"=MIN({ref(f'{code}_n', c)}*{inc_ref},{ref('empty', c)}*{L['CAP_SHARE']})")
         mrow(f"{code}_sub", "其中：替代间夜", "间夜", lambda m, c, p, pp: f"={ref(f'{code}_n', c)}-{ref(f'{code}_inc', c)}")
         mrow(f"{code}_hqc", "总部分成收入", "元", lambda m, c, p, pp: f"={ref(f'{code}_red', c)}*{L['HQ_TAKE']}")
         mrow(f"{code}_hqf", "总部管理费（抖音单）", "元", lambda m, c, p, pp: f"={ref(f'{code}_red', c)}*{L['DY_FEE_RATE']}")
@@ -380,21 +425,25 @@ def build_monthly(ws, scen_idx, scen_name):
                 return f"={L['REDEEM']}*({L['LAG0']}*{ref(f'{code}_storesold', c)}+{L['LAG1']}*{ref(f'{code}_storesold', p)}+{L['LAG2']}*{ref(f'{code}_storesold', pp)})"
             mrow(f"{code}_storered", "其中：门店自播部分核销 GMV", "元", storered_fn)
         mrow(f"{code}_hqcf", "减：被替代订单原有管理费", "元", lambda m, c, p, pp: f"=-{ref(f'{code}_sub', c)}*{L['CF_HQ_NIGHT']}")
-        mrow(f"{code}_hqx", "机制：团队订单加成分成（总部多得）", "元", extra_income_fn or (lambda m, c, p, pp: "=0"))
-        mrow(f"{code}_hqinc", "总部增量收入", "元", lambda m, c, p, pp: f"={ref(f'{code}_hqc', c)}+{ref(f'{code}_hqf', c)}+{ref(f'{code}_hqcf', c)}+{ref(f'{code}_hqx', c)}", bold=True)
+        mrow(f"{code}_hqx", "机制：总部主导订单加成分成（总部多得）", "元", extra_income_fn or (lambda m, c, p, pp: "=0"))
+        mrow(f"{code}_chf", "机制：渠道运营费（向门店收取）", "元", (lambda m, c, p, pp: "=0") if code == "A" else (lambda m, c, p, pp: "=0" if m == 0 else f"={L['CH_FEE']}*{ref(f'{code}_red', c)}"))
+        mrow(f"{code}_hqgross", "总部抖音收入合计（分成 + 管理费 + 加成 + 渠道费）", "元", lambda m, c, p, pp: f"={ref(f'{code}_hqc', c)}+{ref(f'{code}_hqf', c)}+{ref(f'{code}_hqx', c)}+{ref(f'{code}_chf', c)}")
+        mrow(f"{code}_hqinc", "总部增量收入（扣被替代订单原有管理费）", "元", lambda m, c, p, pp: f"={ref(f'{code}_hqc', c)}+{ref(f'{code}_hqf', c)}+{ref(f'{code}_hqcf', c)}+{ref(f'{code}_hqx', c)}+{ref(f'{code}_chf', c)}", bold=True)
         for ck, clabel, cfn in cost_fns:
             mrow(f"{code}_{ck}", clabel, "元", cfn)
         cost_keys = [f"{code}_{ck}" for ck, _, _ in cost_fns]
         mrow(f"{code}_cost", "总部成本合计", "元", lambda m, c, p, pp: "=" + "+".join(ref(k, c) for k in cost_keys), bold=True)
         mrow(f"{code}_net", "总部增量净收益", "元", lambda m, c, p, pp: f"={ref(f'{code}_hqinc', c)}-{ref(f'{code}_cost', c)}", bold=True, fill=FILL_TOTAL)
         mrow(f"{code}_cum", "累计净收益（第 1 月起）", "元", lambda m, c, p, pp: "=0" if m == 0 else (f"={ref(f'{code}_net', c)}" if m == 1 else f"={ref(f'{code}_cum', p)}+{ref(f'{code}_net', c)}"))
-        mrow(f"{code}_paid", "累计净收益已转正标记", "", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({ref(f'{code}_cum', c)}>=0,1,0)")
+        mrow(f"{code}_paid", "累计净收益已转正标记（本月起不再转负）", "", lambda m, c, p, pp: "=0" if m == 0 else f"=IF(MIN({c}{R[f'{code}_cum']}:{col_m(MONTHS)}{R[f'{code}_cum']})>=0,1,0)")
         mrow(f"{code}_cumrel", "相对现状延续的累计净收益", "元", lambda m, c, p, pp: "=0" if (m == 0 or code == "A") else f"={ref(f'{code}_cum', c)}-{ref('A_cum', c)}")
-        mrow(f"{code}_paidrel", "相对现状已转正标记", "", lambda m, c, p, pp: "=0" if (m == 0 or code == "A") else f"=IF({ref(f'{code}_cumrel', c)}>0,1,0)")
+        mrow(f"{code}_paidrel", "相对现状已回本标记（本月起累计不再转负）", "", lambda m, c, p, pp: "=0" if (m == 0 or code == "A") else f"=IF(MIN({c}{R[f'{code}_cumrel']}:{col_m(MONTHS)}{R[f'{code}_cumrel']})>0,1,0)")
+        mrow(f"{code}_relm", "相对现状延续的当月净收益", "元", lambda m, c, p, pp: "=0" if (m == 0 or code == "A") else f"={ref(f'{code}_net', c)}-{ref('A_net', c)}")
+        mrow(f"{code}_paidm", "月度转正标记（本月起当月净增不再为负）", "", lambda m, c, p, pp: "=0" if (m == 0 or code == "A") else f"=IF(MIN({c}{R[f'{code}_relm']}:{col_m(MONTHS)}{R[f'{code}_relm']})>=0,1,0)")
         mrow(f"{code}_sh", "门店直播投入小时", "小时", store_hours_fn)
         mrow(f"{code}_stx", "机制：门店让渡的分成与分担的投流", "元", extra_store_fn or (lambda m, c, p, pp: "=0"))
         mrow(f"{code}_stc", "门店承担的开播提成（付给员工部分）", "元", (lambda m, c, p, pp: "=0" if m == 0 else f"=-{L['AP_COMM']}*{L['COMM_BY_STORE']}*{L['COMM_TO_STAFF']}*{ref(f'{code}_storered', c)}") if store_comm else (lambda m, c, p, pp: "=0"))
-        mrow(f"{code}_store", "门店端净收益变化（全系统）", "元", lambda m, c, p, pp: f"={ref(f'{code}_inc', c)}*{L['STORE_INC_CONTRIB']}-{ref(f'{code}_sub', c)}*{L['STORE_SUB_LOSS']}-{ref(f'{code}_sh', c)}*{L['MGR_HOURLY']}+{ref(f'{code}_stx', c)}+{ref(f'{code}_stc', c)}", bold=True)
+        mrow(f"{code}_store", "门店端净收益变化（全系统）", "元", lambda m, c, p, pp: f"={ref(f'{code}_inc', c)}*{L['STORE_INC_CONTRIB']}-{ref(f'{code}_sub', c)}*{L['STORE_SUB_LOSS']}-{ref(f'{code}_sh', c)}*{L['MGR_HOURLY']}+{ref(f'{code}_stx', c)}+{ref(f'{code}_stc', c)}-{ref(f'{code}_chf', c)}", bold=True)
         mrow(f"{code}_sys", "系统合计净收益（总部 + 门店）", "元", lambda m, c, p, pp: f"={ref(f'{code}_net', c)}+{ref(f'{code}_store', c)}", bold=True, fill=FILL_TOTAL)
 
     zero = lambda m, c, p, pp: "=0"
@@ -421,27 +470,83 @@ def build_monthly(ws, scen_idx, scen_name):
     mrow("B1_storev", "门店自播售出券数", "张", vb_store_fn)
     mrow("B1_storesold", "门店自播售出 GMV", "元", lambda m, c, p, pp: f"={ref('B1_storev', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref('B1_storev', c)}*{L['PRICE']}")
     option_block("B1", "方案一B：规范化门店直播（总部督导 + 培训 + 提成）", lambda m, c, p, pp: f"={ref('B1_storev', c)}",
-                 [("c_people", "成本：人力（直播督导 1 人）", lambda m, c, p, pp: "=0" if m == 0 else f"={L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})"),
+                 [("c_people", "成本：人力（直播督导，按开关）", lambda m, c, p, pp: "=0" if m == 0 else f"={L['SUP_HIRE']}*{L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})"),
                   ("c_ads", "成本：投流或服务商", zero),
                   ("c_equip", "成本：设备摊销与场地", zero),
                   ("c_train", "成本：培训、门店设备补贴与开播提成", train_fn("B1")),
                   ("c_credit", "减：抵减的品牌预算", zero)],
                  lambda m, c, p, pp: f"={ref('effstores', c)}*{L['STORE_HOURS']}", store_comm=True)
+    # ---------- 方案二P：总部直播试点（现有品牌人员，零增量人力）----------
+    def hq_room_rows(code, start_key, hours_key, gph_key, ramp_key, tag="试点"):
+        mrow(f"{code}_active", f"{tag}是否已开播", "0/1", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L[start_key]},1,0)")
+        mrow(f"{code}_gph", f"{tag}每小时售出 GMV（九折口径）", "元/小时", lambda m, c, p, pp: "=0" if m == 0 else f"={ref(f'{code}_active', c)}*({L['B_GPH_START']}+({L[gph_key]}-{L['B_GPH_START']})*MIN(1,MAX(0,{m}-{L[start_key]})/{L[ramp_key]}))")
+        mrow(f"{code}_livev", f"{tag}直播售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L[hours_key]}*{ref(f'{code}_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+        mrow(f"{code}_prev", "新店开业预售券数（总部主导）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref(f'{code}_active', c)}*{L['PRESALE_V']}*{ref('newstores', c)}")
+        mrow(f"{code}_roomv", f"{tag}售出券数合计（直播 + 新店预售）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref(f'{code}_livev', c)}+{ref(f'{code}_prev', c)}")
+        mrow(f"{code}_hqsold", f"{tag}售出 GMV", "元", lambda m, c, p, pp: "=0" if m == 0 else f"={ref(f'{code}_roomv', c)}*{L['PRICE']}")
+        def hqred(m, c, p, pp):
+            if m == 0: return "=0"
+            return f"={L['REDEEM']}*({L['LAG0']}*{ref(f'{code}_hqsold', c)}+{L['LAG1']}*{ref(f'{code}_hqsold', p)}+{L['LAG2']}*{ref(f'{code}_hqsold', pp)})"
+        mrow(f"{code}_hqred", f"{tag}核销 GMV", "元", hqred)
+        mrow(f"{code}_storev", "门店自播售出券数（规范化后，扣除挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*{ref(f'{code}_livev', c)})")
+        mrow(f"{code}_storesold", "门店自播售出 GMV", "元", lambda m, c, p, pp: f"={ref(f'{code}_storev', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref(f'{code}_storev', c)}*{L['PRICE']}")
+    mech_income = lambda code: (lambda m, c, p, pp: "=0" if m == 0 else f"=({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref(f'{code}_hqred', c)}")
+    section("方案二P：总部直播试点（现有品牌营销人员开播，不新增人力）— 辅助行")
+    hq_room_rows("P", "PILOT_START", "PILOT_HOURS", "PILOT_GPH", "PILOT_RAMP")
+    option_block("P", "方案二P：规范化门店直播 + 总部直播试点（现有品牌人员）", lambda m, c, p, pp: f"={ref('P_storev', c)}+{ref('P_roomv', c)}",
+                 [("c_people", "成本：人力（直播督导，按开关；品牌人员不新增）", lambda m, c, p, pp: "=0" if m == 0 else f"={L['SUP_HIRE']}*{L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})"),
+                  ("c_ads", "成本：投流或服务商", zero),
+                  ("c_equip", "成本：试点设备摊销与内容杂费", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('P_active', c)}*({L['PILOT_EQUIP']}/{L['B_EQUIP_MONTHS']}+{L['PILOT_CONTENT']})"),
+                  ("c_train", "成本：培训、门店设备补贴与开播提成", train_fn("P")),
+                  ("c_credit", "减：抵减的品牌预算", zero)],
+                 lambda m, c, p, pp: f"={ref('effstores', c)}*{L['STORE_HOURS']}", store_comm=True,
+                 extra_income_fn=mech_income("P"),
+                 extra_store_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=-({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('P_hqred', c)}")
+    # ---------- 方案二V：总部主导、按单付费（试点 + 兼职主播或达人佣金制）----------
+    section("方案二V：总部主导、按单付费（试点直播间 + 兼职主播或达人按核销佣金）— 辅助行")
+    hq_room_rows("V0", "PILOT_START", "PILOT_HOURS", "PILOT_GPH", "PILOT_RAMP")
+    mrow("V_active", "按单付费主播是否已开播", "0/1", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['V_START']},1,0)")
+    mrow("V_gph", "按单付费主播每小时售出 GMV（九折口径）", "元/小时", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V_active', c)}*({L['B_GPH_START']}+({L['V_GPH']}-{L['B_GPH_START']})*MIN(1,MAX(0,{m}-{L['V_START']})/{L['V_RAMP']}))")
+    mrow("V_kolv", "按单付费主播售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L['V_HOURS']}*{ref('V_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+    mrow("V_prev", "新店开业预售券数（总部主导，同试点）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V0_prev', c)}")
+    mrow("V_roomv", "总部主导售出券数合计（试点 + 新店预售 + 按单付费）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V0_roomv', c)}+{ref('V_kolv', c)}")
+    mrow("V_hqsold", "总部主导售出 GMV", "元", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V_roomv', c)}*{L['PRICE']}")
+    mrow("V_kolsold", "其中：按单付费主播售出 GMV", "元", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V_kolv', c)}*{L['PRICE']}")
+    def v_red(key):
+        def f(m, c, p, pp):
+            if m == 0: return "=0"
+            return f"={L['REDEEM']}*({L['LAG0']}*{ref(key, c)}+{L['LAG1']}*{ref(key, p)}+{L['LAG2']}*{ref(key, pp)})"
+        return f
+    mrow("V_hqred", "总部主导核销 GMV", "元", v_red("V_hqsold"))
+    mrow("V_kolred", "其中：按单付费主播核销 GMV", "元", v_red("V_kolsold"))
+    mrow("V_storev", "门店自播售出券数（规范化后，扣除挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*({ref('V0_livev', c)}+{ref('V_kolv', c)}))")
+    mrow("V_storesold", "门店自播售出 GMV", "元", lambda m, c, p, pp: f"={ref('V_storev', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref('V_storev', c)}*{L['PRICE']}")
+    option_block("V", "方案二V：规范化门店直播 + 总部主导、按单付费直播", lambda m, c, p, pp: f"={ref('V_storev', c)}+{ref('V_roomv', c)}",
+                 [("c_people", "成本：人力（直播督导，按开关）+ 协调杂费", lambda m, c, p, pp: "=0" if m == 0 else f"={L['SUP_HIRE']}*{L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})+{ref('V_active', c)}*{L['V_COORD']}"),
+                  ("c_ads", "成本：投流或服务商", zero),
+                  ("c_equip", "成本：试点设备摊销与内容杂费", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('V0_active', c)}*({L['PILOT_EQUIP']}/{L['B_EQUIP_MONTHS']}+{L['PILOT_CONTENT']})"),
+                  ("c_train", "成本：培训、门店设备补贴与开播提成", train_fn("V")),
+                  ("c_credit", "减：抵减的品牌预算", zero)],
+                 lambda m, c, p, pp: f"={ref('effstores', c)}*{L['STORE_HOURS']}", store_comm=True,
+                 extra_income_fn=mech_income("V"),
+                 extra_store_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=-({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('V_hqred', c)}-{L['V_COMM']}*{ref('V_kolred', c)}")
     # 方案二：总部直播团队 + 门店赋能
     section("方案二：总部直播团队（含门店赋能）— 辅助行")
     mrow("B2_active", "团队是否已开播", "0/1", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_START']},1,0)")
     mrow("B2_gph", "总部直播间每小时售出 GMV（九折口径）", "元/小时", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2_active', c)}*({L['B_GPH_START']}+({L['B_GPH_MATURE']}-{L['B_GPH_START']})*MIN(1,MAX(0,{m}-{L['B_START']})/{L['B_RAMP']}))")
-    mrow("B2_roomv", "总部直播间售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L['B_HOURS']}*{ref('B2_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+    mrow("B2_livev", "总部直播间直播售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L['B_HOURS']}*{ref('B2_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+    mrow("B2_prev", "新店开业预售券数（总部主导）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2_active', c)}*{L['PRESALE_V']}*{ref('newstores', c)}")
+    mrow("B2_roomv", "总部直播间售出券数合计（直播 + 新店预售）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2_livev', c)}+{ref('B2_prev', c)}")
     mrow("B2_adsv", "投流带来的售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_ADS_START']},{L['B_ADS']}*{L['B_ROI']}/{L['P1_PRICE']}*{L['VOL_EFF']},0)")
     mrow("B2_hqsold", "总部直播间与投流售出 GMV", "元", lambda m, c, p, pp: "=0" if m == 0 else f"=({ref('B2_roomv', c)}+{ref('B2_adsv', c)})*{L['PRICE']}")
     def b2_hqred(m, c, p, pp):
         if m == 0: return "=0"
         return f"={L['REDEEM']}*({L['LAG0']}*{ref('B2_hqsold', c)}+{L['LAG1']}*{ref('B2_hqsold', p)}+{L['LAG2']}*{ref('B2_hqsold', pp)})"
     mrow("B2_hqred", "总部直播间与投流核销 GMV", "元", b2_hqred)
-    mrow("B2_storev", "门店自播售出券数（赋能后，扣除总部直播间挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*({ref('B2_roomv', c)}+{ref('B2_adsv', c)}))")
+    mrow("B2_storev", "门店自播售出券数（赋能后，扣除总部直播间挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*({ref('B2_livev', c)}+{ref('B2_adsv', c)}))")
     mrow("B2_storesold", "门店自播售出 GMV", "元", lambda m, c, p, pp: f"={ref('B2_storev', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref('B2_storev', c)}*{L['PRICE']}")
     option_block("B2", "方案二：总部直播团队（含门店赋能）", lambda m, c, p, pp: f"={ref('B2_storev', c)}+{ref('B2_roomv', c)}+{ref('B2_adsv', c)}",
-                 [("c_people", "成本：直播督导 + 团队人力（4 人含社保、兼职备播）+ 主播提成 + 招聘", lambda m, c, p, pp: "=0" if m == 0 else f"={L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})+{ref('B2_active', c)}*{L['TEAM_SAL']}+{L['B_HOST_COMM']}*{ref('B2_hqred', c)}" + (f"+{L['B_RECRUIT']}" if m == 1 else "")),
+                 [("c_people", "成本：直播督导 + 团队人力（4 人含社保、兼职备播）+ 主播提成 + 招聘", lambda m, c, p, pp: "=0" if m == 0 else f"={L['SUP_HIRE']}*{L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})+{ref('B2_active', c)}*{L['TEAM_SAL']}+{L['B_HOST_COMM']}*{ref('B2_hqred', c)}" + (f"+{L['B_RECRUIT']}" if m == 1 else "")),
                   ("c_ads", "成本：投流", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_ADS_START']},{L['B_ADS']},0)"),
                   ("c_equip", "成本：设备摊销与场地", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2_active', c)}*({L['B_EQUIP']}/{L['B_EQUIP_MONTHS']}+{L['B_SPACE']})"),
                   ("c_train", "成本：培训、门店设备补贴与开播提成", train_fn("B2")),
@@ -451,24 +556,26 @@ def build_monthly(ws, scen_idx, scen_name):
     section("方案二+：总部直播团队 + 配套机制（团队订单总部分成提高、门店分担投流）— 辅助行")
     mrow("B2M_active", "团队是否已开播", "0/1", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_START']},1,0)")
     mrow("B2M_gph", "总部直播间每小时售出 GMV（九折口径）", "元/小时", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2M_active', c)}*({L['B_GPH_START']}+({L['B_GPH_MATURE']}-{L['B_GPH_START']})*MIN(1,MAX(0,{m}-{L['B_START']})/{L['B_RAMP']}))")
-    mrow("B2M_roomv", "总部直播间售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L['B_HOURS']}*{ref('B2M_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+    mrow("B2M_livev", "总部直播间直播售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={L['B_HOURS']}*{ref('B2M_gph', c)}/{L['P1_PRICE']}*{L['VOL_EFF']}")
+    mrow("B2M_prev", "新店开业预售券数（总部主导）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2M_active', c)}*{L['PRESALE_V']}*{ref('newstores', c)}")
+    mrow("B2M_roomv", "总部直播间售出券数合计（直播 + 新店预售）", "张", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2M_livev', c)}+{ref('B2M_prev', c)}")
     mrow("B2M_adsv", "投流带来的售出券数", "张", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_ADS_START']},{L['B_ADS']}*{L['B_ROI']}/{L['P1_PRICE']}*{L['VOL_EFF']},0)")
     mrow("B2M_hqsold", "总部直播间与投流售出 GMV", "元", lambda m, c, p, pp: "=0" if m == 0 else f"=({ref('B2M_roomv', c)}+{ref('B2M_adsv', c)})*{L['PRICE']}")
     def b2m_hqred(m, c, p, pp):
         if m == 0: return "=0"
         return f"={L['REDEEM']}*({L['LAG0']}*{ref('B2M_hqsold', c)}+{L['LAG1']}*{ref('B2M_hqsold', p)}+{L['LAG2']}*{ref('B2M_hqsold', pp)})"
     mrow("B2M_hqred", "总部直播间与投流核销 GMV", "元", b2m_hqred)
-    mrow("B2M_storev", "门店自播售出券数（赋能后，扣除总部直播间挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*({ref('B2M_roomv', c)}+{ref('B2M_adsv', c)}))")
+    mrow("B2M_storev", "门店自播售出券数（赋能后，扣除总部直播间挤占）", "张", lambda m, c, p, pp: vb_store_fn(m, c, p, pp) if m == 0 else f"=MAX(0,{vb_store_fn(m, c, p, pp)[1:]}-{L['B_CANNIB']}*({ref('B2M_livev', c)}+{ref('B2M_adsv', c)}))")
     mrow("B2M_storesold", "门店自播售出 GMV", "元", lambda m, c, p, pp: f"={ref('B2M_storev', c)}*{L['P1_PRICE']}" if m == 0 else f"={ref('B2M_storev', c)}*{L['PRICE']}")
     option_block("B2M", "方案二+：总部直播团队 + 配套机制", lambda m, c, p, pp: f"={ref('B2M_storev', c)}+{ref('B2M_roomv', c)}+{ref('B2M_adsv', c)}",
-                 [("c_people", "成本：直播督导 + 团队人力（4 人含社保、兼职备播）+ 主播提成 + 招聘", lambda m, c, p, pp: "=0" if m == 0 else f"={L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})+{ref('B2M_active', c)}*{L['TEAM_SAL']}+{L['B_HOST_COMM']}*{ref('B2M_hqred', c)}" + (f"+{L['B_RECRUIT']}" if m == 1 else "")),
+                 [("c_people", "成本：直播督导 + 团队人力（4 人含社保、兼职备播）+ 主播提成 + 招聘", lambda m, c, p, pp: "=0" if m == 0 else f"={L['SUP_HIRE']}*{L['AP_SUP_SALARY']}*(1+{L['SOCIAL']})+{ref('B2M_active', c)}*{L['TEAM_SAL']}+{L['B_HOST_COMM']}*{ref('B2M_hqred', c)}" + (f"+{L['B_RECRUIT']}" if m == 1 else "")),
                   ("c_ads", "成本：投流（扣除门店分担部分）", lambda m, c, p, pp: "=0" if m == 0 else f"=IF({m}>={L['B_ADS_START']},{L['B_ADS']}*(1-{L['B_ADS_STORE_SHARE']}),0)"),
                   ("c_equip", "成本：设备摊销与场地", lambda m, c, p, pp: "=0" if m == 0 else f"={ref('B2M_active', c)}*({L['B_EQUIP']}/{L['B_EQUIP_MONTHS']}+{L['B_SPACE']})"),
                   ("c_train", "成本：培训、门店设备补贴与开播提成", train_fn("B2M")),
                   ("c_credit", "减：抵减的品牌预算与人员", lambda m, c, p, pp: "=0" if m == 0 else f"=-{ref('B2M_active', c)}*{L['BRAND_CREDIT']}")],
                  lambda m, c, p, pp: f"={ref('effstores', c)}*{L['STORE_HOURS']}",
-                 extra_income_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=({L['B_HQ_TAKE_ROOM']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('B2M_hqred', c)}",
-                 extra_store_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=-({L['B_HQ_TAKE_ROOM']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('B2M_hqred', c)}-IF({m}>={L['B_ADS_START']},{L['B_ADS']}*{L['B_ADS_STORE_SHARE']},0)", store_comm=True)
+                 extra_income_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('B2M_hqred', c)}",
+                 extra_store_fn=lambda m, c, p, pp: "=0" if m == 0 else f"=-({L['HQ_TAKE_M']}-{L['HQ_TAKE']})*IF({L['MGMT_BASE']}=1,1,1-{L['MGMT_FEE']})*{ref('B2M_hqred', c)}-IF({m}>={L['B_ADS_START']},{L['B_ADS']}*{L['B_ADS_STORE_SHARE']},0)", store_comm=True)
     # 方案三：外包服务商
     section("方案三：外包服务商代播（参照）— 辅助行")
     mrow("C_storev_raw", "门店自播售出券数（同现状延续，扣除挤占前）", "张", va_fn)
@@ -497,11 +604,12 @@ for name, idx in [("月度_基准", 2), ("月度_悲观", 1), ("月度_乐观", 
 # ---------------- 情景对比 ----------------
 ws = ws_s
 ws["A1"] = "情景对比：12 个月合计（第 1 到 12 月）"; ws["A1"].font = F_H1
-ws["A2"] = "全部为公式，引用三张月度表。相对现状转正月指该方案相对现状延续（方案一A）的累计总部净收益首次转正的月份。"; ws["A2"].font = F_NOTE
-OPTS = [("A", "方案一A 门店自播，现状延续"), ("B1", "方案一B 规范化门店直播"), ("B2", "方案二 总部直播团队（现有分成）"), ("B2M", "方案二+ 总部直播团队（配套机制）"), ("C", "方案三 外包服务商（参照）")]
+ws["A2"] = "全部为公式，引用三张月度表。相对现状转正月（回本月）指该方案相对现状延续（方案一A）的累计总部净收益转正且此后到第 12 月不再转负的最早月份。"; ws["A2"].font = F_NOTE
+OPTS = [("A", "方案一A 门店自播，现状延续"), ("B1", "方案一B 规范化门店直播"), ("P", "方案二P 总部直播试点（现有人员）"), ("V", "方案二V 总部主导、按单付费"), ("B2", "方案二 总部直播团队（现有分成）"), ("B2M", "方案二+ 总部直播团队（配套机制）"), ("C", "方案三 外包服务商（参照）")]
 METRICS = [("sold", "售出 GMV", FMT_INT), ("red", "核销 GMV", FMT_INT), ("n", "核销间夜", FMT_INT), ("inc", "增量间夜", FMT_INT),
-           ("hqinc", "总部增量收入", FMT_INT), ("cost", "总部成本", FMT_INT), ("net", "总部增量净收益", FMT_INT), ("paidrel", "相对现状转正月", FMT_INT),
-           ("store", "门店端净收益变化", FMT_INT), ("sys", "系统合计净收益", FMT_INT)]
+           ("hqgross", "总部抖音收入合计", FMT_INT), ("hqinc", "总部增量收入", FMT_INT), ("cost", "总部成本", FMT_INT), ("net", "总部增量净收益", FMT_INT), ("relnet", "相对现状延续的净收益", FMT_INT), ("paidrel", "相对现状转正月", FMT_INT),
+           ("share12", "第 12 月抖音份额", FMT_PCT), ("store", "门店端净收益变化", FMT_INT), ("sys", "系统合计净收益", FMT_INT),
+           ("trough", "相对现状的现金谷底", FMT_INT), ("paidm", "月度转正月", FMT_INT)]
 r = 4
 SUMMARY_ROWS = {}
 for sname, sidx in [("月度_基准", 2), ("月度_悲观", 1), ("月度_乐观", 3)]:
@@ -513,17 +621,26 @@ for sname, sidx in [("月度_基准", 2), ("月度_悲观", 1), ("月度_乐观"
     for code, olabel in OPTS:
         ws.cell(row=r, column=1, value=olabel).font = F_LABEL
         for j, (mk, ml, fmt) in enumerate(METRICS, 2):
-            rr = R[f"{code}_{mk}"]
             if mk == "paidrel":
+                rr = R[f"{code}_paidrel"]
                 f = "—" if code == "A" else f"=IFERROR(MATCH(1,'{sname}'!$D${rr}:$O${rr},0),\"12 个月内未转正\")"
+            elif mk == "share12":
+                rr = R[f"{code}_share"]; f = f"='{sname}'!$O${rr}"
+            elif mk == "trough":
+                rr = R[f"{code}_cumrel"]; f = "0" if code == "A" else f"=MIN(0,MIN('{sname}'!$D${rr}:$O${rr}))"
+            elif mk == "paidm":
+                rr = R[f"{code}_paidm"]
+                f = "—" if code == "A" else f"=IFERROR(MATCH(1,'{sname}'!$D${rr}:$O${rr},0),\"12 个月内未转正\")"
+            elif mk == "relnet":
+                rr = R[f"{code}_net"]; ra = R["A_net"]; f = f"=SUM('{sname}'!$D${rr}:$O${rr})-SUM('{sname}'!$D${ra}:$O${ra})"
             else:
-                f = f"=SUM('{sname}'!$D${rr}:$O${rr})"
+                rr = R[f"{code}_{mk}"]; f = f"=SUM('{sname}'!$D${rr}:$O${rr})"
             c = ws.cell(row=r, column=j, value=f); c.font = F_LINK; c.number_format = fmt; c.alignment = ALIGN_R
         SUMMARY_ROWS[(sname, code)] = r
         r += 1
     r += 1
 # 边际对比：方案二相对方案一B
-for mcode, mtitle in [("B2", "边际：方案二（现有分成）相对方案一B"), ("B2M", "边际：方案二+（配套机制）相对方案一B")]:
+for mcode, mtitle in [("P", "边际：方案二P（试点）相对方案一B"), ("V", "边际：方案二V（按单付费）相对方案一B"), ("B2", "边际：方案二（现有分成）相对方案一B"), ("B2M", "边际：方案二+（配套机制）相对方案一B")]:
     c = ws.cell(row=r, column=1, value=mtitle); c.font = F_H2; c.fill = FILL_H2
     for j, h in enumerate(["情景", "多售出 GMV", "多核销 GMV", "总部多增收入", "总部多成本", "总部净收益差", "门店端差", "系统合计差"], 2):
         c = ws.cell(row=r, column=j, value=h); c.font = F_H2; c.fill = FILL_H2; c.alignment = ALIGN_C
@@ -531,15 +648,124 @@ for mcode, mtitle in [("B2", "边际：方案二（现有分成）相对方案�
     for sname in ["月度_悲观", "月度_基准", "月度_乐观"]:
         ws.cell(row=r, column=2, value=sname.split("_")[1]).font = F_LABEL
         rb2 = SUMMARY_ROWS[(sname, mcode)]; rb1 = SUMMARY_ROWS[(sname, "B1")]
-        pairs = [("sold", 2), ("red", 3), ("hqinc", 6), ("cost", 7), ("net", 8), ("store", 10), ("sys", 11)]
+        _mcol = {mk: j for j, (mk, _, _) in enumerate(METRICS, 2)}
+        pairs = [("sold", _mcol["sold"]), ("red", _mcol["red"]), ("hqinc", _mcol["hqinc"]), ("cost", _mcol["cost"]), ("net", _mcol["net"]), ("store", _mcol["store"]), ("sys", _mcol["sys"])]
         for j, (mk, colidx) in enumerate(pairs, 3):
             colL = get_column_letter(colidx)
             c = ws.cell(row=r, column=j, value=f"={colL}{rb2}-{colL}{rb1}"); c.font = F_CALC; c.number_format = FMT_INT; c.alignment = ALIGN_R
         r += 1
     r += 1
 ws.column_dimensions["A"].width = 34
-for j in range(2, 13): ws.column_dimensions[get_column_letter(j)].width = 15
+for j in range(2, 18): ws.column_dimensions[get_column_letter(j)].width = 15
 ws.freeze_panes = "B5"
+
+
+# ---------------- 总部决策（回本规则、单位经济、各方案总部口径汇总）----------------
+ws = ws_dec
+ws["A1"] = "总部决策：每个方案对总部的投入、收益与回本（全部为公式）"; ws["A1"].font = F_H1
+ws["A2"] = "回本月 = 相对现状延续（方案一A）的总部累计净收益转正且此后不再转负的最早月份。回本规则判定 = 基准回本月 ≤ 适用通过线（含固定人头 3 个月、零固定成本 6 个月）且 基准现金谷底 ≥ 允许谷底 且 悲观 12 个月相对现状 ≥ 允许亏损，三者同时成立。稳态月成本取第 12 月。盈亏平衡所需份额提升 = 稳态月固定成本 ÷（系统月间夜 × 总部每替代间夜净得），即最保守口径。"; ws["A2"].font = F_NOTE
+LB, RB, _ = MS["月度_基准"]; LP, RP, _ = MS["月度_悲观"]; LO, RO, _ = MS["月度_乐观"]
+def mref(sname, addr): return f"'{sname}'!{addr}"
+r = 4
+ws.cell(row=r, column=1, value="总部单位经济（基准情景，按选用定价档）").font = F_BOLD; ws.cell(row=r, column=1).fill = FILL_SEC
+for col in range(2, 5): ws.cell(row=r, column=col).fill = FILL_SEC
+r += 1
+UE = {}
+for key, lab, fmt in [("HQ_SUB_GAIN", "总部每替代间夜净得（现有 4% 分成）", FMT_DEC), ("HQ_INC_GAIN", "总部每增量间夜净得（现有 4% 分成）", FMT_DEC),
+                      ("HQ_SUB_GAIN_M", "总部每替代间夜净得（总部主导订单分成）", FMT_DEC), ("HQ_INC_GAIN_M", "总部每增量间夜净得（总部主导订单分成）", FMT_DEC),
+                      ("HQ_PER_PT", "份额每提升 1 个百分点的总部月净得（当前门店数，替代口径）", FMT_INT)]:
+    ws.cell(row=r, column=1, value=lab).font = F_LABEL
+    c = ws.cell(row=r, column=2, value=f"={mref('月度_基准', LB[key])}"); c.font = F_LINK; c.number_format = fmt; c.alignment = ALIGN_R
+    UE[key] = f"$B${r}"; r += 1
+ws.cell(row=r, column=1, value="份额每提升 1 个百分点的总部月净得（第 12 月门店数，替代口径）").font = F_LABEL
+c = ws.cell(row=r, column=2, value=f"={mref('月度_基准', '$O$' + str(RB['nights']))}*0.01*{UE['HQ_SUB_GAIN']}"); c.font = F_CALC; c.number_format = FMT_INT; c.alignment = ALIGN_R
+UE["HQ_PER_PT_12"] = f"$B${r}"; r += 1
+ws.cell(row=r, column=1, value="回本规则：通过线（月）").font = F_LABEL
+c = ws.cell(row=r, column=2, value=f"={A_base('PAYBACK_RULE')}"); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R
+RULE = f"$B${r}"; r += 2
+hdr = ["方案", "一次性投入（元）", "稳态月成本（第 12 月，基准，元）", "12 个月总部净收益 悲观", "基准", "乐观", "相对现状延续 悲观", "基准", "乐观", "回本月 悲观", "基准", "乐观", "第 12 月份额 悲观", "基准", "乐观", "盈亏平衡所需份额提升（当前 30 家店）", "盈亏平衡所需份额提升（第 12 月门店数）", "回本规则判定", "成本类型", "现金谷底 悲观", "现金谷底 基准", "月度转正月 基准", "适用通过线（月）"]
+for j, h in enumerate(hdr, 1):
+    c = ws.cell(row=r, column=j, value=h); c.font = F_H2; c.fill = FILL_H2; c.alignment = ALIGN_C
+r += 1
+ONEOFF = {
+    "B1": f"={A_base('AP_TRAIN_ONEOFF')}+{A_base('AP_STORE_KIT')}*{A_base('STORES0')}",
+    "P": f"={A_base('AP_TRAIN_ONEOFF')}+{A_base('AP_STORE_KIT')}*{A_base('STORES0')}+{A_base('PILOT_EQUIP')}",
+    "V": f"={A_base('AP_TRAIN_ONEOFF')}+{A_base('AP_STORE_KIT')}*{A_base('STORES0')}+{A_base('PILOT_EQUIP')}",
+    "B2": f"={A_base('AP_TRAIN_ONEOFF')}+{A_base('AP_STORE_KIT')}*{A_base('STORES0')}+{A_base('B_RECRUIT')}+{A_base('B_EQUIP')}",
+    "B2M": f"={A_base('AP_TRAIN_ONEOFF')}+{A_base('AP_STORE_KIT')}*{A_base('STORES0')}+{A_base('B_RECRUIT')}+{A_base('B_EQUIP')}",
+    "C": "=0",
+}
+DEC_ROWS = {}
+_mcol = {mk: get_column_letter(j) for j, (mk, _, _) in enumerate(METRICS, 2)}
+for code, olabel in OPTS:
+    if code == "A": continue
+    ws.cell(row=r, column=1, value=olabel).font = F_LABEL
+    c = ws.cell(row=r, column=2, value=ONEOFF[code]); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R
+    c = ws.cell(row=r, column=3, value=f"={mref('月度_基准', '$O$' + str(RB[code + '_cost']))}"); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R
+    col = 4
+    for mk in ["net", "relnet", "paidrel", "share12"]:
+        for sname in ["月度_悲观", "月度_基准", "月度_乐观"]:
+            rr = SUMMARY_ROWS[(sname, code)]
+            c = ws.cell(row=r, column=col, value=f"='情景对比'!{_mcol[mk]}{rr}"); c.font = F_LINK; c.alignment = ALIGN_R
+            c.number_format = FMT_PCT if mk == "share12" else FMT_INT
+            col += 1
+    c = ws.cell(row=r, column=col, value=f"=C{r}/({A_base('STORES0')}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}*{UE['HQ_SUB_GAIN']})"); c.font = F_CALC; c.number_format = FMT_PCT; c.alignment = ALIGN_R; col += 1
+    c = ws.cell(row=r, column=col, value=f"=C{r}/({mref('月度_基准', '$O$' + str(RB['nights']))}*{UE['HQ_SUB_GAIN']})"); c.font = F_CALC; c.number_format = FMT_PCT; c.alignment = ALIGN_R; col += 1
+    fixed = code in ("B2", "B2M", "C")
+    ctype = "固定人头" if fixed else "零固定成本（可随时停止）"
+    rule_cell = f"IF({A_base('SUP_HIRE')}=1,{A_base('PAYBACK_RULE')},{A_base('PAYBACK_RULE_VAR')})" if not fixed else f"{A_base('PAYBACK_RULE')}"
+    rb = SUMMARY_ROWS[("月度_基准", code)]; rp = SUMMARY_ROWS[("月度_悲观", code)]
+    tcol = _mcol["trough"]; pmcol = _mcol["paidm"]
+    c = ws.cell(row=r, column=col, value=f'=IF(AND(ISNUMBER(K{r}),K{r}<=W{r},T{r}>={A_base("TROUGH_RULE")},G{r}>={A_base("PESS_LOSS_RULE")}),"通过","不通过")'); c.font = F_BOLD; c.alignment = ALIGN_C; col += 1
+    c = ws.cell(row=r, column=col, value=ctype); c.font = F_LABEL; col += 1
+    c = ws.cell(row=r, column=col, value=f"='情景对比'!{tcol}{rp}"); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R; col += 1
+    c = ws.cell(row=r, column=col, value=f"='情景对比'!{tcol}{rb}"); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R; col += 1
+    c = ws.cell(row=r, column=col, value=f"='情景对比'!{pmcol}{rb}"); c.font = F_LINK; c.alignment = ALIGN_R; col += 1
+    c = ws.cell(row=r, column=col, value=f"={rule_cell}"); c.font = F_LINK; c.number_format = FMT_INT; c.alignment = ALIGN_R; col += 1
+    DEC_ROWS[code] = r; r += 1
+r += 1
+ws.cell(row=r, column=1, value="注：方案一B、二P、二V 的「一次性投入」含门店设备补贴与培训（可改由门店承担）；稳态月成本含门店开播提成中由总部承担的部分（默认 0）。方案二P 的品牌营销人员薪酬不计为新增成本（现有编制），其机会成本是品牌工作被挤占。").font = F_NOTE
+ws.column_dimensions["A"].width = 36
+for j in range(2, 24): ws.column_dimensions[get_column_letter(j)].width = 14
+ws.freeze_panes = "B5"
+
+# ---------------- 份额情景（目标份额 × 门店规模 → 总部与门店的月度结果，基准口径）----------------
+ws = ws_sh
+ws["A1"] = "份额情景：抖音份额从 7% 提升到目标值，总部与门店每月的变化（基准情景参数，稳态）"; ws["A1"].font = F_H1
+ws["A2"] = "蓝色单元格可改。相对现状 = 相对当前份额（假设表 SHARE0）的变化；替代口径 = 新增间夜全部替代 OTA（最保守）；增量口径 = 新增间夜全部填补空房；混合口径按假设表的增量比例。可承受的总部月固定成本 = 替代口径的总部月增量收入（投入不超过它，当月即打平）。"; ws["A2"].font = F_NOTE
+shares = [0.07, 0.10, 0.15, 0.20, 0.25, 0.30]
+store_list = [30, 50, 80]
+r = 4
+SH_ROWS = {}
+for st in store_list:
+    ws.cell(row=r, column=1, value=f"门店数：").font = F_BOLD
+    c = ws.cell(row=r, column=2, value=st); c.font = F_INPUT; c.number_format = FMT_INT; c.fill = FILL_KEY
+    stcell = f"$B${r}"; r += 1
+    hdr = ["目标份额", "抖音核销间夜/月", "核销 GMV/月（元）", "总部 4% 分成/月", "总部抖音收入合计/月（分成 + 管理费）", "相对现状的总部月增量：替代口径（4%）", "相对现状的总部月增量：混合口径（4%）", "相对现状的总部月增量：替代口径（新增部分按总部主导分成）", "可承受的总部月固定成本（替代口径）", "门店端月变化（混合口径）", "新增间夜占系统空房比例"]
+    for j, h in enumerate(hdr, 1):
+        c = ws.cell(row=r, column=j, value=h); c.font = F_H2; c.fill = FILL_H2; c.alignment = ALIGN_C
+    r += 1
+    for shv in shares:
+        c = ws.cell(row=r, column=1, value=shv); c.font = F_INPUT; c.number_format = FMT_PCT
+        nights = f"({stcell}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')})"
+        empty = f"({stcell}*{A_base('ROOMS')}*(1-{A_base('OCC')})*{A_base('DAYS')})"
+        dn = f"$A{r}*{nights}"; ddn = f"($A{r}-{A_base('SHARE0')})*{nights}"
+        price = mref('月度_基准', LB['PRICE']); inc = mref('月度_基准', LB['INC'])
+        f = [f"={dn}", f"={dn}*{price}", f"={dn}*{price}*{A_base('HQ_TAKE')}", f"={dn}*{price}*({A_base('HQ_TAKE')}+{mref('月度_基准', LB['DY_FEE_RATE'])})",
+             f"={ddn}*{mref('月度_基准', LB['HQ_SUB_GAIN'])}",
+             f"={ddn}*({inc}*{mref('月度_基准', LB['HQ_INC_GAIN'])}+(1-{inc})*{mref('月度_基准', LB['HQ_SUB_GAIN'])})",
+             f"={ddn}*{mref('月度_基准', LB['HQ_SUB_GAIN_M'])}",
+             f"=F{r}",
+             f"={ddn}*({inc}*{mref('月度_基准', LB['STORE_INC_CONTRIB'])}-(1-{inc})*{mref('月度_基准', LB['STORE_SUB_LOSS'])})",
+             f"=IF({ddn}>0,{ddn}*{inc}/{empty},0)"]
+        for j, ff in enumerate(f, 2):
+            c = ws.cell(row=r, column=j, value=ff); c.font = F_CALC; c.alignment = ALIGN_R
+            c.number_format = FMT_PCT if j == 11 else FMT_INT
+        SH_ROWS[(st, shv)] = r; r += 1
+    r += 1
+ws.column_dimensions["A"].width = 14
+for j in range(2, 12): ws.column_dimensions[get_column_letter(j)].width = 18
+ws.freeze_panes = "B4"
 
 # ---------------- 敏感性（稳态月度，基准情景参数）----------------
 ws = ws_sens
@@ -628,7 +854,7 @@ def srow(label, formula, fmt=FMT_DEC, bold=False):
 ST_NIGHTS = srow("单店月间夜", f"={A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}", FMT_INT)
 ST_REV = srow("单店月流水（挂牌口径）", f"={ST_NIGHTS}*{A_base('ADR')}", FMT_INT)
 ST_PROFIT_CF = srow("单店月净得基线（扣平台费与管理费，不含房租人工）", f"={ST_NIGHTS}*'单位经济'!$B$17", FMT_INT)
-ST_VPS = srow("单店月售出券数（九折、现状倒推）", f"={A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')}/{A_base('BASE_REDEEM_EST')}/{A_base('P1_PRICE')}/{A_base('STORES0')}", FMT_DEC)
+ST_VPS = srow("单店月售出券数（九折、按基线校准倒推）", f"=IF({A_base('CAL_MODE')}=1,{A_base('SHARE0')}*{A_base('STORES0')}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}*{A_base('P1_PRICE')},{A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')})/{A_base('REDEEM')}/{A_base('P1_PRICE')}/{A_base('STORES0')}", FMT_DEC)
 ST_DN = srow("单店月抖音核销间夜（九折）", f"={ST_VPS}*{A_base('REDEEM')}", FMT_DEC)
 ST_SHARE = srow("抖音核销间夜占单店间夜比例", f"={ST_DN}/{ST_NIGHTS}", FMT_PCT)
 r += 1
@@ -681,6 +907,11 @@ lines = [
     ("方案一A 与方案三的门店自播按现状口径（不限日期券、不做工作日折减）计算；新店前 3 个月按爬坡入住率计算间夜与空房；增量间夜受空房上限约束：增量间夜 = MIN(核销间夜 × 增量比例, 系统空房间夜 × 上限比例)。方案一A 不含总部投入；方案一B 增加 1 名直播督导、培训、门店设备补贴，开播提成按核销 GMV 计、默认由门店承担（可切换）；方案二在一B 基础上（保留督导）增加 4 人团队与兼职备播、设备、场地、投流，并可抵减现有品牌预算（开关）；方案二+ 在方案二基础上加入配套机制（团队直播间订单的总部分成提高、门店分担投流）；方案三为服务商代播参照，按与总部直播间相同的每小时产出假设。", F_LABEL),
     ("门店端净收益变化 = 增量间夜 × 单夜贡献 − 替代间夜 × 单夜损失 − 门店直播时间成本。", F_LABEL),
     ("", F_LABEL),
+    ("基线校准与口径核对", F_BOLD),
+    ("决策人提供两项事实：当前抖音订单占比约 7%；上月总部抖音收入 4 万（无投流，按核销结算）。按系统 30 家店 × 100 间 × 85% × 30 天 = 76,500 间夜计：7% 份额对应约 5,355 个核销间夜、九折券核销 GMV 约 48 万/月，总部 4% 分成约 1.9 万，加抖音订单的 3.5% 管理费约 1.7 万，合计约 3.6 万，与「4 万」基本吻合；若把 4 万理解为纯 4% 分成，则核销 GMV 为 100 万、份额约 14.5%，与 7% 矛盾。模型默认按 7% 份额校准（CAL_MODE = 1），上月 4 万按「分成 + 管理费」口径核对；如公司确认 4 万为纯分成，把 CAL_MODE 改为 2 即可。", F_LABEL),
+    ("方案口径：一A 现状延续；一B 规范化门店直播（默认不新招督导，由运营部现有人员兼任）；二P 在一B 基础上由现有品牌营销人员做总部直播试点（不新增人力）；二V 在二P 基础上引入兼职主播或达人按核销佣金带货（佣金从门店到账中划转，总部零固定成本）；二 / 二+ 为专职总部直播团队（现有分成 / 配套机制）；三为外包服务商。总部主导订单（试点、按单付费、团队、投流）的总部分成按 MECH_ON 开关执行 8%。", F_LABEL),
+    ("回本规则：相对现状延续的总部累计净收益首次转正的月份 ≤ 假设表「回本规则」（默认 3 个月）为通过。「总部决策」表汇总每个方案的一次性投入、稳态月成本、12 个月净收益、回本月、第 12 月份额与盈亏平衡所需的份额提升。", F_LABEL),
+    ("", F_LABEL),
     ("数据来源与核验状态", F_BOLD),
     ("决策人提供的事实见假设表说明列；研究参数的来源见决策文档附录 C 与 research_notes 目录。", F_LABEL),
     ("外部参数来自 2026 年 11 月 4 日的网络检索，并于 11 月 5 日放开网络后做了两道核验（逐条打开引用页面核对原文；不看原文的独立交叉检索）。核验后的修正：支付手续费改为已含在 8% 内（参数设 0）、薪酬注释按职友集近一年口径更新；核验状态逐条见决策文档附录 D。核对后只需改假设表的对应单元格。", F_LABEL),
@@ -708,7 +939,7 @@ tiers = [("P1", "C"), ("P2", "D"), ("P3", "E")]
 INCREF = f"IF({A_base('WEEKDAY_ONLY')}=1,'单位经济'!{{c}}$26,'单位经济'!{{c}}$25)"
 prow("price", "券价", [f"={A_base(t+'_PRICE')}" for t, _ in tiers], FMT_DEC)
 prow("vol", "销量系数", [f"={A_base(t+'_VOL')}" for t, _ in tiers], FMT_DEC)
-prow("v", "月售出券数（全系统，含工作日券折减）", [f"={A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')}/{A_base('BASE_REDEEM_EST')}/{A_base('P1_PRICE')}*{A_base(t+'_VOL')}*IF({A_base('WEEKDAY_ONLY')}=1,{A_base('WEEKDAY_VOL')},1)" for t, _ in tiers])
+prow("v", "月售出券数（全系统，含工作日券折减）", [f"=IF({A_base('CAL_MODE')}=1,{A_base('SHARE0')}*{A_base('STORES0')}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}*{A_base('P1_PRICE')},{A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')})/{A_base('REDEEM')}/{A_base('P1_PRICE')}*{A_base(t+'_VOL')}*IF({A_base('WEEKDAY_ONLY')}=1,{A_base('WEEKDAY_VOL')},1)" for t, _ in tiers])
 prow("sold", "月售出 GMV", [f"=B{PR['v']}*B{PR['price']}".replace("B", colL) for colL in "BCD"])
 prow("n", "月核销间夜", [f"={colL}{PR['v']}*{A_base('REDEEM')}" for colL in "BCD"])
 prow("red", "月核销 GMV", [f"={colL}{PR['n']}*{colL}{PR['price']}" for colL in "BCD"])
