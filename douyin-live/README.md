@@ -21,7 +21,7 @@
 ## 怎么改数
 
 1. 打开模型的「假设」表，只改蓝色单元格；黄色底是对结论影响最大的关键假设。改完后所有表自动重算。
-2. 关键开关：`CAL_MODE`（基线校准方式：1 按 7% 份额，2 按上月 4 万倒推，3 按实测核销间夜）、`SHARE_VPO`（每个抖音订单对应的间夜数）、`SUP_HIRE`（一B 是否新招督导）、`MECH_ON`（总部主导订单是否按 8% 分成）、`MKT_FEE`（品牌营销费率，按门店全渠道流水）、`CH_FEE`（渠道运营费，按抖音核销 GMV）、`PART`（门店参与率）、`PRESALE_ON` / `PRESALE_V`（新店开业预售）、`EQUIP_CASH`（设备按现金计入）、`ABSORB_BRAND`（团队是否抵减品牌预算，默认不抵减）、`PAYBACK_RULE` / `PAYBACK_RULE_VAR` / `TROUGH_RULE` / `PESS_LOSS_RULE`（回本规则的三道门）、`PRICING_SEL`、`WEEKDAY_ONLY`。
+2. 关键开关：`CAL_MODE`（基线校准方式：1 按 7% 份额，2 按上月 4 万倒推，3 按实测核销间夜）、`SHARE_VPO`（每个抖音订单对应的间夜数）、`NEW_LIVE_RAMP`（新店自播达到系统平均产出所需月数，默认 1 即首月按半店计）、`SUP_HIRE`（一B 是否新招督导）、`MECH_ON`（总部主导订单是否按 8% 分成）、`MKT_FEE`（品牌营销费率，按门店全渠道流水）、`CH_FEE`（渠道运营费，按抖音核销 GMV）、`PART`（门店参与率）、`PRESALE_ON` / `PRESALE_V`（新店开业预售）、`EQUIP_CASH`（设备按现金计入）、`ABSORB_BRAND`（团队是否抵减品牌预算，默认不抵减）、`PAYBACK_RULE` / `PAYBACK_RULE_VAR` / `TROUGH_RULE` / `PESS_LOSS_RULE`（回本规则的三道门）、`PRICING_SEL`、`WEEKDAY_ONLY`。
 3. 如需同步更新文档里的表格和图：在仓库目录执行
 
 ```bash

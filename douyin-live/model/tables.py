@@ -585,7 +585,8 @@ T["A_DRIFT_PESS"] = pct(abs(pess("A_DRIFT")), 0)
 
 # ---- 绝对口径：总收入（分成 + 管理费 + 加成 + 渠道费 + 营销费）− 总成本；三情景、各方案 ----
 LAB_GROSS = "总部抖音收入合计（分成 + 管理费 + 加成 + 渠道费 + 营销费）"
-LAB_COST = "总部成本合计"; LAB_TAKE = "总部分成收入"; LAB_X = "机制：总部主导订单加成分成（总部多得）"; LAB_STORE = "门店端净收益变化（全系统）"; LAB_SHARE = "抖音份额（核销间夜 ÷ 系统间夜）"; LAB_ONEOFF = "其中：一次性现金（培训、设备补贴、设备、招聘）"
+T["V_COORD_BASE"] = wan(base("V_COORD"), 1)
+LAB_CF = "减：被替代订单原有管理费"; LAB_COST = "总部成本合计"; LAB_TAKE = "总部分成收入"; LAB_X = "机制：总部主导订单加成分成（总部多得）"; LAB_STORE = "门店端净收益变化（全系统）"; LAB_SHARE = "抖音份额（核销间夜 ÷ 系统间夜）"; LAB_ONEOFF = "其中：一次性现金（培训、设备补贴、设备、招聘）"
 ABS = {}
 for sn, sheet in [("基准", "月度_基准"), ("悲观", "月度_悲观"), ("乐观", "月度_乐观")]:
     wsm = wb[sheet]; dm_ = rows_by_label(wsm)
@@ -593,13 +594,15 @@ for sn, sheet in [("基准", "月度_基准"), ("悲观", "月度_悲观"), ("�
     for code in CODES:
         i = CIDX[code]
         g, cst, tk, x, st = ser(LAB_GROSS, i), ser(LAB_COST, i), ser(LAB_TAKE, i), ser(LAB_X, i), ser(LAB_STORE, i)
+        cf = ser(LAB_CF, i)
         sh12 = wsm.cell(row=dm_[LAB_SHARE][i], column=15).value or 0
         cum = 0; cums = []
-        for a, b in zip(g, cst): cum += a - b; cums.append(cum)
+        for _g, _c in zip(g, cst): cum += _g - _c; cums.append(cum)
         pb = None
         for m in range(12):
             if min(cums[m:]) >= 0: pb = m + 1; break
-        ABS[(code, sn)] = dict(gross=sum(g), cost=sum(cst), take=sum(tk) + sum(x), net=sum(g) - sum(cst), store=sum(st), share12=sh12, pb=pb, cums=cums, oneoff=sum(ser(LAB_ONEOFF, i)))
+        ABS[(code, sn)] = dict(gross=sum(g), cost=sum(cst), take=sum(tk) + sum(x), net=sum(g) - sum(cst), store=sum(st), share12=sh12, pb=pb, cums=cums, oneoff=sum(ser(LAB_ONEOFF, i)), cf=sum(cf))
+        T[f"ACF_{code}_{sn}"] = wan(abs(sum(cf)), 1)
         T[f"AGROSS_{code}_{sn}"] = wan(sum(g), 1); T[f"ACOST_{code}_{sn}"] = wan(sum(cst), 1); T[f"ATAKE_{code}_{sn}"] = wan(sum(tk) + sum(x), 1)
         T[f"ANET_{code}_{sn}"] = wan(sum(g) - sum(cst), 1); T[f"ASTORE_{code}_{sn}"] = wan(sum(st), 0); T[f"ASHARE12_{code}_{sn}"] = pct(sh12, 1)
         T[f"APB_{code}_{sn}"] = (f"第 {pb} 月" if pb else "12 个月内未转正"); T[f"AONEOFF_{code}_{sn}"] = wan(sum(ser(LAB_ONEOFF, i)), 1)
@@ -620,6 +623,21 @@ for sn in ["基准", "悲观", "乐观"]:
         T[f"AGROSS0_{code}_{sn}"] = wan(ABS[(code, sn)]["gross"], 0); T[f"ACOST0_{code}_{sn}"] = wan(ABS[(code, sn)]["cost"], 0); T[f"ANET0_{code}_{sn}"] = wan(ABS[(code, sn)]["net"], 0); T[f"ATAKE0_{code}_{sn}"] = wan(ABS[(code, sn)]["take"], 0)
 for code in CODES:
     T[f"ADIFF_{code}_STORE"] = wan(ABS[(code, "基准")]["store"] - ABS[("A", "基准")]["store"], 0)
+for sn in ["基准", "悲观", "乐观"]:
+    for code in CODES:
+        T[f"ADIFFN_{code}_{sn}"] = wan((ABS[(code, sn)]["net"] + ABS[(code, sn)]["cf"]) - (ABS[("A", sn)]["net"] + ABS[("A", sn)]["cf"]), 0)
+# 绝对口径下的 MECH_ON = 0 变体（总部主导订单不提至 8%）
+_wbm = load_workbook(f"{VDIR}/variant_mech0.xlsx", data_only=True)
+for sn, sheet in [("基准", "月度_基准"), ("悲观", "月度_悲观"), ("乐观", "月度_乐观")]:
+    _wsm = _wbm[sheet]; _dm = rows_by_label(_wsm)
+    def _ser(label, idx): return [_wsm.cell(row=_dm[label][idx], column=c).value or 0 for c in range(4, 16)]
+    _netv = {}
+    for code in CODES:
+        i = CIDX[code]
+        _netv[code] = sum(_ser(LAB_GROSS, i)) - sum(_ser(LAB_COST, i))
+        T[f"AGROSS0_{code}_{sn}_MECH0"] = wan(sum(_ser(LAB_GROSS, i)), 0); T[f"ANET0_{code}_{sn}_MECH0"] = wan(_netv[code], 0)
+    for code in CODES:
+        T[f"ADIFF_{code}_{sn}_MECH0"] = wan(_netv[code] - _netv["A"], 0)
 a = ABS[("A", "基准")]
 T["A_AGROSS"] = wan(a["gross"], 0); T["A_ANET"] = wan(a["net"], 0); T["A_ATAKE"] = wan(a["take"], 0); T["A_ASHARE12"] = pct(a["share12"], 1); T["A_ASTORE"] = wan(a["store"], 0)
 json.dump(T, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

@@ -255,25 +255,32 @@ fig.tight_layout(); fig.savefig(f"{OUT}/chart8_path_scenarios.png", facecolor=SU
 # ---------- 图9（简版）：三个方案的累计净收益（总收入 − 总成本，绝对口径，基准）与现状延续 ----------
 LAB_GROSS = "总部抖音收入合计（分成 + 管理费 + 加成 + 渠道费 + 营销费）"; LAB_COST = "总部成本合计"
 SIMPLE = [("A", "不投入：门店自播现状", C_GRAY), ("B1", "方案一：门店自播规范化", C_BLUE), ("V", "方案二：品牌部主导、按单付费", C_YELLOW), ("B2M", "方案三：总部专职团队", C_VIOLET)]
-fig, axes = plt.subplots(1, 3, figsize=(13, 4.6), dpi=200, sharey=True)
+fig, axes = plt.subplots(1, 3, figsize=(13, 4.2), dpi=200, sharey=True)
 for ax, (sheet, sname) in zip(axes, [("月度_悲观", "悲观"), ("月度_基准", "基准"), ("月度_乐观", "乐观")]):
     style_ax(ax)
+    ends = []
     for code, lab, color in SIMPLE:
         g = monthly_series(sheet, LAB_GROSS, CIDX[code]); cst = monthly_series(sheet, LAB_COST, CIDX[code])
         cum = 0; ys = []
         for a_, b_ in zip(g, cst): cum += a_ - b_; ys.append(wan(cum))
         ax.plot(months, ys, color=color, linewidth=2.2, marker="o", markersize=3.5, label=lab)
-        ax.annotate(f"{ys[-1]:.0f}", (12, ys[-1]), textcoords="offset points", xytext=(5, 0), va="center", fontsize=9, color=C_INK2)
+        ends.append([ys[-1], ys[-1], color])
+    # 末端数字标签：按值排序后拉开最小间距，避免重叠
+    ends.sort(key=lambda e: e[0]); gap = 14
+    for k in range(1, len(ends)):
+        if ends[k][1] - ends[k - 1][1] < gap: ends[k][1] = ends[k - 1][1] + gap
+    for yv, ypos, color in ends:
+        ax.annotate(f"{yv:.0f}", (12, ypos), textcoords="offset points", xytext=(5, 0), va="center", fontsize=9, color=color)
     ax.axhline(0, color=C_AXIS, linewidth=0.8)
-    ax.set_xticks([1, 3, 6, 9, 12]); ax.set_xticklabels([f"第{m}月" for m in [1, 3, 6, 9, 12]])
+    ax.set_xticks([3, 6, 9, 12]); ax.set_xticklabels([f"第{m}月" for m in [3, 6, 9, 12]])
     ax.set_title(f"{sname}情景", loc="left", color=C_INK, fontsize=11, fontweight="bold")
-axes[0].set_ylabel("总部累计净收益：总收入 − 总成本（万元）", color=C_INK2)
+axes[0].set_ylabel("总部累计净收益：总收入减总成本（万元）", color=C_INK2)
 axes[1].legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=4, fontsize=9)
 fig.suptitle("三个方案 12 个月的总部累计净收益（绝对口径）", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
 fig.tight_layout(); fig.savefig(f"{OUT}/chart9_simple_cum.png", facecolor=SURFACE); plt.close(fig)
 
 # ---------- 图10（简版）：三个方案 12 个月总收入、总成本、净收益（基准）----------
-fig, ax = plt.subplots(figsize=(9, 4.4), dpi=200)
+fig, ax = plt.subplots(figsize=(9, 3.9), dpi=200)
 style_ax(ax)
 names = [lab for _, lab, _ in SIMPLE]
 gross, cost, net = [], [], []
