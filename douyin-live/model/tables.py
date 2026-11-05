@@ -45,6 +45,7 @@ for sn, r0 in scen_rows.items():
     for i in range(NOPT):
         r = r0 + i
         pb = ws.cell(row=r, column=COL["paidrel"]).value
+        if isinstance(pb, str): pb = pb.replace("未转正", "未回本")
         rows.append([SHORT[i], wan(ws.cell(row=r, column=COL["red"]).value, 0), wan(ws.cell(row=r, column=COL["hqgross"]).value, 1), wan(ws.cell(row=r, column=COL["hqinc"]).value, 1), wan(ws.cell(row=r, column=COL["cost"]).value, 1),
                      wan(ws.cell(row=r, column=COL["net"]).value, 1), wan(ws.cell(row=r, column=COL["relnet"]).value, 1), ("—" if i == 0 else (pb if isinstance(pb, str) else f"第 {pb} 月")), pct(ws.cell(row=r, column=COL["share12"]).value, 1),
                      wan(ws.cell(row=r, column=COL["store"]).value, 0), wan(ws.cell(row=r, column=COL["sys"]).value, 0)])
@@ -54,7 +55,7 @@ for sn, r0 in scen_rows.items():
 rows = []
 for i, o in enumerate(OPTS):
     rows.append([SHORT[i]] + [wan(ws.cell(row=scen_rows[sn] + i, column=COL["relnet"]).value, 1) for sn in ["悲观", "基准", "乐观"]] +
-                [(lambda v: "—" if i == 0 else (v if isinstance(v, str) else f"第 {v} 月"))(ws.cell(row=scen_rows[sn] + i, column=COL["paidrel"]).value) for sn in ["悲观", "基准", "乐观"]] +
+                [(lambda v: "—" if i == 0 else (v.replace("未转正", "未回本") if isinstance(v, str) else f"第 {v} 月"))(ws.cell(row=scen_rows[sn] + i, column=COL["paidrel"]).value) for sn in ["悲观", "基准", "乐观"]] +
                 [wan(ws.cell(row=scen_rows[sn] + i, column=COL["sys"]).value, 0) for sn in ["悲观", "基准", "乐观"]])
 rows = [[x[0], x[1], x[2], x[3], x[5], x[8]] for x in rows]
 T["TABLE_SCEN_SUMMARY"] = md(["方案", "相对现状的总部净收益 悲观（万元）", "基准（万元）", "乐观（万元）", "回本月（基准）", "系统合计 基准（万元）"], rows)
@@ -228,7 +229,7 @@ for sn, r0 in scen_rows.items():
         T[f"SYS_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["sys"]).value, 0)
         T[f"SHARE12_{code}_{sn}"] = pct(ws.cell(row=r, column=COL["share12"]).value, 1)
         _pb = ws.cell(row=r, column=COL["paidrel"]).value
-        T[f"PB_{code}_{sn}"] = "—" if code == "A" else (_pb if isinstance(_pb, str) else f"第 {_pb} 月")
+        T[f"PB_{code}_{sn}"] = "—" if code == "A" else (_pb.replace("未转正", "未回本") if isinstance(_pb, str) else f"第 {_pb} 月")
         T[f"STOREDIFF_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["store"]).value - ws.cell(row=r0, column=COL["store"]).value, 0)
         T[f"TROUGH_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["trough"]).value or 0, 1)
         T[f"HQPRE_{code}_{sn}"] = wan(ws.cell(row=r, column=COL["hqpre"]).value or 0, 1)
@@ -319,7 +320,7 @@ def read_variant(path, tag):
             T[f"COST_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["cost"]).value, 1)
             T[f"TROUGH_{code}_{sn}_{tag}"] = wan(vs.cell(row=r0 + i, column=COL["trough"]).value or 0, 1)
             _pb = vs.cell(row=r0 + i, column=COL["paidrel"]).value
-            T[f"PB_{code}_{sn}_{tag}"] = "—" if code == "A" else (_pb if isinstance(_pb, str) else f"第 {_pb} 月")
+            T[f"PB_{code}_{sn}_{tag}"] = "—" if code == "A" else (_pb.replace("未转正", "未回本") if isinstance(_pb, str) else f"第 {_pb} 月")
 VDIR = os.environ.get("VARIANT_DIR", "/home/user/CC/douyin-live/report/build")
 read_variant(f"{VDIR}/variant_phased.xlsx", "PHASED")
 read_variant(f"{VDIR}/variant_absorb.xlsx", "ABSORB")
@@ -330,6 +331,7 @@ read_variant(f"{VDIR}/variant_share10.xlsx", "SHARE10")
 read_variant(f"{VDIR}/variant_mkt05.xlsx", "MKT05")
 read_variant(f"{VDIR}/variant_mkt10.xlsx", "MKT10")
 read_variant(f"{VDIR}/variant_zeromkt05.xlsx", "ZEROMKT05")
+read_variant(f"{VDIR}/variant_mech0.xlsx", "MECH0")
 read_variant(f"{VDIR}/variant_tier3.xlsx", "T3")
 read_variant(f"{VDIR}/variant_chfee.xlsx", "CHFEE")
 read_variant(f"{VDIR}/variant_zero.xlsx", "ZERO")
@@ -395,10 +397,10 @@ def ue_get(prefix):
     for k, v in ue.items():
         if k.startswith(prefix): return v
     return None
-T["HQ_SUB_GAIN"] = num(ue_get("总部每替代间夜净得（现有"), 1)
-T["HQ_INC_GAIN"] = num(ue_get("总部每增量间夜净得（现有"), 1)
-T["HQ_SUB_GAIN_M"] = num(ue_get("总部每替代间夜净得（总部主导"), 1)
-T["HQ_INC_GAIN_M"] = num(ue_get("总部每增量间夜净得（总部主导"), 1)
+T["HQ_SUB_GAIN"] = num(ue_get("总部每替代间夜净得（现有"), 2)
+T["HQ_INC_GAIN"] = num(ue_get("总部每增量间夜净得（现有"), 2)
+T["HQ_SUB_GAIN_M"] = num(ue_get("总部每替代间夜净得（总部主导"), 2)
+T["HQ_INC_GAIN_M"] = num(ue_get("总部每增量间夜净得（总部主导"), 2)
 T["HQ_MIX_GAIN"] = num(ue_get("总部每抖音间夜净得（混合口径，4%"), 1)
 T["HQ_MIX_GAIN_M"] = num(ue_get("总部每抖音间夜净得（混合口径，总部主导"), 1)
 T["HQ_PER_PT_30"] = num(ue_get("份额每提升 1 个百分点的总部月净得（当前门店数，替代"), 0)
@@ -530,7 +532,7 @@ T["BASE_RED0_V2"] = wan(D["基线：当前每月抖音核销 GMV"], 0)
 T["BASE_SOLD0_V2"] = wan(D["基线：对应的每月售出 GMV（按本情景核销率倒推）"], 0)
 
 # 变体的总部决策表（渠道费 1%、新招督导）
-for _tag, _fn in [("CHFEE", "variant_chfee.xlsx"), ("SUP", "variant_sup.xlsx"), ("ZERO", "variant_zero.xlsx"), ("ABSORB", "variant_absorb.xlsx"), ("TEAM2", "variant_team2.xlsx"), ("NOPRESALE", "variant_nopresale.xlsx"), ("SHARE145", "variant_share145.xlsx"), ("SHARE10", "variant_share10.xlsx"), ("MKT05", "variant_mkt05.xlsx"), ("MKT10", "variant_mkt10.xlsx"), ("ZEROMKT05", "variant_zeromkt05.xlsx")]:
+for _tag, _fn in [("CHFEE", "variant_chfee.xlsx"), ("SUP", "variant_sup.xlsx"), ("ZERO", "variant_zero.xlsx"), ("ABSORB", "variant_absorb.xlsx"), ("TEAM2", "variant_team2.xlsx"), ("NOPRESALE", "variant_nopresale.xlsx"), ("SHARE145", "variant_share145.xlsx"), ("SHARE10", "variant_share10.xlsx"), ("MKT05", "variant_mkt05.xlsx"), ("MKT10", "variant_mkt10.xlsx"), ("ZEROMKT05", "variant_zeromkt05.xlsx"), ("MECH0", "variant_mech0.xlsx")]:
     _vch = f"{VDIR}/{_fn}"
     if not os.path.exists(_vch): continue
     _wb2 = load_workbook(_vch, data_only=True); _ws2 = _wb2["总部决策"]

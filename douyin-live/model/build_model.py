@@ -78,7 +78,7 @@ P("SOLDOUT_WD", "工作日券核销落在满房日的比例", [0.08, 0.05, 0.03]
 P("CAP_SHARE", "抖音增量间夜可占用的空房比例上限", [0.6, 0.7, 0.8], "%", "假设：空房集中在平日，抖音增量不可能把全部空房填满；增量间夜 = MIN(核销间夜 × 增量比例, 空房间夜 × 该比例)", FMT_PCT)
 P("INC_DECAY", "增量比例随份额递减：份额每高于基线 10 个百分点，增量比例相对下降", [0.4, 0.2, 0.1], "%", "假设：份额越高，新增的抖音买家中本来就会订本品牌的比例越高（选择效应）；下限见下一行；12 个月内影响小，主要约束份额情景表", FMT_PCT)
 P("INC_FLOOR", "增量比例相对基线的下限", 0.4, "倍", "假设：递减后不低于基线增量比例的 40%", FMT_DEC)
-P("WOULD_BOOK", "抖音买家中原本就会订本品牌的比例", [0.7, 0.5, 0.35], "%", "关键假设：替代率核心。参照：度假与高星酒店直播核销客新客占比 71% 到 80%（洲际 2026、Club Med 2025）；经济型连锁按平日核销中 50% 为真实增量（区间 40% 到 70%）推断；叠加满房日后不限日期券总体增量约 35%（情景区间 20% 到 49%）", FMT_PCT, key_cell=True)
+P("WOULD_BOOK", "抖音买家中原本就会订本品牌的比例", [0.7, 0.5, 0.35], "%", "关键假设：替代率核心。参照：度假与高星酒店直播核销客新客占比 71% 到 80%（洲际 2026、Club Med 2025）；经济型连锁按平日核销中 50% 为真实增量（情景区间 30% 到 65%）推断；叠加满房日后不限日期券总体增量约 35%（情景区间 20% 到 49%）", FMT_PCT, key_cell=True)
 P("BASE_HQ_COMM", "上月总部抖音相关收入（实际）", 40000, "元", "决策人提供：上月总部抖音收入 4 万；按 7% 份额校准时对应「4% 分成 + 3.5% 管理费」合计约 7.5% × 核销 GMV（见说明表的口径核对）；仅校准方式 2 用它倒推", FMT_INT)
 P("SHARE0", "当前抖音核销间夜占系统间夜比例", 0.07, "%", "决策人提供：当前抖音订单占比约 7%；校准方式 1 用它定基线", FMT_PCT, key_cell=True)
 P("SHARE_VPO", "份额口径换算：每个抖音订单对应的间夜数", 1.0, "倍", "决策人的 7% 为「订单占比」；若一个抖音订单平均含多张券或多晚，填实际倍数（例如 1.5）把订单份额换算为间夜份额；默认 1", FMT_DEC)
@@ -779,7 +779,8 @@ HC = {h: get_column_letter(j) for j, h in enumerate(HDR, 1)}
 r += 1
 DEC_ROWS = {}
 _mcol = {mk: get_column_letter(j) for j, (mk, _, _) in enumerate(METRICS, 2)}
-CTYPE = {"B1": "零固定成本（可随时停止）", "P": "零固定成本（可随时停止）", "V": "零固定成本（可随时停止）", "VH": "准固定（30 天可停）", "B2": "固定人头", "B2M": "固定人头", "C": "固定人头"}
+_var = f'=IF({A_base("SUP_HIRE")}=1,"固定人头（含新招督导）","零固定成本（可随时停止）")'
+CTYPE = {"B1": _var, "P": _var, "V": _var, "VH": "准固定（30 天可停）", "B2": "固定人头", "B2M": "固定人头", "C": "固定人头"}
 for code, olabel in OPTS:
     if code == "A": continue
     rb = SUMMARY_ROWS[("月度_基准", code)]; rp = SUMMARY_ROWS[("月度_悲观", code)]; ro = SUMMARY_ROWS[("月度_乐观", code)]
@@ -803,6 +804,8 @@ for code, olabel in OPTS:
                        ("混合 4%（30 家店）", f"={cost}/({nights0}*{UE['HQ_MIX_GAIN']})"),
                        ("混合 8%（30 家店）", f"={cost}/({nights0}*{UE['HQ_MIX_GAIN_M']})")]:
         c = ws.cell(row=r, column=colnum(h), value=formula); c.font = F_CALC; c.number_format = FMT_PCT; c.alignment = ALIGN_R
+    if str(CTYPE[code]).startswith("="):
+        cc = ws.cell(row=r, column=2); cc.font = F_LINK
     c = ws.cell(row=r, column=colnum("门店约束"), value=sc("storeok", rb)); c.font = F_LINK; c.alignment = ALIGN_C
     c = ws.cell(row=r, column=colnum("门店每抖音间夜期望收益（基准）"), value=sc("stnight", rb)); c.font = F_LINK; c.number_format = FMT_DEC; c.alignment = ALIGN_R
     fixed = code in ("B2", "B2M", "C")
@@ -999,7 +1002,7 @@ def srow(label, formula, fmt=FMT_DEC, bold=False):
 ST_NIGHTS = srow("单店月间夜", f"={A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}", FMT_INT)
 ST_REV = srow("单店月流水（挂牌口径）", f"={ST_NIGHTS}*{A_base('ADR')}", FMT_INT)
 ST_PROFIT_CF = srow("单店月净得基线（扣平台费与管理费，不含房租人工）", f"={ST_NIGHTS}*'单位经济'!$B$17", FMT_INT)
-ST_VPS = srow("单店月售出券数（九折、按基线校准倒推）", f"=IF({A_base('CAL_MODE')}=1,{A_base('SHARE0')}*{A_base('STORES0')}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}*{A_base('P1_PRICE')},{A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')})/{A_base('REDEEM')}/{A_base('P1_PRICE')}/{A_base('STORES0')}", FMT_DEC)
+ST_VPS = srow("单店月售出券数（九折、按基线校准倒推）", f"='月度_基准'!{MS['月度_基准'][0]['BASE_RED0']}/{A_base('REDEEM')}/{A_base('P1_PRICE')}/{A_base('STORES0')}", FMT_DEC)
 ST_DN = srow("单店月抖音核销间夜（九折）", f"={ST_VPS}*{A_base('REDEEM')}", FMT_DEC)
 ST_SHARE = srow("抖音核销间夜占单店间夜比例", f"={ST_DN}/{ST_NIGHTS}", FMT_PCT)
 r += 1
@@ -1085,7 +1088,7 @@ tiers = [("P1", "C"), ("P2", "D"), ("P3", "E")]
 INCREF = f"IF({A_base('WEEKDAY_ONLY')}=1,'单位经济'!{{c}}$26,'单位经济'!{{c}}$25)"
 prow("price", "券价", [f"={A_base(t+'_PRICE')}" for t, _ in tiers], FMT_DEC)
 prow("vol", "销量系数", [f"={A_base(t+'_VOL')}" for t, _ in tiers], FMT_DEC)
-prow("v", "月售出券数（全系统，含工作日券折减）", [f"=IF({A_base('CAL_MODE')}=1,{A_base('SHARE0')}*{A_base('STORES0')}*{A_base('ROOMS')}*{A_base('OCC')}*{A_base('DAYS')}*{A_base('P1_PRICE')},{A_base('BASE_HQ_COMM')}/{A_base('HQ_TAKE')})/{A_base('REDEEM')}/{A_base('P1_PRICE')}*{A_base(t+'_VOL')}*IF({A_base('WEEKDAY_ONLY')}=1,{A_base('WEEKDAY_VOL')},1)" for t, _ in tiers])
+prow("v", "月售出券数（全系统，含工作日券折减）", [f"='月度_基准'!{MS['月度_基准'][0]['BASE_RED0']}/{A_base('REDEEM')}/{A_base('P1_PRICE')}*{A_base(t+'_VOL')}*IF({A_base('WEEKDAY_ONLY')}=1,{A_base('WEEKDAY_VOL')},1)" for t, _ in tiers])
 prow("sold", "月售出 GMV", [f"=B{PR['v']}*B{PR['price']}".replace("B", colL) for colL in "BCD"])
 prow("n", "月核销间夜", [f"={colL}{PR['v']}*{A_base('REDEEM')}" for colL in "BCD"])
 prow("red", "月核销 GMV", [f"={colL}{PR['n']}*{colL}{PR['price']}" for colL in "BCD"])
