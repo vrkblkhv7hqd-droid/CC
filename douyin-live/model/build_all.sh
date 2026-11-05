@@ -25,3 +25,5 @@ python3 tables.py "$M/住小叮抖音直播财务模型.xlsx" "$B/tables.json"
 python3 charts.py "$M/住小叮抖音直播财务模型.xlsx" "$ROOT/report/charts" 2>&1 | grep -v findfont || true
 python3 "$B/build_doc.py"
 cd "$ROOT/report" && soffice --headless --convert-to pdf --outdir "$B" "住小叮抖音直播组织方案_股东决策文档.docx" >/dev/null 2>&1 && cp "$B/住小叮抖音直播组织方案_股东决策文档.pdf" ./ && echo "pdf pages: $(pdfinfo 住小叮抖音直播组织方案_股东决策文档.pdf | awk '/Pages/{print $2}')"
+python3 "$B/build_doc.py" "$ROOT/report/住小叮抖音直播方案_股东会简版.template.md" "$ROOT/report/住小叮抖音直播方案_股东会简版.md" "$ROOT/report/住小叮抖音直播方案_股东会简版.docx"
+cd "$ROOT/report" && soffice --headless --convert-to pdf --outdir "$B" "住小叮抖音直播方案_股东会简版.docx" >/dev/null 2>&1 && cp "$B/住小叮抖音直播方案_股东会简版.pdf" ./ && echo "simple pdf pages: $(pdfinfo 住小叮抖音直播方案_股东会简版.pdf | awk '/Pages/{print $2}')"

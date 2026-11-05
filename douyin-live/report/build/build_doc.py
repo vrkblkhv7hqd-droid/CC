@@ -2,9 +2,9 @@
 """用模型输出的表格替换模板占位符，生成最终 Markdown，并用 pandoc 导出 Word。"""
 import json, re, subprocess, sys, os
 BASE = "/home/user/CC/douyin-live/report"
-TEMPLATE = f"{BASE}/住小叮抖音直播组织方案_股东决策文档.template.md"
-OUT_MD = f"{BASE}/住小叮抖音直播组织方案_股东决策文档.md"
-OUT_DOCX = f"{BASE}/住小叮抖音直播组织方案_股东决策文档.docx"
+TEMPLATE = sys.argv[1] if len(sys.argv) > 1 else f"{BASE}/住小叮抖音直播组织方案_股东决策文档.template.md"
+OUT_MD = sys.argv[2] if len(sys.argv) > 2 else f"{BASE}/住小叮抖音直播组织方案_股东决策文档.md"
+OUT_DOCX = sys.argv[3] if len(sys.argv) > 3 else f"{BASE}/住小叮抖音直播组织方案_股东决策文档.docx"
 T = json.load(open(f"{BASE}/build/tables.json", encoding="utf-8"))
 T["SOURCES"] = open(f"{BASE}/build/sources.md", encoding="utf-8").read().strip()
 tpl = open(TEMPLATE, encoding="utf-8").read()
@@ -60,7 +60,7 @@ def cn_quotes(md):
     return head + "\n".join(lines)
 out = cn_quotes(out)
 # pandoc 源（含 YAML 标题块）
-PANDOC_MD = f"{BASE}/build/pandoc_source.md"
+PANDOC_MD = f"{BASE}/build/pandoc_source_" + os.path.basename(OUT_MD).replace(".md", "") + ".md"
 open(PANDOC_MD, "w", encoding="utf-8").write(out)
 # 飞书友好的 Markdown：去掉 YAML，改为一级标题
 m = re.match(r"---\n(.*?)\n---\n", out, re.S)

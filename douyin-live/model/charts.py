@@ -251,4 +251,44 @@ ax.set_title("推荐路线与专职团队：三种情景下总部累计净现金
 ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=9)
 fig.tight_layout(); fig.savefig(f"{OUT}/chart8_path_scenarios.png", facecolor=SURFACE); plt.close(fig)
 
+
+# ---------- 图9（简版）：三个方案的累计净收益（总收入 − 总成本，绝对口径，基准）与现状延续 ----------
+LAB_GROSS = "总部抖音收入合计（分成 + 管理费 + 加成 + 渠道费 + 营销费）"; LAB_COST = "总部成本合计"
+SIMPLE = [("A", "不投入：门店自播现状", C_GRAY), ("B1", "方案一：门店自播规范化", C_BLUE), ("V", "方案二：品牌部主导、按单付费", C_YELLOW), ("B2M", "方案三：总部专职团队", C_VIOLET)]
+fig, axes = plt.subplots(1, 3, figsize=(13, 4.6), dpi=200, sharey=True)
+for ax, (sheet, sname) in zip(axes, [("月度_悲观", "悲观"), ("月度_基准", "基准"), ("月度_乐观", "乐观")]):
+    style_ax(ax)
+    for code, lab, color in SIMPLE:
+        g = monthly_series(sheet, LAB_GROSS, CIDX[code]); cst = monthly_series(sheet, LAB_COST, CIDX[code])
+        cum = 0; ys = []
+        for a_, b_ in zip(g, cst): cum += a_ - b_; ys.append(wan(cum))
+        ax.plot(months, ys, color=color, linewidth=2.2, marker="o", markersize=3.5, label=lab)
+        ax.annotate(f"{ys[-1]:.0f}", (12, ys[-1]), textcoords="offset points", xytext=(5, 0), va="center", fontsize=9, color=C_INK2)
+    ax.axhline(0, color=C_AXIS, linewidth=0.8)
+    ax.set_xticks([1, 3, 6, 9, 12]); ax.set_xticklabels([f"第{m}月" for m in [1, 3, 6, 9, 12]])
+    ax.set_title(f"{sname}情景", loc="left", color=C_INK, fontsize=11, fontweight="bold")
+axes[0].set_ylabel("总部累计净收益：总收入 − 总成本（万元）", color=C_INK2)
+axes[1].legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=4, fontsize=9)
+fig.suptitle("三个方案 12 个月的总部累计净收益（绝对口径）", x=0.01, ha="left", color=C_INK, fontsize=12, fontweight="bold")
+fig.tight_layout(); fig.savefig(f"{OUT}/chart9_simple_cum.png", facecolor=SURFACE); plt.close(fig)
+
+# ---------- 图10（简版）：三个方案 12 个月总收入、总成本、净收益（基准）----------
+fig, ax = plt.subplots(figsize=(9, 4.4), dpi=200)
+style_ax(ax)
+names = [lab for _, lab, _ in SIMPLE]
+gross, cost, net = [], [], []
+for code, lab, color in SIMPLE:
+    g = sum(monthly_series("月度_基准", LAB_GROSS, CIDX[code])); c_ = sum(monthly_series("月度_基准", LAB_COST, CIDX[code]))
+    gross.append(wan(g)); cost.append(wan(c_)); net.append(wan(g - c_))
+xs = list(range(len(names))); w = 0.26
+for i, (vals, name, color) in enumerate([(gross, "12 个月总收入", C_BLUE), (cost, "12 个月总成本", C_ORANGE), (net, "净收益", C_AQUA)]):
+    bx = [x + (i - 1) * w for x in xs]
+    ax.bar(bx, vals, width=w - 0.03, color=color, label=name)
+    for x_, v in zip(bx, vals): ax.annotate(f"{v:.0f}", (x_, v), textcoords="offset points", xytext=(0, 4 if v >= 0 else -12), ha="center", fontsize=9, color=C_INK2)
+ax.axhline(0, color=C_AXIS, linewidth=0.8)
+ax.set_xticks(xs); ax.set_xticklabels([n.replace("：", "：\n") for n in names], fontsize=9)
+ax.set_ylabel("万元（基准情景，12 个月）", color=C_INK2)
+ax.set_title("总部口径：总收入、总成本与净收益（基准）", loc="left", color=C_INK, fontsize=12, fontweight="bold")
+ax.legend(frameon=False, loc="upper left", fontsize=9)
+fig.tight_layout(); fig.savefig(f"{OUT}/chart10_simple_bars.png", facecolor=SURFACE); plt.close(fig)
 print("charts written to", OUT)
