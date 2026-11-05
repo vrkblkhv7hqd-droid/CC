@@ -31,7 +31,7 @@ def fix_tables(md):
             for c in range(ncol):
                 cells = [hdr[c]] + [r[c] for r in body if c < len(r)]
                 w = max(dwidth(x) for x in cells)
-                widths.append(max(6, min(w, 36)))
+                widths.append(max(9, min(w, 36)))
             newsep = []
             for c in range(ncol):
                 right = sep[c].endswith(":") if c < len(sep) else False

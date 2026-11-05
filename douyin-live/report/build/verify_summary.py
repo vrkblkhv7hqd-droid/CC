@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""汇总两路核验结果（来源核对、独立交叉验证），生成附录 D 用的核验状态表与原始明细。"""
+"""汇总两路核验结果（来源核对、独立交叉验证），生成附录 D 用的核验状态表与原始明细。核验日期 2026-11-05。"""
 import json, sys, re
 W = "/root/.claude/projects/-home-user-CC/f2fc4d9d-a896-563c-b59a-2b4100561ba6/subagents/workflows"
 FID = f"{W}/wf_1471eb55-0a9/journal.jsonl"
@@ -39,7 +39,7 @@ lines.append("## 来源核对（逐 URL）\n")
 lines.append("| 编号 | URL | 可打开 | 判定 | 页面日期 | 说明 |")
 lines.append("|---|---|---|---|---|---|")
 for c in checks:
-    lines.append(f"| {c.get('id','')} | {c.get('url','')} | {'是' if c.get('reachable') else '否'} | {ZH.get(c.get('status'), c.get('status'))} | {c.get('page_date','') or ''} | {(c.get('note','') or '').replace('|','／')[:300]} |")
+    lines.append(f"| {c.get('id','')} | {c.get('url','')} | {'否' if c.get('status') == 'unreachable' else '是'} | {ZH.get(c.get('status'), c.get('status'))} | {c.get('page_date','') or ''} | {(c.get('note','') or '').replace('|','／')[:300]} |")
 lines.append("\n## 来源核对（按编号）\n")
 lines.append("| 编号 | 综合判定 | 说明 |")
 lines.append("|---|---|---|")

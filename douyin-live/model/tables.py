@@ -302,5 +302,28 @@ def grid_max(hdr_label):
         vals += [sv.cell(row=r, column=c).value for c in range(2, 9) if sv.cell(row=r, column=c).value is not None]; r += 1
     return max(vals)
 T["SENS1_MAX"] = wan(grid_max("每小时 GMV \\ ROI"), 1); T["SENS2_MAX"] = wan(grid_max("每小时 GMV \\ 人力成本"), 1)
+
+# ---- 核验统计（report/build/verification.json，由 verify_summary.py 生成）----
+import os as _os, re as _re
+_vp = "/home/user/CC/douyin-live/report/build/verification.json"
+if _os.path.exists(_vp):
+    _V = json.load(open(_vp, encoding="utf-8"))
+    _checks = _V["checks"]
+    T["VER_URL_TOTAL"] = str(len(_checks))
+    T["VER_URL_OK"] = str(sum(1 for c in _checks if c.get("status") != "unreachable"))
+    T["VER_URL_UNREACH"] = str(sum(1 for c in _checks if c.get("status") == "unreachable"))
+    # 同一编号有「补」记录时以补抓结果为准
+    _rows = {}
+    for _k, _v in _V["row_verdicts"].items():
+        _b = _re.sub(r"（.*?）", "", _k)
+        if _b not in _rows or "补" in _k: _rows[_b] = _v["verdict"]
+    T["VER_ROW_SUP"] = str(sum(1 for v in _rows.values() if v == "supported"))
+    T["VER_ROW_PART"] = str(sum(1 for v in _rows.values() if v == "partially_supported"))
+    T["VER_ROW_UNV"] = str(sum(1 for v in _rows.values() if v not in ("supported", "partially_supported")))
+    _vd = _V["verdicts"]
+    T["VER_COR_ITEMS"] = str(len(_vd))
+    for _name, _key in [("VER_COR_CONF", "confirmed"), ("VER_COR_ADJ", "adjust"), ("VER_COR_REF", "refuted"), ("VER_COR_UNV", "unverifiable")]:
+        T[_name] = str(sum(1 for v in _vd if v.get("verdict") == _key))
+    T["VER_SEARCHES"] = str(_V.get("searches", 0))
 json.dump(T, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("tables:", len(T), "->", OUT)
