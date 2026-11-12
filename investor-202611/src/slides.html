@@ -193,40 +193,71 @@
   <aside class="notes">【约 1 分钟】这是真实运行的界面。左边是出租率监测，未来每一天卖了多少、还剩多少。右上是调价：系统把日期、房型、平台和目标价填好，店长点确认才执行；表里的价格是划线价，不是成交价。右下是评价回复，AI 起草，店长改完再发。</aside>
 </section>
 
-<!-- ===================== 9 住小叮与 −64% ===================== -->
-<section class="slide" data-label="住小叮验证">
+<!-- ===================== 9 试验场：住小叮 ===================== -->
+<section class="slide" data-label="试验场住小叮">
   <div class="slide-inner">
-    <div class="eyebrow reveal" style="--i:0">03 · 验证 <span class="badge">内部口径</span></div>
+    <div class="eyebrow reveal" style="--i:0">03 · 验证</div>
     <div class="title-block reveal" style="--i:1">
-      <h2>住小叮 30 家店：6 项日常任务每周用时减少约 64%</h2>
-      <p class="key">住小叮是 4 平方米单人间的极简酒店，房价低、人手少。<strong>在这里跑得通，就不依赖高房价和大团队。</strong></p>
+      <h2>试验场：住小叮，房价最低、人手最少的 30 家店</h2>
+      <p class="key">4 平方米的单人间，介于青旅和经济型酒店之间。<strong>在这里跑得通，就不依赖高房价和大团队。</strong></p>
     </div>
     <div class="slide-body center">
-      <div class="cols center" style="--cols: 0.95fr 1.15fr 0.9fr; gap: 44px">
-        <div class="figure reveal" style="--i:2">
-          <div class="photo" style="--h: 380px"><img src="assets/zhuxiaoding-store.jpg" alt="住小叮门店"></div>
-          <div class="caption"><strong>住小叮</strong>：30 家已开业（20 家直营、10 家加盟），含签约与筹建共 54 家，不到 4,000 间房</div>
-        </div>
-        <div class="reveal" style="--i:3">
-          <div class="legend" style="margin-bottom:22px"><span class="lb">使用前</span><span class="la">使用后</span><span style="margin-left:auto">分钟 / 周</span></div>
-          <div class="bars" style="grid-template-columns: 190px 1fr 70px; row-gap: 20px">
-            <div class="lab">房态巡检</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">120</span><span class="a">30</span></div>
-            <div class="lab">竞品监控</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:50%"></div></div><div class="val"><span class="b">120</span><span class="a">60</span></div>
-            <div class="lab">出租率监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
-            <div class="lab">每小时订房监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
-            <div class="lab">一键调价</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
-            <div class="lab">划线价核查</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
+      <div class="cols center" style="--cols: 1.2fr 1fr; gap: 56px">
+        <div class="photo reveal" style="--i:2; --h: 540px"><img src="assets/zhuxiaoding-store.jpg" alt="住小叮门店"></div>
+        <div style="display:flex; flex-direction:column; gap:28px">
+          <div class="reveal" style="--i:3; display:flex; gap:48px; align-items:flex-end">
+            <div class="stat"><div class="big accent">30</div><div class="cap">家店<strong>已开业</strong><br>20 家直营、10 家加盟</div></div>
+            <div class="stat"><div class="big md">54</div><div class="cap">家，<strong>含签约和筹建中</strong></div></div>
           </div>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:24px">
-          <div class="stat reveal" style="--i:4"><div class="big accent">−64<span class="unit">%</span></div><div class="cap">每周合计 <strong>480 分钟降到 174 分钟</strong>；口径：一位店长管两家店，不含其他工作</div></div>
-          <div class="card reveal" style="--i:5"><span class="label">一次房态巡检 · 团结湖店 · 11 月 12 日</span><p>核对 1,890 条平台记录，发现 <strong>498 条</strong>“有房却关了房”</p></div>
+          <div class="stat reveal" style="--i:4"><div class="big md"><span class="pre">不到</span>4,000</div><div class="cap">间客房，<strong>全部门店都在用 HogentX</strong></div></div>
+          <ul class="points tight reveal" style="--i:5">
+            <li>单人间为主，没有独立卫浴，每间约 4 平方米</li>
+            <li>一家店约 5 名员工加 1 名店长，请不起专人盯收入</li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="foot"><span class="src">来源：住小叮经营数据与内部业务反馈（2026-11）；房态巡检为 2026-11-12 团结湖店实测</span><span class="num">{{n}}</span></div>
+    <div class="foot"><span class="src">来源：住小叮经营数据（创始人提供，2026-11）</span><span class="num">{{n}}</span></div>
   </div>
-  <aside class="notes">【约 2 分钟】验证是在住小叮做的。30 家店已开业，20 家直营、10 家加盟，都是 4 平方米的单人间。这是房价最低、人手最少的业态之一，在这里跑通，说明产品不依赖高房价和大团队。结果：6 项日常任务每周合计用时从 480 分钟降到 174 分钟。口径我直接说：一位店长管两家店，内部统计，不含其他工作。另外一个例子：昨晚团结湖店的一次房态巡检，核对 1,890 条平台记录，发现 498 条有房却关了房。（如果被问“为什么这么多”，按实际情况说明：哪些是有意不开售的，哪些是漏开的。）</aside>
+  <aside class="notes">【约 40 秒】验证是在住小叮做的。30 家店已开业，20 家直营、10 家加盟，算上签约和筹建中的一共 54 家，不到 4,000 间房。都是 4 平方米的单人间，没有独立卫浴，介于青旅和经济型酒店之间。这是房价最低、人手最少的业态之一，在这里跑通，说明产品不依赖高房价和大团队。</aside>
+</section>
+
+<!-- ===================== 10 验证结果：−64% 与房态巡检 ===================== -->
+<section class="slide" data-label="验证结果">
+  <div class="slide-inner">
+    <div class="eyebrow reveal" style="--i:0">03 · 验证 <span class="badge">内部口径 · 右图为系统实拍</span></div>
+    <div class="title-block reveal" style="--i:1">
+      <h2>住小叮 30 家店：6 项日常任务每周用时减少约 64%</h2>
+      <p class="key">每周 480 分钟降到 174 分钟。<strong>右图是 11 月 12 日的一次房态巡检：1,890 条平台记录里，498 条有房却关了房。</strong></p>
+    </div>
+    <div class="slide-body center">
+      <div class="cols center" style="--cols: 0.92fr 1.08fr; gap: 54px">
+        <div style="display:flex; flex-direction:column; gap:24px">
+          <div class="reveal" style="--i:2; display:flex; gap:30px; align-items:center">
+            <div class="big md accent">−64<span class="unit">%</span></div>
+            <div class="stat"><div class="cap">每周合计 <strong>480 分钟降到 174 分钟</strong><br>口径：一位店长管两家店，不含其他工作</div></div>
+          </div>
+          <div class="reveal" style="--i:3">
+            <div class="legend" style="margin-bottom:18px"><span class="lb">使用前</span><span class="la">使用后</span><span style="margin-left:auto">分钟 / 周</span></div>
+            <div class="bars" style="grid-template-columns: 200px 1fr 70px; row-gap: 16px">
+              <div class="lab">房态巡检</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">120</span><span class="a">30</span></div>
+              <div class="lab">竞品监控</div><div class="track"><div class="bar before" style="width:100%"></div><div class="bar after" style="width:50%"></div></div><div class="val"><span class="b">120</span><span class="a">60</span></div>
+              <div class="lab">出租率监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
+              <div class="lab">每小时订房监测</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:25%"></div></div><div class="val"><span class="b">60</span><span class="a">30</span></div>
+              <div class="lab">一键调价</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
+              <div class="lab">划线价核查</div><div class="track"><div class="bar before" style="width:50%"></div><div class="bar after" style="width:10%"></div></div><div class="val"><span class="b">60</span><span class="a">12</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="figure reveal" style="--i:4">
+          <div class="shot"><img src="assets/shot-roomcheck.jpg" alt="房态巡检结果"></div>
+          <div class="caption"><strong>房态巡检</strong>（团结湖店）：酒店系统里有房，平台上却关着，客人订不到。每一条都要店长判断：是有意不开售，还是漏开</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span class="src">来源：住小叮内部业务反馈（2026-11）；HogentX 应用实际页面（2026-11-12 实拍，住小叮团结湖店）</span><span class="num">{{n}}</span></div>
+  </div>
+  <aside class="notes">【约 1.5 分钟】结果有两个。第一，6 项日常任务每周合计用时从 480 分钟降到 174 分钟，少了约六成四；降得最多的是改价和划线价核查，从 60 分钟到 12 分钟。口径我直接说：一位店长管两家店，内部统计，不含其他工作。第二，右边是团结湖店 11 月 12 日晚上的一次房态巡检：核对 1,890 条平台记录，498 条是酒店系统里有房、平台上却关着。（如果被问“为什么这么多”，按实际情况说明：哪些是有意不开售的，哪些是漏开的。）</aside>
 </section>
 
 <!-- ===================== 10 阶段 ===================== -->
