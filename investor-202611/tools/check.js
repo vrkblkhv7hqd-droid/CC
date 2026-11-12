@@ -5,7 +5,8 @@ const path = require('path');
 const fs = require('fs');
 
 const deck = path.resolve(__dirname, '..');
-const file = path.join(deck, 'HogentX-Investor-Update-202611.html');
+// 默认检查第二版；要检查别的文件，用环境变量 DECK_FILE 指定文件名
+const file = path.join(deck, process.env.DECK_FILE || 'HogentX-Investor-Update-202611-v2.html');
 const outDir = path.resolve(process.argv[2] || path.join(deck, '.check'));
 const W = parseInt(process.argv[3] || '1920', 10), H = parseInt(process.argv[4] || '1080', 10);
 fs.mkdirSync(outDir, { recursive: true });
@@ -16,6 +17,8 @@ fs.mkdirSync(outDir, { recursive: true });
   const errors = [];
   page.on('pageerror', e => errors.push('pageerror: ' + e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
+  // OFFLINE=1：拦掉在线字体，模拟现场没有网络时的样子
+  if (process.env.OFFLINE) await page.route(/fonts\.(googleapis|gstatic)\.com/, r => r.abort());
   await page.goto('file://' + file, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   const n = await page.evaluate(() => document.querySelectorAll('.slide').length);

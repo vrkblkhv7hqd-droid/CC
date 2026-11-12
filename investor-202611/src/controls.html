@@ -1,8 +1,7 @@
-<!-- 舞台外控件 -->
+<!-- 舞台外控件。按键提示不显示在屏幕上：← → 翻页，F 全屏，Shift+N 讲稿，Shift+E 编辑 -->
 <div class="progress" id="progress"></div>
 <div class="counter" id="counter">1 / 1</div>
-<div class="help">← → 翻页 · N 备注 · F 全屏 · E 编辑</div>
+<div class="help"></div>
 <aside class="notes-panel" id="notesPanel"><h4>演讲者备注</h4><div id="notesBody"></div></aside>
-<div class="edit-hotzone" id="editHotzone"></div>
-<button class="edit-toggle" id="editToggle" title="编辑模式 (E)">✎</button>
-
+<div class="edit-hotzone" id="editHotzone" style="pointer-events:none"></div>
+<button class="edit-toggle" id="editToggle" title="编辑模式 (Shift+E)">✎</button>

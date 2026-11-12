@@ -12,7 +12,8 @@ class SlidePresentation {
         this.setupStageScale();
         this.setupKeyboardNav();
         this.setupTouchNav();
-        this.setupWheelNav();
+        /* 滚轮和触控板翻页已关闭：带惯性的一次滑动会连翻几页。需要时取消下一行的注释 */
+        /* this.setupWheelNav(); */
         this.setupNotes();
         this.setupEditing();
         const fromHash = parseInt(location.hash.replace('#', ''), 10);
@@ -43,7 +44,7 @@ class SlidePresentation {
                 case 'ArrowLeft': case 'ArrowUp': case 'PageUp': e.preventDefault(); this.prev(); break;
                 case 'Home': e.preventDefault(); this.go(0); break;
                 case 'End': e.preventDefault(); this.go(this.slides.length - 1); break;
-                case 'n': case 'N': this.toggleNotes(); break;
+                case 'N': if (e.shiftKey) this.toggleNotes(); break;   /* 讲稿面板要按 Shift+N，避免投屏时误触 */
                 case 'f': case 'F': this.toggleFullscreen(); break;
             }
         });
@@ -85,7 +86,7 @@ class SlidePresentation {
         else document.exitFullscreen && document.exitFullscreen();
     }
 
-    /* 行内编辑：E 键或左上角热区，Ctrl+S 保存为新 HTML 文件，草稿自动存 localStorage */
+    /* 行内编辑：Shift+E 进入，Ctrl+S 保存为新 HTML 文件，草稿自动存 localStorage。左上角热区在 controls.html 里已关闭 */
     setupEditing() {
         const hotzone = document.getElementById('editHotzone');
         const toggle = document.getElementById('editToggle');
@@ -100,7 +101,8 @@ class SlidePresentation {
         hotzone.addEventListener('click', () => this.toggleEditMode());
         toggle.addEventListener('click', () => this.toggleEditMode());
         document.addEventListener('keydown', (e) => {
-            if ((e.key === 'e' || e.key === 'E') && !(e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true')) this.toggleEditMode();
+            /* 编辑模式要按 Shift+E，避免投屏时误触 */
+            if (e.key === 'E' && e.shiftKey && !(e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true')) this.toggleEditMode();
             if ((e.ctrlKey || e.metaKey) && e.key === 's' && this.isEditing) { e.preventDefault(); this.saveFile(); }
         });
         try {
@@ -123,7 +125,7 @@ class SlidePresentation {
         const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const blob = new Blob([html], { type: 'text/html' });
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob); a.download = 'HogentX-Investor-Update-202611-edited.html'; a.click();
+        a.href = URL.createObjectURL(blob); a.download = 'HogentX-Investor-Update-202611-v2-edited.html'; a.click();
         this.toggleEditMode(); this.toggleEditMode();
     }
 

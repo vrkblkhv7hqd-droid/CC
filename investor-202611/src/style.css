@@ -503,3 +503,6 @@ table.tbl.mid th { font-size: 19px; }
 
 /* 结尾页的一句话 */
 .closing { font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 1.3; color: var(--paper); }
+
+/* 标签行右侧的小字说明（如“现在由酒店授权、在本地客户端操作”） */
+.tagnote { font-size: 20px; color: var(--muted); margin-left: 12px; align-self: center; }
