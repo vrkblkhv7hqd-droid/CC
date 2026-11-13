@@ -506,3 +506,6 @@ table.tbl.mid th { font-size: 19px; }
 
 /* 标签行右侧的小字说明（如“现在由酒店授权、在本地客户端操作”） */
 .tagnote { font-size: 20px; color: var(--muted); margin-left: 12px; align-self: center; }
+
+/* 矩阵里“等接口打通后”的小字 */
+table.tbl td .later { font-size: 19px; color: var(--muted); font-weight: 400; white-space: nowrap; }
