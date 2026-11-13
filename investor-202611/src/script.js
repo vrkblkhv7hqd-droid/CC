@@ -125,7 +125,7 @@ class SlidePresentation {
         const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const blob = new Blob([html], { type: 'text/html' });
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob); a.download = 'HogentX-Investor-Update-202611-v2-edited.html'; a.click();
+        a.href = URL.createObjectURL(blob); a.download = 'HogentX-Investor-Update-202611-v3-edited.html'; a.click();
         this.toggleEditMode(); this.toggleEditMode();
     }
 

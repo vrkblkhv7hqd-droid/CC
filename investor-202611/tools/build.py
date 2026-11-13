@@ -2,18 +2,18 @@
 
 用法（在 investor-202611 目录下）：  python3 tools/build.py
 产出：
-  HogentX-Investor-Update-202611-v2.html        现场用的演示稿（含讲稿，按 Shift+N 打开）
-  HogentX-Investor-Update-202611-v2-share.html  外发版：同样的页面，去掉全部讲稿
-  speaker-notes-v2.md                           讲稿、时间分配、追问清单
+  HogentX-Investor-Update-202611-v3.html        现场用的演示稿（含讲稿，按 Shift+N 打开）
+  HogentX-Investor-Update-202611-v3-share.html  外发版：同样的页面，去掉全部讲稿
+  speaker-notes-v3.md                           讲稿、时间分配、追问清单
 第一版（HogentX-Investor-Update-202611.html 和 speaker-notes.md）保留不动，不由本脚本生成。
 """
 import base64, datetime, html, mimetypes, pathlib, re
 
 deck = pathlib.Path(__file__).resolve().parent.parent
 src = deck / "src"
-OUT = deck / "HogentX-Investor-Update-202611-v2.html"
-SHARE = deck / "HogentX-Investor-Update-202611-v2-share.html"
-NOTES = deck / "speaker-notes-v2.md"
+OUT = deck / "HogentX-Investor-Update-202611-v3.html"
+SHARE = deck / "HogentX-Investor-Update-202611-v3-share.html"
+NOTES = deck / "speaker-notes-v3.md"
 TITLE = "HogentX 进展汇报 · 2026 年 11 月"
 FONTS = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700"
          "&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700"
@@ -109,15 +109,15 @@ for label, appendix, content in sections:
     index.append(f"{head}：{label}")
     body += [f"## {head} · {label}", "", f"**页面标题**：{title}", "", note, ""]
 
-INTRO = f"""# HogentX 进展汇报 · 讲稿（第二版）
+INTRO = f"""# HogentX 进展汇报 · 讲稿（第三版）
 
 由演示稿里的讲稿自动生成。演示时按 **Shift+N** 可以在屏幕右侧打开同样的内容；投屏时对方也看得到，正式讲的时候不要打开，用手机或打印稿看这份。
 
-正文合计约 **{total:.0f} 分钟**，留十二分钟以上给对话；附录只在被问到时翻。
+正文合计约 **{total:.0f} 分钟**。只有 30 分钟时，跳过第 7 页（工具矩阵）、第 9 页（为什么是这 10 项）、第 11 页（传统方式对比）和第 14 页（现在的位置），可以省下约 2 分半；附录只在被问到时翻。
 
 **按键**：← → 或空格翻页；Home 回封面，End 到最后一页；F 全屏；Shift+N 讲稿；Shift+E 编辑。滚轮和触控板不翻页。
 
-**页码**（跳页时在网址后面加 # 和页码，例如 #15）：{"；".join(index)}。
+**页码**（跳页时在网址后面加 # 和页码，例如 #18）：{"；".join(index)}。
 
 ## 三种长度
 
@@ -129,19 +129,19 @@ INTRO = f"""# HogentX 进展汇报 · 讲稿（第二版）
 
 **5 页版（约 8 分钟）**
 
-只讲第 2 页（结论）、第 10 页（证据）、第 15 页（收费）、第 16 页（时间表）、第 18 页（收尾）。时间只剩一半时，第 2 页讲完直接说：“时间有限，我只讲三页：证据、怎么收费、时间表。”
+只讲第 2 页（结论）、第 13 页（证据）、第 18 页（收费）、第 19 页（时间表）、第 21 页（收尾）。时间只剩一半时，第 2 页讲完直接说：“时间有限，我只讲三页：证据、怎么收费、时间表。”
 
 **完整版**
 
-按下面逐页的讲稿。只背开场（第 1、2 页）和收尾（第 18 页），其余每页记一句结论、最多两个数、一句过渡。
+按下面逐页的讲稿。只背开场（第 1、2 页）和收尾（第 21 页），其余每页记一句结论、最多两个数、一句过渡。
 
 ## 现场规则
 
 - 坐在他旁边或桌角，两个人看同一块屏幕。手机放在桌上计时。
 - 他说“直接说吧”：把屏幕转开，讲 90 秒版，然后问“您想先追哪一块”，需要看证据时再翻到那一页。
 - 他在第 2 页就抛出大问题：直接答，答完问一句“我接着往下讲，还是就着这个聊？”不要说“这个后面会讲到”。
-- 开讲后第 11 分钟必须翻到第 14 页（为什么是海外）。前面被问多了，第 7 页、第 11 页直接翻过去。到第 15 分钟还没讲到收费，说“我跳到怎么卖”，直接翻到第 15 页。
-- 他在第 13 页想深聊技术：“细节放到最后一起聊，我先把怎么卖讲完。”
+- 开讲后第 13 分钟必须翻到第 17 页（为什么是海外）。前面被问多了，第 7、9、11、14 页直接翻过去。到第 17 分钟还没讲到收费，说“我跳到怎么卖”，直接翻到第 18 页。
+- 他在第 16 页想深聊技术：“细节放到最后一起聊，我先把怎么卖讲完。”
 - 每页嘴上最多两个数，其余用手指给他看。
 - 坦白的话集中在第 2 页说一次，说干脆；后面各页不再重复。每一句“还没有”后面，紧跟一句“所以我怎么做”。
 
