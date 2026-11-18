@@ -1,0 +1,8 @@
+node_modules/
+film/fonts/
+chunks/
+list.txt
+*.mp4
+*.wav
+*.log
+package-lock.json

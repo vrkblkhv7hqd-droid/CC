@@ -1,0 +1,15 @@
+{
+  "name": "hogentx-30s-film",
+  "private": true,
+  "description": "HogentX 30s brand film: canvas renderer + synthesised score",
+  "scripts": {
+    "setup": "./setup.sh",
+    "audio": "python3 audio.py bgm.wav",
+    "render": "node render.js 0 1800 4 30",
+    "assemble": "./assemble.sh HogentX-BrandFilm-30s.mp4"
+  },
+  "dependencies": {
+    "@fontsource/manrope": "^5",
+    "@fontsource/noto-sans-sc": "^5"
+  }
+}
