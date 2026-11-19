@@ -24,6 +24,7 @@ function drawProof(t, cam) {
   lattice(cam, 'rgba(255,255,255,.075)', 'rgba(255,255,255,.04)');
   const a = onLine(BOUND[1] - 60), b = onLine(BOUND[2] + 60);
   seg(g, a[0], a[1], b[0], b[1], '#fff', 5, 'butt');
+  linePulse(t, 23.4375, 5 * D, C.amber, null);
   const n = node(5);
   if (Math.hypot(n[0] - cam.x, n[1] - cam.y) > 2600) return;
   const τ = t - 20;
@@ -33,15 +34,15 @@ function drawProof(t, cam) {
     // kicker
     const s = τ - 0.1;
     g.save(); g.globalAlpha = an(s, 0, 0.5); fillPoly(g, towerPts(-820, -330, 13, 28), C.amber); g.restore();
-    txt(g, '住小叮实验', -792, -334, { w: 700, size: 28, ls: 5, color: C.amber, t: s, st: 0.03 });
-    g.save(); g.globalAlpha = an(s, 0.1, 0.5) * 0.5; seg(g, -610, -345, -610 + 44 * an(s, 0.1, 0.6), -345, '#fff', 2, 'butt'); g.restore();
-    txt(g, '29 HOTELS · WEEKLY HOURS ON 6 ROUTINE TASKS', -548, -336, { w: 700, size: 21, ls: 4.5, color: 'rgba(255,255,255,.72)', t: s - 0.08, st: 0.008 });
+    const P = S.proof, kw = txt(g, P.kicker, -792, -334, { w: 700, size: EN ? 25 : 28, ls: 5, color: C.amber, t: s, st: 0.03 }), kx = -792 + kw + 22;
+    g.save(); g.globalAlpha = an(s, 0.1, 0.5) * 0.5; seg(g, kx, -345, kx + 44 * an(s, 0.1, 0.6), -345, '#fff', 2, 'butt'); g.restore();
+    txt(g, P.kicker2, kx + 62, -336, { w: 700, size: 21, ls: 4.5, color: 'rgba(255,255,255,.72)', t: s - 0.08, st: 0.008 });
     // number
     const cnt = E.inOutCubic(pr(τ, 1.25, 2.42)), tq = Math.floor(t * FPS + 1e-6) / FPS - 20, val = Math.round(lerp(480, 174, E.inOutCubic(pr(tq, 1.25, 2.42))));
     const wN = digits(g, String(val), -832, -62, { size: 262, color: '#fff', t: s - 0.12 });
-    txt(g, '分钟', -832 + wN + 26, -124, { w: 700, size: 56, ls: 2, color: '#fff', t: s - 0.4, st: 0.05 });
-    txt(g, '/ 周', -832 + wN + 28, -62, { w: 500, size: 38, ls: 2, color: 'rgba(255,255,255,.75)', t: s - 0.5, st: 0.05 });
-    txt(g, '6 项日常任务，每周合计用时', -820, 6, { w: 500, size: 36, ls: 2, color: 'rgba(255,255,255,.92)', t: s - 0.35, st: 0.022 });
+    txt(g, P.unit, -832 + wN + 26, -124, { w: 700, size: 56, ls: EN ? -0.5 : 2, color: '#fff', t: s - 0.4, st: 0.05 });
+    txt(g, P.per, -832 + wN + 28, -62, { w: 500, size: 38, ls: EN ? 0 : 2, color: 'rgba(255,255,255,.75)', t: s - 0.5, st: 0.05 });
+    txt(g, P.label, -820, 6, { w: 500, size: 36, ls: EN ? 0.2 : 2, by: BODY.by, color: 'rgba(255,255,255,.92)', t: s - 0.35, st: EN ? 0.05 : 0.022 });
     // towers: before (ghost) / after (solid)
     const base = 430, tx = 640, tw = 180, hB = 636, hA = 636 * (174 / 480);
     const up = clamp(spring(τ - 0.38, 2.3, 0.75), 0, 1.15);
@@ -54,11 +55,11 @@ function drawProof(t, cam) {
       seg(g, 30, base + 1, tx + tw + 30, base + 1, 'rgba(255,255,255,.4)', 2, 'butt');
       // labels
       g.save(); g.globalAlpha = an(τ, 0.75, 0.5);
-      label(g, '使用前', tx - 22, base - hB + 30, { w: 500, size: 25, ls: 2, color: 'rgba(255,255,255,.75)', align: 'r' });
+      label(g, P.before, tx - 22, base - hB + 30, { w: 500, size: 25, ls: EN ? 0.5 : 2, color: 'rgba(255,255,255,.75)', align: 'r' });
       label(g, '480', tx - 22, base - hB + 68, { w: 800, size: 34, color: 'rgba(255,255,255,.9)', align: 'r' });
       g.restore();
       g.save(); g.globalAlpha = an(τ, 2.45, 0.5);
-      label(g, '使用后', tx - 22, base - hA + 30, { w: 500, size: 25, ls: 2, color: '#fff', align: 'r' });
+      label(g, P.after, tx - 22, base - hA + 30, { w: 500, size: 25, ls: EN ? 0.5 : 2, color: '#fff', align: 'r' });
       label(g, '174', tx - 22, base - hA + 68, { w: 800, size: 34, color: C.amber, align: 'r' });
       g.restore();
     }
@@ -69,12 +70,12 @@ function drawProof(t, cam) {
       g.globalAlpha = clamp(hp * 3);
       label(g, '−64%', 14, 420, { w: 800, size: 192, ls: -4, color: C.amber });
       g.restore();
-      txt(g, '用时减少', 26, 236, { w: 700, size: 40, ls: 6, color: '#fff', t: τ - 2.62, st: 0.05 });
+      txt(g, P.less, 26, 236, { w: 700, size: EN ? 30 : 40, ls: EN ? 5 : 6, color: '#fff', t: τ - 2.62, st: EN ? 0.025 : 0.05 });
       const k2 = pr(τ, 2.5, 3.2); if (k2 < 1) { g.save(); g.globalAlpha = (1 - k2) * 0.5; rr(g, 0 - 60 * k2, 190 - 60 * k2, 520 + 120 * k2, 250 + 120 * k2, 40); g.strokeStyle = C.amber; g.lineWidth = 3; g.stroke(); g.restore(); }
     }
     // footnote
     g.save(); g.globalAlpha = an(τ, 0.7, 0.8, E.outCubic) * 0.72;
-    label(g, '实验范围：自有品牌「住小叮」29 家酒店（中国）· 口径：一位经理管理 2 家酒店时，6 项任务每周合计用时 · 来源：内部业务反馈', -820, 486, { w: 400, size: 20, ls: 0.6, color: '#fff' });
+    label(g, P.note, -820, 486, { w: 400, size: P.noteSize, ls: EN ? 0.2 : 0.6, color: '#fff' });
     g.restore();
   });
 }
@@ -121,10 +122,10 @@ function drawFinal(t, cam) {
     drawSymbol(g, cx, cy, k, p, C.white);
     GL.save(); GL.globalAlpha = lerp(0.75, 0.42, pr(τ, 0.3, 1.6)); drawSymbol(GL, cx, cy, k, p, '#6F96FF'); GL.restore();
     // wordmark
-    const S = 0.27, wx = -243, wy = -240 - 289 * S + 70;
+    const WS = 0.27, wx = -243, wy = -240 - 289 * WS + 70;
     const order = ['H', 'o', 'g', 'e', 'n', 't', 'X'];
     for (const c of [g, GL]) {
-      c.save(); c.translate(wx, wy); c.scale(S, S);
+      c.save(); c.translate(wx, wy); c.scale(WS, WS);
       c.save(); c.beginPath(); c.rect(-40, -60, WM_W + 80, 60 + 592); c.clip();
       for (let i = 0; i < order.length; i++) {
         const q = E.outExpo(pr(τ, 1.48 + i * 0.065, 2.28 + i * 0.065));
@@ -150,15 +151,16 @@ function drawFinal(t, cam) {
       GL.save(); GL.beginPath(); GL.moveTo(gx - 60, -500); GL.lineTo(gx + 60, -500); GL.lineTo(gx + 60 + 500 * 0.6, 300); GL.lineTo(gx - 60 + 500 * 0.6, 300); GL.closePath(); GL.clip();
       GL.globalAlpha = Math.sin(Math.PI * gp);
       drawSymbol(GL, cx, cy, k, { L: 1, M: 1, R: 1, link: 1 }, '#fff');
-      GL.translate(wx, wy); GL.scale(S, S); GL.fillStyle = '#fff'; for (const o of order) GL.fill(WM_PATHS[o], 'evenodd');
+      GL.translate(wx, wy); GL.scale(WS, WS); GL.fillStyle = '#fff'; for (const o of order) GL.fill(WM_PATHS[o], 'evenodd');
       GL.restore();
     }
     // tagline
-    txt(g, '让每一间房，卖出它该有的价钱。', 0, 130, { w: 700, size: 64, ls: 8, color: C.white, align: 'c', t: τ - 2.47, st: 0.036, d: 0.9 });
+    const Z = S.end;
+    txt(g, Z.tag, 0, 130, { w: 700, size: Z.tagSize, ls: Z.tagLs, by: BODY.by, color: C.white, align: 'c', t: τ - 2.47, st: Z.tagSt, d: 0.9 });
     // descriptor + url
-    const f1 = fnt(500, 28), s1 = '懂经营的酒店 AI 数字员工', s2 = 'hogentx.com';
-    const w1 = textW(s1, f1, 3), w2 = textW(s2, fnt(700, 28), 2.5), tot = w1 + 64 + w2, x0 = -tot / 2;
-    txt(g, s1, x0, 212, { w: 500, size: 28, ls: 3, color: 'rgba(214,224,255,.78)', t: τ - 3.0, st: 0.016, d: 0.7 });
+    const f1 = fnt(500, 28), s1 = Z.desc, s2 = Z.url, dls = EN ? 0.6 : 3;
+    const w1 = textW(s1, f1, dls), w2 = textW(s2, fnt(700, 28), 2.5), tot = w1 + 64 + w2, x0 = -tot / 2;
+    txt(g, s1, x0, 212, { w: 500, size: 28, ls: dls, by: BODY.by, color: 'rgba(214,224,255,.78)', t: τ - 3.0, st: EN ? 0.05 : 0.016, d: 0.7 });
     g.save(); g.globalAlpha = an(τ, 3.2, 0.5); fillPoly(g, towerPts(x0 + w1 + 28, 214, 7, 26), C.amber); g.restore();
     txt(g, s2, x0 + w1 + 64, 212, { w: 700, size: 28, ls: 2.5, color: C.white, t: τ - 3.22, st: 0.02, d: 0.7 });
   });

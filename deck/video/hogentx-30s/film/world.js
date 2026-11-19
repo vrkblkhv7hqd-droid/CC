@@ -29,6 +29,11 @@ function stopPos(i, t) {
   const d = DRIFT * (t - t0 - 1.1);
   return [STOPS[i].x + U[0] * d, STOPS[i].y + U[1] * d];
 }
+const HOLD_PUSH = 0.022;
+function holdPush(k, t) {          // k = stop index 1..5
+  if (k < 1 || k > 5) return 0;
+  return HOLD_PUSH * E.inOutSine(pr(t, WHIPS[k - 1] + 0.55, WHIPS[k] - WT * WC));
+}
 function cameraAt(t) {
   let x, y, z = 1;
   if (t < T_STRIKE) {
@@ -51,6 +56,9 @@ function cameraAt(t) {
       a = stopPos(k - 1, t); b = stopPos(k, t);
       x = lerp(a[0], b[0], p); y = lerp(a[1], b[1], p);
       z = 1 - 0.085 * Math.pow(Math.sin(Math.PI * Math.pow(q, 0.8)), 2);
+      // gentle push while holding on a stop; the previous stop's push is released as the next whip starts
+      const ws = WHIPS[k - 1] - WT * WC;
+      z *= 1 + holdPush(k, t) + (k > 1 ? HOLD_PUSH : 0) * (1 - smooth(pr(t, ws, ws + 0.3)));
     }
     // impacts
     const sh = (t0, amp, f = 62) => { const d = t - t0; if (d < 0 || d > 0.6) return; const e = amp * Math.exp(-d * 9); x += e * Math.sin(d * f); y += e * Math.cos(d * f * 1.31); };
@@ -136,6 +144,13 @@ function drawDebris(cam) {
   g.globalAlpha = 1;
 }
 
+// a bright pulse running along the line (the agent at work)
+function linePulse(t, t0, sMid, core, glowCol, dur = 0.95) {
+  const p = pr(t, t0, t0 + dur); if (p <= 0 || p >= 1) return;
+  const s = sMid + lerp(-1350, 1350, E.inOutCubic(p)), a = onLine(s - 80), b = onLine(s + 80), al = Math.sin(Math.PI * p);
+  g.save(); g.globalAlpha = al; seg(g, a[0], a[1], b[0], b[1], core, 7, 'round'); g.restore();
+  if (glowCol) { GL.save(); GL.globalAlpha = al; seg(GL, a[0], a[1], b[0], b[1], glowCol, 12, 'round'); GL.restore(); }
+}
 // ---------- the line ----------
 // visible range of the line [sa, sb] at time t
 function lineRange(t) {

@@ -116,10 +116,10 @@ function layoutText(s, font, ls = 0) {
   if (L) return L;
   if (!_mctx) _mctx = document.createElement('canvas').getContext('2d');
   const c = _mctx; c.font = font; c.letterSpacing = ls + 'px';
-  const chars = Array.from(s), xs = [0];
-  let acc = '';
-  for (let i = 0; i < chars.length; i++) { acc += chars[i]; xs.push(c.measureText(acc).width); }
-  L = { chars, xs, w: xs[xs.length - 1] - ls };
+  const chars = Array.from(s), xs = [0], wi = [];
+  let acc = '', wn = 0;
+  for (let i = 0; i < chars.length; i++) { acc += chars[i]; xs.push(c.measureText(acc).width); wi.push(wn); if (chars[i] === ' ') wn++; }
+  L = { chars, xs, wi, w: xs[xs.length - 1] - ls };
   _mc.set(key, L);
   return L;
 }
@@ -143,7 +143,7 @@ function txt(ctx, s, x, y, o = {}) {
   const A = o.alpha === undefined ? 1 : o.alpha;
   const n = L.chars.length;
   for (let i = 0; i < n; i++) {
-    const k = o.by === 'line' ? 0 : i;
+    const k = o.by === 'line' ? 0 : o.by === 'word' ? L.wi[i] : i;
     const p = ease(pr(t, k * st, k * st + d));
     if (p <= 0) continue;
     const q = out === null ? 0 : E.inQuart(pr(t, out + k * sto, out + k * sto + 0.32));

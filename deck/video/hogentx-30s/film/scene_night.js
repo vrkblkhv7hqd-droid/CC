@@ -59,8 +59,8 @@ const CITY = (() => {
 const LEAKS = (() => {
   const near = CITY.T.filter((t) => t.layer === 2 && !t.hero && t.x > -1250 && t.x < -150).sort((a, b) => a.x - b.x);
   const pick = [near[Math.floor(near.length * 0.12)], near[Math.floor(near.length * 0.42)], near[Math.floor(near.length * 0.68)], near[near.length - 1]];
-  const txts = ['空房发现太晚', '价格偏低少收', '有房漏卖', '差评没回'];
-  return pick.map((t, i) => ({ t, s: txts[i], at: 1.5625 + i * 0.625, lift: [92, 132, 84, 120][i] }));
+  const txts = S.night.leaks;
+  return pick.map((t, i) => ({ t, s: txts[i], at: 1.5625 + i * 0.625, lift: (EN ? [92, 132, 60, 150] : [92, 132, 84, 120])[i], flip: EN && i === 3 }));
 })();
 
 const AMB = ['#FFC46B', '#FFD489', '#FFB24A'];
@@ -226,8 +226,9 @@ function drawNight(t, cam) {
     const p = spring(t - L.at, 2.6, 0.62), o = 1 - pr(t, 4.3 + (L.at - 1.56) * 0.06, 4.62 + (L.at - 1.56) * 0.06);
     if (t < L.at || o <= 0) continue;
     const tw = L.t, ax = tw.x + tw.w * 0.3, ay = tw.base - tw.h + tw.w * 0.3 * ROOF;
-    const f = fnt(500, 29), wT = textW(L.s, f, 1);
-    const pw = wT + 78, ph = 54, px = ax - 26, py = ay - L.lift - ph;
+    const lsz = S.night.leakSize, lw = EN ? 600 : 500, lls = EN ? 0.2 : 1;
+    const f = fnt(lw, lsz), wT = textW(L.s, f, lls);
+    const pw = wT + 78, ph = 54, px = L.flip ? ax - pw + 26 : ax - 26, py = ay - L.lift - ph;       // long English label opens to the left, clear of the hero tower
     g.save(); g.globalAlpha = clamp(p * 1.4) * o;
     seg(g, ax, ay - 4, ax, py + ph + 2, rgba('#FFC46B', 0.7), 1.6, 'butt');
     circle(g, ax, ay - 4, 4.5, '#FFC46B');
@@ -236,7 +237,7 @@ function drawNight(t, cam) {
     g.strokeStyle = rgba('#FFC46B', 0.55); g.lineWidth = 1.5; g.stroke();
     circle(g, px + 28, py + ph / 2, 11, '#FFC46B');
     seg(g, px + 22, py + ph / 2, px + 34, py + ph / 2, '#07112A', 3, 'round');
-    label(g, L.s, px + 50, py + ph / 2 + 1, { w: 500, size: 29, ls: 1, color: '#F6F8FF', base: 'middle' });
+    label(g, L.s, px + 50, py + ph / 2 + 1, { w: lw, size: lsz, ls: lls, color: '#F6F8FF', base: 'middle' });
     g.restore();
   }
 }
@@ -279,10 +280,10 @@ function drawNightText(t, cam) {
       fillPoly(g, [[140, 132], [140 + 34 * kp, 132 + 34 * kp * ROOF * 0.0], [140 + 34 * kp, 142], [140, 142]], C.amber);
       g.restore();
     }
-    txt(g, '酒店的日常', 190, 149, { w: 700, size: 28, ls: 8, color: C.amber, t: t - 0.15, st: 0.03, out: 4.2 - 0.15 });
-    txt(g, '酒店的收入，', 134, 268, { w: 900, size: 104, color: C.white, t: t - 0.22, st: 0.04, d: 0.8, out: 4.24 - 0.22 });
-    txt(g, '每天都在漏掉一点。', 134, 398, { w: 900, size: 104, color: C.white, t: t - 0.5, st: 0.04, d: 0.8, out: 4.3 - 0.5 });
-    txt(g, 'Hotel revenue rarely vanishes at once. It leaks — a little, every day.', 140, 468, { w: 500, size: 28, ls: 0.4, color: rgba('#C9D6F5', 0.72), t: t - 1.0, st: 0.006, d: 0.7, out: 4.36 - 1.0, sto: 0.003 });
+    const N1 = S.night, y1 = EN ? 262 : 268;
+    txt(g, N1.kicker, 190, 149, { w: 700, size: N1.ksize, ls: N1.kls, color: C.amber, t: t - 0.15, st: 0.03, out: 4.2 - 0.15 });
+    N1.h.forEach((ln, i) => { const d0 = 0.22 + i * 0.28; txt(g, ln, 134, y1 + i * HL.lead, { w: HL.w, size: HL.size, ls: HL.ls, by: HL.by, color: C.white, t: t - d0, st: HL.st, d: 0.8, out: 4.24 + i * 0.06 - d0, sto: EN ? 0.035 : 0.012 }); });
+    txt(g, N1.sub, 140, y1 + (N1.h.length - 1) * HL.lead + (EN ? 66 : 70), { w: 500, size: 28, ls: 0.3, by: 'word', color: rgba('#C9D6F5', 0.76), t: t - 1.0, st: 0.045, d: 0.7, out: 4.36 - 1.0, sto: 0.012 });
   }
   // scene 2 (attached to the world at stop 0)
   if (t > 5.8) {
@@ -293,16 +294,16 @@ function drawNightText(t, cam) {
     fillPoly(g, towerPts(ox + 140, oy + 154, 14, 30), C.amber);
     g.restore();
     txt(g, 'HogentX', ox + 170, oy + 152, { w: 800, size: 34, ls: 1.5, color: C.white, t: t - 6.02, st: 0.03 });
-    txt(g, '懂经营的', ox + 134, oy + 268, { w: 900, size: 104, color: C.white, t: t - 6.1, st: 0.045, d: 0.8 });
-    txt(g, '酒店 AI 数字员工', ox + 134, oy + 398, { w: 900, size: 104, color: C.white, t: t - 6.32, st: 0.04, d: 0.8 });
-    const parts = ['盯价格', '盯房态', '回点评', '管质检'];
+    const I2 = S.intro, y2 = oy + (EN ? 262 : 268), yt = y2 + (I2.h.length - 1) * HL.lead + (EN ? 82 : 76);
+    I2.h.forEach((ln, i) => txt(g, ln, ox + 134, y2 + i * HL.lead, { w: HL.w, size: HL.size, ls: HL.ls, by: HL.by, color: C.white, t: t - 6.1 - i * 0.2, st: HL.st, d: 0.8 }));
+    const parts = I2.tags;
     let x = ox + 140;
     for (let i = 0; i < 4; i++) {
       const tt = t - 6.9 - i * 0.16;
-      const w = txt(g, parts[i], x, oy + 474, { w: 700, size: 37, ls: 2, color: C.amber, t: tt, st: 0.03, d: 0.6 });
+      const w = txt(g, parts[i], x, yt, { w: 700, size: I2.tagSize, ls: EN ? 0.3 : 2, color: C.amber, t: tt, st: EN ? 0.018 : 0.03, d: 0.6 });
       x += w + 22;
-      if (i < 3) { g.save(); g.globalAlpha = an(tt, 0.15, 0.4) * 0.6; fillPoly(g, towerPts(x, oy + 468, 5, 22), '#C9D6F5'); g.restore(); x += 27; }
+      if (i < 3) { g.save(); g.globalAlpha = an(tt, 0.15, 0.4) * 0.6; fillPoly(g, towerPts(x, yt - 6, 5, 22), '#C9D6F5'); g.restore(); x += 27; }
     }
-    txt(g, 'AI digital employees that know how to run a hotel.', ox + 141, oy + 530, { w: 500, size: 27, ls: 0.4, color: rgba('#C9D6F5', 0.7), t: t - 7.4, st: 0.006, d: 0.7 });
+    txt(g, I2.sub, ox + 141, yt + 56, { w: 500, size: 27, ls: 0.3, by: 'word', color: rgba('#C9D6F5', 0.74), t: t - 7.4, st: 0.045, d: 0.7 });
   }
 }

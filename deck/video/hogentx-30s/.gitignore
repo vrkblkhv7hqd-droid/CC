@@ -1,8 +1,9 @@
 node_modules/
 film/fonts/
-chunks/
-list.txt
+chunks*/
+list*.txt
 *.mp4
 *.wav
 *.log
+*.npy
 package-lock.json

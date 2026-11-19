@@ -50,16 +50,17 @@ function bar(x, y, w, h, style) { rr(g, x, y, w, h, h / 2); g.fillStyle = style;
 // two-point path with ease
 function path2(τ, t0, d, a, b, ease = E.inOutCubic) { const p = ease(pr(τ, t0, t0 + d)); return [lerp(a[0], b[0], p), lerp(a[1], b[1], p)]; }
 
-function roleText(τ, idx, en, title, tasks) {
+function roleText(τ, idx) {
+  const R0 = S.roles[idx - 1], en = R0.k, title = R0.title, tasks = R0.tasks, RT = S.roleTitle;
   const s = τ - 0.1;
   txt(g, '0' + idx, -820, -338, { w: 800, size: 30, ls: 1, color: C.blue, t: s, st: 0.04 });
   g.save(); g.globalAlpha = an(s, 0.05, 0.5) * 0.35; seg(g, -770, -349, -770 + 44 * an(s, 0.05, 0.6), -349, C.navy, 2, 'butt'); g.restore();
   txt(g, en, -708, -340, { w: 700, size: 21, ls: 5.5, color: C.mute, t: s - 0.06, st: 0.012 });
-  txt(g, title, -826, -196, { w: 900, size: 116, color: C.navy, t: s - 0.05, st: 0.042, d: 0.85 });
+  txt(g, title, -826, -196, { w: RT.w, size: RT.size, ls: RT.ls, by: RT.by, color: C.navy, t: s - 0.05, st: RT.st, d: 0.85 });
   let x = -820;
   for (let i = 0; i < tasks.length; i++) {
     const tt = s - 0.36 - i * 0.1;
-    const w = txt(g, tasks[i], x, -112, { w: 500, size: 33, ls: 1, color: C.soft, t: tt, st: 0.018, d: 0.6 });
+    const w = txt(g, tasks[i], x, -112, { w: 500, size: EN ? 30 : 33, ls: EN ? 0.2 : 1, by: BODY.by, color: C.soft, t: tt, st: EN ? 0.05 : 0.018, d: 0.6 });
     x += w + 20;
     if (i < tasks.length - 1) { g.save(); g.globalAlpha = an(tt, 0.12, 0.4); fillPoly(g, towerPts(x, -108, 5, 20), C.blue); g.restore(); x += 25; }
   }
@@ -74,7 +75,7 @@ function pillBtn(x, y, w, h, o) {      // o: {fill, stroke, color, text, size, i
 // ---- 01 revenue manager: every bar is lifted to the line it deserves ----
 const V1 = { f: [0.66, 0.82, 0.56, 0.76, 0.52, 0.7, 0.6], base: 430, w: 86 };
 function role1(τ) {
-  roleText(τ, 1, 'REVENUE MANAGER', '数字收益经理', ['竞品价格对比', '预订进度监测', '多平台改价']);
+  roleText(τ, 1);
   const click = 1.25;
   // baseline
   g.save(); g.globalAlpha = an(τ, 0.15, 0.6); seg(g, 0, V1.base + 1, 0 + 800 * an(τ, 0.15, 0.9), V1.base + 1, rgba(C.navy, 0.18), 2, 'butt'); g.restore();
@@ -92,7 +93,8 @@ function role1(τ) {
   }
   // suggestion pill -> confirmed by a human
   const pp = spring(τ - 0.62, 3, 0.66), done = an(τ, click, 0.3, E.outCubic), press = Math.sin(Math.PI * pr(τ, click - 0.06, click + 0.16));
-  const px = -410, py = 300, pw = 318, ph = 76;
+  const UI = S.ui, pf = fnt(700, UI.pillSize);
+  const pw = Math.max(textW(UI.pillA, pf, UI.uiLs), textW(UI.pillB, pf, UI.uiLs)) + 74 + 36, px = -92 - pw, py = EN ? 320 : 300, ph = 76;
   pop(px + pw / 2, py + ph / 2, pp * (1 - 0.05 * press), () => {
     pillBtn(px, py, pw, ph, { fill: mixc('#FFFFFF', C.blue, done), shadow: mixc('#10213A', C.blue, done, lerp(0.16, 0.38, done)) });
     if (done < 1) { g.save(); g.globalAlpha *= 1 - done; rr(g, px, py, pw, ph, ph / 2); g.strokeStyle = rgba(C.blue, 0.35); g.lineWidth = 2; g.stroke(); g.restore(); }
@@ -100,20 +102,20 @@ function role1(τ) {
     const ix = px + 44, iy = py + ph / 2;
     if (done < 0.5) { g.save(); g.globalAlpha *= 1 - done * 2; fillPoly(g, towerPts(ix - 13, iy + 15, 10, 20), C.blue); fillPoly(g, towerPts(ix + 1, iy + 15, 10, 31), C.blue); g.restore(); }
     else { g.save(); g.globalAlpha *= (done - 0.5) * 2; checkPath(g, ix - 4, iy + 9, 24, pr(τ, click + 0.08, click + 0.4)); g.strokeStyle = '#fff'; g.lineWidth = 5.5; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); g.restore(); }
-    g.save(); g.globalAlpha *= 1 - done; label(g, '调价建议 · 待确认', px + 74, py + ph / 2 + 1, { w: 700, size: 27, ls: 1, color: C.navy, base: 'middle' }); g.restore();
-    g.save(); g.globalAlpha *= done; label(g, '经理已确认 · 执行', px + 74, py + ph / 2 + 1, { w: 700, size: 27, ls: 1, color: '#fff', base: 'middle' }); g.restore();
+    g.save(); g.globalAlpha *= 1 - done; label(g, UI.pillA, px + 74, py + ph / 2 + 1, { w: 700, size: UI.pillSize, ls: UI.uiLs, color: C.navy, base: 'middle' }); g.restore();
+    g.save(); g.globalAlpha *= done; label(g, UI.pillB, px + 74, py + ph / 2 + 1, { w: 700, size: UI.pillSize, ls: UI.uiLs, color: '#fff', base: 'middle' }); g.restore();
   });
   const rp = pr(τ, click, click + 0.5);
   if (rp > 0 && rp < 1) { g.save(); g.globalAlpha = (1 - rp) * 0.5; rr(g, px - 26 * rp, py - 26 * rp, pw + 52 * rp, ph + 52 * rp, (ph + 52 * rp) / 2); g.strokeStyle = C.blue; g.lineWidth = 3; g.stroke(); g.restore(); }
   // cursor
-  const cp = path2(τ, 0.55, 0.6, [-560, 560], [px + 232, py + 46], E.outQuart), away = path2(τ, click + 0.25, 1.4, [0, 0], [-30, 46], E.outCubic);
+  const cp = path2(τ, 0.55, 0.6, [px - 150, 560], [px + pw * 0.73, py + 46], E.outQuart), away = path2(τ, click + 0.25, 1.4, [0, 0], [-30, 46], E.outCubic);
   g.save(); g.globalAlpha = an(τ, 0.5, 0.3); cursor(g, cp[0] + away[0], cp[1] + away[1], 1.15, press); g.restore();
 }
 
 // ---- 02 guest relations: a low review, a drafted reply, a human confirms ----
 function role2(τ) {
-  roleText(τ, 2, 'GUEST RELATIONS', '数字宾客关系专员', ['关注宾客反馈', '起草差评回复', '确认后发布']);
-  const click = 1.25;
+  roleText(τ, 2);
+  const click = 1.25, UI = S.ui;
   g.save(); g.translate(-97.5, -130); g.scale(1.25, 1.25);
   // review card
   pop(265, 185, spring(τ - 0.2, 2.8, 0.7), () => {
@@ -135,19 +137,20 @@ function role2(τ) {
     rr(g, 290, 258, 510, 188, [8, 30, 30, 30]); g.fillStyle = C.blue; g.fill(); g.restore();
     // "AI draft" tag
     fillPoly(g, towerPts(322, 311, 8, 18), '#fff');
-    label(g, 'AI 回复草稿', 340, 310, { w: 700, size: 22, ls: 2, color: 'rgba(255,255,255,.92)' });
+    label(g, UI.draft, 340, 310, { w: 700, size: 22, ls: EN ? 0.6 : 2, color: 'rgba(255,255,255,.92)' });
     const ty = (k) => an(τ, 0.84 + k * 0.12, 0.38, E.outCubic);
     bar(322, 332, 440 * ty(0), 12, 'rgba(255,255,255,.9)'); bar(322, 357, 390 * ty(1), 12, 'rgba(255,255,255,.9)'); bar(322, 382, 250 * ty(2), 12, 'rgba(255,255,255,.9)');
     // confirm button
-    const bx = 622, by = 386, bw = 152, bh = 46, s = 1 - 0.07 * press;
+    const bf = fnt(700, 22), bw = Math.max(textW(UI.post, bf, UI.uiLs) + 48, textW(UI.posted, bf, UI.uiLs) + 86), bx = 774 - bw, by = 386, bh = 46, s = 1 - 0.07 * press;
     g.save(); g.translate(bx + bw / 2, by + bh / 2); g.scale(s, s); g.translate(-(bx + bw / 2), -(by + bh / 2));
     g.globalAlpha *= an(τ, 1.0, 0.3);
     rr(g, bx, by, bw, bh, bh / 2); g.fillStyle = '#fff'; g.fill();
-    g.save(); g.globalAlpha *= 1 - done; label(g, '确认发布', bx + bw / 2, by + bh / 2 + 1, { w: 700, size: 22, ls: 1, color: C.blue, align: 'c', base: 'middle' }); g.restore();
+    g.save(); g.globalAlpha *= 1 - done; label(g, UI.post, bx + bw / 2, by + bh / 2 + 1, { w: 700, size: 22, ls: UI.uiLs, color: C.blue, align: 'c', base: 'middle' }); g.restore();
     if (done > 0) {
       g.save(); g.globalAlpha *= done;
-      checkPath(g, bx + 30, by + 31, 18, pr(τ, click + 0.05, click + 0.35)); g.strokeStyle = C.blue; g.lineWidth = 4.5; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke();
-      label(g, '已发布', bx + 60, by + bh / 2 + 1, { w: 700, size: 22, ls: 1, color: C.blue, base: 'middle' }); g.restore();
+      const cx0 = bx + (bw - textW(UI.posted, bf, UI.uiLs) - 36) / 2;
+      checkPath(g, cx0 + 8, by + 31, 18, pr(τ, click + 0.05, click + 0.35)); g.strokeStyle = C.blue; g.lineWidth = 4.5; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke();
+      label(g, UI.posted, cx0 + 36, by + bh / 2 + 1, { w: 700, size: 22, ls: UI.uiLs, color: C.blue, base: 'middle' }); g.restore();
     }
     g.restore();
     g.restore();
@@ -164,19 +167,20 @@ function role2(τ) {
     g.fillStyle = C.amber; g.fill(SMILE_PATH, 'evenodd');
     g.restore();
   }
-  const cp = path2(τ, 0.7, 0.5, [900, 620], [716, 416], E.outQuart), away = path2(τ, click + 0.25, 1.4, [0, 0], [26, 44], E.outCubic);
+  const bw2 = Math.max(textW(UI.post, fnt(700, 22), UI.uiLs) + 48, textW(UI.posted, fnt(700, 22), UI.uiLs) + 86);
+  const cp = path2(τ, 0.7, 0.5, [900, 620], [774 - bw2 * 0.38, 416], E.outQuart), away = path2(τ, click + 0.25, 1.4, [0, 0], [26, 44], E.outCubic);
   g.save(); g.globalAlpha = an(τ, 0.72, 0.3); cursor(g, cp[0] + away[0], cp[1] + away[1], 1.0, press); g.restore();
   g.restore();
 }
 
 // ---- 03 quality inspector: plan, follow up, sign off ----
 function role3(τ) {
-  roleText(τ, 3, 'QUALITY INSPECTOR', '数字质检主管', ['质检计划与任务', '整改跟进', '验收与统计']);
-  const rows = ['客房卫生', '设施设备', '整改复核'], tk = [0.625, 0.9375, 1.25];
+  roleText(τ, 3);
+  const UI = S.ui, rows = UI.qRows, tk = [0.625, 0.9375, 1.25];
   g.save(); g.translate(-97.5, -130); g.scale(1.25, 1.25);
   pop(295, 240, spring(τ - 0.2, 2.8, 0.7), () => {
     cardBox(30, 56, 530, 368);
-    label(g, '质检任务', 66, 114, { w: 800, size: 30, ls: 1, color: C.navy });
+    label(g, UI.qTitle, 66, 114, { w: 800, size: 30, ls: UI.uiLs, color: C.navy });
     const n = tk.filter((x) => τ > x + 0.12).length;
     rr(g, 444, 86, 84, 38, 19); g.fillStyle = '#EEF2FF'; g.fill();
     label(g, n + ' / 3', 486, 106, { w: 800, size: 21, color: C.blue, align: 'c', base: 'middle' });
@@ -191,11 +195,11 @@ function role3(τ) {
       if (d < 1) { g.strokeStyle = rgba('#AEBBD6', 1 - d); g.lineWidth = 2.5; g.stroke(); }
       if (d > 0) { checkPath(g, -4, 9, 20, pr(τ, tk[i] + 0.04, tk[i] + 0.3)); g.strokeStyle = '#fff'; g.lineWidth = 4.6; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); }
       g.restore();
-      label(g, rows[i], 124, y + 31, { w: 500, size: 29, ls: 1, color: C.navy, base: 'middle' });
+      label(g, rows[i], 124, y + 31, { w: 500, size: UI.rowSize, ls: UI.uiLs, color: C.navy, base: 'middle' });
       // status
       rr(g, 416, y + 11, 104, 38, 19); g.fillStyle = mixc('#F1F4FA', '#E3ECFF', d); g.fill();
-      g.save(); g.globalAlpha *= 1 - d; label(g, '待检', 468, y + 31, { w: 700, size: 20, ls: 1, color: C.mute, align: 'c', base: 'middle' }); g.restore();
-      g.save(); g.globalAlpha *= d; label(g, '已通过', 468, y + 31, { w: 700, size: 20, ls: 1, color: C.blue, align: 'c', base: 'middle' }); g.restore();
+      g.save(); g.globalAlpha *= 1 - d; label(g, UI.qTodo, 468, y + 31, { w: 700, size: EN ? 19 : 20, ls: UI.uiLs, color: C.mute, align: 'c', base: 'middle' }); g.restore();
+      g.save(); g.globalAlpha *= d; label(g, UI.qDone, 468, y + 31, { w: 700, size: EN ? 19 : 20, ls: UI.uiLs, color: C.blue, align: 'c', base: 'middle' }); g.restore();
       g.restore();
     }
   });
@@ -216,14 +220,15 @@ function role3(τ) {
     } else {
       label(g, Math.round(prog * 100) + '%', cx, cy + 2, { w: 800, size: 40, color: C.navy, align: 'c', base: 'middle' });
     }
-    txt(g, '验收通过', cx, cy + R + 62, { w: 700, size: 27, ls: 3, color: C.navy, align: 'c', t: τ - 1.62, st: 0.04, d: 0.6 });
+    txt(g, UI.qFinal, cx, cy + R + 62, { w: 700, size: 27, ls: EN ? 0.5 : 3, by: BODY.by, color: C.navy, align: 'c', t: τ - 1.62, st: 0.04, d: 0.6 });
   });
   g.restore();
 }
 
 // ---- 04 GM's assistant: the morning brief ----
 function role4(τ) {
-  roleText(τ, 4, "GM'S ASSISTANT", '数字总经理助理', ['每日早安简报', '重点事项与异常提醒']);
+  roleText(τ, 4);
+  const UI = S.ui;
   // sunrise over the line
   const sx = 580, rise = an(τ, 0.25, 1.5, E.outQuart), sy = LINK * sx + lerp(170, -28, rise), R = 104;
   g.save();
@@ -239,13 +244,14 @@ function role4(τ) {
   circle(g, sx, sy, R, sg);
   g.restore();
   // brief card
-  const rows = ['调价建议', '差评回复', '质检整改', '订单价格异常'], cols = [C.blue, C.amberDeep, C.navy, '#7FA2FF'];
+  const rows = UI.bRows, cols = [C.blue, C.amberDeep, C.navy, '#7FA2FF'];
   g.save(); g.translate(-97.5, -130); g.scale(1.25, 1.25);
   pop(310, 240, spring(τ - 0.2, 2.8, 0.7), () => {
     cardBox(30, 50, 560, 384);
-    label(g, '早安简报', 66, 110, { w: 800, size: 32, ls: 1, color: C.navy });
-    rr(g, 462, 80, 96, 42, 21); g.fillStyle = '#FFF3DC'; g.fill();
-    label(g, '08:00', 510, 102, { w: 800, size: 22, color: '#B66A00', align: 'c', base: 'middle' });
+    label(g, UI.bTitle, 66, 110, { w: 800, size: 32, ls: UI.uiLs, color: C.navy });
+    const cwT = textW(UI.bTime, fnt(800, 22)) + 36;
+    rr(g, 558 - cwT, 80, cwT, 42, 21); g.fillStyle = '#FFF3DC'; g.fill();
+    label(g, UI.bTime, 558 - cwT / 2, 102, { w: 800, size: 22, color: '#B66A00', align: 'c', base: 'middle' });
     seg(g, 62, 140, 558, 140, 'rgba(16,33,58,.08)', 2, 'butt');
     for (let i = 0; i < 4; i++) {
       const y = 158 + i * 66, rp = an(τ, 0.42 + i * 0.11, 0.55);
@@ -253,7 +259,7 @@ function role4(τ) {
       g.save(); g.globalAlpha *= rp; g.translate((1 - rp) * 60, 0);
       rr(g, 62, y + 6, 44, 44, 13); g.fillStyle = cols[i]; g.fill();
       fillPoly(g, towerPts(75, y + 40, 8, 16), '#fff'); fillPoly(g, towerPts(86, y + 40, 8, 24), '#fff');
-      label(g, rows[i], 126, y + 29, { w: 500, size: 29, ls: 1, color: C.navy, base: 'middle' });
+      label(g, rows[i], 126, y + 29, { w: 500, size: UI.rowSize, ls: UI.uiLs, color: C.navy, base: 'middle' });
       const d = spring(τ - 0.95 - i * 0.13, 3.2, 0.5);
       if (d > 0) { g.save(); g.translate(532, y + 28); g.scale(Math.min(d, 1.3), Math.min(d, 1.3)); circle(g, 0, 0, 15, '#E3ECFF'); checkPath(g, -3, 6, 13, 1); g.strokeStyle = C.blue; g.lineWidth = 3.6; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); g.restore(); }
       g.restore();
@@ -270,6 +276,7 @@ function drawRoles(t, cam) {
   // the line + stops
   const a = onLine(BOUND[0] - 60), b = onLine(BOUND[1] + 60);
   seg(g, a[0], a[1], b[0], b[1], C.blue, 5, 'butt');
+  for (let i = 0; i < 4; i++) linePulse(t, WHIPS[i] + 1.5625, (i + 1) * D, '#BFD2FF', null);
   const fns = [role1, role2, role3, role4];
   for (let i = 0; i < 4; i++) {
     const n = node(i + 1);

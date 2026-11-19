@@ -5,7 +5,7 @@ const { chromium } = require('playwright'); const fs = require('fs'); const { st
   const { srv, port } = await start(async () => {});
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1920, height: 1080 } });
   pg.on('console', (m) => console.log('[page]', m.text())); pg.on('pageerror', (e) => console.log('[pageerror]', e.message, e.stack));
-  await pg.goto(`http://127.0.0.1:${port}/index.html`);
+  await pg.goto(`http://127.0.0.1:${port}/${process.env.PAGE || 'index.html'}`);
   await pg.evaluate(() => window.ready);
   const t0 = Date.now(); let url;
   if (mode === 'sheet') {

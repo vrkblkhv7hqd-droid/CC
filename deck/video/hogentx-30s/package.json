@@ -1,12 +1,18 @@
 {
   "name": "hogentx-30s-film",
   "private": true,
-  "description": "HogentX 30s brand film: canvas renderer + synthesised score",
+  "description": "HogentX 30s films (brand film zh/en + logo film): canvas renderer + synthesised score",
   "scripts": {
     "setup": "./setup.sh",
-    "audio": "python3 audio.py bgm.wav",
-    "render": "node render.js 0 1800 4 30",
-    "assemble": "./assemble.sh HogentX-BrandFilm-30s.mp4"
+    "audio:main": "python3 audio.py bgm_main.wav",
+    "audio:logo": "CUT=logo BANDS=film/audio_bands.js python3 audio.py bgm_logo.wav",
+    "render:zh": "PAGE='index.html?lang=zh' CHUNKS=chunks_zh node render.js 0 1800 4 30",
+    "render:en": "PAGE='index.html?lang=en' CHUNKS=chunks_en node render.js 0 1800 4 30",
+    "render:logo": "PAGE=logo.html CHUNKS=chunks_logo node render.js 0 1800 4 30",
+    "assemble:zh": "./assemble.sh HogentX-BrandFilm-30s-ZH.mp4 chunks_zh bgm_main.wav",
+    "assemble:en": "./assemble.sh HogentX-BrandFilm-30s-EN.mp4 chunks_en bgm_main.wav",
+    "assemble:logo": "./assemble.sh HogentX-LogoFilm-30s-EN.mp4 chunks_logo bgm_logo.wav 'volume=-0.5dB'",
+    "check": "python3 smooth.py"
   },
   "dependencies": {
     "@fontsource/manrope": "^5",

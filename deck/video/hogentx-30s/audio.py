@@ -3,6 +3,8 @@ import numpy as np, scipy.signal as sg, wave, sys
 
 SR = 48000; DUR = 30.0; N = int(SR * DUR)
 BPM = 96; BEAT = 60 / BPM; BAR = 4 * BEAT; S16 = BEAT / 4
+import os
+CUT = os.environ.get('CUT', 'main')
 rs = np.random.RandomState(7)
 hz = lambda m: 440.0 * 2 ** ((m - 69) / 12)
 tb = lambda bar, beat=1.0, s=0: (bar - 1) * BAR + (beat - 1) * BEAT + s * S16
@@ -258,81 +260,149 @@ for b in (1, 2):
         put(tick(1300, 0.012), tb(b, bt + 1, 2), 0.03, pan=0.3, r=0.5)
 
 # ---------------- sound design, on the picture ----------------
-# intro: descending "drops" (rooms going dark), F minor pentatonic
-DROPS = [84, 80, 77, 75, 72, 80, 77, 75, 72, 70, 75, 72, 70, 68, 65, 63]
-t0 = tb(1, 2, 2)
-for i, m in enumerate(DROPS):
-    t = t0 + i * BEAT / 2
-    if t > 4.2: break
-    put(bell(hz(m), 1.4, 3.5, 1.6, 4.2), t, 0.17 + 0.07 * (i % 2 == 0), pan=0.5 * np.sin(i * 2.1), r=0.65, d=0.4)
-# leak labels
-for i in range(4): put(blip(520 - 40 * i, 300 - 20 * i, 0.14), 1.5625 + i * 0.625, 0.16, pan=-0.3 + 0.2 * i, r=0.4)
-# into the strike
-put(riser(1.5, 250, 7000), 5.0 - 1.5, 0.3, r=0.3)
-put(revswell(1.2), 5.0 - 1.2, 0.2, r=0.4)
-put(whoosh(0.2, 0.5, 900, 9000, 1500), 5.0 - 0.2, 0.55, r=0.3)
-lo, hi = impact(1.0); put(lo, 5.0, 0.55); put(hi, 5.0, 0.62, r=0.7)
-put(blip(220, 880, 0.9), 5.05, 0.12, r=0.6)                    # towers charging
-for t in (6.25, 7.5, 8.75): put(bell(hz(80), 1.5, 2.0, 1.0, 3.5), t, 0.17, pan=0.3, r=0.7, d=0.5)   # pulses on the line
-# the city relights
-for i, m in enumerate([61, 65, 68, 72, 73, 77, 80, 84, 85, 89]): put(pluck(hz(m), 0.9, 4.5, 0.8), 5.625 + i * 0.3125, 0.085 + 0.004 * i, pan=0.5 * np.sin(i * 1.3), r=0.6, d=0.35)
-# camera whips
-for i, t in enumerate([10.0, 12.5, 15.0, 17.5, 20.0, 25.0]):
-    big = t in (10.0, 20.0, 25.0)
-    put(whoosh(0.36, 0.6, 400, 7500 if big else 5500, 800), t - 0.36, 0.62 if big else 0.42, r=0.25)
-put(riser(1.25, 300, 8000), 10.0 - 1.25, 0.26, r=0.3)
-lo, hi = impact(0.6); put(lo, 10.0, 0.42); put(hi, 10.0, 0.3, r=0.5)
-# 01 revenue: pill, click, bars climbing to the line
-put(blip(700, 1100, 0.09), 10.625, 0.16, r=0.3)
-put(tick(2100, 0.01), 11.25, 0.4, r=0.2); put(blip(900, 1500, 0.1), 11.27, 0.18, r=0.3)
-for i, m in enumerate([68, 70, 72, 75, 77, 80, 84]): put(pluck(hz(m), 0.5, 6, 1.0), 11.37 + i * 0.05, 0.16, pan=-0.4 + i * 0.13, r=0.4, d=0.3)
-# 02 guest relations: card, typing, click, smile
-put(blip(600, 900, 0.09), 12.7, 0.14, r=0.3); put(blip(700, 1000, 0.09), 13.125, 0.14, r=0.3)
-for i in range(9): put(tick(3000 + 300 * (i % 3), 0.005), 13.36 + i * 0.047, 0.1, pan=0.3, r=0.1)
-put(tick(2100, 0.01), 13.75, 0.4, r=0.2)
-put(blip(784, 1175, 0.1), 13.93, 0.2, r=0.4); put(blip(1175, 1568, 0.14), 14.03, 0.2, r=0.4)
-# 03 quality: three checks, the ring closes
-for i, m in enumerate([84, 87, 92]): put(tick(hz(m), 0.03), 15.625 + i * 0.3125, 0.26, pan=0.2, r=0.35)
-put(bell(hz(92), 1.6, 2.0, 1.2, 3.0), 16.5625, 0.2, pan=0.3, r=0.6, d=0.3)
-# 04 morning brief: sunrise shimmer
-n = int(1.6 * SR); sh = tvf(rs.randn(n), lin(n, 2500, 9000, 1.3), 'bp', 3.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 1.5
-put(sh, 17.7, 0.16, pan=0.4, r=0.6)
-for i in range(4): put(tick(1800 + 250 * i, 0.012), 17.92 + i * 0.11, 0.14, pan=0.2, r=0.3)
-for i in range(4): put(tick(hz(84 + [0, 3, 5, 8][i]), 0.025), 18.45 + i * 0.13, 0.16, pan=0.3, r=0.4)
-# proof: the counter runs down, then the hit
-put(riser(0.9, 500, 6000), 20.0 - 0.9, 0.2, r=0.3)
-lo, hi = impact(0.5); put(lo, 20.0, 0.3); put(hi, 20.0, 0.26, r=0.5)
-tc = 21.25
-while tc < 22.42:
-    u = (tc - 21.25) / 1.17
-    put(tick(2600 - 1500 * u, 0.006), tc, 0.12 + 0.08 * np.sin(np.pi * u), pan=-0.2 + 0.4 * u, r=0.15)
-    tc += 0.028 + 0.05 * abs(u - 0.5) ** 1.5
-put(revswell(0.8), 22.5 - 0.8, 0.16, r=0.4)
-lo, hi = impact(0.7); put(lo, 22.5, 0.55); put(hi, 22.5, 0.4, r=0.6)
-put(bell(hz(75), 2.0, 2.0, 1.4, 2.4) + bell(hz(82), 2.0, 2.0, 1.2, 2.4), 22.5, 0.14, r=0.6, d=0.3)
-# into the logo
-put(riser(1.6, 250, 9000), 25.0 - 1.6, 0.34, r=0.3)
-put(revswell(1.4), 25.0 - 1.4, 0.24, r=0.4)
-lo, hi = impact(1.25); put(lo, 25.0, 0.6); put(hi, 25.0, 0.7, r=0.8)
-kicks.append((25.0, 1.0)); kicks.append((5.0, 1.0)); kicks.append((22.5, 0.8)); kicks.append((10.0, 0.7)); kicks.append((20.0, 0.6))
-# line retracts, lockup slides
-w = whoosh(0.3, 0.25, 6000, 1200, 500)[::-1]; put(np.ascontiguousarray(w), 25.62, 0.22, r=0.3)
-put(whoosh(0.4, 0.5, 300, 2500, 500), 26.05, 0.2, r=0.3)
-# wordmark letters + smile
-for i, m in enumerate([68, 70, 72, 75, 77, 80, 82]): put(pluck(hz(m), 0.6, 5, 0.8), 26.48 + i * 0.065, 0.13, pan=-0.3 + 0.1 * i, r=0.5, d=0.25)
-put(blip(hz(80), hz(84), 0.12), 27.14, 0.16, r=0.5); put(blip(hz(84), hz(87), 0.2), 27.26, 0.16, r=0.5)
-# bar 11: slow rising bells
-for i, m in enumerate([68, 75, 82, 84]): put(bell(hz(m), 2.4, 2.0, 1.0, 2.0), tb(11, 1 + i) + (0.0 if i else 0.02), 0.2, pan=-0.3 + 0.2 * i, r=0.7, d=0.4)
-# bar 12: the tagline motif
-MOT = [(0, 75), (2, 80), (4, 82), (8, 87)]
-for (s, m) in MOT:
-    put(mixs(keys(hz(m), 3.0) * 1.0, bell(hz(m), 2.6, 2.0, 0.9, 1.9) * 0.6), tb(12, 1, s), 0.32, pan=0.1 * (s - 4) / 4, r=0.6, d=0.3)
-put(keys(hz(56), 3.2) + keys(hz(63), 3.2) * 0.8 + keys(hz(72), 3.2) * 0.7, tb(12), 0.3, r=0.5)
-K(tb(12), 0.45, 1.3)
-# glint
-n = int(1.0 * SR); gl = tvf(rs.randn(n), lin(n, 5000, 11000, 1.0), 'bp', 4.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 2
-put(gl, 28.3, 0.1, pan=0.0, r=0.7)
-for i, m in enumerate([92, 87, 84, 80]): put(bell(hz(m), 1.4, 2.0, 0.8, 3.5), 28.42 + i * 0.1, 0.05, pan=-0.4 + 0.27 * i, r=0.8)
+if CUT == 'main':
+    # intro: descending "drops" (rooms going dark), F minor pentatonic
+    DROPS = [84, 80, 77, 75, 72, 80, 77, 75, 72, 70, 75, 72, 70, 68, 65, 63]
+    t0 = tb(1, 2, 2)
+    for i, m in enumerate(DROPS):
+        t = t0 + i * BEAT / 2
+        if t > 4.2: break
+        put(bell(hz(m), 1.4, 3.5, 1.6, 4.2), t, 0.17 + 0.07 * (i % 2 == 0), pan=0.5 * np.sin(i * 2.1), r=0.65, d=0.4)
+    # leak labels
+    for i in range(4): put(blip(520 - 40 * i, 300 - 20 * i, 0.14), 1.5625 + i * 0.625, 0.16, pan=-0.3 + 0.2 * i, r=0.4)
+    # into the strike
+    put(riser(1.5, 250, 7000), 5.0 - 1.5, 0.3, r=0.3)
+    put(revswell(1.2), 5.0 - 1.2, 0.2, r=0.4)
+    put(whoosh(0.2, 0.5, 900, 9000, 1500), 5.0 - 0.2, 0.55, r=0.3)
+    lo, hi = impact(1.0); put(lo, 5.0, 0.55); put(hi, 5.0, 0.62, r=0.7)
+    put(blip(220, 880, 0.9), 5.05, 0.12, r=0.6)                    # towers charging
+    for t in (6.25, 7.5, 8.75): put(bell(hz(80), 1.5, 2.0, 1.0, 3.5), t, 0.17, pan=0.3, r=0.7, d=0.5)   # pulses on the line
+    # the city relights
+    for i, m in enumerate([61, 65, 68, 72, 73, 77, 80, 84, 85, 89]): put(pluck(hz(m), 0.9, 4.5, 0.8), 5.625 + i * 0.3125, 0.085 + 0.004 * i, pan=0.5 * np.sin(i * 1.3), r=0.6, d=0.35)
+    # camera whips
+    for i, t in enumerate([10.0, 12.5, 15.0, 17.5, 20.0, 25.0]):
+        big = t in (10.0, 20.0, 25.0)
+        put(whoosh(0.36, 0.6, 400, 7500 if big else 5500, 800), t - 0.36, 0.62 if big else 0.42, r=0.25)
+    put(riser(1.25, 300, 8000), 10.0 - 1.25, 0.26, r=0.3)
+    lo, hi = impact(0.6); put(lo, 10.0, 0.42); put(hi, 10.0, 0.3, r=0.5)
+    # 01 revenue: pill, click, bars climbing to the line
+    put(blip(700, 1100, 0.09), 10.625, 0.16, r=0.3)
+    put(tick(2100, 0.01), 11.25, 0.4, r=0.2); put(blip(900, 1500, 0.1), 11.27, 0.18, r=0.3)
+    for i, m in enumerate([68, 70, 72, 75, 77, 80, 84]): put(pluck(hz(m), 0.5, 6, 1.0), 11.37 + i * 0.05, 0.16, pan=-0.4 + i * 0.13, r=0.4, d=0.3)
+    # 02 guest relations: card, typing, click, smile
+    put(blip(600, 900, 0.09), 12.7, 0.14, r=0.3); put(blip(700, 1000, 0.09), 13.125, 0.14, r=0.3)
+    for i in range(9): put(tick(3000 + 300 * (i % 3), 0.005), 13.36 + i * 0.047, 0.1, pan=0.3, r=0.1)
+    put(tick(2100, 0.01), 13.75, 0.4, r=0.2)
+    put(blip(784, 1175, 0.1), 13.93, 0.2, r=0.4); put(blip(1175, 1568, 0.14), 14.03, 0.2, r=0.4)
+    # 03 quality: three checks, the ring closes
+    for i, m in enumerate([84, 87, 92]): put(tick(hz(m), 0.03), 15.625 + i * 0.3125, 0.26, pan=0.2, r=0.35)
+    put(bell(hz(92), 1.6, 2.0, 1.2, 3.0), 16.5625, 0.2, pan=0.3, r=0.6, d=0.3)
+    # 04 morning brief: sunrise shimmer
+    n = int(1.6 * SR); sh = tvf(rs.randn(n), lin(n, 2500, 9000, 1.3), 'bp', 3.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 1.5
+    put(sh, 17.7, 0.16, pan=0.4, r=0.6)
+    for i in range(4): put(tick(1800 + 250 * i, 0.012), 17.92 + i * 0.11, 0.14, pan=0.2, r=0.3)
+    for i in range(4): put(tick(hz(84 + [0, 3, 5, 8][i]), 0.025), 18.45 + i * 0.13, 0.16, pan=0.3, r=0.4)
+    # proof: the counter runs down, then the hit
+    put(riser(0.9, 500, 6000), 20.0 - 0.9, 0.2, r=0.3)
+    lo, hi = impact(0.5); put(lo, 20.0, 0.3); put(hi, 20.0, 0.26, r=0.5)
+    tc = 21.25
+    while tc < 22.42:
+        u = (tc - 21.25) / 1.17
+        put(tick(2600 - 1500 * u, 0.006), tc, 0.12 + 0.08 * np.sin(np.pi * u), pan=-0.2 + 0.4 * u, r=0.15)
+        tc += 0.028 + 0.05 * abs(u - 0.5) ** 1.5
+    put(revswell(0.8), 22.5 - 0.8, 0.16, r=0.4)
+    lo, hi = impact(0.7); put(lo, 22.5, 0.55); put(hi, 22.5, 0.4, r=0.6)
+    put(bell(hz(75), 2.0, 2.0, 1.4, 2.4) + bell(hz(82), 2.0, 2.0, 1.2, 2.4), 22.5, 0.14, r=0.6, d=0.3)
+    # into the logo
+    put(riser(1.6, 250, 9000), 25.0 - 1.6, 0.34, r=0.3)
+    put(revswell(1.4), 25.0 - 1.4, 0.24, r=0.4)
+    lo, hi = impact(1.25); put(lo, 25.0, 0.6); put(hi, 25.0, 0.7, r=0.8)
+    kicks.append((25.0, 1.0)); kicks.append((5.0, 1.0)); kicks.append((22.5, 0.8)); kicks.append((10.0, 0.7)); kicks.append((20.0, 0.6))
+    # line retracts, lockup slides
+    w = whoosh(0.3, 0.25, 6000, 1200, 500)[::-1]; put(np.ascontiguousarray(w), 25.62, 0.22, r=0.3)
+    put(whoosh(0.4, 0.5, 300, 2500, 500), 26.05, 0.2, r=0.3)
+    # wordmark letters + smile
+    for i, m in enumerate([68, 70, 72, 75, 77, 80, 82]): put(pluck(hz(m), 0.6, 5, 0.8), 26.48 + i * 0.065, 0.13, pan=-0.3 + 0.1 * i, r=0.5, d=0.25)
+    put(blip(hz(80), hz(84), 0.12), 27.14, 0.16, r=0.5); put(blip(hz(84), hz(87), 0.2), 27.26, 0.16, r=0.5)
+    # bar 11: slow rising bells
+    for i, m in enumerate([68, 75, 82, 84]): put(bell(hz(m), 2.4, 2.0, 1.0, 2.0), tb(11, 1 + i) + (0.0 if i else 0.02), 0.2, pan=-0.3 + 0.2 * i, r=0.7, d=0.4)
+    # bar 12: the tagline motif
+    MOT = [(0, 75), (2, 80), (4, 82), (8, 87)]
+    for (s, m) in MOT:
+        put(mixs(keys(hz(m), 3.0) * 1.0, bell(hz(m), 2.6, 2.0, 0.9, 1.9) * 0.6), tb(12, 1, s), 0.32, pan=0.1 * (s - 4) / 4, r=0.6, d=0.3)
+    put(keys(hz(56), 3.2) + keys(hz(63), 3.2) * 0.8 + keys(hz(72), 3.2) * 0.7, tb(12), 0.3, r=0.5)
+    K(tb(12), 0.45, 1.3)
+    # glint
+    n = int(1.0 * SR); gl = tvf(rs.randn(n), lin(n, 5000, 11000, 1.0), 'bp', 4.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 2
+    put(gl, 28.3, 0.1, pan=0.0, r=0.7)
+    for i, m in enumerate([92, 87, 84, 80]): put(bell(hz(m), 1.4, 2.0, 0.8, 3.5), 28.42 + i * 0.1, 0.05, pan=-0.4 + 0.27 * i, r=0.8)
+
+else:
+    # ---------- logo film: the mark comes apart, is drawn again, multiplies, dances, lights up ----------
+    lo, hi = impact(0.5); put(lo, 0.0, 0.3); put(hi, 0.0, 0.14, r=0.6)
+    put(mixs(bell(hz(77), 2.2, 2.0, 1.0, 2.2), bell(hz(84), 2.2, 2.0, 0.8, 2.2)), 0.02, 0.1, r=0.7, d=0.3)
+    for i, t0 in enumerate((0.5, 0.65, 0.8)):                     # towers fold back into the line
+        w = whoosh(0.3, 0.22, 5200, 1100, 500)[::-1]; put(np.ascontiguousarray(w), t0, 0.2, r=0.3)
+        put(blip(660 - 110 * i, 330 - 50 * i, 0.22), t0 + 0.22, 0.1, pan=0.3 - 0.3 * i, r=0.4)
+    put(blip(240, 960, 0.55), 1.32, 0.11, r=0.5)                  # line -> point
+    put(bell(hz(84), 1.8, 2.0, 1.0, 3.0), 1.875, 0.2, r=0.7, d=0.4)
+    put(whoosh(0.07, 0.65, 1200, 9000, 1400), 2.5 - 0.07, 0.5, r=0.3)   # the line shoots out
+    lo, hi = impact(0.45); put(lo, 2.5, 0.42); put(hi, 2.5, 0.2, r=0.5); kicks.append((2.5, 0.5))
+    for n in range(1, 23): put(tick(2600 + 60 * n, 0.006), 2.5 + n * 0.022, 0.07 * (1 - n / 30), pan=(-1) ** n * 0.5, r=0.15)
+    put(blip(520, 1040, 0.7), 3.15, 0.07, r=0.5); put(tick(1900, 0.012), 3.62, 0.2, r=0.3)
+    for i, m in enumerate([65, 72, 75, 80]): put(bell(hz(m), 1.8, 2.0, 1.0, 2.8), 2.5 + 0.625 * i, 0.12, pan=-0.3 + 0.2 * i, r=0.7, d=0.4)
+    # construction
+    put(riser(1.5, 250, 7000), 5.0 - 1.5, 0.3, r=0.3); put(revswell(1.2), 5.0 - 1.2, 0.2, r=0.4)
+    lo, hi = impact(1.0); put(lo, 5.0, 0.55); put(hi, 5.0, 0.6, r=0.7); kicks.append((5.0, 1.0))
+    for i in range(5): put(tick(2400 - 220 * i, 0.008), 5.02 + i * 0.035, 0.14, pan=-0.4 + 0.2 * i, r=0.2)
+    for i, t0 in enumerate((5.3, 5.45, 5.6)):                     # outlines being drawn
+        n = int(0.85 * SR); x = tvf(rs.randn(n), lin(n, 1800 + 500 * i, 4200 + 500 * i, 1.0), 'bp', 5.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 0.8
+        put(x, t0, 0.11, pan=-0.4 + 0.4 * i, r=0.25)
+    put(tick(2000, 0.012), 6.5, 0.18, r=0.3); put(tick(2300, 0.012), 6.65, 0.18, r=0.3)
+    put(mixs(bell(hz(80), 2.0, 2.0, 1.2, 2.6), bell(hz(87), 2.0, 2.0, 1.0, 2.6)), 7.0, 0.14, r=0.6, d=0.3)   # 60 degrees
+    put(blip(220, 700, 0.95), 6.5, 0.1, r=0.6)
+    lo, hi = impact(0.6); put(lo, 7.5, 0.4); put(hi, 7.5, 0.26, r=0.6); kicks.append((7.5, 0.5))
+    w = whoosh(0.3, 0.25, 6000, 1200, 500)[::-1]; put(np.ascontiguousarray(w), 8.75, 0.18, r=0.3)
+    # one becomes many
+    put(riser(1.25, 300, 8000), 10.0 - 1.25, 0.26, r=0.3)
+    put(whoosh(0.36, 0.7, 400, 7500, 700), 10.0 - 0.36, 0.62, r=0.25)
+    lo, hi = impact(0.6); put(lo, 10.0, 0.42); put(hi, 10.0, 0.3, r=0.5); kicks.append((10.0, 0.7))
+    for i, t0 in enumerate((10.625, 11.875, 13.125)):             # waves through the pattern
+        put(whoosh(0.55, 0.75, 500, 5200, 900, 1.6), t0 + 0.15, 0.3, r=0.3)
+        for j, m in enumerate([80, 84, 87, 92]): put(bell(hz(m), 1.2, 2.0, 0.9, 3.6), t0 + 0.5 + j * 0.09, 0.06, pan=-0.6 + 0.4 * j, r=0.7)
+    put(riser(0.7, 400, 9000), 14.93 - 0.7, 0.3, r=0.3)           # dive into one tower
+    put(whoosh(0.42, 0.35, 500, 8500, 1200), 14.93 - 0.42, 0.6, r=0.25)
+    lo, hi = impact(0.5); put(lo, 15.0, 0.4); put(hi, 15.0, 0.26, r=0.5); kicks.append((15.0, 0.6))
+    # rhythm: the bars find the line
+    for i in range(13): put(pluck(hz([56, 58, 60, 63, 65, 68, 70, 72, 75, 77, 80, 82, 84][i]), 0.5, 6, 1.0), 18.62 + i * 0.05, 0.15, pan=-0.6 + i * 0.1, r=0.4, d=0.3)
+    put(whoosh(0.3, 0.5, 400, 4500, 700), 19.4, 0.3, r=0.3)
+    put(riser(0.9, 500, 6000), 20.0 - 0.9, 0.18, r=0.3)
+    lo, hi = impact(0.5); put(lo, 20.0, 0.3); put(hi, 20.0, 0.22, r=0.5); kicks.append((20.0, 0.6))
+    w = whoosh(0.3, 0.25, 6000, 1200, 500)[::-1]; put(np.ascontiguousarray(w), 20.02, 0.18, r=0.3)
+    # light: the sun crosses, night falls, rooms light up
+    n = int(2.4 * SR); sh = tvf(rs.randn(n), lin(n, 5200, 1500, 1.2), 'bp', 2.5) * np.sin(np.pi * np.linspace(0, 1, n)) ** 1.3
+    put(sh, 20.3, 0.12, pan=0.0, r=0.6)
+    put(revswell(0.8), 22.5 - 0.8, 0.12, r=0.4)
+    lo, hi = impact(0.7); put(lo, 22.5, 0.42); put(hi, 22.5, 0.24, r=0.6); kicks.append((22.5, 0.7))
+    PENT = [68, 70, 72, 75, 77, 80, 82, 84, 87, 89, 92]
+    NW = 30
+    for i in range(NW):
+        tw = 22.45 + 1.85 * (i / NW) ** 0.72
+        put(pluck(hz(PENT[(i * 3) % len(PENT)]), 0.6, 5.5, 0.9), tw, 0.07 + 0.05 * i / NW, pan=0.7 * np.sin(i * 2.4), r=0.5, d=0.25)
+    put(riser(1.6, 250, 9000), 25.0 - 1.6, 0.34, r=0.3); put(revswell(1.4), 25.0 - 1.4, 0.24, r=0.4)
+    lo, hi = impact(1.25); put(lo, 25.0, 0.6); put(hi, 25.0, 0.7, r=0.8); kicks.append((25.0, 1.0))
+    put(blip(220, 880, 0.6), 25.03, 0.1, r=0.6)
+    put(whoosh(0.4, 0.5, 300, 2500, 500), 26.0, 0.2, r=0.3)
+    for i, m in enumerate([68, 70, 72, 75, 77, 80, 82]): put(pluck(hz(m), 0.6, 5, 0.8), 26.48 + i * 0.065, 0.13, pan=-0.3 + 0.1 * i, r=0.5, d=0.25)
+    put(blip(hz(80), hz(84), 0.12), 27.14, 0.16, r=0.5); put(blip(hz(84), hz(87), 0.2), 27.26, 0.16, r=0.5)
+    for i, m in enumerate([68, 75, 82, 84]): put(bell(hz(m), 2.4, 2.0, 1.0, 2.0), tb(11, 1 + i) + (0.0 if i else 0.02), 0.2, pan=-0.3 + 0.2 * i, r=0.7, d=0.4)
+    for (s16, m) in [(0, 75), (2, 80), (4, 82), (8, 87)]:
+        put(mixs(keys(hz(m), 3.0) * 1.0, bell(hz(m), 2.6, 2.0, 0.9, 1.9) * 0.6), tb(12, 1, s16), 0.32, pan=0.1 * (s16 - 4) / 4, r=0.6, d=0.3)
+    put(keys(hz(56), 3.2) + keys(hz(63), 3.2) * 0.8 + keys(hz(72), 3.2) * 0.7, tb(12), 0.3, r=0.5)
+    K(tb(12), 0.45, 1.3)
+    n = int(1.0 * SR); gl = tvf(rs.randn(n), lin(n, 5000, 11000, 1.0), 'bp', 4.0) * np.sin(np.pi * np.linspace(0, 1, n)) ** 2
+    put(gl, 28.3, 0.1, pan=0.0, r=0.7)
+    for i, m in enumerate([92, 87, 84, 80]): put(bell(hz(m), 1.4, 2.0, 0.8, 3.5), 28.42 + i * 0.1, 0.05, pan=-0.4 + 0.27 * i, r=0.8)
 
 # ---------------- sidechain, fx, master ----------------
 sc = np.ones(N); t_all = np.arange(N) / SR
@@ -382,3 +452,25 @@ with wave.open(out, 'wb') as w:
     d = np.clip(mix, -1, 1); i32 = (d * (2 ** 23 - 1)).astype('<i4')
     w.writeframes(np.ascontiguousarray(i32).view(np.uint8).reshape(-1, 4)[:, :3].tobytes())
 print('wrote', out, 'peak', np.abs(mix).max())
+
+# ---------- band envelopes for the equaliser scene (logo film) ----------
+if os.environ.get('BANDS'):
+    m = mix.mean(1); NBD = 13; F0, F1 = 15 * 60 - 4, 20 * 60 + 4
+    edges = np.geomspace(45, 9000, NBD + 1); rows = []
+    for k in range(NBD):
+        sos = sg.butter(3, [edges[k] / (SR / 2), edges[k + 1] / (SR / 2)], 'band', output='sos')
+        e = sg.sosfilt(sos, m) ** 2
+        e = np.sqrt(sg.sosfilt(sg.butter(2, 14 / (SR / 2), 'low', output='sos'), e).clip(1e-12))
+        idx = (np.arange(F0, F1) * SR / 60).astype(int)
+        v = 20 * np.log10(e[idx] + 1e-9)
+        lo_, hi_ = np.percentile(v, 12), np.percentile(v, 98.5)
+        rows.append(np.clip((v - lo_) / (hi_ - lo_), 0, 1) ** 1.25)
+    B = np.array(rows).T                                   # frames x bands
+    B = 0.7 * B + 0.15 * np.roll(B, 1, 1) + 0.15 * np.roll(B, -1, 1)
+    for i in range(1, len(B)):                                               # limited attack, slow release
+        up = B[i - 1] + (B[i] - B[i - 1]) * 0.55
+        B[i] = np.where(B[i] > B[i - 1], up, np.maximum(B[i], B[i - 1] * 0.9))
+    B = 0.1 + 0.9 * B
+    with open(os.environ['BANDS'], 'w') as fh:
+        fh.write('const BANDS_F0 = %d;\nconst BANDS = %s;\n' % (F0, '[' + ','.join('[' + ','.join('%.3f' % x for x in r) + ']' for r in B) + ']'))
+    print('bands', B.shape, 'mean per band', np.round(B.mean(0), 2))
