@@ -45,6 +45,114 @@ def ctx(text, m, span=18):
     return text[a:b].replace("\n", " ")
 
 
+OTA_NAMES = r"Agoda|Booking\.com|Trip\.com|Traveloka|Expedia|Airbnb|Ctrip|Meituan|Fliggy|携程|美团|飞猪"
+KEY_NUMBERS = ["31", "56", "699", "2,499", "9,980", "200+", "2026-11-12"]
+LANG_RULES = {
+    "en": {
+        "file": "HogentX-Malaysia-Hotel-Briefing-EN.html",
+        "banned": {
+            "old pricing or offers": r"RM ?199|\bfree\b|discount|revenue share|limited[- ]time",
+            "wrong abbreviations": r"H2A|A2E|MCT",
+            "named channels": OTA_NAMES,
+            "overclaim": r"already (connected|live|launched)|fully automatic|one[- ]click",
+        },
+        "neg": r"\b(not|no|never|without|cannot|nor)\b|≠|n't",
+        "need_neg_before": r"guarantee|promis",
+        "need_limit_around": {r"automatic": r"\bnot\b|≠|\bidea\b|\bdemo\b", r"real-time": r"not launched|not usable|cannot be used|does not exist|not there yet|Not tested"},
+        "plan_word": r"plan",
+        "after_56": "including open, signed and in preparation",
+        "required": ["is not a tool that guarantees more revenue", "A suggestion is not automatic execution", "Not published automatically by default", "No promise of rankings, exposure or booking volume", "to be agreed by both sides", "does not operate or change prices for you", "Included in all three plans", "INTENT COMPUTING PTE. LTD.", "hi@intent-computing.com", "hogentx.com", "A2A", "MCP"],
+    },
+    "ms": {
+        "file": "HogentX-Malaysia-Hotel-Briefing-BM.html",
+        "banned": {
+            "harga lama atau tawaran": r"RM ?199|percuma|diskaun|masa terhad",
+            "singkatan salah": r"H2A|A2E|MCT",
+            "saluran dinamakan": OTA_NAMES,
+            "dakwaan berlebihan": r"sudah (disambungkan untuk hotel anda|dilancarkan)|automatik sepenuhnya|satu klik",
+        },
+        "neg": r"\b(tidak|bukan|tiada|tanpa|belum)\b|≠",
+        "need_neg_before": r"jamin|janji",
+        "need_limit_around": {r"automatik": r"\btidak\b|\bbukan\b|≠|\bidea\b|\bdemo\b", r"masa nyata": r"belum dilancarkan|belum boleh|belum ada|Tidak diuji"},
+        "plan_word": r"rancangan",
+        "after_56": "termasuk yang telah dibuka, ditandatangani dan dalam persiapan",
+        "required": ["bukan alat yang menjamin peningkatan hasil", "Cadangan bukan pelaksanaan automatik", "Tidak diterbitkan secara automatik secara lalai", "Tidak menjanjikan kedudukan, pendedahan atau jumlah tempahan", "dipersetujui", "tidak mengendalikan operasi atau mengubah harga bagi pihak anda", "Termasuk dalam ketiga-tiga pelan", "INTENT COMPUTING PTE. LTD.", "hi@intent-computing.com", "hogentx.com", "A2A", "MCP"],
+    },
+}
+
+
+def check_translations():
+    """英文、马来文：数字和中文一致，标记成对，没有旧说法，否定和限定没有丢。"""
+    import json
+
+    strings = ROOT / "i18n" / "strings.json"
+    if not strings.is_file():
+        fail("缺少 i18n/strings.json")
+        return
+    rows = json.loads(strings.read_text(encoding="utf-8"))
+
+    def nums(t):
+        t = re.sub(r"<[^>]+>", "", t)
+        return set(x.rstrip(",.") for x in re.findall(r"\d[\d,]*(?:\.\d+)?\+?|\d{4}-\d{2}-\d{2}", t))
+
+    for r in rows:
+        zh = r["zh"]
+        for lang in ("en", "ms"):
+            t = r.get(lang, "")
+            where = f"[{lang}] {zh[:28]}…"
+            if not t.strip():
+                fail(f"缺翻译 {where}")
+                continue
+            extra = nums(t) - nums(zh) - {"1", "2", "3"}
+            if extra:
+                fail(f"译文多出了中文里没有的数字 {sorted(extra)} {where}")
+            for k in KEY_NUMBERS:
+                if k in zh and k not in t:
+                    fail(f"译文漏了数字 {k} {where}")
+            opens = re.findall(r"<([a-z]+)\b[^>]*>", t)
+            closes = re.findall(r"</([a-z]+)>", t)
+            if sorted(x for x in opens if x != "br") != sorted(closes):
+                fail(f"译文里的标记不成对 {where}")
+            if set(opens) - {"b", "span", "br", "a", "small", "em", "i"}:
+                fail(f"译文里有不该出现的标记 {sorted(set(opens))} {where}")
+            for marker in ('class="qref"', 'class="plus"', "href="):
+                if zh.count(marker) != t.count(marker):
+                    fail(f"译文与中文的标记数量不一致（{marker}） {where}")
+            if re.search(r"[\u201c\u201d\u2018\u2019\uff0c\u3002\uff1b\uff1a]", t):
+                fail(f"译文里有全角或弯引号标点 {where}")
+
+    for lang, rule in LANG_RULES.items():
+        f = ROOT / rule["file"]
+        if not f.is_file():
+            fail(f"缺少 {rule['file']}，先运行 python3 tools/build.py")
+            continue
+        doc = f.read_text(encoding="utf-8")
+        flat = visible_text(doc).replace("\n", " ")
+        for name, pat in rule["banned"].items():
+            for m in re.finditer(pat, flat, flags=re.I):
+                fail(f"[{lang}] 禁用内容 · {name}：…{ctx(flat, m, 30)}…")
+        for m in re.finditer(rule["need_neg_before"], flat, flags=re.I):
+            if not re.search(rule["neg"], flat[max(0, m.start() - 70):m.start()], flags=re.I):
+                fail(f"[{lang}] 保证类说法前缺否定：…{ctx(flat, m, 40)}…")
+        for pat, limit in rule["need_limit_around"].items():
+            for m in re.finditer(pat, flat, flags=re.I):
+                if not re.search(limit, flat[max(0, m.start() - 160):m.end() + 200], flags=re.I):
+                    fail(f"[{lang}] 缺否定或限定：…{ctx(flat, m, 40)}…")
+        for m in re.finditer(r"200\+", flat):
+            if not re.search(rule["plan_word"], flat[max(0, m.start() - 80):m.end() + 80], flags=re.I):
+                fail(f"[{lang}] 200+ OTA 只能作为计划出现：…{ctx(flat, m, 30)}…")
+        for m in re.finditer(r"(?<![\d,])56(?!\d)", flat):
+            if rule["after_56"] not in flat[m.start():m.end() + 90]:
+                fail(f"[{lang}] 56 后面要紧跟包含范围的说明：…{ctx(flat, m, 30)}…")
+        amounts = set(x.rstrip(",.") for x in re.findall(r"RM ?([\d,]+(?:\.\d+)?)", flat))
+        if amounts - {"699", "2,499", "9,980"}:
+            fail(f"[{lang}] 出现了三档月费以外的 RM 金额：" + ", ".join(sorted(amounts - {'699', '2,499', '9,980'})))
+        for need in rule["required"]:
+            if need not in flat:
+                fail(f"[{lang}] 缺少必备内容：{need}")
+    notes.append(f"英文、马来文各 {len(rows)} 条，数字、标记、否定与限定已核对。")
+
+
 def main():
     if not BUILT.is_file():
         sys.exit("先运行 python3 tools/build.py")
@@ -237,6 +345,8 @@ def main():
         fail("缺少 lang=\"zh-CN\"")
     size_mb = BUILT.stat().st_size / 1024 / 1024
     notes.append(f"成品大小 {size_mb:.2f} MB；可见文字约 {len(re.sub(r'\\s', '', text))} 字；截图 {len(figures)} 张。")
+
+    check_translations()
 
     if problems:
         print(f"未通过：{len(problems)} 处")

@@ -1057,3 +1057,30 @@ html.present[lang="ms"] .grid--pace { grid-template-columns: minmax(0, 1fr) 560p
 html.present[lang="ms"] .slide--plans .plan { padding: 14px 0 12px; }
 html.present[lang="ms"] #multi-ota .slide-body { zoom: 0.83; }
 html.present:not([lang^="zh"]) #pilot .grid--7-5 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+html.present[lang="ms"] #pace, html.present[lang="ms"] #pricing-advice, html.present[lang="ms"] #availability { --fs-tiny: 24px; }
+h3 .en { white-space: normal; }
+html:not([lang^="zh"]) .en { white-space: normal; }
+html.present:not([lang^="zh"]) .en { font-size: max(0.82em, 22px); }
+.glance-h { font-size: var(--fs-small); }
+html.present:not([lang^="zh"]) #measure .job .table thead th { font-size: 22px; }
+html:not(.present) .tag { white-space: normal; }
+@media (max-width: 400px) {
+  html:not(.present) .topbar { gap: 0.4rem; }
+  html:not(.present) .lang-switch button { padding: 0.3rem 0.5rem; }
+  html:not(.present) .chip-btn { padding: 0.3rem 0.7rem; }
+}
+@media (max-width: 359px) {
+  html.i18n:not(.present) .topbar .wordmark { display: none; }
+  html.i18n:not(.present) .topbar { justify-content: flex-end; }
+}
+@media (max-width: 719px) {
+  html:not(.present) .table--stack td::before { flex: 0 1 auto; min-width: 0; }
+  html:not(.present) .table--stack td { text-align: right; }
+  html:not(.present) .table--stack td::before { text-align: left; }
+  html:not(.present) .table--ledger.table--stack td { text-align: left; }
+}
+html:not(.present) .calc-table td, html:not(.present) .calc-table th { white-space: normal; }
+html:not(.present):not([lang^="zh"]) .table--who tbody th { white-space: normal; }
+html:not(.present) .table--cmp .fill { min-width: 0; }
+html:not(.present) .table--cmp th { white-space: normal; overflow-wrap: anywhere; }
+html:not(.present) .table thead th { white-space: normal; }
