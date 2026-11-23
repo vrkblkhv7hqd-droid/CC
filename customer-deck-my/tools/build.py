@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 OUT = ROOT / "HogentX-Malaysia-Hotel-Briefing.html"
 
+ALLOWED_LINKS = ['href="mailto:hi@intent-computing.com"', 'href="https://hogentx.com"']
+
 MIME = {
     ".png": "image/png",
     ".webp": "image/webp",
@@ -66,9 +68,13 @@ def main() -> None:
     html, n_img = re.subn(r'src="(\.\./assets/[^"]+)"', img_repl, html)
 
     # 自检：不允许残留任何外部或相对引用
-    leftovers = re.findall(r'(?:src|href)="(?!data:|#)[^"]*"', html)
-    leftovers += re.findall(r'url\((?!"data:)[^)]*\)', html)
-    leftovers += [u for u in re.findall(r"https?://[^\s\"'<>)]+", html)]
+    # 结尾页的两个联系方式是读者自己点的链接，不是页面加载的资源
+    probe = html
+    for ok in ALLOWED_LINKS:
+        probe = probe.replace(ok, "")
+    leftovers = re.findall(r'(?:src|href)="(?!data:|#)[^"]*"', probe)
+    leftovers += re.findall(r'url\((?!"data:)[^)]*\)', probe)
+    leftovers += [u for u in re.findall(r"https?://[^\s\"'<>)]+", probe)]
     if leftovers:
         sys.exit("仍有未内嵌的引用：" + ", ".join(sorted(set(leftovers))[:10]))
 
