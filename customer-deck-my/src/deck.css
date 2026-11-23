@@ -988,3 +988,72 @@ html.present .slide--plans .slide-body { gap: 16px; justify-content: flex-start;
 html.present .slide--plans .slide-body > .small { font-size: 21px; }
 html.present .gloss { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 44px; }
 html.present .gloss dd { font-size: 22px; line-height: 1.42; }
+
+/* =====================================================================
+   English / Bahasa Melayu：拉丁文字句子更长，投屏时整体收一点、标题小一号
+   ===================================================================== */
+html[lang="en"], html[lang="ms"] { --latin-zoom: 0.9; }
+html[lang="ms"] { --latin-zoom: 0.86; }
+html.present:not([lang^="zh"]) { --fs-title: 46px; --fs-lead: 27px; --fs-tiny: 22px; --fs-small: 24px; }
+html.present[lang="ms"] { --fs-title: 42px; --fs-lead: 26px; --fs-tiny: 23px; --fs-small: 25px; }
+html.present:not([lang^="zh"]) .slide-body { zoom: var(--latin-zoom); }
+html.present:not([lang^="zh"]) .slide-title { letter-spacing: -0.012em; max-width: none; text-wrap: balance; }
+html.present:not([lang^="zh"]) .slide-lead { max-width: none; }
+html.present:not([lang^="zh"]) .status-key li { white-space: normal; align-items: flex-start; }
+html.present:not([lang^="zh"]) .status-key .tag { flex: none; }
+html.present:not([lang^="zh"]) .cover-title { font-size: 78px; line-height: 1.12; letter-spacing: -0.02em; }
+html.present[lang="ms"] .cover-title { font-size: 70px; }
+html.present:not([lang^="zh"]) .cover-sub { font-size: 30px; }
+html.present:not([lang^="zh"]) .cover-q b { font-size: 29px; line-height: 1.3; }
+html.present:not([lang^="zh"]) .cover-q li { padding: 22px 0; }
+html:not([lang^="zh"]) .kicker, html:not([lang^="zh"]) .rail-sec { letter-spacing: 0.01em; }
+html.present:not([lang^="zh"]) .rail { font-size: 20px; gap: 8px; }
+html:not([lang^="zh"]) .table tbody th, html:not([lang^="zh"]) .calc-table td, html:not([lang^="zh"]) .calc-table th { white-space: normal; }
+html.present:not([lang^="zh"]) .table--who tbody th, html.present:not([lang^="zh"]) .calc-table tbody th { white-space: nowrap; }
+
+/* 英文 / 马来文：几页密度高的版面再收一点 */
+html.present:not([lang^="zh"]) .table thead th { white-space: normal; vertical-align: bottom; }
+html.present:not([lang^="zh"]) .slide--overview .slide-body { zoom: 0.84; }
+html.present:not([lang^="zh"]) .slide--overview .table--ledger td small { font-size: 24px; }
+html.present:not([lang^="zh"]) .slide--overview .table--ledger .tag, html.present:not([lang^="zh"]) .slide--overview .status-key .tag { font-size: 24px; }
+html.present:not([lang^="zh"]) .slide--overview .status-key li { font-size: 24px; }
+html.present:not([lang^="zh"]) .slide--overview .table--ledger thead th { font-size: 24px; }
+html.present:not([lang^="zh"]) .slide--overview .table--ledger tbody th { width: 22%; }
+html.present[lang="ms"] .slide--overview .slide-body { zoom: 0.8; }
+html.present[lang="ms"] .slide--overview .table--ledger td small, html.present[lang="ms"] .slide--overview .status-key li, html.present[lang="ms"] .slide--overview .table--ledger .tag, html.present[lang="ms"] .slide--overview .status-key .tag, html.present[lang="ms"] .slide--overview .table--ledger thead th { font-size: 25px; }
+html.present:not([lang^="zh"]) .slide--plans .slide-body { zoom: 0.84; }
+html.present:not([lang^="zh"]) .plan, html.present:not([lang^="zh"]) .plan--head { grid-template-columns: 290px 300px minmax(0, 1.7fr) minmax(0, 1.05fr) minmax(0, 1fr); }
+html.present:not([lang^="zh"]) .plan--head { font-size: 24px; }
+html.present:not([lang^="zh"]) .plan-name b { font-size: 36px; }
+html.present:not([lang^="zh"]) .plan-name .small { font-size: 24px; }
+html.present:not([lang^="zh"]) .plan-inc p, html.present:not([lang^="zh"]) .plan-who p, html.present:not([lang^="zh"]) .xlist { font-size: 26px; line-height: 1.36; }
+html.present:not([lang^="zh"]) .carry { font-size: 24px; }
+html.present:not([lang^="zh"]) .slide--plans .slide-body > .small { font-size: 24px; }
+html.present[lang="ms"] .slide--plans .slide-body { zoom: 0.78; }
+html.present[lang="ms"] .plan--head, html.present[lang="ms"] .plan-name .small, html.present[lang="ms"] .carry, html.present[lang="ms"] .slide--plans .slide-body > .small { font-size: 26px; }
+html.present[lang="ms"] .plan-inc p, html.present[lang="ms"] .plan-who p, html.present[lang="ms"] .xlist { font-size: 27px; }
+html.present:not([lang^="zh"]) .slide--control .slide-body { zoom: 0.84; }
+html.present:not([lang^="zh"]) .slide--control .card { padding: 28px 32px; gap: 14px; }
+html.present:not([lang^="zh"]) .slide--control .card h3 { font-size: 34px; }
+html.present:not([lang^="zh"]) .slide--control .card > p { font-size: 28px; }
+html.present:not([lang^="zh"]) .slide--control .card > p.small { font-size: 25px; }
+html.present:not([lang^="zh"]) .slide--control .table { font-size: 26px; }
+html.present:not([lang^="zh"]) .grid--control { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.7fr) minmax(0, 0.9fr); }
+html.present[lang="ms"] .slide--control .slide-body { zoom: 0.8; }
+html.present:not([lang^="zh"]) #pilot .sheet-row { grid-template-columns: 290px minmax(0, 1fr); }
+html.present:not([lang^="zh"]) #measure .table--cmp tbody th { white-space: nowrap; }
+html.present:not([lang^="zh"]) .table--ota thead th { font-size: 22px; }
+html.present:not([lang^="zh"]) .grid--shot-left { grid-template-columns: 520px minmax(0, 1fr); }
+html.present[lang="ms"] .grid--pace { grid-template-columns: minmax(0, 1fr) 500px 500px; }
+html.present:not([lang^="zh"]) .slide--overview .slide-body { zoom: 0.82; gap: 12px; }
+html.present:not([lang^="zh"]) .slide--overview .table--ledger th, html.present:not([lang^="zh"]) .slide--overview .table--ledger td { padding: 5px 18px 5px 0; line-height: 1.3; }
+html.present[lang="ms"] .slide--overview .slide-body { zoom: 0.78; }
+html.present[lang="en"] #pace .slide-body, html.present[lang="en"] #pricing-advice .slide-body, html.present[lang="en"] #availability .slide-body { zoom: 0.87; }
+html.present[lang="ms"] #pace .slide-body, html.present[lang="ms"] #pricing-advice .slide-body, html.present[lang="ms"] #availability .slide-body { zoom: 0.76; }
+html.present[lang="ms"] #pace .shot-label, html.present[lang="ms"] #pricing-advice .shot-label, html.present[lang="ms"] #availability .shot-label { font-size: 25px; }
+html.present[lang="ms"] #pace .shot-bar, html.present[lang="ms"] #pricing-advice .shot-bar, html.present[lang="ms"] #availability .shot-bar { font-size: 25px; }
+html.present[lang="ms"] .grid--shot-left { grid-template-columns: 620px minmax(0, 1fr); }
+html.present[lang="ms"] .grid--pace { grid-template-columns: minmax(0, 1fr) 560px 560px; }
+html.present[lang="ms"] .slide--plans .plan { padding: 14px 0 12px; }
+html.present[lang="ms"] #multi-ota .slide-body { zoom: 0.83; }
+html.present:not([lang^="zh"]) #pilot .grid--7-5 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }

@@ -100,6 +100,8 @@
       var kicker = rail.parentNode.querySelector('.kicker');
       if (kicker) {
         var parts = Array.prototype.filter.call(kicker.querySelectorAll('span'), function (x) { return !x.classList.contains('sep') && x.textContent.trim(); }).map(function (x) { return x.textContent.trim(); });
+        /* 英文、马来文的栏目名较长：三段时只留首尾两段 */
+        if (lang !== 'zh' && parts.length === 3) parts = [parts[0], parts[2]];
         var sec = document.createElement('b'); sec.className = 'rail-sec'; sec.textContent = parts.join(' · ');
         rail.appendChild(sec);
       }

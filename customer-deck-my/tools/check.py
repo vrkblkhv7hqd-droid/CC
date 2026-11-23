@@ -31,6 +31,8 @@ def visible_text(doc: str) -> str:
     body = re.sub(r"<script\b.*?</script>", " ", body, flags=re.S)
     attrs = re.findall(r'\b(?:alt|aria-label|title|placeholder|data-title|content)="([^"]*)"', body)
     body = re.sub(r'="data:[^"]*"', '=""', body)
+    # .nb / .nowrap 只是断行用的词组标记，读文字时当作不存在
+    body = re.sub(r'<(span|b) class="(?:nb|nowrap)">(.*?)</\1>', r"\2", body, flags=re.S)
     body = re.sub(r"<(br|/p|/li|/h[1-6]|/div|/tr|/td|/th|/dd|/dt|/section|/article|/figcaption|/span|/button|/label)\b[^>]*>", "\n", body)
     body = re.sub(r"<[^>]+>", "", body)
     text = htmllib.unescape(body + "\n" + "\n".join(attrs))
@@ -91,7 +93,7 @@ def main():
             fail(f"200+ OTA 只能作为计划出现：…{ctx(flat, m, 30)}…")
     for m in re.finditer(r"实时", flat):
         around = flat[max(0, m.start() - 30):m.end() + 60]
-        if not re.search(r"未上线|需求|还没有|不能使用|不验证", around):
+        if not re.search(r"未上线|需求|还没有|还没上线|不能使用|不验证", around):
             fail(f"“实时”只能出现在未上线的收益报表语境里：…{ctx(flat, m, 30)}…")
     for m in re.finditer(r"(?<!\d)56(?!\d)", flat):
         around = flat[m.start():m.end() + 26]
@@ -140,6 +142,10 @@ def main():
         "由双方另",
         "English",
         "Bahasa Melayu",
+        "专人不代运营、不代改价",
+        "从专人陪跑方案（RM 2,499）起包含",
+        "三个方案都含",
+        "不含 AI 浏览器",
     ]
     for r in required:
         if r not in flat:
@@ -163,11 +169,12 @@ def main():
         if not hit:
             fail(f"截图缺失或标题不符：{title}")
             continue
-        f = hit[0]
+        f = re.sub(r"<[^>]+>", "", hit[0])
         for need in (desc, "历史实拍，已脱敏。" + scope, "来源：2026-11-12 产品进展汇报，" + page):
             if need not in f:
                 fail(f"截图「{title}」旁缺少标注：{need}")
-    if scope and len(re.findall(re.escape(scope), doc)) < 6:
+    static = re.sub(r"<(style|script)\b.*?</\1>", "", doc, flags=re.S)
+    if scope and len(re.findall(re.escape(scope), re.sub(r"<[^>]+>", "", static))) < 6:
         fail("六张截图应各自带一句验证范围")
 
     # ---------- 结构：标签成对，<main> 下只有幻灯片 ----------
@@ -216,16 +223,20 @@ def main():
     notes.append(f"共 {slide_n} 页。")
 
     # ---------- 4. 成品文件本身 ----------
-    if re.search(r"https?://", doc):
+    # 结尾页的邮箱和网址是读者自己点的链接，不算外部引用
+    probe = doc
+    for ok in ("mailto:hi@intent-computing.com", "https://hogentx.com"):
+        probe = probe.replace(ok, "")
+    if re.search(r"https?://", probe):
         fail("成品文件里有外部网址")
     if "<!--" in doc:
         fail("成品文件里有注释")
-    if re.search(r'(?:src|href)="(?!data:|#)[^"]*"', doc):
+    if re.search(r'(?:src|href)="(?!data:|#|")[^"]*"', probe):
         fail("成品文件里有未内嵌的引用")
     if 'lang="zh-CN"' not in doc:
         fail("缺少 lang=\"zh-CN\"")
     size_mb = BUILT.stat().st_size / 1024 / 1024
-    notes.append(f"成品大小 {size_mb:.2f} MB；可见文字约 {len(re.sub(r'\\s', '', text))} 字；截图 {len(figures)} 张（含 2 张界面局部）。")
+    notes.append(f"成品大小 {size_mb:.2f} MB；可见文字约 {len(re.sub(r'\\s', '', text))} 字；截图 {len(figures)} 张。")
 
     if problems:
         print(f"未通过：{len(problems)} 处")
