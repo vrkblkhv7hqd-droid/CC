@@ -170,6 +170,51 @@ def main():
     if scope and len(re.findall(re.escape(scope), doc)) < 6:
         fail("六张截图应各自带一句验证范围")
 
+    # ---------- 结构：标签成对，<main> 下只有幻灯片 ----------
+    from html.parser import HTMLParser
+
+    VOID = {"meta", "link", "img", "input", "br", "hr", "use", "circle", "path", "source"}
+
+    class Tree(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.stack, self.errors, self.main_children = [], [], []
+
+        def handle_starttag(self, tag, attrs):
+            if self.stack and self.stack[-1][0] == "main":
+                self.main_children.append((tag, dict(attrs).get("class") or ""))
+            if tag not in VOID:
+                self.stack.append((tag, self.getpos()[0]))
+
+        def handle_startendtag(self, tag, attrs):
+            if self.stack and self.stack[-1][0] == "main":
+                self.main_children.append((tag, dict(attrs).get("class") or ""))
+
+        def handle_endtag(self, tag):
+            if tag in VOID:
+                return
+            if not self.stack or self.stack[-1][0] != tag:
+                self.errors.append(f"第 {self.getpos()[0]} 行 </{tag}> 与未闭合的 <{self.stack[-1][0] if self.stack else '无'}> 不匹配")
+                names = [x[0] for x in self.stack]
+                if tag in names:
+                    while self.stack and self.stack[-1][0] != tag:
+                        self.stack.pop()
+                    self.stack.pop()
+            else:
+                self.stack.pop()
+
+    tree = Tree()
+    tree.feed(re.sub(r"<(style|script)\b.*?</\1>", "", doc, flags=re.S))
+    for e in tree.errors[:5]:
+        fail("标签不成对：" + e)
+    if tree.stack:
+        fail("有未闭合的标签：" + ", ".join(x[0] for x in tree.stack[:5]))
+    stray = [c for c in tree.main_children if c[0] != "section" or "slide" not in c[1].split()]
+    if stray:
+        fail("<main> 下出现了幻灯片以外的内容：" + ", ".join(f"<{c[0]} class='{c[1]}'>" for c in stray[:5]))
+    slide_n = len([c for c in tree.main_children if c[0] == "section"])
+    notes.append(f"共 {slide_n} 页。")
+
     # ---------- 4. 成品文件本身 ----------
     if re.search(r"https?://", doc):
         fail("成品文件里有外部网址")

@@ -825,3 +825,5 @@ html.present .plan { padding: 32px 0 30px; }
 html.present .plan-inc p, html.present .plan-who p, html.present .xlist { font-size: 27px; line-height: 1.45; }
 html.present .plan-name .small { font-size: 23px; line-height: 1.4; }
 html.present .slide--plans .slide-body > .small { font-size: 22px; }
+
+html.present .deck > :not(.slide) { display: none; }

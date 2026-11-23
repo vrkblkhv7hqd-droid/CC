@@ -33,6 +33,7 @@ async function newPage(browser, viewport, extra) {
   await page.evaluate(() => document.fonts.ready);
   const total = await page.evaluate(() => document.querySelectorAll('.slide').length);
   ok('宽屏自动进入投屏模式', await page.evaluate(() => document.documentElement.classList.contains('present')));
+  ok('舞台里只有幻灯片，没有游离内容', await page.evaluate(() => Array.from(document.getElementById('deck').children).every((c) => c.classList.contains('slide'))));
   ok('第一页可见，其余隐藏', await page.evaluate(() => document.querySelectorAll('.slide.is-current').length === 1 && document.querySelector('.slide').classList.contains('is-current')));
   const cur = () => page.evaluate(() => Array.prototype.indexOf.call(document.querySelectorAll('.slide'), document.querySelector('.slide.is-current')) + 1);
   await page.keyboard.press('ArrowRight'); await page.keyboard.press('PageDown'); await page.keyboard.press('Space');
