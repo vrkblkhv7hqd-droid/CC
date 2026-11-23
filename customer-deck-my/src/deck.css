@@ -482,7 +482,7 @@ html.present .slide > .slide-inner { max-width: none; margin: 0; height: 1020px;
 html.present .slide-head { gap: 12px; flex: none; }
 html.present .slide-title { line-height: 1.22; max-width: 1640px; }
 html.present .slide-lead { max-width: 1500px; line-height: 1.5; }
-html.present .slide-body { flex: 1 1 auto; min-height: 0; gap: var(--sp-4); }
+html.present .slide-body { flex: 1 1 auto; min-height: 0; gap: var(--sp-4); justify-content: center; }
 html.present .slide-foot {
   flex: none; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   height: 64px; margin: 0 -96px; padding: 0 96px; border-top: 2px solid var(--line-soft);
@@ -505,7 +505,8 @@ html.present .grid--5-7 { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); 
 html.present .grid--7-5 { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
 html.present .grid--4-8 { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
 html.present .grid--6-6 { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
-html.present .grid--stretch { align-items: stretch; flex: 1 1 auto; min-height: 0; }
+html.present .grid--stretch { align-items: stretch; }
+html.present .grid--fill { flex: 1 1 auto; min-height: 0; }
 html.present .fill-h { height: 100%; }
 html.present .card { padding: 26px 30px; }
 html.present .note { padding: 18px 26px; }
@@ -598,3 +599,87 @@ html.present .status-col--has { border-top-width: 8px; }
 html.present .status-col--check { border-top-width: 8px; }
 html.present .status-col--human { border-top-width: 8px; }
 html.present .status-col--notyet { border-top-width: 8px; }
+
+/* ---- 版面细调 ---- */
+.qref { align-self: flex-start; font-size: var(--fs-tiny); font-weight: 700; line-height: 1.2; color: var(--blue-ink); background: var(--blue-soft); border-radius: 999px; padding: 0.2em 0.7em; }
+.flow--3 { grid-template-columns: minmax(0, 1fr); }
+html.present .flow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; }
+html.present .flow--3 > li { padding: 16px 24px; }
+html.present .flow--3 > li b { font-size: 28px; }
+html.present .shot--side { display: grid; grid-template-columns: 700px minmax(0, 1fr); gap: 36px; align-items: start; }
+html.present .slide--q .slide-body { justify-content: center; gap: 36px; }
+html.present .slide--q .grid--stretch { flex: none; }
+html.present .slide--q .qcard { padding: 40px 40px 44px; gap: 24px; }
+html.present .slide--q .qcard h3 { font-size: 40px; line-height: 1.3; }
+html.present .slide--q .qcard p { font-size: 29px; }
+html.present .slide--q .choice button { font-size: 23px; padding: 10px 24px; }
+html.present .slide--q .choice-label { font-size: 22px; }
+html.present .slide--q .note { font-size: 30px; padding: 24px 32px; }
+html.present .slide--ruler .slide-body { justify-content: center; gap: 36px; }
+html.present .slide--ruler .ruler { gap: 24px; }
+html.present .slide--ruler .term { padding: 26px 28px 28px; gap: 6px; min-height: 216px; }
+html.present .slide--ruler .term b { font-size: 38px; }
+html.present .slide--ruler .term .en { font-size: 22px; }
+html.present .slide--ruler .term .hint { font-size: 25px; margin-top: 6px; }
+html.present .slide--ruler .note { font-size: 27px; }
+html.present .slide--overview .status-col { gap: 14px; }
+html.present .slide--overview .status-col > header { gap: 10px; }
+html.present .slide--overview .status-col > header p { font-size: 22px; line-height: 1.4; }
+html.present .slide--overview .status-col .items { gap: 12px; }
+html.present .slide--overview .status-col .items li { padding-top: 12px; line-height: 1.35; }
+html.present .slide--overview .status-col .items li b { font-size: 28px; }
+html.present .slide--overview .status-col .items li span { font-size: 22px; line-height: 1.38; }
+
+html.present .slide--control .card { padding: 34px 36px; gap: 18px; }
+html.present .slide--control .card h3 { font-size: 36px; }
+html.present .slide--control .card > p { font-size: 29px; line-height: 1.5; }
+html.present .slide--control .card > p.small { font-size: 24px; }
+html.present .slide--control .qno-s { font-size: 44px; }
+html.present .slide--control .table { font-size: 25px; }
+html.present .slide--control .note { font-size: 29px; }
+html.present .slide--next .card { padding: 40px 44px; gap: 26px; }
+html.present .slide--next .card h3 { font-size: 36px; }
+html.present .slide--next .steps { gap: 26px; font-size: 31px; }
+html.present .slide--next .closing-contact { font-size: 36px; text-align: right; }
+html.present .slide--next .closing-who .small { font-size: 24px; }
+
+.slide-lead .qref { vertical-align: 0.12em; margin-right: 0.3em; display: inline-block; }
+
+/* ---- 取自“状态分明”方案的做法 ---- */
+.neq { font-weight: 700; font-size: var(--fs-small); line-height: 1.35; color: var(--ink); }
+.status-col--has .neq { color: var(--st-has); }
+.status-col--check .neq { color: var(--st-check); }
+.status-col--human .neq { color: var(--st-human); }
+.status-col--notyet .neq { color: var(--st-notyet); }
+.mini { font-style: normal; font-weight: 700; font-size: 0.68em; line-height: 1.2; white-space: nowrap; vertical-align: 0.14em;
+  padding: 0.12em 0.55em; border-radius: 999px; border: var(--border) solid var(--line); color: var(--ink-2); background: var(--card); margin-left: 0.25em; display: inline-block; }
+.status-col--notyet .mini { border-style: dashed; border-color: var(--st-notyet-line); background: transparent; }
+.status-col--human .mini { border-color: var(--st-human-line); color: var(--st-human); background: var(--st-human-bg); }
+.status-col--check .mini { border-color: var(--st-check-line); color: var(--st-check); background: var(--st-check-bg); }
+.shot-bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2em 1em; font-size: var(--fs-tiny); line-height: 1.3;
+  background: var(--navy-900); color: #fff; padding: 0.45em 0.8em; border-radius: var(--radius-s) var(--radius-s) 0 0; }
+.shot-bar b { font-weight: 700; color: var(--gold); }
+.shot-bar span { color: #d5deee; }
+.shot-bar + .shot-frame { border-top-left-radius: 0; border-top-right-radius: 0; }
+.foot-legend { display: none; }
+html.present .foot-legend { display: flex; align-items: center; gap: 22px; }
+html.present .foot-legend .lg { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; }
+html.present .foot-legend .lg svg { width: 18px; height: 18px; }
+.lg--has { color: var(--st-has); } .lg--check { color: var(--st-check); } .lg--human { color: var(--st-human); } .lg--notyet { color: var(--st-notyet); }
+html.present .shot-bar { padding: 8px 16px; }
+html.present .slide--overview .status-col .neq { font-size: 22px; }
+
+.shot-pic { display: flex; flex-direction: column; min-width: 0; }
+.shot-pic .shot-frame { border-top-left-radius: 0; border-top-right-radius: 0; }
+.shot--menu .shot-pic { max-width: 15rem; }
+html.present .grid--shot-left { grid-template-columns: 560px minmax(0, 1fr); gap: 52px; }
+html.present .shot--menu .shot-pic { max-width: 232px; }
+html.present .shot--menu .shot-frame { max-width: none; }
+
+html.present .slide--rev .card { padding: 34px 38px; gap: 18px; }
+html.present .slide--rev .card h3 { font-size: 36px; }
+html.present .slide--rev .list, html.present .slide--rev .card > p { font-size: 29px; }
+html.present .slide--rev .card > p.small { font-size: 24px; }
+html.present .slide--rev .money { padding: 26px 32px; }
+html.present .slide--rev .money b { font-size: 34px; }
+html.present .slide--rev .money .small { font-size: 25px; }

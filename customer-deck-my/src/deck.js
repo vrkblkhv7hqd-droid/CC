@@ -194,7 +194,8 @@
     var frame = e.target.closest ? e.target.closest('.shot-frame') : null;
     if (!frame || !lightbox) return;
     var img = frame.querySelector('img');
-    var cap = frame.parentNode.querySelector('.shot-cap');
+    var fig = frame.closest('.shot') || frame.parentNode;
+    var cap = fig.querySelector('.shot-cap');
     lbImg.src = img.currentSrc || img.src;
     lbImg.alt = img.alt;
     lbCap.innerHTML = cap ? cap.innerHTML : '';

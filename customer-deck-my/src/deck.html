@@ -28,7 +28,7 @@
 
 <main class="deck" id="deck">
 
-<!-- 01 封面 -->
+<!-- 01 现在能用什么，值不值得试 -->
 <section class="slide slide--dark slide--cover" id="cover" data-title="现在能用什么，值不值得试">
   <div class="slide-inner">
     <div class="cover-brand"><span class="wordmark wordmark--cover" role="img" aria-label="HogentX"></span></div>
@@ -49,13 +49,13 @@
   </div>
 </section>
 
-<!-- 02 三个问题 -->
-<section class="slide" id="questions" data-title="先请教您三个问题">
+<!-- 02 先请教您三个问题 -->
+<section class="slide slide--q" id="questions" data-title="先请教您三个问题">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第一部分</span><span class="sep"></span><span>您想改善什么</span></p>
       <h2 class="slide-title">先不讲 AI，先请教您三个问题</h2>
-      <p class="slide-lead">这三个问题，您现在靠数据回答，还是靠经验？答不上来的那一个，就是我们建议先验证的事。</p>
+      <p class="slide-lead">这三个问题，您现在靠数据回答，还是靠经验？答不上来的那一个，就值得先拿来验证。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--3 grid--stretch">
@@ -112,8 +112,8 @@
   </div>
 </section>
 
-<!-- 03 同一把尺子 -->
-<section class="slide" id="ruler" data-title="满房只说明入住率高，还要看房价和实收">
+<!-- 03 满房只说明入住率高，还要看房价和实收 -->
+<section class="slide slide--ruler" id="ruler" data-title="满房只说明入住率高，还要看房价和实收">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第一部分</span><span class="sep"></span><span>您想改善什么</span></p>
@@ -123,18 +123,18 @@
     <div class="slide-body">
       <div class="ruler">
         <div class="ruler-row ruler-row--5">
-          <div class="term"><b>可售房晚</b><span class="en">Available room nights</span><span class="hint">有房却没开卖，这个数就白白变小。</span></div>
+          <div class="term"><b>可售房晚</b><span class="en">Available room nights</span><span class="hint">能卖的房间数 × 天数。</span></div>
           <span class="op" aria-label="乘以">×</span>
-          <div class="term"><b>入住率</b><span class="en">Occupancy</span><span class="hint">经常满房，说明它已经接近到顶。</span></div>
+          <div class="term"><span class="qref">问题 2</span><b>入住率</b><span class="en">Occupancy</span><span class="hint">有房却没开卖，会拉低它；经常满房时，它已接近到顶。</span></div>
           <span class="op" aria-label="乘以">×</span>
-          <div class="term term--key"><b>平均成交房价</b><span class="en">ADR</span><span class="hint">满房时还能不能多收，看的是它。</span></div>
+          <div class="term term--key"><span class="qref">问题 1</span><b>平均成交房价</b><span class="en">ADR</span><span class="hint">满房时还能不能多收，看的是它。</span></div>
           <span class="op" aria-label="等于">=</span>
           <div class="term term--result"><b>房费收入</b><span class="en">Room revenue</span><span class="hint">还没有扣渠道佣金。</span></div>
         </div>
         <div class="ruler-row ruler-row--3">
           <div class="term"><b>房费收入</b><span class="en">Room revenue</span><span class="hint">上一行算出来的数。</span></div>
           <span class="op" aria-label="减去">−</span>
-          <div class="term term--key"><b>渠道佣金</b><span class="en">Channel commission</span><span class="hint">哪类渠道的订单成本最高，看的是它。</span></div>
+          <div class="term term--key"><span class="qref">问题 3</span><b>渠道佣金</b><span class="en">Channel commission</span><span class="hint">哪类渠道的订单成本最高，看的是它。</span></div>
           <span class="op" aria-label="等于">=</span>
           <div class="term term--result"><b>净实收</b><span class="en">Net</span><span class="hint">每间房最后实收多少。具体扣哪些项，试点前和您约定。</span></div>
         </div>
@@ -153,7 +153,7 @@
   </div>
 </section>
 
-<!-- 04 HogentX 是什么 -->
+<!-- 04 HogentX 是什么：发现问题、给出建议，由人确认 -->
 <section class="slide" id="what" data-title="HogentX 是什么：发现问题、给出建议，由人确认">
   <div class="slide-inner">
     <header class="slide-head">
@@ -178,32 +178,34 @@
         </article>
         <article class="card">
           <h3>我们自己也在经营酒店</h3>
-          <p>住小叮是我们的极简超经济酒店品牌，也是这套产品的实际应用和反馈场景：<b>31 家已开业</b>；合计 56 家（包含已开业、已签约及筹建中）。</p>
+          <p>住小叮是我们的极简超经济酒店品牌：<b>31 家已开业</b>；合计 56 家（包含已开业、已签约及筹建中）。它也是这套产品的实际应用和反馈场景。</p>
           <p class="tiny muted">住小叮是自有品牌，不等同于外部客户或付费客户的数量。</p>
         </article>
       </div>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 05 总览 -->
-<section class="slide" id="overview" data-title="现在能用什么：先分清四种情况">
+<!-- 05 现在能用什么：先分清四种情况 -->
+<section class="slide slide--overview" id="overview" data-title="现在能用什么：先分清四种情况">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span></p>
       <h2 class="slide-title">现在能用什么：先分清四种情况</h2>
+      <p class="slide-lead"><b>两条前提：</b>凡是用到 OTA 数据的功能，都从您授权、我们逐项核对开始；建议不等于自动执行。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--4 grid--stretch">
         <section class="status-col status-col--has">
           <header>
             <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
-            <p>产品里已经有的界面和功能，可以演示。</p>
+            <p>产品里已经有的界面和功能，可以演示界面。</p>
+            <p class="neq">≠ 您的酒店已经接通</p>
           </header>
           <ul class="items">
             <li><b>智能收益</b><span>调价建议；预订进度、房态与开售核对、划线价、异常低价</span></li>
@@ -217,38 +219,40 @@
           <header>
             <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span>
             <p>要逐项核对酒店、账号、权限和可接渠道，才能确认。</p>
+            <p class="neq">≠ 已确认您的酒店能接</p>
           </header>
           <ul class="items">
             <li><b>AI 浏览器（多 OTA）</b><span>授权登录支持的 OTA 后，在同一工作台查看和监测</span></li>
-            <li><b>ChatGPT 预订</b><span>面向符合条件的合作酒店</span></li>
-            <li><b>生成酒店官网</b><span>围绕酒店素材生成，需要配置</span></li>
-            <li><b>GEO 优化</b><span>提高在 AI 搜索中被发现的机会</span></li>
+            <li><b>ChatGPT 预订 <i class="mini">工具授权不含</i></b><span>面向符合条件的合作酒店</span></li>
+            <li><b>生成酒店官网 <i class="mini">工具授权不含</i></b><span>围绕酒店素材生成，需要配置</span></li>
+            <li><b>GEO 优化 <i class="mini">工具授权不含</i></b><span>提高在 AI 搜索中被发现的机会；不承诺排名、曝光或订单量</span></li>
           </ul>
         </section>
         <section class="status-col status-col--human">
           <header>
             <span class="tag tag--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span>
             <p>由专人提供，范围按方案和双方约定。</p>
+            <p class="neq">≠ 托管全部平台、酒店现场和财务</p>
           </header>
           <ul class="items">
-            <li><b>专人陪跑</b><span>协助配置、指导运营；日常操作仍由酒店团队负责</span></li>
-            <li><b>OTA 全托管</b><span>专人在约定渠道、已开通权限和批准的操作范围内，操作线上 OTA 运营</span></li>
+            <li><b>专人陪跑 <i class="mini">RM 2,499 档</i></b><span>协助配置、指导运营；日常操作仍由酒店团队负责</span></li>
+            <li><b>OTA 全托管 <i class="mini">RM 9,980 档</i></b><span>专人在约定渠道、已开通权限和批准的操作范围内，操作线上 OTA 运营</span></li>
           </ul>
         </section>
         <section class="status-col status-col--notyet">
           <header>
             <span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span>
-            <p>现在不能用，这次也不验证。不给上线时间。</p>
+            <p>需求、计划或设想，这次也不验证。</p>
+            <p class="neq">≠ 现在能用；也不给上线时间</p>
           </header>
           <ul class="items">
-            <li><b>独立、实时的收益报表</b><span>客户提出的需求，已记录</span></li>
-            <li><b>按日看未来预计收益</b><span>客户提出的需求，已记录</span></li>
-            <li><b>200+ OTA</b><span>渠道拓展计划，不是当前可接渠道</span></li>
-            <li><b>口述后自动建站</b><span>演示/产品改进设想</span></li>
+            <li><b>独立、实时的收益报表 <i class="mini">需求反馈</i></b><span>客户提出的需求，已记录</span></li>
+            <li><b>按日看未来预计收益 <i class="mini">需求反馈</i></b><span>客户提出的需求，已记录</span></li>
+            <li><b>200+ OTA <i class="mini">计划</i></b><span>渠道拓展计划，不是当前可接渠道</span></li>
+            <li><b>口述后自动建站 <i class="mini">设想</i></b><span>演示/产品改进设想，不是现有流程</span></li>
           </ul>
         </section>
       </div>
-      <div class="note"><span><b>“产品界面已有”不等于“您的酒店已接通”。</b>凡是用到 OTA 数据的功能，都从您授权、我们逐项核对开始。</span></div>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
@@ -258,13 +262,66 @@
   </div>
 </section>
 
-<!-- 06 预订进度提醒 -->
-<section class="slide" id="pace" data-title="订得偏快、偏慢的日期，可以设提醒">
+<!-- 06 多个 OTA，一个工作台：先核对，再接通 -->
+<section class="slide" id="multi-ota" data-title="多个 OTA，一个工作台：先核对，再接通">
+  <div class="slide-inner">
+    <header class="slide-head">
+      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>AI 浏览器</span></p>
+      <h2 class="slide-title">多个 OTA，一个工作台：先核对，再接通</h2>
+      <p class="slide-lead">由酒店授权登录支持的 OTA 后，在同一工作台查看和监测数据，并按约定权限管理。</p>
+    </header>
+    <div class="slide-body">
+      <figure class="shot shot--strip">
+        <div class="shot-pic"><div class="shot-bar"><b>界面实拍局部</b><span>平台登录入口，不是已接通清单</span></div>
+        <button type="button" class="shot-frame" aria-label="放大查看：AI 浏览器渠道栏">
+          <img src="../assets/shots/ui-ai-browser-channel-bar.webp" width="2000" height="65" alt="界面实拍局部：AI 浏览器的渠道栏，一排平台标签和一个静音开关。">
+        </button></div>
+        <figcaption class="shot-cap">
+          <span class="shot-label"><b>「AI 浏览器」渠道栏 · 界面实拍局部</b>｜标签是各平台的登录入口，<b>不代表已为您的酒店接通</b>；图中的平台是该界面当时的设置，不是可接渠道清单。</span>
+        </figcaption>
+      </figure>
+      <div class="grid grid--7-5 grid--stretch">
+        <article class="card">
+          <div class="row">
+            <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span>
+            <span class="small">接通前逐项核对：</span>
+            <span class="tag tag--plain">酒店</span><span class="tag tag--plain">账号</span><span class="tag tag--plain">权限</span><span class="tag tag--plain">可接渠道</span>
+          </div>
+          <h3>渠道核对表 <span class="en">现场可填</span></h3>
+          <div class="table-wrap table-wrap--bare">
+            <table class="table">
+              <thead><tr><th>您已在用的 OTA</th><th>能否授权登录</th><th>可查看、监测</th><th>可按权限管理</th></tr></thead>
+              <tbody>
+                <tr><td><input class="fill" type="text" aria-label="OTA 名称 1" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
+                <tr><td><input class="fill" type="text" aria-label="OTA 名称 2" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
+                <tr><td><input class="fill" type="text" aria-label="OTA 名称 3" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <article class="card" style="background:var(--st-notyet-bg);border-style:dashed;border-color:var(--st-notyet-line)">
+          <div class="row"><span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>计划 · 不是当前可接渠道</span></div>
+          <h3>200+ OTA 是渠道拓展计划</h3>
+          <p>方向是逐步扩大可管理的渠道，让酒店未来可以在一个工作台集中管理更多渠道。</p>
+          <p class="small">它不在任何方案的权益里，也没有交付日期。</p>
+        </article>
+      </div>
+    </div>
+    <footer class="slide-foot">
+      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
+      <span class="foot-note">登录入口和平台图标，都不是“已接通”的证据。</span>
+      <span class="foot-page"></span>
+    </footer>
+  </div>
+</section>
+
+<!-- 07 订得偏快、偏慢的日期，可以设提醒 -->
+<section class="slide" id="pace" data-title="满房的日子，是不是卖便宜了？先看预订进度">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
-      <h2 class="slide-title">订得偏快、偏慢的日期，可以设提醒</h2>
-      <p class="slide-lead">对应的问题：满房时还有没有提价空间。先看得见，才谈得上调。</p>
+      <h2 class="slide-title">满房的日子，是不是卖便宜了？先看预订进度</h2>
+      <p class="slide-lead"><span class="qref">问题 1</span> 订得偏快、偏慢的日期可以设提醒。先看得见，才谈得上调。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--pace grid--stretch">
@@ -280,59 +337,104 @@
           <div class="note note--honest"><span>两张图都是<b>规则设置页</b>，不是监测结果。灰色块是遮盖掉的数值。在您的酒店启用前，要先接通数据。</span></div>
         </div>
         <figure class="shot">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>规则设置页 · 图中开关为关闭</span></div>
           <button type="button" class="shot-frame" aria-label="放大查看：出租率监测">
             <img src="../assets/shots/shot-1-occupancy-monitor.png" width="1118" height="999" alt="历史界面截图：出租率监测设置页，可见相邻日期比较、偏高和偏低阈值、通知频率、通知接收人等设置项，数值已遮盖。">
             <span class="shot-zoom" aria-hidden="true">放大</span>
-          </button>
+          </button></div>
           <figcaption class="shot-cap">
             <span class="shot-what"><b>出租率监测</b>　原界面可配置预订进度偏高或偏低的提醒规则。</span>
-            <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 4 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+            <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 4 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
           </figcaption>
         </figure>
         <figure class="shot">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>规则设置页 · 数值已遮盖</span></div>
           <button type="button" class="shot-frame" aria-label="放大查看：小时级订房监测">
             <img src="../assets/shots/shot-2-hourly-booking-monitor.png" width="1118" height="1002" alt="历史界面截图：小时级间夜监测设置页，可见配置名称、监测数据和两条以间夜为单位的预警规则，数值已遮盖。">
             <span class="shot-zoom" aria-hidden="true">放大</span>
-          </button>
+          </button></div>
           <figcaption class="shot-cap">
             <span class="shot-what"><b>小时级订房监测</b>　原界面可配置小时级变化的监测规则。</span>
-            <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 7 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+            <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 7 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
           </figcaption>
         </figure>
       </div>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">图中“出租率”即入住率，“间夜”即房晚。</span>
+      <span class="foot-note">图中“出租率”即入住率，“间夜”即房晚。截图为中文界面；产品界面另有 English、Bahasa Melayu。</span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 07 房态与开售核对 -->
-<section class="slide" id="availability" data-title="有房却没在卖？逐日核对房态与开售">
+<!-- 08 调价：建议给到您，改不改由您定 -->
+<section class="slide" id="pricing-advice" data-title="调价：建议给到您，改不改由您定">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
-      <h2 class="slide-title">有房却没在卖？逐日核对房态与开售</h2>
-      <p class="slide-lead">对应的问题：什么时候真的有房，却漏卖了。</p>
+      <h2 class="slide-title">调价：建议给到您，改不改由您定</h2>
+      <p class="slide-lead"><span class="qref">问题 1</span> 是不是卖得太便宜，哪些日期容易少收。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--shot-left grid--stretch">
         <figure class="shot">
-          <button type="button" class="shot-frame" aria-label="放大查看：房态与开售核对">
-            <img src="../assets/shots/shot-3-availability-check.png" width="1118" height="1007" alt="历史界面截图：房态巡检设置页，可见满房未关、有房已关两类异常的定义，剩余房量免提醒阈值，以及巡检渠道勾选项，部分内容已遮盖。">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>设置页 · 数值已遮盖</span></div>
+          <button type="button" class="shot-frame" aria-label="放大查看：调价安全边界">
+            <img src="../assets/shots/shot-4-pricing-guardrail.png" width="1118" height="1007" alt="历史界面截图：调价安全设置页，表头为统一房型、最低允许价格、最高允许价格、单次最大涨跌幅，表内数值已全部遮盖。">
             <span class="shot-zoom" aria-hidden="true">放大</span>
-          </button>
+          </button></div>
           <figcaption class="shot-cap">
-            <span class="shot-what"><b>房态与开售核对</b>　原界面展示房态差异巡检、数据来源及触发设置。</span>
-            <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 10 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+            <span class="shot-what"><b>调价安全边界</b>　原界面展示房型调价范围设置；保护区间并非真实报价。</span>
+            <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 19 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
           </figcaption>
         </figure>
         <div class="stack stack--loose">
           <div class="row">
             <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
-            <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>您的酒店：按酒店核对数据来源</span>
+          </div>
+          <ul class="list">
+            <li><b>调价建议</b>：结合可卖房量、周边同类酒店和平台数据给出。</li>
+            <li><b>调价范围</b>：可按房型预设最低价、最高价和单次涨跌幅；超出时，调价预览会提醒，核对后再确认。</li>
+            <li><b>顺带核对</b>：划线价（展示原价，不是成交价）和异常低价。</li>
+          </ul>
+          <div class="note note--honest"><span><b>建议不等于自动执行。</b>工具授权、专人陪跑两个方案，由酒店确认和执行；OTA 全托管由专人在批准的操作范围内执行。</span></div>
+        </div>
+      </div>
+    </div>
+    <footer class="slide-foot">
+      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
+      <span class="foot-note">图中金额单位“元”是历史界面当时的设置；本方案价格以马币（RM）计。</span>
+      <span class="foot-page"></span>
+    </footer>
+  </div>
+</section>
+
+<!-- 09 有房却没在卖？逐日核对房态与开售 -->
+<section class="slide" id="availability" data-title="有房却没在卖？逐日核对房态与开售">
+  <div class="slide-inner">
+    <header class="slide-head">
+      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
+      <h2 class="slide-title">有房却没在卖？逐日核对房态与开售</h2>
+      <p class="slide-lead"><span class="qref">问题 2</span> 什么时候真的有房，却漏卖了。</p>
+    </header>
+    <div class="slide-body">
+      <div class="grid grid--shot-left grid--stretch">
+        <figure class="shot">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>设置页 · 图中巡检开关为关闭</span></div>
+          <button type="button" class="shot-frame" aria-label="放大查看：房态与开售核对">
+            <img src="../assets/shots/shot-3-availability-check.png" width="1118" height="1007" alt="历史界面截图：房态巡检设置页，可见满房未关、有房已关两类异常的定义，剩余房量免提醒阈值，以及巡检渠道勾选项，部分内容已遮盖。">
+            <span class="shot-zoom" aria-hidden="true">放大</span>
+          </button></div>
+          <figcaption class="shot-cap">
+            <span class="shot-what"><b>房态与开售核对</b>　原界面展示房态差异巡检、数据来源及触发设置。</span>
+            <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 10 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+          </figcaption>
+        </figure>
+        <div class="stack stack--loose">
+          <div class="row">
+            <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
+            <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>在您的酒店：先核对数据来源</span>
           </div>
           <div class="grid grid--2">
             <article class="card">
@@ -360,144 +462,13 @@
   </div>
 </section>
 
-<!-- 08 调价建议 -->
-<section class="slide" id="pricing-advice" data-title="调价：建议给到您，改不改由您定">
-  <div class="slide-inner">
-    <header class="slide-head">
-      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
-      <h2 class="slide-title">调价：建议给到您，改不改由您定</h2>
-      <p class="slide-lead">对应的问题：是不是卖得太便宜，哪些日期容易少收。</p>
-    </header>
-    <div class="slide-body">
-      <div class="grid grid--shot-left grid--stretch">
-        <figure class="shot">
-          <button type="button" class="shot-frame" aria-label="放大查看：调价安全边界">
-            <img src="../assets/shots/shot-4-pricing-guardrail.png" width="1118" height="1007" alt="历史界面截图：调价安全设置页，表头为统一房型、最低允许价格、最高允许价格、单次最大涨跌幅，表内数值已全部遮盖。">
-            <span class="shot-zoom" aria-hidden="true">放大</span>
-          </button>
-          <figcaption class="shot-cap">
-            <span class="shot-what"><b>调价安全边界</b>　原界面展示房型调价范围设置；保护区间并非真实报价。</span>
-            <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 19 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
-          </figcaption>
-        </figure>
-        <div class="stack stack--loose">
-          <div class="row">
-            <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
-          </div>
-          <ul class="list">
-            <li><b>调价建议</b>：结合可卖房量、周边同类酒店和平台数据给出。</li>
-            <li><b>调价范围</b>：可按房型预设最低价、最高价和单次涨跌幅；超出时，调价预览会提醒，核对后再确认。</li>
-            <li><b>顺带核对</b>：划线价（展示原价，不是成交价）和异常低价。</li>
-          </ul>
-          <div class="note note--honest"><span><b>建议不等于自动执行。</b>工具授权、专人陪跑两个方案，由酒店确认和执行；OTA 全托管由专人在批准的操作范围内执行。</span></div>
-        </div>
-      </div>
-    </div>
-    <footer class="slide-foot">
-      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">图中金额单位“元”是历史界面当时的设置；本方案价格以马币（RM）计。</span>
-      <span class="foot-page"></span>
-    </footer>
-  </div>
-</section>
-
-<!-- 09 点评与质检 -->
-<section class="slide" id="reviews-quality" data-title="点评先出草稿、人来定稿；质检任务有派有收">
-  <div class="slide-inner">
-    <header class="slide-head">
-      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>口碑与现场</span></p>
-      <h2 class="slide-title">点评：先出草稿，人来定稿。质检：任务有派有收</h2>
-    </header>
-    <div class="slide-body">
-      <div class="grid grid--5-7 grid--stretch">
-        <article class="card">
-          <div class="row"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></div>
-          <h3>点评回复草稿</h3>
-          <ol class="flow flow--v">
-            <li><span class="who">HogentX</span><b>跨 OTA 生成回复草稿</b></li>
-            <li class="is-human"><span class="who">酒店团队</span><b>审核、修改</b></li>
-            <li class="is-human"><span class="who">酒店团队</span><b>确认后再发布</b></li>
-          </ol>
-          <p><b>不是默认自动发布。</b>能回复哪些 OTA 的点评，按您酒店的可接渠道核对。</p>
-        </article>
-        <article class="card">
-          <div class="row"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></div>
-          <h3>质检与整改 <span class="en">客房与服务检查，发现问题后跟进改正</span></h3>
-          <figure class="shot">
-            <button type="button" class="shot-frame" aria-label="放大查看：质检工作台">
-              <img src="../assets/shots/shot-5-quality-workbench.png" width="1118" height="501" alt="历史界面截图：质检总览页，可见本月、城市、门店筛选，以及质检得分、首检一次通过率、任务完成率、整改销项率、待跟进整改项、红线问题等指标卡，数值已遮盖。">
-              <span class="shot-zoom" aria-hidden="true">放大</span>
-            </button>
-            <figcaption class="shot-cap">
-              <span class="shot-what"><b>质检工作台</b>　原界面展示质检任务和整改管理入口。</span>
-              <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 23 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
-            </figcaption>
-          </figure>
-          <p>创建和指派检查任务、回收结果；不合格项生成整改任务；可看周期评价和质检看板。</p>
-        </article>
-      </div>
-    </div>
-    <footer class="slide-foot">
-      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
-      <span class="foot-page"></span>
-    </footer>
-  </div>
-</section>
-
-<!-- 10 早安简报与数字员工 -->
-<section class="slide" id="brief" data-title="每天早上一页：今天要处理什么，放在一起">
-  <div class="slide-inner">
-    <header class="slide-head">
-      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>每天怎么用</span></p>
-      <h2 class="slide-title">每天早上一页：今天要处理什么，放在一起</h2>
-    </header>
-    <div class="slide-body">
-      <div class="grid grid--brief grid--stretch">
-        <figure class="shot">
-          <button type="button" class="shot-frame" aria-label="放大查看：早安简报">
-            <img src="../assets/shots/shot-6-morning-brief.png" width="1118" height="753" alt="历史界面截图：早安简报页，可见待处理、高风险等计数位（数值已遮盖），以及上门客价格异常监控、划线价不一致、调价、评价回复四张待办卡片。">
-            <span class="shot-zoom" aria-hidden="true">放大</span>
-          </button>
-          <figcaption class="shot-cap">
-            <span class="shot-what"><b>早安简报</b>　原界面展示每日经营信号和待处理任务。</span>
-            <span class="shot-label"><b>历史实拍，已脱敏</b>｜来源：2026-11-12 产品进展汇报，第 25 页｜用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
-          </figcaption>
-        </figure>
-        <div class="stack stack--loose">
-          <div class="row"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></div>
-          <ul class="list">
-            <li><b>早安简报</b>把每日经营数据、划线价核对、调价建议、点评回复、质检整改和高风险待办放在一起。</li>
-            <li><b>经营报表</b>可展示入住率、小时级和房晚数据、点评分析。</li>
-          </ul>
-          <article class="card card--blue">
-            <h3>四位数字员工</h3>
-            <div class="row">
-              <span class="tag tag--plain">数字收益</span>
-              <span class="tag tag--plain">数字宾客关系</span>
-              <span class="tag tag--plain">数字质检</span>
-              <span class="tag tag--plain">数字总经理</span>
-            </div>
-            <p>可以对话发起任务、归纳数据或生成内容。角色权限按酒店配置，<b>不是无人值守自动改价</b>。</p>
-          </article>
-        </div>
-      </div>
-    </div>
-    <footer class="slide-foot">
-      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">图中“出租率”即入住率，“间夜”即房晚；划线价是展示原价，不是成交价。</span>
-      <span class="foot-page"></span>
-    </footer>
-  </div>
-</section>
-
-<!-- 11 随时看收益 -->
-<section class="slide" id="revenue-view" data-title="“随时看收益”：现在到哪一步">
+<!-- 10 “随时看收益”：现在到哪一步 -->
+<section class="slide slide--rev" id="revenue-view" data-title="“随时看收益”：现在到哪一步">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>收益报表</span></p>
       <h2 class="slide-title">“随时看收益”：现在到哪一步</h2>
-      <p class="slide-lead">这是客户最常问的一件事，所以把有的和没有的分开说清楚。</p>
+      <p class="slide-lead"><span class="qref">问题 3</span> 每间房最后实收多少。这是客户特别关心的一件事，所以把有的和没有的分开说清楚。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--2 grid--stretch">
@@ -530,64 +501,114 @@
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 12 多 OTA -->
-<section class="slide" id="multi-ota" data-title="多个 OTA，一个工作台：先核对，再接通">
+<!-- 11 每天早上一页：今天要处理什么，放在一起 -->
+<section class="slide" id="brief" data-title="每天早上一页：今天要处理什么，放在一起">
   <div class="slide-inner">
     <header class="slide-head">
-      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>AI 浏览器</span></p>
-      <h2 class="slide-title">多个 OTA，一个工作台：先核对，再接通</h2>
-      <p class="slide-lead">由酒店授权登录支持的 OTA 后，在同一工作台查看和监测数据，并按约定权限管理。</p>
+      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>每天怎么用</span></p>
+      <h2 class="slide-title">每天早上一页：今天要处理什么，放在一起</h2>
     </header>
     <div class="slide-body">
-      <figure class="shot shot--strip">
-        <button type="button" class="shot-frame" aria-label="放大查看：AI 浏览器渠道栏">
-          <img src="../assets/shots/ui-ai-browser-channel-bar.webp" width="2000" height="65" alt="界面实拍局部：AI 浏览器的渠道栏，一排平台标签和一个静音开关。">
-        </button>
-        <figcaption class="shot-cap">
-          <span class="shot-label"><b>「AI 浏览器」渠道栏 · 界面实拍局部</b>｜标签是各平台的登录入口，<b>不代表已为您的酒店接通</b>；图中的平台是该界面当时的设置，不是可接渠道清单。</span>
-        </figcaption>
-      </figure>
-      <div class="grid grid--7-5 grid--stretch">
-        <article class="card">
-          <div class="row">
-            <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span>
-            <span class="small muted">接通前逐项核对：酒店、账号、权限、可接渠道</span>
-          </div>
-          <h3>渠道核对表 <span class="en">现场可填</span></h3>
-          <div class="table-wrap table-wrap--bare">
-            <table class="table">
-              <thead><tr><th>您已在用的 OTA</th><th>能否授权登录</th><th>可查看、监测</th><th>可按权限管理</th></tr></thead>
-              <tbody>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 1" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 2" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 3" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-        <article class="card" style="background:var(--st-notyet-bg);border-style:dashed;border-color:var(--st-notyet-line)">
-          <div class="row"><span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>计划 · 不是当前可接渠道</span></div>
-          <h3>200+ OTA 是渠道拓展计划</h3>
-          <p>方向是逐步扩大可管理的渠道，让酒店未来可以在一个工作台集中管理更多渠道。</p>
-          <p class="small">它不在任何方案的权益里，也没有交付日期。</p>
-        </article>
+      <div class="grid grid--brief grid--stretch">
+        <figure class="shot">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>简报页 · 数值已遮盖</span></div>
+          <button type="button" class="shot-frame" aria-label="放大查看：早安简报">
+            <img src="../assets/shots/shot-6-morning-brief.png" width="1118" height="753" alt="历史界面截图：早安简报页，可见待处理、高风险等计数位（数值已遮盖），以及上门客价格异常监控、划线价不一致、调价、评价回复四张待办卡片。">
+            <span class="shot-zoom" aria-hidden="true">放大</span>
+          </button></div>
+          <figcaption class="shot-cap">
+            <span class="shot-what"><b>早安简报</b>　原界面展示每日经营信号和待处理任务。</span>
+            <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 25 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+          </figcaption>
+        </figure>
+        <div class="stack stack--loose">
+          <div class="row"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></div>
+          <ul class="list">
+            <li><b>早安简报</b>把每日经营数据、划线价核对、调价建议、点评回复、质检整改和高风险待办放在一起。</li>
+            <li><b>经营报表</b>可展示入住率、小时级和房晚数据、点评分析。</li>
+          </ul>
+          <article class="card card--blue">
+            <h3>四位数字员工</h3>
+            <div class="row">
+              <span class="tag tag--plain">数字收益</span>
+              <span class="tag tag--plain">数字宾客关系</span>
+              <span class="tag tag--plain">数字质检</span>
+              <span class="tag tag--plain">数字总经理</span>
+            </div>
+            <p>可以对话发起任务、归纳数据或生成内容。角色权限按酒店配置，<b>不是无人值守自动改价</b>。</p>
+          </article>
+        </div>
       </div>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">登录入口和平台图标，都不是“已接通”的证据。</span>
+      <span class="foot-note">图中“出租率”即入住率，“间夜”即房晚；划线价是展示原价，不是成交价。</span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 13 AI 获客 -->
+<!-- 12 点评先出草稿、人来定稿；质检任务有派有收 -->
+<section class="slide" id="reviews-quality" data-title="点评先出草稿、人来定稿；质检任务有派有收">
+  <div class="slide-inner">
+    <header class="slide-head">
+      <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>口碑与现场</span></p>
+      <h2 class="slide-title">点评：先出草稿，人来定稿。质检：任务有派有收</h2>
+    </header>
+    <div class="slide-body">
+      <article class="card">
+        <div class="row">
+          <h3>点评回复草稿</h3>
+          <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
+        </div>
+        <ol class="flow flow--3">
+          <li><span class="who">HogentX</span><b>跨 OTA 生成回复草稿</b></li>
+          <li class="is-human"><span class="who">酒店团队</span><b>审核、修改</b></li>
+          <li class="is-human"><span class="who">酒店团队</span><b>确认后再发布</b></li>
+        </ol>
+        <p><b>不是默认自动发布。</b>能回复哪些 OTA 的点评，按您酒店的可接渠道核对。</p>
+      </article>
+      <article class="card">
+        <div class="row">
+          <h3>质检与整改</h3>
+          <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
+          <span class="small muted">质检＝客房与服务检查；整改＝发现问题后跟进改正</span>
+        </div>
+        <figure class="shot shot--side">
+          <div class="shot-pic"><div class="shot-bar"><b>历史界面截图 · 2026-11-12</b><span>总览页 · 数值已遮盖</span></div>
+          <button type="button" class="shot-frame" aria-label="放大查看：质检工作台">
+            <img src="../assets/shots/shot-5-quality-workbench.png" width="1118" height="501" alt="历史界面截图：质检总览页，可见本月、城市、门店筛选，以及质检得分、首检一次通过率、任务完成率、整改销项率、待跟进整改项、红线问题等指标卡，数值已遮盖。">
+            <span class="shot-zoom" aria-hidden="true">放大</span>
+          </button></div>
+          <div class="stack">
+            <ul class="list">
+              <li>创建和指派检查任务，回收结果。</li>
+              <li>不合格项生成整改任务。</li>
+              <li>可看周期评价和质检看板。</li>
+            </ul>
+            <figcaption class="shot-cap">
+              <span class="shot-what"><b>质检工作台</b>　原界面展示质检任务和整改管理入口。</span>
+              <span class="shot-label"><b>来源：2026-11-12 产品进展汇报，第 23 页。</b>历史实拍，已脱敏。用于理解产品界面，不证明马来西亚门店当前接入或实际运营结果。</span>
+            </figcaption>
+          </div>
+        </figure>
+      </article>
+    </div>
+    <footer class="slide-foot">
+      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
+      <span class="foot-page"></span>
+    </footer>
+  </div>
+</section>
+
+<!-- 13 让客人在 AI 里找得到您：三项能力，逐家配置和接入 -->
 <section class="slide" id="ai-acquisition" data-title="让客人在 AI 里找得到您：三项能力，逐家配置和接入">
   <div class="slide-inner">
     <header class="slide-head">
@@ -618,9 +639,10 @@
           <p class="small muted"><b>不承诺排名、曝光或订单量。</b></p>
         </article>
         <figure class="shot shot--menu">
+        <div class="shot-pic"><div class="shot-bar"><b>界面实拍局部</b><span>开店时要设置的项目</span></div>
           <button type="button" class="shot-frame" aria-label="放大查看：AI 销售开店指引菜单">
             <img src="../assets/shots/ui-ai-sales-setup-menu.png" width="300" height="690" alt="界面实拍局部：AI 销售开店指引的菜单，酒店设置下有酒店资料、设施与服务、房型与售卖产品、入住与付款、房间设置，账户与合作下有主体与联系人、合作协议。">
-          </button>
+          </button></div>
           <figcaption class="shot-cap">
             <span class="shot-label"><b>「AI 销售 · 开店指引」菜单 · 界面实拍局部</b>｜列的是开店时要设置的项目，不代表已为您的酒店开通。</span>
           </figcaption>
@@ -629,13 +651,13 @@
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 14 三个方案 -->
+<!-- 14 三个方案，差别在：建议出来以后，谁来做 -->
 <section class="slide" id="plans" data-title="三个方案，差别在：建议出来以后，谁来做">
   <div class="slide-inner">
     <header class="slide-head">
@@ -660,7 +682,7 @@
           <dl>
             <div><dt>包含</dt><dd>工具授权的全部内容<br><span class="plus">+</span> AI 获客三项：ChatGPT 预订*、生成酒店官网、GEO 优化<br><span class="plus">+</span> 专人协助配置和运营指导</dd></div>
             <div class="who"><dt>谁来做</dt><dd>酒店团队负责日常运营与执行</dd></div>
-            <div class="not"><dt>边界</dt><dd>专人不代为操作</dd></div>
+            <div class="not"><dt>边界</dt><dd>专人不接管日常运营</dd></div>
           </dl>
         </article>
         <article class="card plan">
@@ -677,14 +699,14 @@
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 15 三件事 -->
-<section class="slide" id="control" data-title="开始之前，三件事先让您知道">
+<!-- 15 开始之前，三件事先让您知道 -->
+<section class="slide slide--control" id="control" data-title="开始之前，三件事先让您知道">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第三部分</span><span class="sep"></span><span>值不值得试</span></p>
@@ -723,13 +745,13 @@
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note foot-legend"><span>状态标记</span><span class="lg lg--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span class="lg lg--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span class="lg lg--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span class="lg lg--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span></span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 16 怎么试 -->
+<!-- 16 怎么试：一家酒店、已有的 OTA、一件事 -->
 <section class="slide" id="pilot" data-title="怎么试：一家酒店、已有的 OTA、一件事">
   <div class="slide-inner">
     <header class="slide-head">
@@ -784,7 +806,7 @@
   </div>
 </section>
 
-<!-- 17 怎么量 -->
+<!-- 17 值不值，用同一把尺子量；没有对照，不谈增收 -->
 <section class="slide" id="measure" data-title="值不值，用同一把尺子量；没有对照，不谈增收">
   <div class="slide-inner">
     <header class="slide-head">
@@ -842,8 +864,8 @@
   </div>
 </section>
 
-<!-- 18 下一步 -->
-<section class="slide slide--dark" id="next" data-title="如果您愿意试，下一步只要四样东西">
+<!-- 18 如果您愿意试，下一步只要四样东西 -->
+<section class="slide slide--dark slide--next" id="next" data-title="如果您愿意试，下一步只要四样东西">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>下一步</span></p>
@@ -885,7 +907,7 @@
   </div>
 </section>
 
-<!-- 19 名词对照 -->
+<!-- 19 附：名词对照 -->
 <section class="slide" id="glossary" data-title="附：名词对照">
   <div class="slide-inner">
     <header class="slide-head">

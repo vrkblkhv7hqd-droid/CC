@@ -15,6 +15,7 @@ const fs = require('fs');
   page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
   await page.goto(base + (mode === 'present' ? '?mode=present' : '?mode=read'), { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
+  await page.addStyleTag({ content: '.hud{display:none !important}' });
   const n = await page.evaluate(() => document.querySelectorAll('.slide').length);
   const report = [];
   if (mode === 'present') {
@@ -42,7 +43,36 @@ const fs = require('fs');
           if (hasText) { const fs = parseFloat(cs.fontSize); if (fs < minFont) minFont = fs; if (fs < 20) small.push(el.className + ':' + fs + ':' + el.textContent.trim().slice(0, 14)); }
         });
         const footTop = foot ? (foot.getBoundingClientRect().top - sr.top) / scale : 1080;
-        return { id: s.id, contentBottom: Math.round(maxBottom), footTop: Math.round(footTop), slack: Math.round(footTop - maxBottom), maxRight: Math.round(maxRight), minFont, small: small.slice(0, 6), lowest };
+        // 带边框或底色的容器也不能压到页脚，或超出右边界
+        let boxBottom = 0, boxWho = '';
+        s.querySelectorAll('.card, .note, .term, .status-col, .sheet, .shot-frame, .shot-label, .table-wrap, .flow > li, .money').forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) return;
+          const bb = (r.bottom - sr.top) / scale;
+          if (bb > boxBottom) { boxBottom = bb; boxWho = el.className; }
+        });
+        // 容器内文字是否溢出容器
+        const clipped = [];
+        s.querySelectorAll('.card, .note, .term, .status-col, .sheet').forEach((el) => {
+          if (el.scrollHeight - el.clientHeight > 2 || el.scrollWidth - el.clientWidth > 2) clipped.push(el.className + ':' + (el.scrollHeight - el.clientHeight));
+          const er = el.getBoundingClientRect();
+          el.querySelectorAll('*').forEach((c) => {
+            const cr = c.getBoundingClientRect();
+            if (cr.width && cr.height && (cr.bottom - er.bottom > 2 * scale)) { const t = (c.textContent || '').trim().slice(0, 10); if (t && clipped.length < 6) clipped.push('out-of-' + el.className.split(' ')[0] + ':' + t); }
+          });
+        });
+        if (boxBottom > maxBottom) { maxBottom = boxBottom; lowest = 'box ' + boxWho; }
+        // 互不包含的块之间不能重叠
+        const boxes = Array.from(s.querySelectorAll('.card, .note, .term, .status-col, .sheet, .shot, .slide-head, .table-wrap, .flow > li, .money, .slide-lead, .slide-title')).filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+        for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+          const A = boxes[i], B = boxes[j];
+          if (A.contains(B) || B.contains(A)) continue;
+          const ra = A.getBoundingClientRect(), rb = B.getBoundingClientRect();
+          const ox = Math.min(ra.right, rb.right) - Math.max(ra.left, rb.left);
+          const oy = Math.min(ra.bottom, rb.bottom) - Math.max(ra.top, rb.top);
+          if (ox > 3 * scale && oy > 3 * scale && clipped.length < 8) clipped.push('overlap ' + A.className.split(' ').slice(0, 2).join('.') + ' x ' + B.className.split(' ').slice(0, 2).join('.') + ' by ' + Math.round(oy / scale) + 'px');
+        }
+        return { id: s.id, clipped: Array.from(new Set(clipped)).slice(0, 6), contentBottom: Math.round(maxBottom), footTop: Math.round(footTop), slack: Math.round(footTop - maxBottom), maxRight: Math.round(maxRight), minFont, small: small.slice(0, 6), lowest };
       }, i);
       const file = path.join(outDir, String(i + 1).padStart(2, '0') + '-' + m.id + '.png');
       await page.screenshot({ path: file });
