@@ -26,6 +26,27 @@
     return s.getAttribute('data-title') || (s.querySelector('.slide-title, .cover-title') || {}).textContent || '';
   }
 
+  /* ---------- 公式导航条：同一把尺子，标出这一页说的是哪个数 ---------- */
+  var RAIL = [['avail', '可售房晚'], ['occ', '入住率'], ['adr', '平均成交房价'], ['rev', '房费收入'], ['comm', '渠道佣金'], ['net', '净实收']];
+  var RAIL_OPS = ['×', '×', '=', '−', '='];
+  Array.prototype.forEach.call(document.querySelectorAll('.rail'), function (rail) {
+    var on = (rail.getAttribute('data-on') || '').split(' ');
+    RAIL.forEach(function (t, k) {
+      var sp = document.createElement('span');
+      sp.textContent = t[1];
+      if (on.indexOf(t[0]) >= 0) sp.className = 'on';
+      rail.appendChild(sp);
+      if (k < RAIL_OPS.length) { var op = document.createElement('i'); op.textContent = RAIL_OPS[k]; rail.appendChild(op); }
+    });
+    var kicker = rail.parentNode.querySelector('.kicker');
+    if (kicker) {
+      var parts = Array.prototype.filter.call(kicker.querySelectorAll('span'), function (x) { return !x.classList.contains('sep') && x.textContent.trim(); }).map(function (x) { return x.textContent.trim(); });
+      var sec = document.createElement('b'); sec.className = 'rail-sec'; sec.textContent = parts.slice(1).join(' · ') || parts.join(' · ');
+      rail.appendChild(sec);
+    }
+    rail.setAttribute('aria-hidden', 'true');
+  });
+
   /* ---------- 模式 ---------- */
   function wantPresent() {
     if (printFlat) return true;

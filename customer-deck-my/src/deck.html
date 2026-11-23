@@ -28,40 +28,50 @@
 
 <main class="deck" id="deck">
 
-<!-- 01 现在能用什么，值不值得试 -->
-<section class="slide slide--dark slide--cover" id="cover" data-title="现在能用什么，值不值得试">
+<!-- 01 封面 -->
+<section class="slide slide--dark slide--cover" id="cover" data-title="即使经常满房，也有三笔账值得算清楚">
   <div class="slide-inner">
-    <div class="cover-brand"><span class="wordmark wordmark--cover" role="img" aria-label="HogentX"></span></div>
-    <div class="stack stack--loose">
-      <p class="kicker"><span>给马来西亚酒店的说明</span><span class="sep"></span><span>2026 年 11 月</span></p>
-      <h1 class="cover-title">现在能用什么，<br><em>值不值得试。</em></h1>
-      <p class="cover-sub">HogentX 是面向酒店的 AI 运营产品。这份说明把四件事分开讲：产品里已经有的、要按您的酒店逐项核对的、由专人来做的、还没有上线的。</p>
+    <div class="cover-top">
+      <span class="wordmark wordmark--cover" role="img" aria-label="HogentX"></span>
+      <span class="cover-tag">给马来西亚酒店的说明 · 2026 年 11 月</span>
     </div>
-    <ol class="cover-agenda">
-      <li><span class="n">1</span><span>您的酒店，想改善哪一块经营结果</span></li>
-      <li><span class="n">2</span><span>HogentX 现在能交付什么</span></li>
-      <li><span class="n">3</span><span>下一步，可以先验证什么</span></li>
-    </ol>
+    <div class="cover-main">
+      <div class="cover-left">
+        <h1 class="cover-title">即使经常满房，<br><em>也有三笔账值得算清楚</em></h1>
+        <p class="cover-sub">HogentX 是面向酒店的 AI 运营产品。看完这份说明，您能回答两件事：<b>现在能用什么</b>；<b>值不值得试</b>。</p>
+      </div>
+      <aside class="cover-card" aria-label="三个问题和同一把尺子">
+        <p class="cover-card-h">先请教三个问题，各对应账本里的一个数</p>
+        <ol class="cover-q">
+          <li><span class="n">01</span><div><b>满房的时候，还有没有提价空间？</b><span class="see">看 <i>平均成交房价</i> <span class="en">ADR</span></span></div></li>
+          <li><span class="n">02</span><div><b>什么时候明明有房，却没卖出去？</b><span class="see">看 <i>入住率</i> <span class="en">Occupancy</span></span></div></li>
+          <li><span class="n">03</span><div><b>哪一类渠道的订单，成本最高？</b><span class="see">看 <i>渠道佣金</i>，算到 <i>净实收</i> <span class="en">Net</span></span></div></li>
+        </ol>
+        <p class="cover-formula">可售房晚 × 入住率 × 平均成交房价 = <b>房费收入</b><br>房费收入 − 渠道佣金 = <b>净实收</b></p>
+      </aside>
+    </div>
     <footer class="slide-foot">
-      <span class="foot-note">INTENT COMPUTING PTE. LTD. · 新加坡</span>
+      <span class="foot-note">INTENT COMPUTING PTE. LTD.（新加坡）</span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 02 先请教您三个问题 -->
-<section class="slide slide--q" id="questions" data-title="先请教您三个问题">
+
+<!-- 02 三笔账 -->
+<section class="slide slide--q" id="questions" data-title="三笔账：您现在靠数据回答，还是靠经验？">
   <div class="slide-inner">
     <header class="slide-head">
       <p class="kicker"><span>第一部分</span><span class="sep"></span><span>您想改善什么</span></p>
-      <h2 class="slide-title">先不讲 AI，先请教您三个问题</h2>
-      <p class="slide-lead">这三个问题，您现在靠数据回答，还是靠经验？答不上来的那一个，就值得先拿来验证。</p>
+      <h2 class="slide-title">三笔账：您现在靠数据回答，还是靠经验？</h2>
+      <p class="slide-lead">先不讲 AI。答不上来的那一个，就值得先拿来验证。</p>
     </header>
     <div class="slide-body">
       <div class="grid grid--3 grid--stretch">
         <article class="card qcard">
-          <span class="qno">1</span>
+          <span class="qno">01</span>
           <h3>满房的时候，还有没有提价空间？</h3>
+          <p class="see">看的是　<b>平均成交房价</b> <span class="en">ADR</span></p>
           <p class="muted">订得很快的那些日期，是不是卖便宜了。</p>
           <div class="stack stack--tight">
             <span class="choice-label">您现在怎么回答</span>
@@ -73,8 +83,9 @@
           </div>
         </article>
         <article class="card qcard">
-          <span class="qno">2</span>
+          <span class="qno">02</span>
           <h3>什么时候明明有房，却没卖出去？</h3>
+          <p class="see">看的是　<b>入住率</b> <span class="en">Occupancy</span></p>
           <p class="muted">酒店里还有房，OTA（在线订房平台）上却订不到。</p>
           <div class="stack stack--tight">
             <span class="choice-label">您现在怎么回答</span>
@@ -86,8 +97,9 @@
           </div>
         </article>
         <article class="card qcard">
-          <span class="qno">3</span>
+          <span class="qno">03</span>
           <h3>哪一类渠道的订单，成本最高？</h3>
+          <p class="see">看的是　<b>渠道佣金</b> → <b>净实收</b> <span class="en">Net</span></p>
           <p class="muted">扣掉渠道佣金以后，每间房最后实收多少。</p>
           <div class="stack stack--tight">
             <span class="choice-label">您现在怎么回答</span>
@@ -99,64 +111,26 @@
           </div>
         </article>
       </div>
-      <div class="note note--navy">
-        <b>房晚会过期</b>
-        <span>今晚没卖出去、或者卖便宜了的房，明天补不回来。所以要紧的是早一点看见。</span>
+      <div class="formula-band">
+        <p class="formula-line"><span>可售房晚</span><i>×</i><span class="on">入住率</span><i>×</i><span class="on">平均成交房价</span><i>=</i><span>房费收入</span><i>−</i><span class="on">渠道佣金</span><i>=</i><span class="on">净实收</span></p>
+        <p class="formula-note"><b>房晚会过期：</b>今晚没卖出去、或者卖便宜了的房，明天补不回来。所以要紧的是早一点看见。</p>
       </div>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
+      <span class="foot-note">房费收入还没有扣渠道佣金，不是利润；净实收的具体扣项，试点前和您约定。</span>
       <span class="foot-page"></span>
     </footer>
   </div>
 </section>
 
-<!-- 03 满房只说明入住率高，还要看房价和实收 -->
-<section class="slide slide--ruler" id="ruler" data-title="满房只说明入住率高，还要看房价和实收">
-  <div class="slide-inner">
-    <header class="slide-head">
-      <p class="kicker"><span>第一部分</span><span class="sep"></span><span>您想改善什么</span></p>
-      <h2 class="slide-title">满房，只说明入住率高。卖得值不值，还要看房价和实收</h2>
-      <p class="slide-lead">我们和您用同一把尺子：四个数分开看，房费收入和净实收分开算。</p>
-    </header>
-    <div class="slide-body">
-      <div class="ruler">
-        <div class="ruler-row ruler-row--5">
-          <div class="term"><b>可售房晚</b><span class="en">Available room nights</span><span class="hint">能卖的房间数 × 天数。</span></div>
-          <span class="op" aria-label="乘以">×</span>
-          <div class="term"><span class="qref">问题 2</span><b>入住率</b><span class="en">Occupancy</span><span class="hint">有房却没开卖，会拉低它；经常满房时，它已接近到顶。</span></div>
-          <span class="op" aria-label="乘以">×</span>
-          <div class="term term--key"><span class="qref">问题 1</span><b>平均成交房价</b><span class="en">ADR</span><span class="hint">满房时还能不能多收，看的是它。</span></div>
-          <span class="op" aria-label="等于">=</span>
-          <div class="term term--result"><b>房费收入</b><span class="en">Room revenue</span><span class="hint">还没有扣渠道佣金。</span></div>
-        </div>
-        <div class="ruler-row ruler-row--3">
-          <div class="term"><b>房费收入</b><span class="en">Room revenue</span><span class="hint">上一行算出来的数。</span></div>
-          <span class="op" aria-label="减去">−</span>
-          <div class="term term--key"><span class="qref">问题 3</span><b>渠道佣金</b><span class="en">Channel commission</span><span class="hint">哪类渠道的订单成本最高，看的是它。</span></div>
-          <span class="op" aria-label="等于">=</span>
-          <div class="term term--result"><b>净实收</b><span class="en">Net</span><span class="hint">每间房最后实收多少。具体扣哪些项，试点前和您约定。</span></div>
-        </div>
-      </div>
-      <div class="grid grid--3">
-        <div class="note"><span><b>同一口径</b><br>对照期和试点期，用同一套算法。</span></div>
-        <div class="note"><span><b>房费收入不是利润</b><br>也不是到手的钱，所以两个数分开看。</span></div>
-        <div class="note note--honest"><span><b>没有对照，不谈增收</b><br>我们不给增收保证。</span></div>
-      </div>
-    </div>
-    <footer class="slide-foot">
-      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
-      <span class="foot-note">给马来西亚酒店的说明 · 2026 年 11 月</span>
-      <span class="foot-page"></span>
-    </footer>
-  </div>
-</section>
 
-<!-- 04 HogentX 是什么：发现问题、给出建议，由人确认 -->
+
+<!-- 03 HogentX 是什么：发现问题、给出建议，由人确认 -->
 <section class="slide" id="what" data-title="HogentX 是什么：发现问题、给出建议，由人确认">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span></p>
       <h2 class="slide-title">HogentX 是面向酒店的 AI 运营产品：发现问题、给出建议，由人确认</h2>
     </header>
@@ -191,30 +165,46 @@
   </div>
 </section>
 
-<!-- 05 现在能用什么：先分清四种情况 -->
-<section class="slide slide--overview" id="overview" data-title="现在能用什么：先分清四种情况">
+<!-- 04 总览 -->
+<section class="slide slide--overview" id="overview" data-title="现在能用什么：一页账本看清">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span></p>
-      <h2 class="slide-title">现在能用什么：先分清四种情况</h2>
-      <p class="slide-lead"><b>两条前提：</b>凡是用到 OTA 数据的功能，都从您授权、我们逐项核对开始；建议不等于自动执行。</p>
+      <h2 class="slide-title">现在能用什么：一页账本看清</h2>
     </header>
     <div class="slide-body">
-      <div class="grid grid--4 grid--stretch">
-        <section class="status-col status-col--has">
-          <header>
-            <span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span>
-            <p>产品里已经有的界面和功能，可以演示界面。</p>
-            <p class="neq">≠ 您的酒店已经接通</p>
-          </header>
-          <ul class="items">
-            <li><b>智能收益</b><span>调价建议；预订进度、房态与开售核对、划线价、异常低价</span></li>
-            <li><b>点评回复草稿</b><span>跨 OTA 生成，可审核修改</span></li>
-            <li><b>质检与整改</b><span>派任务、收结果、跟进整改</span></li>
-            <li><b>经营报表与早安简报</b><span>每天要处理的事放在一起</span></li>
-            <li><b>四位数字员工</b><span>可对话发起任务，权限按酒店配置</span></li>
-          </ul>
-        </section>
+      <div class="table-wrap table-wrap--bare">
+        <table class="table table--ledger table--stack">
+          <thead><tr><th>您要回答的问题</th><th>HogentX 里对应的能力</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><span class="n">01</span><span class="q">满房时还有没有提价空间</span></th><td data-label="HogentX 里对应的能力"><b>智能收益</b>：调价建议、预订进度提醒、调价范围、划线价与异常低价核对<small>建议不等于自动执行</small></td><td data-label="状态"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></td></tr>
+            <tr><th scope="row"><span class="n">02</span><span class="q">什么时候有房却漏卖</span></th><td data-label="HogentX 里对应的能力"><b>房态与开售核对</b><small>把酒店可卖的房，和渠道上是否在卖，逐日对一遍</small></td><td data-label="状态"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></td></tr>
+            <tr><th scope="row" rowspan="2"><span class="n">03</span><span class="q">哪类渠道订单成本最高</span></th><td data-label="HogentX 里对应的能力"><b>经营报表与早安简报</b>：入住率、小时级和房晚数据、点评分析</td><td data-label="状态"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></td></tr>
+            <tr class="cont"><td data-label="HogentX 里对应的能力"><b>独立、实时的收益报表</b>；<b>按日看未来预计收益</b><small>客户提出的需求，已记录</small></td><td data-label="状态"><span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>需求反馈 · 未上线</span></td></tr>
+            <tr><th scope="row" rowspan="2"><span class="q">多个 OTA 一起管</span></th><td data-label="HogentX 里对应的能力"><b>AI 浏览器</b>：授权登录支持的 OTA 后，在同一工作台查看和监测</td><td data-label="状态"><span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span></td></tr>
+            <tr class="cont"><td data-label="HogentX 里对应的能力"><b>200+ OTA</b>：渠道拓展计划，不是当前可接渠道</td><td data-label="状态"><span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>计划 · 未上线</span></td></tr>
+            <tr><th scope="row"><span class="q">每天的执行与口碑</span></th><td data-label="HogentX 里对应的能力"><b>点评回复草稿</b>、<b>质检与整改</b>、<b>四位数字员工</b><small>草稿由人审核后再发布；数字员工的权限按酒店配置</small></td><td data-label="状态"><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span></td></tr>
+            <tr><th scope="row"><span class="q">新的订房来源</span></th><td data-label="HogentX 里对应的能力"><b>AI 获客</b>：ChatGPT 预订、生成酒店官网、GEO 优化<small>工具授权不含；ChatGPT 预订面向符合条件的合作酒店</small></td><td data-label="状态"><span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span></td></tr>
+            <tr><th scope="row"><span class="q">谁来做</span></th><td data-label="HogentX 里对应的能力"><b>专人陪跑</b>：协助配置、指导运营。<b>OTA 全托管</b>：约定范围内由专人操作线上 OTA 运营</td><td data-label="状态"><span class="tag tag--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="status-key">
+        <li><span class="tag tag--has"><svg aria-hidden="true"><use href="#i-has"/></svg>产品界面已有</span><span>可以演示界面；<b>≠ 您的酒店已经接通</b></span></li>
+        <li><span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span><span>逐项核对酒店、账号、权限、可接渠道后才能确认</span></li>
+        <li><span class="tag tag--human"><svg aria-hidden="true"><use href="#i-human"/></svg>人工服务</span><span>由专人提供；<b>≠ 托管全部平台、酒店现场和财务</b></span></li>
+        <li><span class="tag tag--notyet"><svg aria-hidden="true"><use href="#i-notyet"/></svg>未上线</span><span>需求、计划或设想；现在不能用，不给上线时间</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
+      <span class="foot-note"><b>两条前提：</b>凡是用到 OTA 数据的功能，都从您授权、我们逐项核对开始；建议不等于自动执行。</span>
+      <span class="foot-page"></span>
+    </footer>
+  </div>
+</section>
+
         <section class="status-col status-col--check">
           <header>
             <span class="tag tag--check"><svg aria-hidden="true"><use href="#i-check"/></svg>按酒店核对</span>
@@ -262,10 +252,11 @@
   </div>
 </section>
 
-<!-- 06 多个 OTA，一个工作台：先核对，再接通 -->
+<!-- 05 多个 OTA，一个工作台：先核对，再接通 -->
 <section class="slide" id="multi-ota" data-title="多个 OTA，一个工作台：先核对，再接通">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>AI 浏览器</span></p>
       <h2 class="slide-title">多个 OTA，一个工作台：先核对，再接通</h2>
       <p class="slide-lead">由酒店授权登录支持的 OTA 后，在同一工作台查看和监测数据，并按约定权限管理。</p>
@@ -289,12 +280,12 @@
           </div>
           <h3>渠道核对表 <span class="en">现场可填</span></h3>
           <div class="table-wrap table-wrap--bare">
-            <table class="table">
+            <table class="table table--stack">
               <thead><tr><th>您已在用的 OTA</th><th>能否授权登录</th><th>可查看、监测</th><th>可按权限管理</th></tr></thead>
               <tbody>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 1" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 2" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
-                <tr><td><input class="fill" type="text" aria-label="OTA 名称 3" placeholder="填写"></td><td class="muted">待核对</td><td class="muted">待核对</td><td class="muted">待核对</td></tr>
+                <tr><td data-label="您已在用的 OTA"><input class="fill" type="text" aria-label="OTA 名称 1" placeholder="填写"></td><td class="muted" data-label="能否授权登录">待核对</td><td class="muted" data-label="可查看、监测">待核对</td><td class="muted" data-label="可按权限管理">待核对</td></tr>
+                <tr><td data-label="您已在用的 OTA"><input class="fill" type="text" aria-label="OTA 名称 2" placeholder="填写"></td><td class="muted" data-label="能否授权登录">待核对</td><td class="muted" data-label="可查看、监测">待核对</td><td class="muted" data-label="可按权限管理">待核对</td></tr>
+                <tr><td data-label="您已在用的 OTA"><input class="fill" type="text" aria-label="OTA 名称 3" placeholder="填写"></td><td class="muted" data-label="能否授权登录">待核对</td><td class="muted" data-label="可查看、监测">待核对</td><td class="muted" data-label="可按权限管理">待核对</td></tr>
               </tbody>
             </table>
           </div>
@@ -315,10 +306,11 @@
   </div>
 </section>
 
-<!-- 07 订得偏快、偏慢的日期，可以设提醒 -->
+<!-- 06 订得偏快、偏慢的日期，可以设提醒 -->
 <section class="slide" id="pace" data-title="满房的日子，是不是卖便宜了？先看预订进度">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on="adr"></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
       <h2 class="slide-title">满房的日子，是不是卖便宜了？先看预订进度</h2>
       <p class="slide-lead"><span class="qref">问题 1</span> 订得偏快、偏慢的日期可以设提醒。先看得见，才谈得上调。</p>
@@ -368,10 +360,11 @@
   </div>
 </section>
 
-<!-- 08 调价：建议给到您，改不改由您定 -->
+<!-- 07 调价：建议给到您，改不改由您定 -->
 <section class="slide" id="pricing-advice" data-title="调价：建议给到您，改不改由您定">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on="adr"></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
       <h2 class="slide-title">调价：建议给到您，改不改由您定</h2>
       <p class="slide-lead"><span class="qref">问题 1</span> 是不是卖得太便宜，哪些日期容易少收。</p>
@@ -410,10 +403,11 @@
   </div>
 </section>
 
-<!-- 09 有房却没在卖？逐日核对房态与开售 -->
+<!-- 08 有房却没在卖？逐日核对房态与开售 -->
 <section class="slide" id="availability" data-title="有房却没在卖？逐日核对房态与开售">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on="occ"></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>智能收益</span></p>
       <h2 class="slide-title">有房却没在卖？逐日核对房态与开售</h2>
       <p class="slide-lead"><span class="qref">问题 2</span> 什么时候真的有房，却漏卖了。</p>
@@ -462,10 +456,11 @@
   </div>
 </section>
 
-<!-- 10 “随时看收益”：现在到哪一步 -->
+<!-- 09 “随时看收益”：现在到哪一步 -->
 <section class="slide slide--rev" id="revenue-view" data-title="“随时看收益”：现在到哪一步">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on="comm net"></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>收益报表</span></p>
       <h2 class="slide-title">“随时看收益”：现在到哪一步</h2>
       <p class="slide-lead"><span class="qref">问题 3</span> 每间房最后实收多少。这是客户特别关心的一件事，所以把有的和没有的分开说清楚。</p>
@@ -507,10 +502,11 @@
   </div>
 </section>
 
-<!-- 11 每天早上一页：今天要处理什么，放在一起 -->
+<!-- 10 每天早上一页：今天要处理什么，放在一起 -->
 <section class="slide" id="brief" data-title="每天早上一页：今天要处理什么，放在一起">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>每天怎么用</span></p>
       <h2 class="slide-title">每天早上一页：今天要处理什么，放在一起</h2>
     </header>
@@ -554,10 +550,11 @@
   </div>
 </section>
 
-<!-- 12 点评先出草稿、人来定稿；质检任务有派有收 -->
+<!-- 11 点评先出草稿、人来定稿；质检任务有派有收 -->
 <section class="slide" id="reviews-quality" data-title="点评先出草稿、人来定稿；质检任务有派有收">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>口碑与现场</span></p>
       <h2 class="slide-title">点评：先出草稿，人来定稿。质检：任务有派有收</h2>
     </header>
@@ -608,10 +605,11 @@
   </div>
 </section>
 
-<!-- 13 让客人在 AI 里找得到您：三项能力，逐家配置和接入 -->
+<!-- 12 让客人在 AI 里找得到您：三项能力，逐家配置和接入 -->
 <section class="slide" id="ai-acquisition" data-title="让客人在 AI 里找得到您：三项能力，逐家配置和接入">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第二部分</span><span class="sep"></span><span>现在能用什么</span><span class="sep"></span><span>AI 获客</span></p>
       <h2 class="slide-title">让客人在 AI 里找得到您：三项能力，逐家配置和接入</h2>
       <p class="slide-lead">包含在专人陪跑、OTA 全托管两个方案里；工具授权不含。</p>
@@ -657,45 +655,41 @@
   </div>
 </section>
 
-<!-- 14 三个方案，差别在：建议出来以后，谁来做 -->
-<section class="slide" id="plans" data-title="三个方案，差别在：建议出来以后，谁来做">
+<!-- 13 三个方案 -->
+<section class="slide slide--plans" id="plans" data-title="三个方案，差别在：建议出来以后，谁来做">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第三部分</span><span class="sep"></span><span>值不值得试</span></p>
       <h2 class="slide-title">三个方案，差别在：建议出来以后，谁来做</h2>
       <p class="slide-lead">月费以马币（MYR）计，按每家酒店、每月。后一档包含前一档的全部内容。</p>
     </header>
     <div class="slide-body">
-      <div class="grid grid--plans grid--stretch">
-        <article class="card plan">
+      <div class="plans">
+        <div class="plan plan--head" aria-hidden="true"><span>方案</span><span>月费 · 每家酒店 / 每月</span><span>包含</span><span>谁来做</span><span>不含 · 边界</span></div>
+        <article class="plan">
           <div class="plan-name"><b>工具授权</b><span class="small muted">软件使用权，酒店自己操作</span></div>
           <div class="plan-price"><span class="cur">RM</span><span class="amt">699</span><span class="unit">/ 每家酒店 · 每月</span></div>
-          <dl>
-            <div><dt>包含</dt><dd>基础运营工具（如调价建议、点评回复草稿、质检整改、经营报表）</dd></div>
-            <div class="who"><dt>谁来做</dt><dd>酒店自行决策和执行</dd></div>
-            <div class="not"><dt>不含</dt><dd>AI 获客；人工代运营</dd></div>
-          </dl>
+          <div class="plan-inc"><span class="lbl">包含</span><p>基础运营工具（如调价建议、点评回复草稿、质检整改、经营报表）</p></div>
+          <div class="plan-who"><span class="lbl">谁来做</span><p><b>酒店自行决策和执行</b></p></div>
+          <div class="plan-not"><span class="lbl">不含 · 边界</span><ul class="xlist"><li>不含 AI 获客</li><li>不含人工代运营</li></ul></div>
         </article>
-        <article class="card plan">
+        <article class="plan">
           <div class="plan-name"><b>专人陪跑</b><span class="small muted">专人协助和指导，酒店团队操作</span></div>
           <div class="plan-price"><span class="cur">RM</span><span class="amt">2,499</span><span class="unit">/ 每家酒店 · 每月</span></div>
-          <dl>
-            <div><dt>包含</dt><dd>工具授权的全部内容<br><span class="plus">+</span> AI 获客三项：ChatGPT 预订*、生成酒店官网、GEO 优化<br><span class="plus">+</span> 专人协助配置和运营指导</dd></div>
-            <div class="who"><dt>谁来做</dt><dd>酒店团队负责日常运营与执行</dd></div>
-            <div class="not"><dt>边界</dt><dd>专人不接管日常运营</dd></div>
-          </dl>
+          <div class="plan-inc"><span class="lbl">包含</span><p><span class="carry">工具授权的全部内容，另加</span><br><span class="plus">+</span> AI 获客三项：ChatGPT 预订*、生成酒店官网、GEO 优化<br><span class="plus">+</span> 专人协助配置和运营指导</p></div>
+          <div class="plan-who"><span class="lbl">谁来做</span><p><b>酒店团队负责日常运营与执行</b></p></div>
+          <div class="plan-not"><span class="lbl">不含 · 边界</span><ul class="xlist"><li>专人不接管日常运营</li></ul></div>
         </article>
-        <article class="card plan">
+        <article class="plan">
           <div class="plan-name"><b>OTA 全托管</b><span class="small muted">约定范围内，专人操作线上 OTA 运营</span></div>
           <div class="plan-price"><span class="cur">RM</span><span class="amt">9,980</span><span class="unit">/ 每家酒店 · 每月</span></div>
-          <dl>
-            <div><dt>包含</dt><dd>专人陪跑的全部内容<br><span class="plus">+</span> 专人接管双方约定的线上 OTA 运营</dd></div>
-            <div class="who"><dt>谁来做</dt><dd>专人，仅按约定渠道、已开通权限及批准的操作范围执行</dd></div>
-            <div class="not"><dt>边界</dt><dd>不是托管全部平台；酒店现场和财务仍由酒店负责</dd></div>
-          </dl>
+          <div class="plan-inc"><span class="lbl">包含</span><p><span class="carry">专人陪跑的全部内容，另加</span><br><span class="plus">+</span> 专人接管双方约定的线上 OTA 运营</p></div>
+          <div class="plan-who"><span class="lbl">谁来做</span><p><b>专人，仅按约定渠道、已开通权限及批准的操作范围执行</b></p></div>
+          <div class="plan-not"><span class="lbl">不含 · 边界</span><ul class="xlist"><li>不是托管全部平台</li><li>酒店现场和财务仍由酒店负责</li></ul></div>
         </article>
       </div>
-      <p class="small muted">* ChatGPT 预订面向符合条件的合作酒店，预订路径按实际接入情况展示。</p>
+      <p class="small muted">* ChatGPT 预订面向符合条件的合作酒店，预订路径按实际接入情况展示。生成酒店官网的现有流程需要配置；GEO 优化不承诺排名、曝光或订单量。</p>
     </div>
     <footer class="slide-foot">
       <span class="foot-brand"><span class="wordmark" role="img" aria-label="HogentX"></span></span>
@@ -705,10 +699,12 @@
   </div>
 </section>
 
-<!-- 15 开始之前，三件事先让您知道 -->
+
+<!-- 14 开始之前，三件事先让您知道 -->
 <section class="slide slide--control" id="control" data-title="开始之前，三件事先让您知道">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第三部分</span><span class="sep"></span><span>值不值得试</span></p>
       <h2 class="slide-title">开始之前，三件事先让您知道</h2>
     </header>
@@ -751,10 +747,11 @@
   </div>
 </section>
 
-<!-- 16 怎么试：一家酒店、已有的 OTA、一件事 -->
+<!-- 15 怎么试：一家酒店、已有的 OTA、一件事 -->
 <section class="slide" id="pilot" data-title="怎么试：一家酒店、已有的 OTA、一件事">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>第三部分</span><span class="sep"></span><span>值不值得试</span></p>
       <h2 class="slide-title">怎么试：一家酒店、已有的 OTA、一件事</h2>
       <p class="slide-lead">不用一上来全店、全渠道。先挑一件对您有价值的事，在一家您愿意授权的酒店验证。</p>
@@ -806,10 +803,11 @@
   </div>
 </section>
 
-<!-- 17 值不值，用同一把尺子量；没有对照，不谈增收 -->
+<!-- 16 值不值，用同一把尺子量；没有对照，不谈增收 -->
 <section class="slide" id="measure" data-title="值不值，用同一把尺子量；没有对照，不谈增收">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on="avail occ adr rev comm net"></p>
       <p class="kicker"><span>第三部分</span><span class="sep"></span><span>值不值得试</span></p>
       <h2 class="slide-title">值不值，用同一把尺子量；没有对照，不谈增收</h2>
     </header>
@@ -841,12 +839,12 @@
               <div class="sheet-row sheet-row--calc"><label for="calcNet">每个房晚的净实收 RM</label><input class="fill fill--num" id="calcNet" type="text" inputmode="decimal" placeholder="请填"></div>
             </div>
             <div class="table-wrap table-wrap--bare">
-              <table class="table calc-table">
+              <table class="table calc-table table--stack">
                 <thead><tr><th>方案 · 月费</th><th>摊到每个卖出的房晚</th><th>相当于几个房晚的净实收</th></tr></thead>
                 <tbody>
-                  <tr data-fee="699"><th>工具授权 · RM 699</th><td class="calc-out" data-out="per">—</td><td class="calc-out" data-out="eq">—</td></tr>
-                  <tr data-fee="2499"><th>专人陪跑 · RM 2,499</th><td class="calc-out" data-out="per">—</td><td class="calc-out" data-out="eq">—</td></tr>
-                  <tr data-fee="9980"><th>OTA 全托管 · RM 9,980</th><td class="calc-out" data-out="per">—</td><td class="calc-out" data-out="eq">—</td></tr>
+                  <tr data-fee="699"><th>工具授权 · RM 699</th><td class="calc-out" data-out="per" data-label="摊到每个卖出的房晚">—</td><td class="calc-out" data-out="eq" data-label="相当于几个房晚的净实收">—</td></tr>
+                  <tr data-fee="2499"><th>专人陪跑 · RM 2,499</th><td class="calc-out" data-out="per" data-label="摊到每个卖出的房晚">—</td><td class="calc-out" data-out="eq" data-label="相当于几个房晚的净实收">—</td></tr>
+                  <tr data-fee="9980"><th>OTA 全托管 · RM 9,980</th><td class="calc-out" data-out="per" data-label="摊到每个卖出的房晚">—</td><td class="calc-out" data-out="eq" data-label="相当于几个房晚的净实收">—</td></tr>
                 </tbody>
               </table>
             </div>
@@ -864,7 +862,7 @@
   </div>
 </section>
 
-<!-- 18 如果您愿意试，下一步只要四样东西 -->
+<!-- 17 如果您愿意试，下一步只要四样东西 -->
 <section class="slide slide--dark slide--next" id="next" data-title="如果您愿意试，下一步只要四样东西">
   <div class="slide-inner">
     <header class="slide-head">
@@ -907,10 +905,11 @@
   </div>
 </section>
 
-<!-- 19 附：名词对照 -->
+<!-- 18 附：名词对照 -->
 <section class="slide" id="glossary" data-title="附：名词对照">
   <div class="slide-inner">
     <header class="slide-head">
+      <p class="rail" data-on=""></p>
       <p class="kicker"><span>附</span></p>
       <h2 class="slide-title">名词对照</h2>
     </header>
