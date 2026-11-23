@@ -71,7 +71,7 @@ def main():
             fail(f"禁用内容 · {name}：…{ctx(flat, m)}…")
 
     # ---------- 2. 必须带否定或限定 ----------
-    NEG = r"(不|非|没有|不是|不等于|不做|不给|不说|不默认|不承诺|不谈|不代表|并非|不含|不证明)"
+    NEG = r"(不|非|没有|不是|不等于|不做|不给|不说|不默认|不承诺|不谈|不代表|并非|不含|不证明|≠)"
 
     def need_negation(label, pat, window=14):
         for m in re.finditer(pat, flat):
@@ -83,7 +83,7 @@ def main():
     need_negation("保证类说法", r"保证|承诺|确保(增收|排名|订单)")
     need_negation("增收类说法", r"增收|多赚|提升 ?\d+ ?%|回本")
     need_negation("利润", r"利润")
-    need_negation("接通类说法", r"已(为您的酒店)?(接通|连接|接入)|已(为您的酒店)?开通(?!权限)|已连接|已支持|已覆盖")
+    need_negation("接通类说法", r"已经?(为您的酒店)?(接通|连接|接入)|已经?(为您的酒店)?开通(?!权限)|已连接|已支持|已覆盖")
 
     for m in re.finditer(r"200\+", flat):
         around = flat[max(0, m.start() - 40):m.end() + 40]

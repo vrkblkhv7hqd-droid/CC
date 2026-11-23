@@ -62,6 +62,14 @@ const fs = require('fs');
           });
         });
         if (boxBottom > maxBottom) { maxBottom = boxBottom; lowest = 'box ' + boxWho; }
+        // 任何被裁掉、需要滚动才能看到的内容都算问题
+        s.querySelectorAll('*').forEach((el) => {
+          const cs2 = getComputedStyle(el);
+          if (cs2.overflowY !== 'visible' || cs2.overflowX !== 'visible') {
+            if (el.scrollHeight - el.clientHeight > 2 && clipped.length < 8) clipped.push('scroll-clipped ' + (el.className || el.tagName) + ' by ' + (el.scrollHeight - el.clientHeight) + 'px');
+            if (el.scrollWidth - el.clientWidth > 2 && el !== s && clipped.length < 8) clipped.push('scroll-clipped-x ' + (el.className || el.tagName) + ' by ' + (el.scrollWidth - el.clientWidth) + 'px');
+          }
+        });
         // 互不包含的块之间不能重叠
         const boxes = Array.from(s.querySelectorAll('.card, .note, .term, .status-col, .sheet, .shot, .slide-head, .table-wrap, .flow > li, .money, .slide-lead, .slide-title')).filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
         for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
