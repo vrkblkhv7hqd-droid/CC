@@ -30,34 +30,44 @@
   "ms": "HogentX ialah produk operasi AI untuk hotel. Selepas taklimat ini, anda boleh menjawab dua perkara: <b>apa yang boleh digunakan sekarang</b>, dan <b>berbaloikah dicuba</b>."
  },
  {
-  "zh": "今天先请教您三个问题",
-  "en": "Three questions for you today",
-  "ms": "Tiga soalan untuk anda hari ini"
+  "zh": "今天讲三件事",
+  "en": "Three things today",
+  "ms": "Tiga perkara hari ini"
  },
  {
-  "zh": "满房的时候，还有没有提价空间？",
-  "en": "When you are full, is there still room to raise the rate?",
-  "ms": "Apabila penuh, masih adakah ruang untuk menaikkan harga?"
+  "zh": "先请教您三个问题",
+  "en": "First, three questions for you",
+  "ms": "Mula-mula, tiga soalan untuk anda"
  },
  {
-  "zh": "什么时候明明有房，却没卖出去？",
-  "en": "When did you have rooms, yet they went unsold?",
-  "ms": "Bilakah bilik masih ada, tetapi tidak terjual?"
- },
- {
-  "zh": "哪一类渠道的订单，成本最高？",
-  "en": "Which type of channel costs you the most per booking?",
-  "ms": "Saluran jenis manakah yang paling tinggi kosnya bagi setiap tempahan?"
- },
- {
-  "zh": "先看结论",
-  "en": "The short answer",
-  "ms": "Ringkasan dahulu"
+  "zh": "您想改善哪一块经营结果",
+  "en": "Which business result you want to improve",
+  "ms": "Hasil perniagaan mana yang ingin anda perbaiki"
  },
  {
   "zh": "现在能用什么",
   "en": "What you can use now",
   "ms": "Apa yang boleh digunakan sekarang"
+ },
+ {
+  "zh": "已有的、要按酒店核对的、还没上线的",
+  "en": "In the product, to be checked per hotel, not launched yet",
+  "ms": "Sudah ada, perlu disemak ikut hotel, belum dilancarkan"
+ },
+ {
+  "zh": "值不值得试",
+  "en": "Is it worth a trial",
+  "ms": "Berbaloikah dicuba"
+ },
+ {
+  "zh": "三个方案、怎么量、怎么试",
+  "en": "Three plans, how to measure, how to try",
+  "ms": "Tiga pelan, cara mengukur, cara mencuba"
+ },
+ {
+  "zh": "先看结论",
+  "en": "The short answer",
+  "ms": "Ringkasan dahulu"
  },
  {
   "zh": "产品界面已有：调价建议、房态与开售核对、点评回复草稿、质检与整改、经营报表与早安简报。要按酒店核对：AI 浏览器（多个 OTA 一个工作台）和 AI 获客三项。独立、实时的收益报表还没有上线。",
@@ -520,6 +530,11 @@
   "ms": "Boleh diisi terus"
  },
  {
+  "zh": "凡是用到 OTA 数据的功能，都从这些账号的授权和核对开始，所以先请教这一句。",
+  "en": "Every function that uses OTA data starts with authorising and checking these accounts, so we ask this first.",
+  "ms": "Setiap fungsi yang menggunakan data OTA bermula dengan kebenaran dan semakan akaun-akaun ini, jadi kami bertanya ini dahulu."
+ },
+ {
   "zh": "接通前逐项核对：",
   "en": "Checked item by item before connecting:",
   "ms": "Disemak satu demi satu sebelum disambungkan:"
@@ -598,11 +613,6 @@
   "zh": "它不是当前可接渠道，不在任何方案的权益里，<span class=\"nb\">也没有交付日期。</span>",
   "en": "It is not what can be connected today, it is not part of any plan, and it has no delivery date.",
   "ms": "Ia bukan saluran yang boleh disambungkan hari ini, bukan sebahagian daripada mana-mana pelan, dan tiada tarikh penyerahan."
- },
- {
-  "zh": "凡是用到 OTA 数据的功能，都以酒店授权和接入核对为前提。",
-  "en": "Every function that uses OTA data depends on the hotel's authorisation and a connection check.",
-  "ms": "Setiap fungsi yang menggunakan data OTA bergantung pada kebenaran hotel dan semakan sambungan."
  },
  {
   "zh": "智能收益",
@@ -815,7 +825,7 @@
   "ms": "Yang sudah ada"
  },
  {
-  "zh": "经营报表：入住率、按小时和按房晚的数据、点评分析。",
+  "zh": "经营报表：入住率、按小时和按房晚的数据、<span class=\"nb\">点评分析。</span>",
   "en": "Operations reports: occupancy, hourly and room-night data, review analysis.",
   "ms": "Laporan operasi: kadar penghunian, data mengikut jam dan malam bilik, analisis ulasan."
  },
@@ -823,11 +833,6 @@
   "zh": "早安简报：每日经营数据和当天要处理的事。",
   "en": "Morning Brief: daily operating data and what needs handling that day.",
   "ms": "Taklimat Pagi: data operasi harian dan perkara yang perlu ditangani pada hari itu."
- },
- {
-  "zh": "<span class=\"qref\">问题 3</span> “每间房最后实收多少”怎么量：见“值不值”一页的对照表，数字由酒店提供。",
-  "en": "<span class=\"qref\">Question 3</span> How to measure \"what you actually receive per room\": see the comparison table on the page about value; the hotel provides the figures.",
-  "ms": "<span class=\"qref\">Soalan 3</span> Cara mengukur \"berapa yang benar-benar diterima bagi setiap bilik\": lihat jadual perbandingan pada halaman tentang nilai; angka disediakan oleh hotel."
  },
  {
   "zh": "现在还没有的",
@@ -845,49 +850,14 @@
   "ms": "Jangkaan hasil masa depan mengikut hari."
  },
  {
-  "zh": "两项都是酒店方提出的需求，目前不能使用，也没有可以承诺的上线时间。<b>在这之前：</b>试点时先用对照表，按同一口径对一次渠道佣金和净实收。",
-  "en": "Both were requested by hotels. They cannot be used at present, and there is no launch date we can commit to. <b>Until then:</b> in a pilot, we first use the comparison table to work out channel commission and net received once, on one agreed basis.",
-  "ms": "Kedua-duanya diminta oleh pihak hotel. Ia belum boleh digunakan, dan tiada tarikh pelancaran yang dapat kami janjikan. <b>Sebelum itu:</b> dalam percubaan, kita gunakan jadual perbandingan dahulu untuk mengira komisen saluran dan terimaan bersih sekali, atas satu asas yang dipersetujui."
+  "zh": "两项都是酒店方提出的需求，目前不能使用，<span class=\"nb\">也没有可以承诺的上线时间。</span>",
+  "en": "Both were requested by hotels. They cannot be used at present, and there is no launch date we can commit to.",
+  "ms": "Kedua-duanya diminta oleh pihak hotel. Ia belum boleh digunakan, dan tiada tarikh pelancaran yang dapat kami janjikan."
  },
  {
-  "zh": "谈收入时的口径：三种数分开看，不相加、不混用",
-  "en": "When we talk about revenue: three kinds of numbers, kept apart, never added or mixed",
-  "ms": "Apabila bercakap tentang hasil: tiga jenis angka, diasingkan, tidak dicampur atau dijumlahkan"
- },
- {
-  "zh": "这是口径约定，不是现有的报表界面",
-  "en": "This is an agreed way of reading numbers, not an existing report screen",
-  "ms": "Ini cara membaca angka yang dipersetujui, bukan skrin laporan sedia ada"
- },
- {
-  "zh": "已发生收入",
-  "en": "Revenue already earned",
-  "ms": "Hasil yang sudah diperoleh"
- },
- {
-  "zh": "已经住完的。",
-  "en": "Stays that are completed.",
-  "ms": "Penginapan yang sudah selesai."
- },
- {
-  "zh": "在手预订",
-  "en": "On the books",
-  "ms": "Tempahan dalam tangan"
- },
- {
-  "zh": "已经订了、还没入住的。",
-  "en": "Booked, not yet stayed.",
-  "ms": "Sudah ditempah, belum menginap."
- },
- {
-  "zh": "未来预测",
-  "en": "Forecast",
-  "ms": "Ramalan"
- },
- {
-  "zh": "估计值，不是订单。",
-  "en": "An estimate, not bookings.",
-  "ms": "Anggaran, bukan tempahan."
+  "zh": "<span class=\"qref\">问题 3</span> <b>在这之前，“每间房最后实收多少”这样回答：</b>试点时先用对照表，按同一口径对一次渠道佣金和净实收；<span class=\"nb\">数字由酒店提供。</span>",
+  "en": "<span class=\"qref\">Question 3</span> <b>Until then, how to answer \"what do I actually receive per room\":</b> in a pilot, use the comparison table first to work out channel commission and net received on one agreed basis; the hotel provides the figures.",
+  "ms": "<span class=\"qref\">Soalan 3</span> <b>Sebelum itu, cara menjawab \"berapa yang benar-benar diterima bagi setiap bilik\":</b> dalam percubaan, guna jadual perbandingan dahulu untuk mengira komisen saluran dan terimaan bersih atas satu asas yang dipersetujui; angka disediakan oleh hotel."
  },
  {
   "zh": "状态标记",
@@ -898,11 +868,6 @@
   "zh": "第三部分",
   "en": "Part 3",
   "ms": "Bahagian 3"
- },
- {
-  "zh": "值不值得试",
-  "en": "Is it worth a trial",
-  "ms": "Berbaloikah dicuba"
  },
  {
   "zh": "<span class=\"nb\">三个方案，</span><span class=\"nb\">差别在：</span><span class=\"nb\">建议出来以后，</span><span class=\"nb\">谁来做</span>",
@@ -1060,44 +1025,9 @@
   "ms": "Berbaloikah? Satu pembaris: tanpa perbandingan, tiada dakwaan hasil tambahan"
  },
  {
-  "zh": "对照表",
-  "en": "Comparison table",
-  "ms": "Jadual perbandingan"
- },
- {
-  "zh": "数字由酒店提供 · 试点时填",
-  "en": "Figures provided by the hotel · filled in during the pilot",
-  "ms": "Angka disediakan oleh hotel · diisi semasa percubaan"
- },
- {
-  "zh": "刚才这一题还没有数据可看：从这张表开始",
-  "en": "This question has no data to look at yet: start with this table",
-  "ms": "Soalan ini belum ada data untuk dilihat: mulakan dengan jadual ini"
- },
- {
-  "zh": "六个数",
-  "en": "Six numbers",
-  "ms": "Enam angka"
- },
- {
-  "zh": "对照期",
-  "en": "Comparison period",
-  "ms": "Tempoh perbandingan"
- },
- {
-  "zh": "试点期",
-  "en": "Pilot period",
-  "ms": "Tempoh percubaan"
- },
- {
-  "zh": "对照期＝拿来和试点期比较的一段时间。取哪一段、净实收扣哪些项，试点前由双方约定；两段时间用同一种算法。",
-  "en": "Comparison period = a period used to compare against the pilot period. Which period to take, and what is deducted to reach net received, are agreed by both sides before the pilot; both periods are calculated the same way.",
-  "ms": "Tempoh perbandingan = satu tempoh yang digunakan untuk dibandingkan dengan tempoh percubaan. Tempoh mana yang diambil, dan apa yang dipotong untuk sampai kepada terimaan bersih, dipersetujui oleh kedua-dua pihak sebelum percubaan; kedua-dua tempoh dikira dengan cara yang sama."
- },
- {
-  "zh": "把月费换算成您自己的数",
-  "en": "Turn the monthly fee into your own numbers",
-  "ms": "Tukar yuran bulanan kepada angka anda sendiri"
+  "zh": "先看成本：把月费换算成您自己的数",
+  "en": "First the cost: turn the monthly fee into your own numbers",
+  "ms": "Kos dahulu: tukar yuran bulanan kepada angka anda sendiri"
  },
  {
   "zh": "这家酒店每月卖出的房晚",
@@ -1140,9 +1070,44 @@
   "ms": "Ini hanya membahagikan yuran bulanan kepada malam bilik yang sudah anda jual, supaya kosnya mudah dilihat. Ia tidak bermakna anda akan menjual lebih atau memperoleh lebih selepas menggunakannya. Sama ada ia membantu dinilai daripada jadual perbandingan."
  },
  {
-  "zh": "<b>收入之外，还可以先数这些：</b>提示了多少处异常，酒店确认属实的有多少，采纳了多少条建议。是否写进验收标准，由双方另定。",
+  "zh": "<b>收入之外，还可以先数这些：</b>提示了多少处异常，酒店确认属实的有多少，采纳了多少条建议。<span class=\"nb\">是否写进验收标准，</span><span class=\"nb\">由双方另定。</span>",
   "en": "<b>Besides revenue, these can be counted first:</b> how many anomalies were flagged, how many the hotel confirmed as real, and how many suggestions were adopted. Whether they go into the acceptance criteria is for both sides to agree.",
   "ms": "<b>Selain hasil, perkara ini boleh dikira dahulu:</b> berapa kelainan yang dikesan, berapa yang disahkan benar oleh hotel, dan berapa cadangan yang diterima pakai. Sama ada ia dimasukkan dalam kriteria penerimaan dipersetujui oleh kedua-dua pihak."
+ },
+ {
+  "zh": "再看值不值：对照表",
+  "en": "Then the value: the comparison table",
+  "ms": "Kemudian nilainya: jadual perbandingan"
+ },
+ {
+  "zh": "数字由酒店提供 · 试点时填",
+  "en": "Figures provided by the hotel · filled in during the pilot",
+  "ms": "Angka disediakan oleh hotel · diisi semasa percubaan"
+ },
+ {
+  "zh": "刚才这一题还没有数据可看：从这张表开始",
+  "en": "This question has no data to look at yet: start with this table",
+  "ms": "Soalan ini belum ada data untuk dilihat: mulakan dengan jadual ini"
+ },
+ {
+  "zh": "六个数",
+  "en": "Six numbers",
+  "ms": "Enam angka"
+ },
+ {
+  "zh": "对照期",
+  "en": "Comparison period",
+  "ms": "Tempoh perbandingan"
+ },
+ {
+  "zh": "试点期",
+  "en": "Pilot period",
+  "ms": "Tempoh percubaan"
+ },
+ {
+  "zh": "对照期＝拿来和试点期比较的一段时间。取哪一段、净实收扣哪些项，试点前由双方约定；两段时间用同一种算法。",
+  "en": "Comparison period = a period used to compare against the pilot period. Which period to take, and what is deducted to reach net received, are agreed by both sides before the pilot; both periods are calculated the same way.",
+  "ms": "Tempoh perbandingan = satu tempoh yang digunakan untuk dibandingkan dengan tempoh percubaan. Tempoh mana yang diambil, dan apa yang dipotong untuk sampai kepada terimaan bersih, dipersetujui oleh kedua-dua pihak sebelum percubaan; kedua-dua tempoh dikira dengan cara yang sama."
  },
  {
   "zh": "房费收入不是利润；HogentX 不是保证增收的工具。",
@@ -1150,9 +1115,9 @@
   "ms": "Hasil bilik bukan keuntungan; HogentX bukan alat yang menjamin peningkatan hasil."
  },
  {
-  "zh": "<span class=\"nb\">开始之前，</span><span class=\"nb\">三件事先让您知道</span>",
-  "en": "Before we start, three things you should know",
-  "ms": "Sebelum bermula, tiga perkara yang perlu anda tahu"
+  "zh": "<span class=\"nb\">开始之前先说清楚三件事：</span><span class=\"nb\">数据、权限、</span><span class=\"nb\">出了问题找谁</span>",
+  "en": "Three things to be clear on before we start: data, permissions, who to call",
+  "ms": "Tiga perkara dijelaskan sebelum bermula: data, kebenaran, siapa dihubungi"
  },
  {
   "zh": "数据取自哪里",
@@ -1160,17 +1125,17 @@
   "ms": "Dari mana data diambil"
  },
  {
-  "zh": "<span class=\"nb\">取自您授权的来源，</span>从您选定的那家酒店<span class=\"nb\">已在用的 OTA 账号开始。</span>",
+  "zh": "<span class=\"nb\">取自您授权的来源，</span><span class=\"nb\">从您选定的那家酒店</span><span class=\"nb\">已在用的 OTA 账号开始。</span>",
   "en": "From sources you authorise, starting with the OTA accounts already used by the hotel you choose.",
   "ms": "Daripada sumber yang anda benarkan, bermula dengan akaun OTA yang sudah digunakan oleh hotel pilihan anda."
  },
  {
-  "zh": "调价建议还会参考周边同类酒店和平台数据。每个数据来源都先核对，再使用。",
+  "zh": "调价建议还会参考周边同类酒店和平台数据。<span class=\"nb\">每个数据来源都先核对，再使用。</span>",
   "en": "Pricing suggestions also refer to comparable hotels nearby and platform data. Every data source is checked before it is used.",
   "ms": "Cadangan harga turut merujuk hotel setara berdekatan dan data platform. Setiap sumber data disemak sebelum digunakan."
  },
  {
-  "zh": "谁能动价格、谁能发布内容",
+  "zh": "<span class=\"nb\">谁能动价格、</span><span class=\"nb\">谁能发布内容</span>",
   "en": "Who can change prices, who can publish content",
   "ms": "Siapa boleh mengubah harga, siapa boleh menerbitkan kandungan"
  },
@@ -1180,12 +1145,12 @@
   "ms": "Hotel sendiri memutuskan dan membuat setiap perubahan harga dan penerbitan"
  },
  {
-  "zh": "专人协助和指导，不代运营、不代改价；<span class=\"nb\">改价、发布由酒店团队操作</span>",
+  "zh": "专人协助和指导，<span class=\"nb\">不代运营、不代改价；</span><span class=\"nb\">改价、发布由酒店团队操作</span>",
   "en": "A specialist assists and guides, but does not operate or change prices for you; the hotel team changes prices and publishes",
   "ms": "Pakar membantu dan membimbing, tetapi tidak mengendalikan operasi atau mengubah harga bagi pihak anda; pasukan hotel yang mengubah harga dan menerbitkan"
  },
  {
-  "zh": "专人操作，仅限约定渠道、已开通权限及批准的操作范围",
+  "zh": "专人操作，<span class=\"nb\">仅限约定渠道、</span><span class=\"nb\">已开通权限及</span><span class=\"nb\">批准的操作范围</span>",
   "en": "A specialist operates, only on the agreed channels, with permissions already granted, within the approved scope of actions",
   "ms": "Pakar mengendalikan, hanya pada saluran yang dipersetujui, dengan kebenaran yang telah diberikan, dalam skop tindakan yang diluluskan"
  },
@@ -1290,7 +1255,7 @@
   "ms": "Sama ada sesuatu tugas boleh diuji di hotel anda bergantung pada hasil semakan kebenaran dan sambungan."
  },
  {
-  "zh": "<b>这次不验证：</b>独立、实时的收益报表（未上线）；200+ OTA（计划）；口述后自动建站（设想）。ChatGPT 预订只在酒店符合条件<span class=\"nb\">并核对接入情况后才列入。</span>",
+  "zh": "<b>这次不验证：</b>独立、实时的收益报表（未上线）；200+ OTA（计划）；<span class=\"nb\">口述后自动建站（设想）。</span>ChatGPT 预订只在酒店符合条件<span class=\"nb\">并核对接入情况后才列入。</span>",
   "en": "<b>Not tested this time:</b> the standalone, real-time revenue report (not launched); 200+ OTA (a plan); a website built automatically from a spoken briefing (an idea). ChatGPT booking is added only if the hotel is eligible and its connection has been checked.",
   "ms": "<b>Tidak diuji kali ini:</b> laporan hasil berasingan dan masa nyata (belum dilancarkan); 200+ OTA (rancangan); laman web yang dibina secara automatik daripada penerangan lisan (idea). Tempahan ChatGPT hanya dimasukkan jika hotel layak dan sambungannya telah disemak."
  },
@@ -1755,16 +1720,6 @@
   "ms": "Caj bilik yang benar-benar diterima hotel selepas komisen saluran. Potongannya dipersetujui sebelum percubaan."
  },
  {
-  "zh": "在手预订 <span class=\"en\">On the books</span>",
-  "en": "On the books",
-  "ms": "Tempahan dalam tangan <span class=\"en\">On the books</span>"
- },
- {
-  "zh": "已经订了、还没入住的订单。",
-  "en": "Bookings made but not yet stayed.",
-  "ms": "Tempahan yang sudah dibuat tetapi belum menginap."
- },
- {
   "zh": "客房与服务检查；发现问题后的跟进改正。",
   "en": "Room and service inspections; fixing the problems found.",
   "ms": "Pemeriksaan bilik dan perkhidmatan; membetulkan masalah yang ditemui."
@@ -1975,6 +1930,11 @@
   "ms": "Berbaloikah? Satu pembaris: tanpa perbandingan, tiada dakwaan hasil tambahan"
  },
  {
+  "zh": "请填",
+  "en": "Enter",
+  "ms": "Isi"
+ },
+ {
   "zh": "对照期可售房晚",
   "en": "Comparison period: available room nights",
   "ms": "Tempoh perbandingan: malam bilik tersedia"
@@ -2035,14 +1995,9 @@
   "ms": "Tempoh percubaan: terimaan bersih"
  },
  {
-  "zh": "请填",
-  "en": "Enter",
-  "ms": "Isi"
- },
- {
-  "zh": "开始之前，三件事先让您知道",
-  "en": "Before we start, three things you should know",
-  "ms": "Sebelum bermula, tiga perkara yang perlu anda tahu"
+  "zh": "开始之前先说清楚三件事：数据、权限、出了问题找谁",
+  "en": "Three things to be clear on before we start: data, permissions, who to call",
+  "ms": "Tiga perkara dijelaskan sebelum bermula: data, kebenaran, siapa dihubungi"
  },
  {
   "zh": "怎么试：一家酒店、已有的 OTA、一件事",
@@ -2060,7 +2015,7 @@
   "ms": "Pelayar AI: lihat dan pantau beberapa OTA di satu tempat"
  },
  {
-  "zh": "这家酒店已在用、愿意授权的 OTA 账号",
+  "zh": "已在用、愿意授权的 OTA 账号",
   "en": "OTA accounts you will authorise",
   "ms": "Akaun OTA yang anda benarkan"
  },
