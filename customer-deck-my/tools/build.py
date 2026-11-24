@@ -3,6 +3,7 @@
 
 用法（在 customer-deck-my 目录下）：
     python3 tools/build.py
+    python3 tools/build.py --draft   # 改稿途中用：缺译文的地方先用中文顶上，只为看版面，不要发出去
 
 输入：src/deck.html（中文，唯一的内容来源）、src/deck.css、src/deck.js、
       i18n/strings.json（英文、马来文）、assets/ 下的图片与字体
@@ -82,7 +83,7 @@ def main() -> None:
         sys.exit("src/deck.html 里找不到 deck.css 或 deck.js 的引用")
 
     for lang, name in OUTPUTS.items():
-        html, tables = i18n.localize(source, lang)
+        html, tables = i18n.localize(source, lang, strict="--draft" not in sys.argv)
         html = html.replace('<link rel="stylesheet" href="deck.css">', "<style>\n" + css + "\n</style>")
 
         def img_repl(m: re.Match) -> str:

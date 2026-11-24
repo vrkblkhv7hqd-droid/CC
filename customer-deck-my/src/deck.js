@@ -89,7 +89,10 @@
     var names = UI[lang].rail;
     each(document.querySelectorAll('.rail'), function (rail) {
       while (rail.firstChild) rail.removeChild(rail.firstChild);
-      var on = (rail.getAttribute('data-on') || '').split(' ');
+      var on = (rail.getAttribute('data-on') || '').split(' ').filter(Boolean);
+      /* 这一页不对应公式里的某个数：不放公式条，只显示栏目名 */
+      rail.classList.toggle('rail--off', on.length === 0);
+      if (on.length === 0) return;
       RAIL_KEYS.forEach(function (key, k) {
         var sp = document.createElement('span');
         sp.textContent = names[k];

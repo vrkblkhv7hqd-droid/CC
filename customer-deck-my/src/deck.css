@@ -719,7 +719,8 @@ html.present .rail { display: flex; align-items: baseline; gap: 12px; font-size:
 html.present .rail i { font-style: normal; font-family: var(--font-num); font-weight: 700; opacity: 0.75; }
 html.present .rail .on { color: var(--blue-ink); font-weight: 700; box-shadow: inset 0 -3px 0 var(--blue); }
 html.present .rail .rail-sec { margin-left: auto; font-weight: 700; color: var(--ink-2); letter-spacing: 0.02em; }
-html.present .rail + .kicker { display: none; }
+html.present .rail:not(.rail--off) + .kicker { display: none; }
+html.present .rail.rail--off { display: none; }
 html.present .slide-foot { border-top-color: var(--line); }
 
 html.present .en { font-size: max(0.82em, 20px); }
@@ -1118,3 +1119,200 @@ html.present .slide--control .table th, html.present .slide--control .table td {
 html.present .slide--control .note { font-size: 28px; }
 html.present:not([lang^="zh"]) .slide--control .card.ctl { grid-template-columns: 56px 360px minmax(0, 1fr); padding: 22px 32px; }
 html.present:not([lang^="zh"]) .slide--control .ctl h3 { font-size: 32px; }
+
+
+/* =====================================================================
+   第六版：精简。投屏只留要点，字放大；补充说明（.only-read）只在阅读版出现
+   ===================================================================== */
+html:not(.present) .shot.only-read, html:not(.present) .note.only-read { display: flex; }
+.table--ledger td small.only-read { display: none; }
+html:not(.present) .table--ledger td small.only-read { display: block; }
+.eyebrow { font-size: var(--fs-tiny); font-weight: 700; letter-spacing: 0.04em; color: var(--blue-ink); }
+.card--gold { border-color: #f1dfb6; background: #fffaf0; }
+.card--gold .eyebrow { color: #8a5300; }
+
+/* 封面：标题、一句话、三步路线 */
+.cover-main--solo { grid-template-columns: minmax(0, 1fr) !important; }
+.cover-road { margin: 0; padding: 0; }
+.cover-road li { display: flex; align-items: baseline; gap: 0.5em; }
+.cover-road .n { font-family: var(--font-num); font-weight: 800; color: var(--gold); }
+html.present .cover-main--solo .cover-title { font-size: 116px; line-height: 1.16; }
+html.present .cover-main--solo .cover-sub { font-size: 36px; max-width: 1500px; }
+html.present .cover-main--solo .cover-left { gap: 36px; }
+html.present .cover-road { display: flex; flex: none; gap: 64px; padding: 0 0 46px; font-size: 30px; font-weight: 700; color: #dbe4f3; }
+html.present .cover-road .n { font-size: 34px; }
+
+/* 三笔账 */
+html.present .slide--q .qcard { padding: 38px 40px 40px; gap: 22px; }
+html.present .slide--q .qcard .qno { font-size: 72px; }
+html.present .slide--q .qcard h3 { font-size: 44px; line-height: 1.28; }
+html.present .slide--q .qcard .see { font-size: 28px; }
+html.present .slide--q .choice button { font-size: 26px; padding: 12px 28px; }
+html.present .slide--q .qcard .stack { margin-top: 6px; }
+html.present .formula-band { padding: 30px 40px; gap: 12px; }
+html.present .formula-line { font-size: 38px; }
+html.present .formula-note { font-size: 29px; }
+
+/* HogentX 做什么 */
+html.present #what .slide-body { gap: 36px; }
+html.present #what .flow > li { padding: 26px 30px; gap: 8px; }
+html.present #what .flow > li b { font-size: 36px; }
+html.present #what .flow > li .small { font-size: 25px; line-height: 1.45; }
+html.present #what .flow > li .who { font-size: 22px; }
+html.present .grid--what { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+html.present .grid--what .card { padding: 32px 38px; gap: 12px; }
+html.present .grid--what .card h3 { font-size: 40px; line-height: 1.25; }
+html.present .grid--what .card > p { font-size: 29px; line-height: 1.5; }
+html.present .grid--what .card > p.tiny { font-size: 22px; }
+html.present .grid--what .eyebrow { font-size: 22px; }
+
+/* 总览：三个问题一组放大，其余一组收小 */
+html.present .status-key { grid-template-columns: repeat(4, auto); justify-content: start; gap: 36px; }
+html.present .status-key li { font-size: 23px; }
+html.present .table--ledger tr.top th, html.present .table--ledger tr.top td { font-size: 31px; padding-top: 14px; padding-bottom: 14px; }
+html.present .table--ledger tr.top th .n { font-size: 33px; }
+html.present .table--ledger tr.top td small { font-size: 24px; }
+html.present .table--ledger tr.top--last th, html.present .table--ledger tr.top--last td { border-bottom: 3px solid var(--ink); }
+html.present .table--ledger tr:not(.top) th, html.present .table--ledger tr:not(.top) td { font-size: 25px; padding-top: 10px; padding-bottom: 10px; }
+html.present .table--ledger tr:not(.top) th { color: var(--ink-2); }
+html.present .table--ledger td small { font-size: 21px; }
+html.present .table--ledger tr.top .tag { font-size: 24px; }
+
+/* 多个 OTA：一句话，四个空格 */
+.ask-why { color: var(--ink-2); line-height: 1.5; }
+.ota-fill { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); }
+.ota-fill label { display: flex; align-items: baseline; gap: 0.6em; }
+.ota-fill .n { font-family: var(--font-num); font-weight: 800; color: var(--blue); }
+@media (min-width: 720px) { html:not(.present) .ota-fill { grid-template-columns: 1fr 1fr; } }
+html.present .card--ask { padding: 40px 46px; gap: 24px; }
+html.present .card--ask h3 { font-size: 46px; }
+html.present .ask-why { font-size: 29px; }
+html.present .ota-fill { grid-template-columns: 1fr 1fr; gap: 34px 56px; margin: 14px 0 18px; }
+html.present .ota-fill label { font-size: 36px; }
+html.present .ota-fill .fill { font-size: 34px; padding: 6px 4px; }
+html.present .card--ask .row .small { font-size: 25px; }
+html.present #multi-ota .card--blue, html.present #multi-ota .card--notyet { padding: 32px 36px; gap: 14px; }
+html.present #multi-ota .card h3 { font-size: 34px; }
+html.present #multi-ota .card--blue p { font-size: 29px; line-height: 1.5; }
+html.present #multi-ota .card--notyet p.small { font-size: 25px; }
+
+/* 截图页：要点放大 */
+html.present .grid--shot-right { grid-template-columns: minmax(0, 1fr) 580px; gap: 60px; }
+html.present .grid--shot-right > .stack { justify-content: center; }
+html.present .grid--shot-right .list, html.present .grid--shot-left .list { font-size: 32px; gap: 22px; }
+html.present .grid--shot-right .stack--loose, html.present .grid--shot-left .stack--loose { gap: 32px; }
+html.present .grid--shot-left .note, html.present .grid--shot-right .note { font-size: 27px; }
+html.present #pricing-advice .stack > .list { font-size: 32px; }
+html.present #pricing-advice .stack > .note { font-size: 27px; }
+html.present #availability .grid--2 .card { padding: 28px 32px; }
+html.present #availability .grid--2 .card h3 { font-size: 36px; }
+html.present #availability .grid--2 .card p { font-size: 28px; }
+
+/* 三个方案 */
+html.present .plan-name b { font-size: 44px; }
+html.present .plan { padding: 30px 0 28px; }
+html.present .plan-inc p, html.present .plan-who p, html.present .xlist { font-size: 27px; line-height: 1.42; }
+
+/* 值不值 */
+html.present #measure .calc-card { padding: 34px 38px; gap: 22px; }
+html.present #measure .card h3 { font-size: 34px; line-height: 1.3; }
+html.present .calc-table { font-size: 30px; }
+html.present .calc-table .calc-out { font-size: 36px; }
+html.present .calc-table th, html.present .calc-table td { padding-top: 18px; padding-bottom: 18px; }
+html.present #measure .sheet-row--calc label { font-size: 29px; }
+html.present #measure .sheet-row--calc .fill { font-size: 34px; }
+html.present #measure .card > p.small { font-size: 25px; }
+
+/* 怎么试：今天先定三项 */
+.sheet-rest { line-height: 1.55; color: var(--ink-2); border-top: 2px solid var(--ink); padding-top: var(--sp-3); margin-top: var(--sp-2); }
+.sheet-rest b { color: var(--ink); }
+html.present #pilot .sheet { padding: 38px 42px; gap: 26px; justify-content: flex-start; }
+html.present #pilot .sheet h3 { font-size: 40px; }
+html.present #pilot .sheet-row--big { grid-template-columns: 220px minmax(0, 1fr); align-items: baseline; }
+html.present #pilot .sheet-row--big label { font-size: 30px; }
+html.present #pilot .sheet-row--big .fill { font-size: 32px; padding: 8px 4px; }
+html.present .sheet-rest { font-size: 26px; padding-top: 24px; margin-top: 12px; }
+html.present #pilot .jobs .job b { font-size: 28px; }
+html.present #pilot .jobs .job .for { font-size: 21px; }
+html.present #pilot .jobs .job { padding: 18px 24px; }
+html.present #pilot .note { font-size: 24px; }
+
+/* 下一步：三步 */
+.next-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); }
+.next-steps li { background: var(--navy-800); border: var(--border) solid var(--navy-700); border-radius: var(--radius); padding: var(--sp-4); display: flex; flex-direction: column; gap: 0.35em; }
+.next-steps .n { font-family: var(--font-num); font-weight: 800; color: var(--gold); font-size: var(--fs-num); line-height: 1; }
+.next-steps .who { font-size: var(--fs-small); font-weight: 700; color: #9db6ff; letter-spacing: 0.04em; }
+.next-steps b { line-height: 1.45; }
+.slide--dark .next-extra { color: #b5c2d8; }
+html.present .next-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+html.present .next-steps li { padding: 38px 40px 42px; gap: 12px; }
+html.present .next-steps .n { font-size: 84px; }
+html.present .next-steps .who { font-size: 25px; margin-top: 8px; }
+html.present .next-steps b { font-size: 34px; }
+html.present .slide--next .next-extra { font-size: 25px; }
+html.present .slide--next .slide-body { gap: 24px; }
+
+/* 总览：三栏（已有 / 要核对 / 还没有） */
+.buckets { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); min-width: 0; }
+.bucket { background: var(--card); border: var(--border) solid var(--line); border-top: 6px solid var(--line); border-radius: var(--radius); padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+.bucket--has { border-top-color: var(--st-has); }
+.bucket--check { border-top-color: var(--st-check); }
+.bucket--notyet { border-style: dashed; border-color: var(--st-notyet-line); border-top-color: var(--st-notyet); background: var(--st-notyet-bg); }
+.bucket-head { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45em; }
+.bucket-note { font-size: var(--fs-small); color: var(--ink-2); line-height: 1.4; }
+.bucket-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+.bucket-list li { display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 0.3em; align-items: baseline; line-height: 1.4; }
+.bucket-list--plain li { grid-template-columns: minmax(0, 1fr); }
+.bucket-list li.sep { border-top: 1px solid var(--line); padding-top: var(--sp-3); }
+.bucket-list .n { font-family: var(--font-num); font-weight: 800; color: var(--blue); }
+.bucket-list small { display: block; font-size: var(--fs-small); color: var(--muted); line-height: 1.4; margin-top: 0.15em; font-weight: 400; }
+.bucket-foot { font-size: var(--fs-small); color: var(--ink-2); line-height: 1.45; border-top: 1px solid var(--line); padding-top: var(--sp-2); margin-top: auto; }
+.note--human { border-left-color: var(--st-human); align-items: center; }
+.note--human .tag { flex: none; }
+html.present .slide--overview .slide-body { gap: 26px; justify-content: center; }
+html.present .buckets { grid-template-columns: 1.3fr 1fr 1fr; gap: 28px; align-items: stretch; }
+html.present .bucket { padding: 30px 34px 32px; gap: 24px; border-top-width: 10px; }
+html.present .bucket-head { gap: 10px; }
+html.present .bucket-head .tag { font-size: 26px; padding: 9px 20px 9px 15px; }
+html.present .bucket-note { font-size: 24px; }
+html.present .bucket-list { gap: 24px; }
+html.present .bucket-list li { font-size: 31px; line-height: 1.36; grid-template-columns: 58px minmax(0, 1fr); gap: 0; }
+html.present .bucket-list--plain li { grid-template-columns: minmax(0, 1fr); }
+html.present .bucket-list li.sep { padding-top: 24px; }
+html.present .bucket-list .n { font-size: 31px; }
+html.present .bucket-list small { font-size: 23px; margin-top: 4px; }
+html.present .bucket-foot { font-size: 24px; padding-top: 16px; }
+html.present .note--human { font-size: 27px; padding: 18px 28px; gap: 18px; }
+html.present .note--human .tag { font-size: 23px; }
+html.present #multi-ota .card--ask h3 { font-size: 46px; }
+html.present .buckets { grid-template-columns: 1.25fr 1.05fr 1fr; }
+
+/* 第六版 · 英文 / 马来文：内容少了，字可以放回来 */
+html.present:not([lang^="zh"]) .cover-main--solo .cover-title { font-size: 92px; line-height: 1.14; }
+html.present[lang="ms"] .cover-main--solo .cover-title { font-size: 82px; }
+html.present:not([lang^="zh"]) .cover-main--solo .cover-sub { font-size: 32px; }
+html.present:not([lang^="zh"]) .cover-road { font-size: 27px; gap: 48px; }
+html.present:not([lang^="zh"]) .formula-line { font-size: 31px; gap: 8px 14px; }
+html.present:not([lang^="zh"]) .slide--q .qcard h3 { font-size: 38px; }
+html.present:not([lang^="zh"]) .slide--overview .slide-body { zoom: 0.94; gap: 22px; }
+html.present[lang="ms"] .slide--overview .slide-body { zoom: 0.88; }
+html.present:not([lang^="zh"]) .bucket-list li { font-size: 28px; }
+html.present:not([lang^="zh"]) .bucket-list small, html.present:not([lang^="zh"]) .bucket-note, html.present:not([lang^="zh"]) .bucket-foot { font-size: 23px; }
+html.present[lang="en"] #multi-ota .slide-body { zoom: 0.95; }
+html.present[lang="ms"] #multi-ota .slide-body { zoom: 0.9; }
+html.present:not([lang^="zh"]) #multi-ota .card--ask h3 { font-size: 40px; }
+html.present[lang="en"] #pricing-advice .slide-body, html.present[lang="en"] #availability .slide-body { zoom: 0.87; }
+html.present[lang="en"] .grid--shot-left { grid-template-columns: 540px minmax(0, 1fr); }
+html.present[lang="ms"] #pricing-advice .slide-body, html.present[lang="ms"] #availability .slide-body { zoom: 0.75; }
+html.present[lang="ms"] .grid--shot-left { grid-template-columns: 620px minmax(0, 1fr); }
+html.present[lang="ms"] #pricing-advice .slide-lead, html.present[lang="ms"] #availability .slide-lead { font-size: 24px; }
+html.present:not([lang^="zh"]) .grid--shot-left .list, html.present:not([lang^="zh"]) #pricing-advice .stack > .list { font-size: 29px; gap: 18px; }
+html.present:not([lang^="zh"]) .slide--plans .slide-body { zoom: 0.9; }
+html.present[lang="ms"] .slide--plans .slide-body { zoom: 0.86; }
+html.present:not([lang^="zh"]) .plan-name b { font-size: 34px; }
+html.present:not([lang^="zh"]) .slide--control .slide-body { zoom: 0.9; }
+html.present[lang="ms"] .slide--control .slide-body { zoom: 0.86; }
+html.present:not([lang^="zh"]) #pilot .sheet-row--big { grid-template-columns: 240px minmax(0, 1fr); }
+html.present:not([lang^="zh"]) #pilot .sheet h3 { font-size: 34px; }
+html.present:not([lang^="zh"]) .next-steps b { font-size: 30px; }
+html.present:not([lang^="zh"]) #measure .card h3 { font-size: 30px; }

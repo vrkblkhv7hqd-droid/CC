@@ -91,9 +91,29 @@ function measureLayout() {
   ok('最后一页再往后不越界', (await cur()) === total);
   await page.keyboard.press('Home');
   ok('Home 回到第一页', (await cur()) === 1);
-  await page.evaluate(() => { location.hash = '#10'; });
+  await page.evaluate(() => { location.hash = '#9'; });
   await page.waitForTimeout(200);
-  ok('网址加 #10 直达第 10 页（三个方案）', (await cur()) === 10 && (await page.evaluate(() => document.querySelector('.slide.is-current').id)) === 'plans');
+  ok('网址加 #9 直达第 9 页（三个方案）', (await cur()) === 9 && (await page.evaluate(() => document.querySelector('.slide.is-current').id)) === 'plans');
+
+  // 简洁：投屏时每页要读的字数有上限（主线＝标题不以“附”开头的页）
+  const load = await page.evaluate(() => Array.from(document.querySelectorAll('.slide')).map((s) => {
+    let n = 0;
+    const walker = document.createTreeWalker(s, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const t = walker.currentNode; const el = t.parentElement;
+      if (!t.textContent.trim() || el.closest('.rail, .foot-brand, .foot-page, .foot-legend, .shot-zoom')) continue;
+      let hidden = false;
+      for (let e = el; e && e !== s; e = e.parentElement) { if (getComputedStyle(e).display === 'none') { hidden = true; break; } }
+      if (!hidden) n += t.textContent.replace(/\s+/g, '').length;
+    }
+    return { id: s.id, appendix: /^附/.test(s.getAttribute('data-title') || ''), chars: n };
+  }));
+  const mainLoad = load.filter((l) => !l.appendix);
+  const avg = Math.round(mainLoad.reduce((a, l) => a + l.chars, 0) / mainLoad.length);
+  const heavy = mainLoad.filter((l) => l.chars > 400);
+  ok('主线 13 页，其余为附页', mainLoad.length === 13 && load.length === 18, mainLoad.length + ' / ' + load.length);
+  ok('投屏主线每页不超过 400 字', heavy.length === 0, heavy.map((l) => l.id + ':' + l.chars).join(' '));
+  ok('投屏主线平均每页不超过 300 字', avg <= 300, '平均 ' + avg);
 
   // 目录
   await page.evaluate(() => { location.hash = '#1'; });
@@ -154,7 +174,7 @@ function measureLayout() {
   await page.evaluate(() => { location.hash = '#3'; });
   await page.waitForTimeout(120);
   await page.keyboard.press('l');
-  let st = await page.evaluate(() => ({ lang: document.documentElement.lang, title: document.querySelector('#what .slide-title').textContent, rail: document.querySelector('#what .rail').textContent, toc: document.querySelector('#tocList li:nth-child(3)').textContent }));
+  let st = await page.evaluate(() => ({ lang: document.documentElement.lang, title: document.querySelector('#what .slide-title').textContent, rail: document.querySelector('#availability .rail').textContent, toc: document.querySelector('#tocList li:nth-child(3)').textContent }));
   ok('按 L 切到 English：标题、公式条、目录一起换', st.lang === 'en' && /What HogentX does/.test(st.title) && /Occupancy/.test(st.rail) && /What HogentX does/.test(st.toc), JSON.stringify(st));
   ok('切换语言后已填内容和所在页不变', (await cur()) === 3 && (await page.inputValue('#p3')) === '房态与开售核对');
   await page.keyboard.press('l');
@@ -205,7 +225,7 @@ function measureLayout() {
 
   // 网址参数切换语言
   page = await newPage(browser, { width: 1920, height: 1080 });
-  await page.goto(URLS.zh + '?lang=ms#10', { waitUntil: 'load' });
+  await page.goto(URLS.zh + '?lang=ms#9', { waitUntil: 'load' });
   ok('网址加 ?lang=ms 直接以马来文打开', await page.evaluate(() => document.documentElement.lang === 'ms' && /Tiga pelan/.test(document.querySelector('#plans .slide-title').textContent)));
   await page.context().close();
 
