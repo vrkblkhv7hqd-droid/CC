@@ -1,8 +1,8 @@
 [
  {
-  "zh": "HogentX｜现在能用什么，值不值得试",
-  "en": "HogentX | What you can use now, and whether it is worth a trial",
-  "ms": "HogentX | Apa yang boleh digunakan sekarang, dan berbaloikah dicuba"
+  "zh": "HogentX｜每一间房，每一晚，只能卖一次",
+  "en": "HogentX | Every room, every night, can be sold only once",
+  "ms": "HogentX | Setiap bilik, setiap malam, hanya boleh dijual sekali"
  },
  {
   "zh": "目录",
@@ -15,84 +15,39 @@
   "ms": "Mod pembentangan"
  },
  {
-  "zh": "给马来西亚酒店的说明 · 2026 年 11 月",
-  "en": "A briefing for hotels in Malaysia · November 2026",
-  "ms": "Taklimat untuk hotel di Malaysia · November 2026"
+  "zh": "给马来西亚酒店 · 2026 年 11 月",
+  "en": "For hotels in Malaysia · November 2026",
+  "ms": "Untuk hotel di Malaysia · November 2026"
  },
  {
-  "zh": "即使经常满房，<br><em><span class=\"nb\">也有三笔账</span><span class=\"nb\">值得算清楚</span></em>",
-  "en": "Even when you are often full,<br><em>three sums are worth working out</em>",
-  "ms": "Walaupun hotel sering penuh,<br><em>ada tiga kiraan yang wajar dijelaskan</em>"
+  "zh": "每一间房，每一晚，<br><em>只能卖一次。</em>",
+  "en": "Every room, every night,<br><em>can be sold only once.</em>",
+  "ms": "Setiap bilik, setiap malam,<br><em>hanya boleh dijual sekali.</em>"
  },
  {
-  "zh": "HogentX 是面向酒店的 AI 运营产品。这份说明回答两件事：<b>现在能用什么</b>，<b>值不值得试</b>。",
-  "en": "HogentX is an AI operations product for hotels. This briefing answers two things: <b>what you can use now</b>, and <b>whether it is worth a trial</b>.",
-  "ms": "HogentX ialah produk operasi AI untuk hotel. Taklimat ini menjawab dua perkara: <b>apa yang boleh digunakan sekarang</b>, dan <b>berbaloikah dicuba</b>."
+  "zh": "HogentX 是面向酒店的 AI 运营产品，帮您把这一次卖好。",
+  "en": "HogentX is an AI operations product for hotels. It helps you make that one sale count.",
+  "ms": "HogentX ialah produk operasi AI untuk hotel. Ia membantu anda memanfaatkan satu peluang jualan itu sebaiknya."
  },
  {
-  "zh": "先请教您三个问题",
-  "en": "First, three questions for you",
-  "ms": "Mula-mula, tiga soalan untuk anda"
+  "zh": "不漏卖",
+  "en": "Miss no sale",
+  "ms": "Jangan terlepas jualan"
  },
  {
-  "zh": "现在能用什么",
-  "en": "What you can use now",
-  "ms": "Apa yang boleh digunakan sekarang"
+  "zh": "卖对价",
+  "en": "Price it right",
+  "ms": "Harga yang tepat"
  },
  {
-  "zh": "值不值得试",
-  "en": "Is it worth a trial",
-  "ms": "Berbaloikah dicuba"
+  "zh": "算得清",
+  "en": "Know your net",
+  "ms": "Tahu terimaan bersih"
  },
  {
-  "zh": "先看结论",
-  "en": "The short answer",
-  "ms": "Ringkasan dahulu"
- },
- {
-  "zh": "产品界面已有：调价建议、房态与开售核对、点评回复草稿、质检与整改、经营报表与早安简报。要按酒店核对：AI 浏览器（多个 OTA 一个工作台）和 AI 获客三项。独立、实时的收益报表还没有上线。",
-  "en": "Already in the product: pricing suggestions, the availability check, review reply drafts, quality checks and follow-up, operations reports and the Morning Brief. To be checked per hotel: the AI Browser (several OTAs in one workspace) and the three AI Guest Acquisition items. The standalone, real-time revenue report is not launched yet.",
-  "ms": "Sudah ada dalam produk: cadangan harga, semakan ketersediaan, draf balasan ulasan, pemeriksaan kualiti dan tindakan susulan, laporan operasi dan Taklimat Pagi. Perlu disemak ikut hotel: Pelayar AI (beberapa OTA dalam satu ruang kerja) dan tiga perkara Pemerolehan Tetamu AI. Laporan hasil berasingan dan masa nyata belum dilancarkan."
- },
- {
-  "zh": "多少钱",
-  "en": "What it costs",
-  "ms": "Berapa harganya"
- },
- {
-  "zh": "按每家酒店、每月：工具授权 RM 699；专人陪跑 RM 2,499；OTA 全托管 RM 9,980。",
-  "en": "Per hotel, per month: Tool Licence RM 699; Specialist Coaching RM 2,499; Full OTA Management RM 9,980.",
-  "ms": "Bagi setiap hotel, setiap bulan: Lesen Alat RM 699; Bimbingan Pakar RM 2,499; Pengurusan Penuh OTA RM 9,980."
- },
- {
-  "zh": "怎么试",
-  "en": "How to try it",
-  "ms": "Cara mencuba"
- },
- {
-  "zh": "一家酒店、已有的 OTA、一件事；范围、时间、验收标准和费用安排由双方另定。",
-  "en": "One hotel, the OTAs you already use, one task. Scope, timing, acceptance criteria and fees are to be agreed by both sides.",
-  "ms": "Satu hotel, OTA yang sudah anda gunakan, satu tugas. Skop, tempoh, kriteria penerimaan dan bayaran dipersetujui bersama oleh kedua-dua pihak."
- },
- {
-  "zh": "说在前面",
-  "en": "To be clear from the start",
-  "ms": "Dinyatakan dari awal"
- },
- {
-  "zh": "HogentX 不是保证增收的工具；没有对照，不谈增收。凡是用到 OTA 数据的功能，都要先由您授权、我们逐项核对。",
-  "en": "HogentX is not a tool that guarantees more revenue; without a comparison, we do not talk about extra revenue. Every function that uses OTA data starts with your authorisation and our item-by-item check.",
-  "ms": "HogentX bukan alat yang menjamin peningkatan hasil; tanpa perbandingan, kami tidak bercakap tentang peningkatan hasil. Setiap fungsi yang menggunakan data OTA bermula dengan kebenaran anda dan semakan kami satu demi satu."
- },
- {
-  "zh": "三个方案与月费",
-  "en": "The three plans and monthly fees",
-  "ms": "Tiga pelan dan yuran bulanan"
- },
- {
-  "zh": "名词对照",
-  "en": "Glossary",
-  "ms": "Glosari"
+  "zh": "20 分钟。最后只请您定一件事：先从哪家酒店开始。",
+  "en": "20 minutes. At the end we ask for one decision: which hotel to start with.",
+  "ms": "20 minit. Pada akhirnya kami minta satu keputusan: hotel mana untuk bermula."
  },
  {
   "zh": "INTENT COMPUTING PTE. LTD.（新加坡）",
@@ -100,104 +55,1134 @@
   "ms": "INTENT COMPUTING PTE. LTD. (Singapura)"
  },
  {
-  "zh": "第一部分",
-  "en": "Part 1",
-  "ms": "Bahagian 1"
+  "zh": "为什么是现在",
+  "en": "Why now",
+  "ms": "Mengapa sekarang"
  },
  {
-  "zh": "您想改善什么",
-  "en": "What you want to improve",
-  "ms": "Apa yang ingin anda perbaiki"
+  "zh": "2026 年上半年，全马酒店<em>入住率和房价都在降</em>",
+  "en": "Malaysia, first half of 2026: <em>occupancy and room rates both fell</em>",
+  "ms": "Malaysia, separuh pertama 2026: <em>penghunian dan harga bilik sama-sama turun</em>"
  },
  {
-  "zh": "<span class=\"nb\">三笔账：</span><span class=\"nb\">您现在靠数据回答，</span><span class=\"nb\">还是靠经验？</span>",
-  "en": "Three sums: do you answer from data, or from experience?",
-  "ms": "Tiga kiraan: anda menjawab dengan data, atau dengan pengalaman?"
+  "zh": "平均入住率",
+  "en": "Average occupancy rate",
+  "ms": "Purata kadar penghunian"
  },
  {
-  "zh": "先不讲 AI。哪一笔还没有数据可看，就值得先拿来验证。",
-  "en": "No AI talk yet. Whichever sum you cannot yet see in data is the one worth testing first.",
-  "ms": "Belum bercakap tentang AI. Kiraan yang belum dapat dilihat dalam data itulah yang wajar diuji dahulu."
+  "zh": "去年同期 <b>54.1%</b>",
+  "en": "Same period last year: <b>54.1%</b>",
+  "ms": "Tempoh sama tahun lalu: <b>54.1%</b>"
  },
  {
-  "zh": "<span class=\"nb\">满房的时候，</span><span class=\"nb\">还有没有提价空间？</span>",
-  "en": "When you are full, is there still room to raise the rate?",
-  "ms": "Apabila penuh, masih adakah ruang untuk menaikkan harga?"
+  "zh": "平均每晚，近一半的房空着。",
+  "en": "On an average night, almost half the rooms are empty.",
+  "ms": "Pada malam biasa, hampir separuh bilik kosong."
  },
  {
-  "zh": "看的是 <b>平均成交房价</b> <span class=\"en\">ADR</span>",
-  "en": "Look at <b>average daily rate</b> <span class=\"en\">ADR</span>",
-  "ms": "Lihat <b>kadar harian purata</b> <span class=\"en\">ADR</span>"
+  "zh": "平均房价",
+  "en": "Average room rate",
+  "ms": "Purata harga bilik"
  },
  {
-  "zh": "<span class=\"nb\">订得很快的那些日期，</span><span class=\"nb\">是不是卖便宜了？</span>",
-  "en": "The dates that filled very fast: were they sold too cheaply?",
-  "ms": "Tarikh yang ditempah sangat cepat: adakah dijual terlalu murah?"
+  "zh": "去年同期 <b>RM 236.8</b>",
+  "en": "Same period last year: <b>RM 236.8</b>",
+  "ms": "Tempoh sama tahun lalu: <b>RM 236.8</b>"
  },
  {
-  "zh": "您现在怎么回答",
-  "en": "How do you answer this today?",
-  "ms": "Bagaimana anda menjawabnya hari ini?"
+  "zh": "准确数是 RM 231.3。",
+  "en": "The exact figure is RM 231.3.",
+  "ms": "Angka tepat ialah RM 231.3."
  },
  {
-  "zh": "有数据",
-  "en": "Data",
-  "ms": "Data"
+  "zh": "每间可售房的房费收入",
+  "en": "Room revenue per available room",
+  "ms": "Hasil bilik bagi setiap bilik tersedia"
  },
  {
-  "zh": "凭经验",
-  "en": "Experience",
-  "ms": "Pengalaman"
+  "zh": "RM 118，去年同期 <b>RM 128</b>",
+  "en": "RM 118, against <b>RM 128</b> a year earlier",
+  "ms": "RM 118, berbanding <b>RM 128</b> setahun sebelumnya"
  },
  {
-  "zh": "说不准",
-  "en": "Not sure",
-  "ms": "Tidak pasti"
+  "zh": "按入住率 × 平均房价计算。",
+  "en": "Calculated as occupancy × average room rate.",
+  "ms": "Dikira sebagai kadar penghunian × purata harga bilik."
  },
  {
-  "zh": "<span class=\"nb\">什么时候明明有房，</span><span class=\"nb\">却没卖出去？</span>",
-  "en": "When did you have rooms, yet they went unsold?",
-  "ms": "Bilakah bilik masih ada, tetapi tidak terjual?"
+  "zh": "市场不帮忙的时候，<b>更不能自己漏。</b>",
+  "en": "When the market is not helping, <b>you cannot afford leaks of your own.</b>",
+  "ms": "Apabila pasaran tidak membantu, <b>jangan biarkan hasil sendiri bocor.</b>"
  },
  {
-  "zh": "看的是 <b>入住率</b> <span class=\"en\">Occupancy</span>",
-  "en": "Look at <b>occupancy</b>",
-  "ms": "Lihat <b>kadar penghunian</b> <span class=\"en\">Occupancy</span>"
+  "zh": "来源：Tourism Malaysia，Paid Accommodation Survey，2026 年 1–6 月（全国 5,380 家酒店、350,069 间客房）。",
+  "en": "Source: Tourism Malaysia, Paid Accommodation Survey, January–June 2026 (5,380 hotels and 350,069 rooms nationwide).",
+  "ms": "Sumber: Tourism Malaysia, Paid Accommodation Survey, Januari–Jun 2026 (5,380 hotel dan 350,069 bilik di seluruh negara)."
  },
  {
-  "zh": "<span class=\"nb\">酒店里还有房，</span><span class=\"nb\">OTA（在线订房平台）上却订不到。</span>",
-  "en": "The hotel still has rooms, but guests cannot book them on the OTA (online travel agency).",
-  "ms": "Hotel masih ada bilik, tetapi tetamu tidak dapat menempahnya di OTA (agensi pelancongan dalam talian)."
+  "zh": "钱在哪里漏掉",
+  "en": "Where the money leaks",
+  "ms": "Di mana wang bocor"
  },
  {
-  "zh": "<span class=\"nb\">哪一类渠道的订单，</span><span class=\"nb\">成本最高？</span>",
-  "en": "Which type of channel costs you the most per booking?",
-  "ms": "Saluran jenis manakah yang paling tinggi kosnya bagi setiap tempahan?"
+  "zh": "同一家酒店，钱常漏在<em>三个地方</em>",
+  "en": "One hotel, <em>three places</em> where money leaks",
+  "ms": "Satu hotel, <em>tiga tempat</em> wang bocor"
  },
  {
-  "zh": "看的是 <b>渠道佣金</b> → <b>净实收</b> <span class=\"en\">Net</span>",
-  "en": "Look at <b>channel commission</b> → <b>net received</b>",
-  "ms": "Lihat <b>komisen saluran</b> → <b>terimaan bersih</b> <span class=\"en\">Net</span>"
+  "zh": "有房，没在卖",
+  "en": "Rooms, but not on sale",
+  "ms": "Bilik ada, tidak dijual"
  },
  {
-  "zh": "<span class=\"nb\">扣掉渠道佣金以后，</span><span class=\"nb\">每间房最后实收多少？</span>",
-  "en": "After channel commission, how much do you actually receive per room?",
-  "ms": "Selepas komisen saluran, berapakah yang benar-benar diterima bagi setiap bilik?"
+  "zh": "酒店里还有房，平台上却订不到。",
+  "en": "You have rooms, but guests cannot book them online.",
+  "ms": "Bilik masih ada, tetapi tetamu tidak dapat menempah dalam talian."
  },
  {
-  "zh": "点一下您的情况。选了“凭经验”或“说不准”的那件事，后面“值不值”“怎么试”两节会标出来。",
-  "en": "Tap your answer. Any sum marked \"Experience\" or \"Not sure\" is flagged later, in the sections on value and on how to try it.",
-  "ms": "Ketik jawapan anda. Kiraan yang ditanda \"Pengalaman\" atau \"Tidak pasti\" akan ditandakan kemudian, dalam bahagian tentang nilai dan cara mencuba."
+  "zh": "的受访者遇到过想订的日期或房型“没房”。MyCC：平台常显示已满，而酒店可能还有房。",
+  "en": "of respondents found no availability for the dates or room they wanted. MyCC: platforms often show full even when rooms may still be available.",
+  "ms": "responden pernah mendapati tiada kekosongan bagi tarikh atau bilik pilihan. MyCC: platform sering memaparkan penuh walaupun bilik mungkin masih ada."
  },
  {
-  "zh": "可售房晚",
-  "en": "Available room nights",
-  "ms": "Malam bilik tersedia"
+  "zh": "价格，没跟上",
+  "en": "Prices that lag demand",
+  "ms": "Harga ketinggalan permintaan"
+ },
+ {
+  "zh": "订得快的日子没提价，订得慢的日子没动作。",
+  "en": "No rise on fast-filling days; no action on slow ones.",
+  "ms": "Tiada kenaikan pada hari cepat penuh; tiada tindakan pada hari perlahan."
+ },
+ {
+  "zh": "只做少量调价的酒店，每间可售房收入比调价更充分的酒店低约 3%。",
+  "en": "Hotels that adjust prices only a little earn about 3% less per available room than those that adjust more fully.",
+  "ms": "Hotel yang jarang melaras harga memperoleh kira-kira 3% kurang bagi setiap bilik tersedia berbanding yang melaras lebih menyeluruh."
+ },
+ {
+  "zh": "到手的，没算清",
+  "en": "An unclear net",
+  "ms": "Terimaan bersih tidak jelas"
+ },
+ {
+  "zh": "扣掉佣金和手续费，每间房实收多少？",
+  "en": "After commission and fees, what does each room bring in?",
+  "ms": "Selepas komisen dan caj, berapa diterima bagi setiap bilik?"
+ },
+ {
+  "zh": "标准/经济型酒店付给 OTA 的佣金，通常没得谈。大型连锁是 10–18%。",
+  "en": "The commission standard and budget hotels pay OTAs, usually non-negotiable. Large chains pay 10–18%.",
+  "ms": "Komisen yang dibayar hotel standard dan bajet kepada OTA, biasanya tidak boleh dirunding. Rangkaian besar membayar 10–18%."
+ },
+ {
+  "zh": "来源：01、03 为马来西亚竞争委员会（MyCC）OTA 市场调查，2026（消费者调查 262 人）；02 为 Abrate 等，Tourism Management，2019（840 家欧洲城市酒店）。",
+  "en": "Sources: 01 and 03 from the Malaysia Competition Commission (MyCC) market review of OTAs, 2026 (consumer survey of 262 people); 02 from Abrate et al., Tourism Management, 2019 (840 hotels in European cities).",
+  "ms": "Sumber: 01 dan 03 daripada kajian pasaran OTA oleh Suruhanjaya Persaingan Malaysia (MyCC), 2026 (tinjauan pengguna 262 orang); 02 daripada Abrate et al., Tourism Management, 2019 (840 hotel di bandar Eropah)."
+ },
+ {
+  "zh": "先看您的账",
+  "en": "Your numbers first",
+  "ms": "Angka anda dahulu"
+ },
+ {
+  "zh": "按您的酒店，<em>算一笔</em>",
+  "en": "Run the numbers <em>for your hotel</em>",
+  "ms": "Kira angka <em>untuk hotel anda</em>"
+ },
+ {
+  "zh": "房间数",
+  "en": "Rooms",
+  "ms": "Bilangan bilik"
+ },
+ {
+  "zh": "间",
+  "en": "rooms",
+  "ms": "bilik"
  },
  {
   "zh": "入住率",
   "en": "Occupancy",
   "ms": "Kadar penghunian"
+ },
+ {
+  "zh": "先填的是全马平均水平，请改成您酒店的数字。",
+  "en": "These start at the Malaysian average. Change them to your hotel's figures.",
+  "ms": "Angka awal ialah purata Malaysia. Tukar kepada angka hotel anda."
+ },
+ {
+  "zh": "一年的房费收入",
+  "en": "Room revenue for a year",
+  "ms": "Hasil bilik setahun"
+ },
+ {
+  "zh": "一年卖出 <b data-out=\"nights\">—</b> 个房晚 · 平均每晚 <b data-out=\"empty\">—</b> 间房空着",
+  "en": "<b data-out=\"nights\">—</b> room nights sold a year · <b data-out=\"empty\">—</b> rooms empty on an average night",
+  "ms": "<b data-out=\"nights\">—</b> malam bilik terjual setahun · <b data-out=\"empty\">—</b> bilik kosong pada malam biasa"
+ },
+ {
+  "zh": "入住率每多 1 个百分点",
+  "en": "Each extra percentage point of occupancy",
+  "ms": "Setiap tambahan 1 mata peratusan penghunian"
+ },
+ {
+  "zh": "一年多出来的房费",
+  "en": "extra room revenue a year",
+  "ms": "hasil bilik tambahan setahun"
+ },
+ {
+  "zh": "每个房晚多卖 RM 5",
+  "en": "RM 5 more on every room night",
+  "ms": "RM 5 lebih bagi setiap malam bilik"
+ },
+ {
+  "zh": "这一页可以用您酒店的数字来算：一年的房费收入 ＝ 房间数 × 365 × 入住率 × 平均房价。入住率每多 1 个百分点，一年多出来的房费 ＝ 房间数 × 365 × 1% × 平均房价。",
+  "en": "You can work this page out with your hotel's figures: room revenue for a year = rooms × 365 × occupancy × average room rate. For each extra percentage point of occupancy, the extra room revenue a year = rooms × 365 × 1% × average room rate.",
+  "ms": "Halaman ini boleh dikira dengan angka hotel anda: hasil bilik setahun = bilangan bilik × 365 × kadar penghunian × purata harga bilik. Bagi setiap tambahan 1 mata peratusan penghunian, hasil bilik tambahan setahun = bilangan bilik × 365 × 1% × purata harga bilik."
+ },
+ {
+  "zh": "按您填的数字计算：一年的房费收入 ＝ 房间数 × 365 × 入住率 × 平均房价。全马平均水平来自 Tourism Malaysia（2026 年 1–6 月）；65 间 ＝ 全国客房数 ÷ 酒店数。",
+  "en": "Calculated from the figures you enter: room revenue for a year = rooms × 365 × occupancy × average room rate. The Malaysian averages are from Tourism Malaysia (January–June 2026); 65 rooms = rooms nationwide ÷ number of hotels.",
+  "ms": "Dikira daripada angka yang anda masukkan: hasil bilik setahun = bilangan bilik × 365 × kadar penghunian × purata harga bilik. Purata Malaysia daripada Tourism Malaysia (Januari–Jun 2026); 65 bilik = jumlah bilik seluruh negara ÷ bilangan hotel."
+ },
+ {
+  "zh": "HogentX 是什么",
+  "en": "What HogentX is",
+  "ms": "Apa itu HogentX"
+ },
+ {
+  "zh": "HogentX：<em>替您盯着</em>这三笔账",
+  "en": "HogentX <em>watches all three</em> for you",
+  "ms": "HogentX <em>memantau ketiga-tiganya</em> untuk anda"
+ },
+ {
+  "zh": "面向酒店的 AI 运营产品：接上您在用的 OTA，每天盯数据、给建议，您确认后再执行。",
+  "en": "An AI operations product for hotels. Connect your OTAs; it watches the data, suggests daily, and acts only after you confirm.",
+  "ms": "Produk operasi AI untuk hotel. Sambungkan OTA anda; ia memantau data, memberi cadangan setiap hari, dan bertindak selepas anda sahkan."
+ },
+ {
+  "zh": "您",
+  "en": "You",
+  "ms": "Anda"
+ },
+ {
+  "zh": "接上 OTA",
+  "en": "Connect your OTAs",
+  "ms": "Sambungkan OTA"
+ },
+ {
+  "zh": "授权登录您在用的平台",
+  "en": "Authorise the platforms you already use",
+  "ms": "Benarkan platform yang anda gunakan"
+ },
+ {
+  "zh": "盯数据",
+  "en": "Watch the data",
+  "ms": "Pantau data"
+ },
+ {
+  "zh": "房价、空房、渠道、执行，找出异常",
+  "en": "Rates, empty rooms, channels, execution",
+  "ms": "Harga, bilik kosong, saluran, pelaksanaan"
+ },
+ {
+  "zh": "给建议",
+  "en": "Make suggestions",
+  "ms": "Beri cadangan"
+ },
+ {
+  "zh": "调价建议、点评回复草稿、整改待办",
+  "en": "Pricing suggestions, review reply drafts, follow-up tasks",
+  "ms": "Cadangan harga, draf balasan ulasan, tugas susulan"
+ },
+ {
+  "zh": "您和团队",
+  "en": "You and your team",
+  "ms": "Anda dan pasukan"
+ },
+ {
+  "zh": "确认后执行",
+  "en": "Confirm, then act",
+  "ms": "Sahkan, kemudian laksana"
+ },
+ {
+  "zh": "改不改价，您说了算",
+  "en": "Whether a price changes is your call",
+  "ms": "Ubah harga atau tidak, anda yang tentukan"
+ },
+ {
+  "zh": "已支持的 OTA",
+  "en": "OTAs supported today",
+  "ms": "OTA yang disokong kini"
+ },
+ {
+  "zh": "<b>92%、89%</b> 的马来西亚受访者用过",
+  "en": "Used by <b>92% and 89%</b> of Malaysian respondents",
+  "ms": "Digunakan <b>92% dan 89%</b> responden Malaysia"
+ },
+ {
+  "zh": "携程 Ctrip",
+  "en": "Ctrip",
+  "ms": "Ctrip"
+ },
+ {
+  "zh": "美团",
+  "en": "Meituan",
+  "ms": "Meituan"
+ },
+ {
+  "zh": "飞猪",
+  "en": "Fliggy",
+  "ms": "Fliggy"
+ },
+ {
+  "zh": "中国游客 2026 年 1–9 月 <b>+14.1%</b>，352 万人次",
+  "en": "Tourists from China, Jan–Sep 2026: <b>+14.1%</b>, 3.52 million",
+  "ms": "Pelancong dari China, Jan–Sep 2026: <b>+14.1%</b>, 3.52 juta"
+ },
+ {
+  "zh": "更多渠道拓展中",
+  "en": "More channels coming",
+  "ms": "Saluran lain menyusul"
+ },
+ {
+  "zh": "目标 200+ OTA",
+  "en": "Target: 200+ OTAs",
+  "ms": "Sasaran: 200+ OTA"
+ },
+ {
+  "zh": "来源：MyCC 消费者调查，2025 年 6 月；Tourism Malaysia，Visitor Arrival Performance，2026 年 1–9 月（过夜游客）。",
+  "en": "Sources: MyCC consumer survey, June 2025; Tourism Malaysia, Visitor Arrival Performance, January–September 2026 (overnight tourists).",
+  "ms": "Sumber: tinjauan pengguna MyCC, Jun 2025; Tourism Malaysia, Visitor Arrival Performance, Januari–September 2026 (pelancong bermalam)."
+ },
+ {
+  "zh": "第一笔账 · 不漏卖",
+  "en": "1 · Miss no sale",
+  "ms": "1 · Jangan terlepas jualan"
+ },
+ {
+  "zh": "有房，就要在卖：<em>每个平台、每一天都核对</em>",
+  "en": "Rooms on sale, <em>checked on every platform, every day</em>",
+  "ms": "Bilik dijual, <em>disemak di setiap platform, setiap hari</em>"
+ },
+ {
+  "zh": "<b>有房已关：</b>还有房，平台上却订不到。",
+  "en": "<b>Closed with rooms left:</b> guests cannot book.",
+  "ms": "<b>Ditutup walaupun ada bilik:</b> tetamu tidak dapat menempah."
+ },
+ {
+  "zh": "<b>满房未关：</b>没房了，平台上还在卖。",
+  "en": "<b>Open with no rooms:</b> the platform keeps selling.",
+  "ms": "<b>Dibuka walaupun penuh:</b> platform terus menjual."
+ },
+ {
+  "zh": "对不上的，马上提醒团队。",
+  "en": "Any mismatch alerts your team at once.",
+  "ms": "Sebarang ketidakpadanan terus dimaklumkan kepada pasukan."
+ },
+ {
+  "zh": "住小叮实测",
+  "en": "Measured at 住小叮",
+  "ms": "Diukur di 住小叮"
+ },
+ {
+  "zh": "一家酒店、一次核对：未来 90 天、3 个平台共 1,890 条记录里，<b>498 条是有房却没开售</b>。",
+  "en": "One hotel, one check: 1,890 records over 90 days and 3 platforms. <b>498 had rooms but were not on sale</b>.",
+  "ms": "Satu hotel, satu semakan: 1,890 rekod bagi 90 hari dan 3 platform. <b>498 ada bilik tetapi tidak dijual</b>."
+ },
+ {
+  "zh": "酒店的可卖房 对 平台上的开售状态",
+  "en": "Sellable rooms vs on-sale status, by platform",
+  "ms": "Bilik boleh dijual berbanding status jualan"
+ },
+ {
+  "zh": "示意",
+  "en": "Illustration",
+  "ms": "Ilustrasi"
+ },
+ {
+  "zh": "周五",
+  "en": "Fri",
+  "ms": "Jum"
+ },
+ {
+  "zh": "周六",
+  "en": "Sat",
+  "ms": "Sab"
+ },
+ {
+  "zh": "周日",
+  "en": "Sun",
+  "ms": "Ahd"
+ },
+ {
+  "zh": "周一",
+  "en": "Mon",
+  "ms": "Isn"
+ },
+ {
+  "zh": "周二",
+  "en": "Tue",
+  "ms": "Sel"
+ },
+ {
+  "zh": "满房未关",
+  "en": "Open with no rooms",
+  "ms": "Dibuka walaupun penuh"
+ },
+ {
+  "zh": "有房已关",
+  "en": "Closed with rooms left",
+  "ms": "Ditutup walaupun ada bilik"
+ },
+ {
+  "zh": "在售",
+  "en": "On sale",
+  "ms": "Dijual"
+ },
+ {
+  "zh": "住小叮实测：内部核对记录，2026 年 11 月。一条记录＝一个房型某一天在一个平台上的状态。",
+  "en": "Measured at 住小叮: internal check records, November 2026. One record = the status of one room type on one day on one platform.",
+  "ms": "Diukur di 住小叮: rekod semakan dalaman, November 2026. Satu rekod = status satu jenis bilik pada satu hari di satu platform."
+ },
+ {
+  "zh": "第二笔账 · 卖对价",
+  "en": "2 · Price it right",
+  "ms": "2 · Harga yang tepat"
+ },
+ {
+  "zh": "订得快，提价；<em>订得慢，早动手</em>",
+  "en": "Filling fast? Raise the rate. <em>Slow? Act early</em>",
+  "ms": "Cepat penuh? Naikkan harga. <em>Perlahan? Bertindak awal</em>"
+ },
+ {
+  "zh": "<b>看见：</b>未来哪一天订得比平常快、哪一天慢，按小时提醒。",
+  "en": "<b>See it:</b> dates filling faster or slower than usual, with hourly alerts.",
+  "ms": "<b>Nampak:</b> tarikh yang ditempah lebih cepat atau lambat daripada biasa, dengan amaran mengikut jam."
+ },
+ {
+  "zh": "<b>建议：</b>结合可卖房量、周边同类酒店和平台数据，给出调价建议。",
+  "en": "<b>Suggestion:</b> based on rooms left, comparable hotels nearby and platform data.",
+  "ms": "<b>Cadangan:</b> berdasarkan baki bilik, hotel setara berdekatan dan data platform."
+ },
+ {
+  "zh": "<b>您说了算：</b>最低价、最高价、单次涨跌幅由您设定，确认后才执行。",
+  "en": "<b>Your call:</b> you set the floor, ceiling and largest single change. It acts only after you confirm.",
+  "ms": "<b>Anda yang tentukan:</b> anda tetapkan harga terendah, tertinggi dan had perubahan. Ia bertindak selepas anda sahkan."
+ },
+ {
+  "zh": "行业研究",
+  "en": "Industry research",
+  "ms": "Kajian industri"
+ },
+ {
+  "zh": "一家经济型连锁酒店的实地试点：用算法做收益管理后，<b>每间可售房收入</b>的提升。",
+  "en": "A field pilot at a budget hotel chain: the rise in <b>revenue per available room</b> under algorithmic revenue management.",
+  "ms": "Projek rintis di sebuah rangkaian hotel bajet: kenaikan <b>hasil bagi setiap bilik tersedia</b> dengan pengurusan hasil beralgoritma."
+ },
+ {
+  "zh": "这个周六，订得比平常快",
+  "en": "This Saturday is filling faster than usual",
+  "ms": "Sabtu ini ditempah lebih cepat daripada biasa"
+ },
+ {
+  "zh": "示意：某个周六的预订进度",
+  "en": "Illustration: booking pace for one Saturday",
+  "ms": "Ilustrasi: kadar tempahan bagi satu hari Sabtu"
+ },
+ {
+  "zh": "两条曲线，横轴是距离入住还有多少天，纵轴是已订出的比例。这个周六的曲线比平常的进度升得更快，在距入住 12 天时已订出约 80%，平常同一时间约 55%。",
+  "en": "Two curves. The horizontal axis is the number of days before check-in; the vertical axis is the share of rooms booked. The curve for this Saturday rises faster than the usual pace: about 80% booked 12 days before check-in, against about 55% usually.",
+  "ms": "Dua lengkung. Paksi mendatar ialah bilangan hari sebelum daftar masuk; paksi menegak ialah bahagian bilik yang telah ditempah. Lengkung Sabtu ini naik lebih cepat daripada kadar biasa: kira-kira 80% ditempah 12 hari sebelum daftar masuk, berbanding kira-kira 55% kebiasaannya."
+ },
+ {
+  "zh": "30 天前",
+  "en": "30 days out",
+  "ms": "30 hari lagi"
+ },
+ {
+  "zh": "15 天前",
+  "en": "15 days out",
+  "ms": "15 hari lagi"
+ },
+ {
+  "zh": "入住当天",
+  "en": "Check-in day",
+  "ms": "Hari daftar masuk"
+ },
+ {
+  "zh": "平常的进度",
+  "en": "Usual pace",
+  "ms": "Kadar biasa"
+ },
+ {
+  "zh": "这个周六",
+  "en": "This Saturday",
+  "ms": "Sabtu ini"
+ },
+ {
+  "zh": "平常：约 55%",
+  "en": "Usual: about 55%",
+  "ms": "Biasa: kira-kira 55%"
+ },
+ {
+  "zh": "这个周六：约 80%",
+  "en": "This Saturday: about 80%",
+  "ms": "Sabtu ini: kira-kira 80%"
+ },
+ {
+  "zh": "已订 80%",
+  "en": "80% booked",
+  "ms": "80% ditempah"
+ },
+ {
+  "zh": "平常 55%",
+  "en": "Usual 55%",
+  "ms": "Biasa 55%"
+ },
+ {
+  "zh": "今天 · 还有 12 天",
+  "en": "Today · 12 days to go",
+  "ms": "Hari ini · 12 hari lagi"
+ },
+ {
+  "zh": "调价建议",
+  "en": "Pricing suggestion",
+  "ms": "Cadangan harga"
+ },
+ {
+  "zh": "标准房 +RM 15",
+  "en": "Standard room +RM 15",
+  "ms": "Bilik standard +RM 15"
+ },
+ {
+  "zh": "在您设的 RM 120–180 之间 · 等您确认",
+  "en": "Within your RM 120–180 range · awaiting your confirmation",
+  "ms": "Dalam julat RM 120–180 anda · menunggu pengesahan anda"
+ },
+ {
+  "zh": "行业研究：Chen、Xu、Yu、Zhang，Journal of Operations Management，2023。图为示意。",
+  "en": "Industry research: Chen, Xu, Yu and Zhang, Journal of Operations Management, 2023. The chart is an illustration.",
+  "ms": "Kajian industri: Chen, Xu, Yu dan Zhang, Journal of Operations Management, 2023. Carta ialah ilustrasi."
+ },
+ {
+  "zh": "第三笔账 · 算得清",
+  "en": "3 · Know your net",
+  "ms": "3 · Tahu terimaan bersih"
+ },
+ {
+  "zh": "收了多少、到手多少：<em>一笔一笔算清楚</em>",
+  "en": "What came in, what you keep: <em>every ringgit counted</em>",
+  "ms": "Berapa masuk, berapa tinggal: <em>setiap ringgit dikira</em>"
+ },
+ {
+  "zh": "RM 100 的房费，到手多少",
+  "en": "Out of RM 100 in room charges, how much do you keep?",
+  "ms": "Daripada RM 100 caj bilik, berapa yang anda terima?"
+ },
+ {
+  "zh": "净实收",
+  "en": "Net received",
+  "ms": "Terimaan bersih"
+ },
+ {
+  "zh": "OTA 佣金",
+  "en": "OTA commission",
+  "ms": "Komisen OTA"
+ },
+ {
+  "zh": "标准/经济型酒店的佣金 17–20%；用虚拟卡结算，另有约 2–3% 手续费。",
+  "en": "Commission for standard and budget hotels is 17–20%; payout by virtual card adds a fee of about 2–3%.",
+  "ms": "Komisen bagi hotel standard dan bajet ialah 17–20%; bayaran melalui kad maya menambah caj kira-kira 2–3%."
+ },
+ {
+  "zh": "现在就有",
+  "en": "Available now",
+  "ms": "Sedia sekarang"
+ },
+ {
+  "zh": "经营报表与早安简报",
+  "en": "Operations reports and the Morning Brief",
+  "ms": "Laporan operasi dan Taklimat Pagi"
+ },
+ {
+  "zh": "入住率、按小时和按房晚的数据、点评分析。",
+  "en": "Occupancy, hourly and room-night data, review analysis.",
+  "ms": "Kadar penghunian, data mengikut jam dan malam bilik, analisis ulasan."
+ },
+ {
+  "zh": "即将上线",
+  "en": "Coming soon",
+  "ms": "Akan datang"
+ },
+ {
+  "zh": "实时收益报表",
+  "en": "Real-time revenue report",
+  "ms": "Laporan hasil masa nyata"
+ },
+ {
+  "zh": "随时打开，看到收了多少、到手多少。",
+  "en": "Open it any time to see what came in and what you keep.",
+  "ms": "Buka pada bila-bila masa untuk melihat berapa diterima dan berapa yang tinggal."
+ },
+ {
+  "zh": "按日看未来预计收益",
+  "en": "Expected revenue, day by day",
+  "ms": "Hasil dijangka, hari demi hari"
+ },
+ {
+  "zh": "未来每一天，预计能收多少。",
+  "en": "For each day ahead, how much you can expect to take.",
+  "ms": "Bagi setiap hari akan datang, berapa yang dijangka diterima."
+ },
+ {
+  "zh": "来源：马来西亚竞争委员会（MyCC）OTA 市场调查，2026。",
+  "en": "Source: Malaysia Competition Commission (MyCC) market review of OTAs, 2026.",
+  "ms": "Sumber: kajian pasaran OTA oleh Suruhanjaya Persaingan Malaysia (MyCC), 2026."
+ },
+ {
+  "zh": "小团队，也盯得住",
+  "en": "A small team can keep watch too",
+  "ms": "Pasukan kecil pun mampu memantau"
+ },
+ {
+  "zh": "6 项日常工作，<em>每周用时少了 64%</em>",
+  "en": "6 routine tasks: <em>64% less time each week</em>",
+  "ms": "6 tugas rutin: <em>64% kurang masa setiap minggu</em>"
+ },
+ {
+  "zh": "早安简报：每天早上一页",
+  "en": "Morning Brief: one page every morning",
+  "ms": "Taklimat Pagi: satu halaman setiap pagi"
+ },
+ {
+  "zh": "调价",
+  "en": "Pricing",
+  "ms": "Harga"
+ },
+ {
+  "zh": "周六订得比平常快",
+  "en": "Saturday is filling faster than usual",
+  "ms": "Sabtu ditempah lebih cepat daripada biasa"
+ },
+ {
+  "zh": "看调价建议",
+  "en": "See the pricing suggestion",
+  "ms": "Lihat cadangan harga"
+ },
+ {
+  "zh": "开售",
+  "en": "On sale",
+  "ms": "Jualan"
+ },
+ {
+  "zh": "2 个房型有房没开售",
+  "en": "2 room types with rooms, not on sale",
+  "ms": "2 jenis bilik ada bilik, tidak dijual"
+ },
+ {
+  "zh": "去核对",
+  "en": "Check now",
+  "ms": "Semak sekarang"
+ },
+ {
+  "zh": "点评",
+  "en": "Reviews",
+  "ms": "Ulasan"
+ },
+ {
+  "zh": "3 条新点评待回复",
+  "en": "3 new reviews awaiting a reply",
+  "ms": "3 ulasan baharu menunggu balasan"
+ },
+ {
+  "zh": "回复草稿已备好",
+  "en": "Reply drafts are ready",
+  "ms": "Draf balasan sudah sedia"
+ },
+ {
+  "zh": "质检",
+  "en": "Quality",
+  "ms": "Kualiti"
+ },
+ {
+  "zh": "1 项整改今天到期",
+  "en": "1 follow-up is due today",
+  "ms": "1 tindakan susulan perlu selesai hari ini"
+ },
+ {
+  "zh": "去跟进",
+  "en": "Follow up",
+  "ms": "Susuli"
+ },
+ {
+  "zh": "<b>四位数字员工：</b>数字收益、数字宾客关系、数字质检、数字总经理，可以直接对话。",
+  "en": "<b>Four digital staff:</b> Digital Revenue, Digital Guest Relations, Digital Quality, Digital General Manager. Just talk to them.",
+  "ms": "<b>Empat pekerja digital:</b> Hasil Digital, Perhubungan Tetamu Digital, Kualiti Digital, Pengurus Besar Digital. Berbual terus dengan mereka."
+ },
+ {
+  "zh": "6 项日常工作，每周用时（分钟）",
+  "en": "6 routine tasks, minutes per week",
+  "ms": "6 tugas rutin, minit seminggu"
+ },
+ {
+  "zh": "每周 <b>480 分钟</b>，降到 <b>174 分钟</b>",
+  "en": "From <b>480 minutes</b> a week down to <b>174 minutes</b>",
+  "ms": "Daripada <b>480 minit</b> seminggu kepada <b>174 minit</b>"
+ },
+ {
+  "zh": "房态与开售核对",
+  "en": "Availability check",
+  "ms": "Semakan ketersediaan"
+ },
+ {
+  "zh": "周边同类酒店监控",
+  "en": "Comparable hotels",
+  "ms": "Hotel setara"
+ },
+ {
+  "zh": "入住率监测",
+  "en": "Occupancy",
+  "ms": "Kadar penghunian"
+ },
+ {
+  "zh": "每小时订房监测",
+  "en": "Hourly bookings",
+  "ms": "Tempahan setiap jam"
+ },
+ {
+  "zh": "划线价核对",
+  "en": "Strikethrough prices",
+  "ms": "Semakan harga potong"
+ },
+ {
+  "zh": "之前",
+  "en": "Before",
+  "ms": "Sebelum"
+ },
+ {
+  "zh": "现在",
+  "en": "Now",
+  "ms": "Kini"
+ },
+ {
+  "zh": "住小叮实测：内部计时，2026 年 11 月；按一位经理管两家酒店统计，只计这 6 项工作。",
+  "en": "Measured at 住小叮: internal timing, November 2026; based on one manager running two hotels, counting these 6 tasks only.",
+  "ms": "Diukur di 住小叮: catatan masa dalaman, November 2026; berdasarkan seorang pengurus yang mengurus dua hotel, hanya 6 tugas ini dikira."
+ },
+ {
+  "zh": "不只是这三笔账",
+  "en": "Beyond these three",
+  "ms": "Lebih daripada tiga perkara ini"
+ },
+ {
+  "zh": "守住口碑，<em>让 AI 也找得到您</em>",
+  "en": "Protect your reputation, <em>and let AI find you too</em>",
+  "ms": "Jaga reputasi, <em>dan biar AI turut menemui anda</em>"
+ },
+ {
+  "zh": "口碑",
+  "en": "Reputation",
+  "ms": "Reputasi"
+ },
+ {
+  "zh": "点评回复草稿、质检与整改",
+  "en": "Review reply drafts, quality checks and follow-up",
+  "ms": "Draf balasan ulasan, pemeriksaan kualiti dan tindakan susulan"
+ },
+ {
+  "zh": "跨 OTA 生成点评回复草稿，团队改一改就能发。",
+  "en": "Reply drafts for reviews across OTAs; your team edits and sends.",
+  "ms": "Draf balasan ulasan merentas OTA; pasukan anda sunting dan hantar."
+ },
+ {
+  "zh": "客房与服务检查：任务有派、有收、有整改。",
+  "en": "Room and service inspections: tasks assigned, results collected, problems followed up.",
+  "ms": "Pemeriksaan bilik dan perkhidmatan: tugas diagih, hasil dikumpul, masalah disusuli."
+ },
+ {
+  "zh": "+0.12 星",
+  "en": "+0.12 stars",
+  "ms": "+0.12 bintang"
+ },
+ {
+  "zh": "开始回复点评的酒店，评分的平均变化。评分每高 1 分（5 分制），同样的入住率可以多卖 <b>11.2%</b> 的价。",
+  "en": "Average rating change at hotels that began replying to reviews. One more point (of 5) supports an <b>11.2%</b> higher price at the same occupancy.",
+  "ms": "Purata perubahan penarafan di hotel yang mula membalas ulasan. Tambahan 1 mata (daripada 5) menyokong harga <b>11.2%</b> lebih tinggi pada penghunian yang sama."
+ },
+ {
+  "zh": "新客源",
+  "en": "New guests",
+  "ms": "Tetamu baharu"
+ },
+ {
+  "zh": "AI 获客：让客人在 AI 里找到您",
+  "en": "AI Guest Acquisition: be found when guests ask AI",
+  "ms": "Pemerolehan Tetamu AI: ditemui apabila tetamu bertanya kepada AI"
+ },
+ {
+  "zh": "<b>ChatGPT 预订</b>、<b>生成酒店官网</b>、<b>GEO 优化</b>。",
+  "en": "<b>ChatGPT booking</b>, <b>hotel website generation</b>, <b>GEO optimisation</b>.",
+  "ms": "<b>Tempahan ChatGPT</b>, <b>penjanaan laman web hotel</b>, <b>pengoptimuman GEO</b>."
+ },
+ {
+  "zh": "专人按您酒店的情况配置和接入。",
+  "en": "A specialist sets it up and connects it to suit your hotel.",
+  "ms": "Pakar mengkonfigurasi dan menyambungkannya mengikut keadaan hotel anda."
+ },
+ {
+  "zh": "的亚洲旅客用 AI 规划行程，一年前是 33%。调查覆盖 11 个市场，包括马来西亚。",
+  "en": "of Asian travellers now plan trips with AI, up from 33% a year earlier. 11 markets surveyed, including Malaysia.",
+  "ms": "pelancong Asia kini merancang perjalanan dengan AI, berbanding 33% setahun sebelumnya. 11 pasaran ditinjau, termasuk Malaysia."
+ },
+ {
+  "zh": "来源：Proserpio 与 Zervas，Marketing Science，2017；Anderson，Cornell Hospitality Report，2012；Agoda，2027 Asia Travel Pulse，2026 年 11 月。",
+  "en": "Sources: Proserpio and Zervas, Marketing Science, 2017; Anderson, Cornell Hospitality Report, 2012; Agoda, 2027 Asia Travel Pulse, November 2026.",
+  "ms": "Sumber: Proserpio dan Zervas, Marketing Science, 2017; Anderson, Cornell Hospitality Report, 2012; Agoda, 2027 Asia Travel Pulse, November 2026."
+ },
+ {
+  "zh": "我们是谁",
+  "en": "Who we are",
+  "ms": "Siapa kami"
+ },
+ {
+  "zh": "我们自己就开酒店：<em>产品先在自己的店里用</em>",
+  "en": "We run hotels too: <em>our own hotels use it first</em>",
+  "ms": "Kami juga mengusahakan hotel: <em>hotel kami guna dahulu</em>"
+ },
+ {
+  "zh": "家已开业",
+  "en": "hotels open",
+  "ms": "hotel telah dibuka"
+ },
+ {
+  "zh": "住小叮：我们自己的酒店品牌",
+  "en": "住小叮: our own hotel brand",
+  "ms": "住小叮: jenama hotel kami sendiri"
+ },
+ {
+  "zh": "合计 56 家（包含已开业、已签约及筹建中）。",
+  "en": "56 in total (including open, signed and in preparation).",
+  "ms": "56 kesemuanya (termasuk yang telah dibuka, ditandatangani dan dalam persiapan)."
+ },
+ {
+  "zh": "先在自己的酒店里用，再给您用。",
+  "en": "Used in our own hotels first, then offered to you.",
+  "ms": "Digunakan di hotel kami dahulu, kemudian ditawarkan kepada anda."
+ },
+ {
+  "zh": "国际平台和中国平台，一起管。",
+  "en": "International and Chinese platforms, together.",
+  "ms": "Platform antarabangsa dan China, bersama."
+ },
+ {
+  "zh": "不只给工具：专人陪跑，或全托管。",
+  "en": "More than a tool: Specialist Coaching, or Full OTA Management.",
+  "ms": "Lebih daripada alat: Bimbingan Pakar, atau Pengurusan Penuh OTA."
+ },
+ {
+  "zh": "界面语言：中文、English、Bahasa Melayu。",
+  "en": "Interface languages: Chinese, English, Bahasa Melayu.",
+  "ms": "Bahasa antara muka: Cina, English, Bahasa Melayu."
+ },
+ {
+  "zh": "<b>产品界面实拍：房态与开售核对</b> · 2026 年 11 月，数值已脱敏 · 点击可放大",
+  "en": "<b>Product screenshot: availability check</b> · November 2026, values masked · click to enlarge",
+  "ms": "<b>Tangkapan skrin produk: semakan ketersediaan</b> · November 2026, nilai disembunyikan · klik untuk besarkan"
+ },
+ {
+  "zh": "方案与月费",
+  "en": "Plans and monthly fees",
+  "ms": "Pelan dan yuran bulanan"
+ },
+ {
+  "zh": "三个方案：从工具，到有人带，<em>到替您做</em>",
+  "en": "Three plans: tools, coaching, <em>or done for you</em>",
+  "ms": "Tiga pelan: alat, bimbingan, <em>atau diuruskan untuk anda</em>"
+ },
+ {
+  "zh": "按您填的数字，这家酒店每月约有 <b class=\"num\" data-out=\"emptyMonth\">—</b> 个房晚空着。",
+  "en": "On your figures, this hotel has about <b class=\"num\" data-out=\"emptyMonth\">—</b> empty room nights a month.",
+  "ms": "Mengikut angka anda, hotel ini ada kira-kira <b class=\"num\" data-out=\"emptyMonth\">—</b> malam bilik kosong sebulan."
+ },
+ {
+  "zh": "工具授权",
+  "en": "Tool Licence",
+  "ms": "Lesen Alat"
+ },
+ {
+  "zh": "工具给您，团队自己用",
+  "en": "You get the tools; your team runs them",
+  "ms": "Alat untuk anda; pasukan anda mengendalikannya"
+ },
+ {
+  "zh": "/ 月 · 每家酒店",
+  "en": "/ month · per hotel",
+  "ms": "/ bulan · setiap hotel"
+ },
+ {
+  "zh": "基础运营工具：调价建议、点评回复草稿、质检整改、经营报表",
+  "en": "Core tools: pricing suggestions, review reply drafts, quality follow-up, operations reports",
+  "ms": "Alat asas: cadangan harga, draf balasan ulasan, susulan kualiti, laporan operasi"
+ },
+ {
+  "zh": "早安简报",
+  "en": "Morning Brief",
+  "ms": "Taklimat Pagi"
+ },
+ {
+  "zh": "四位数字员工",
+  "en": "Four digital staff",
+  "ms": "Empat pekerja digital"
+ },
+ {
+  "zh": "月费 ≈ 每月 <b data-eq>—</b> 个房晚的房费",
+  "en": "Fee ≈ <b data-eq>—</b> room nights a month",
+  "ms": "Yuran ≈ <b data-eq>—</b> malam bilik sebulan"
+ },
+ {
+  "zh": "专人陪跑",
+  "en": "Specialist Coaching",
+  "ms": "Bimbingan Pakar"
+ },
+ {
+  "zh": "工具 ＋ 多 OTA 工作台 ＋ 专人带着做",
+  "en": "Tools + multi-OTA workspace + a specialist",
+  "ms": "Alat + ruang kerja berbilang OTA + pakar"
+ },
+ {
+  "zh": "推荐",
+  "en": "Recommended",
+  "ms": "Disyorkan"
+ },
+ {
+  "zh": "工具授权的全部内容",
+  "en": "Everything in Tool Licence",
+  "ms": "Semua dalam Lesen Alat"
+ },
+ {
+  "zh": "<b>AI 浏览器：</b>多个 OTA，一个工作台",
+  "en": "<b>AI Browser:</b> several OTAs, one workspace",
+  "ms": "<b>Pelayar AI:</b> beberapa OTA, satu ruang kerja"
+ },
+ {
+  "zh": "<b>AI 获客：</b>ChatGPT 预订、酒店官网、GEO 优化",
+  "en": "<b>AI Guest Acquisition:</b> ChatGPT booking, hotel website, GEO optimisation",
+  "ms": "<b>Pemerolehan Tetamu AI:</b> tempahan ChatGPT, laman web hotel, GEO"
+ },
+ {
+  "zh": "<b>专人</b>协助配置、指导运营",
+  "en": "<b>A specialist</b> for setup and guidance",
+  "ms": "<b>Pakar</b> untuk konfigurasi dan bimbingan"
+ },
+ {
+  "zh": "OTA 全托管",
+  "en": "Full OTA Management",
+  "ms": "Pengurusan Penuh OTA"
+ },
+ {
+  "zh": "线上 OTA 运营，专人替您做",
+  "en": "A specialist runs your online OTA operations",
+  "ms": "Pakar mengendalikan operasi OTA dalam talian anda"
+ },
+ {
+  "zh": "专人陪跑的全部内容",
+  "en": "Everything in Specialist Coaching",
+  "ms": "Semua dalam Bimbingan Pakar"
+ },
+ {
+  "zh": "专人按约定的渠道和权限，接管线上 OTA 运营",
+  "en": "A specialist takes over online OTA operations, within agreed channels and permissions",
+  "ms": "Pakar mengambil alih operasi OTA dalam talian, dalam saluran dan kebenaran yang dipersetujui"
+ },
+ {
+  "zh": "线上交给专人，您专心管好店里",
+  "en": "Online is handled; you focus on the hotel",
+  "ms": "Dalam talian diuruskan; anda fokus pada hotel"
+ },
+ {
+  "zh": "月费以马币（RM）计，按每家酒店。“每月几个房晚”按您在“算一笔”那一页填的平均房价计算。",
+  "en": "Monthly fees are in Malaysian ringgit (RM), per hotel. The room-night figure uses the average room rate you entered on the calculator page.",
+  "ms": "Yuran bulanan dalam ringgit Malaysia (RM), bagi setiap hotel. Angka malam bilik menggunakan purata harga bilik yang anda masukkan di halaman pengiraan."
+ },
+ {
+  "zh": "下一步",
+  "en": "Next step",
+  "ms": "Langkah seterusnya"
+ },
+ {
+  "zh": "今天只定一件事：<em>先从哪家酒店开始</em>",
+  "en": "One decision today: <em>which hotel to start with</em>",
+  "ms": "Satu keputusan hari ini: <em>hotel mana untuk bermula</em>"
+ },
+ {
+  "zh": "今天",
+  "en": "Today",
+  "ms": "Hari ini"
+ },
+ {
+  "zh": "选一家酒店，告诉我们您在用哪些 OTA。",
+  "en": "Pick one hotel and tell us which OTAs you use.",
+  "ms": "Pilih satu hotel dan beritahu kami OTA yang anda gunakan."
+ },
+ {
+  "zh": "我们",
+  "en": "We",
+  "ms": "Kami"
+ },
+ {
+  "zh": "接通账号，先把这家酒店在各平台的开售状态核对一遍。",
+  "en": "We connect the accounts and start by checking this hotel's on-sale status on every platform.",
+  "ms": "Kami sambungkan akaun dan mula dengan menyemak status jualan hotel ini di setiap platform."
+ },
+ {
+  "zh": "每天早上看简报，确认建议。",
+  "en": "Read the brief each morning and confirm the suggestions.",
+  "ms": "Baca taklimat setiap pagi dan sahkan cadangan."
+ },
+ {
+  "zh": "先从这家酒店开始",
+  "en": "Start with this hotel",
+  "ms": "Mula dengan hotel ini"
+ },
+ {
+  "zh": "在用的 OTA",
+  "en": "OTAs in use",
+  "ms": "OTA yang digunakan"
+ },
+ {
+  "zh": "附 · 产品界面",
+  "en": "Appendix · Product screens",
+  "ms": "Lampiran · Skrin produk"
+ },
+ {
+  "zh": "产品界面实拍",
+  "en": "Product screenshots",
+  "ms": "Tangkapan skrin produk"
+ },
+ {
+  "zh": "2026 年 11 月的界面，数值已脱敏。点击可放大。",
+  "en": "The interface as of November 2026, with values masked. Click to enlarge.",
+  "ms": "Antara muka pada November 2026, nilai disembunyikan. Klik untuk besarkan."
+ },
+ {
+  "zh": "调价范围设置",
+  "en": "Price range settings",
+  "ms": "Tetapan julat harga"
+ },
+ {
+  "zh": "预订进度提醒",
+  "en": "Booking-pace alerts",
+  "ms": "Amaran kadar tempahan"
+ },
+ {
+  "zh": "小时级订房监测",
+  "en": "Hourly booking monitoring",
+  "ms": "Pemantauan tempahan mengikut jam"
+ },
+ {
+  "zh": "质检工作台",
+  "en": "Quality workbench",
+  "ms": "Ruang kerja kualiti"
+ },
+ {
+  "zh": "附 · 分工",
+  "en": "Appendix · Who does what",
+  "ms": "Lampiran · Pembahagian tugas"
+ },
+ {
+  "zh": "谁来做，谁说了算",
+  "en": "Who does the work, who decides",
+  "ms": "Siapa yang melakukannya, siapa yang memutuskan"
+ },
+ {
+  "zh": "方案",
+  "en": "Plan",
+  "ms": "Pelan"
+ },
+ {
+  "zh": "谁来操作",
+  "en": "Who operates",
+  "ms": "Siapa yang mengendalikan"
+ },
+ {
+  "zh": "改价和发布",
+  "en": "Price changes and publishing",
+  "ms": "Perubahan harga dan penerbitan"
+ },
+ {
+  "zh": "酒店团队",
+  "en": "Hotel team",
+  "ms": "Pasukan hotel"
+ },
+ {
+  "zh": "酒店自己决定和操作",
+  "en": "The hotel decides and operates",
+  "ms": "Hotel memutuskan dan mengendalikan sendiri"
+ },
+ {
+  "zh": "酒店团队，专人协助和指导",
+  "en": "Hotel team, with a specialist assisting and guiding",
+  "ms": "Pasukan hotel, dengan pakar membantu dan membimbing"
+ },
+ {
+  "zh": "酒店团队确认和操作",
+  "en": "The hotel team confirms and operates",
+  "ms": "Pasukan hotel mengesahkan dan mengendalikan"
+ },
+ {
+  "zh": "专人",
+  "en": "Specialist",
+  "ms": "Pakar"
+ },
+ {
+  "zh": "专人按约定的渠道、已开通的权限和批准的操作范围执行",
+  "en": "A specialist acts within the agreed channels, the permissions granted and the approved scope",
+  "ms": "Pakar bertindak dalam saluran yang dipersetujui, kebenaran yang diberikan dan skop yang diluluskan"
+ },
+ {
+  "zh": "<b>数据：</b>取自您授权的来源，从这家酒店已在用的 OTA 账号开始。",
+  "en": "<b>Data:</b> from sources you authorise, starting with the OTA accounts this hotel already uses.",
+  "ms": "<b>Data:</b> daripada sumber yang anda benarkan, bermula dengan akaun OTA yang sudah digunakan hotel ini."
+ },
+ {
+  "zh": "<b>点评回复：</b>先出草稿，由人审核后发布。",
+  "en": "<b>Review replies:</b> drafted first, published after a person has reviewed them.",
+  "ms": "<b>Balasan ulasan:</b> didraf dahulu, diterbitkan selepas disemak oleh manusia."
+ },
+ {
+  "zh": "<b>对接：</b>开始前双方各指定一位对接人。",
+  "en": "<b>Contacts:</b> each side names one contact person before we start.",
+  "ms": "<b>Perhubungan:</b> setiap pihak menamakan seorang pegawai perhubungan sebelum bermula."
+ },
+ {
+  "zh": "附 · 量效果",
+  "en": "Appendix · Measuring results",
+  "ms": "Lampiran · Mengukur hasil"
+ },
+ {
+  "zh": "效果怎么量：同一把尺子，前后对比",
+  "en": "How results are measured: one ruler, before and after",
+  "ms": "Cara hasil diukur: satu pembaris, sebelum dan selepas"
+ },
+ {
+  "zh": "同一把尺子，六个数",
+  "en": "One ruler, six numbers",
+  "ms": "Satu pembaris, enam angka"
+ },
+ {
+  "zh": "开始前",
+  "en": "Before",
+  "ms": "Sebelum"
+ },
+ {
+  "zh": "开始后",
+  "en": "After",
+  "ms": "Selepas"
+ },
+ {
+  "zh": "可售房晚",
+  "en": "Available room nights",
+  "ms": "Malam bilik tersedia"
  },
  {
   "zh": "平均成交房价",
@@ -215,1379 +1200,109 @@
   "ms": "Komisen saluran"
  },
  {
-  "zh": "净实收",
-  "en": "Net received",
-  "ms": "Terimaan bersih"
+  "zh": "可售房晚 × 入住率 × 平均成交房价 ＝ 房费收入；房费收入 − 渠道佣金 ＝ 净实收。取哪一段时间来比，开始前和您一起定。",
+  "en": "Available room nights × occupancy × ADR = room revenue; room revenue − channel commission = net received. Which period to compare is agreed with you before we start.",
+  "ms": "Malam bilik tersedia × kadar penghunian × ADR = hasil bilik; hasil bilik − komisen saluran = terimaan bersih. Tempoh perbandingan dipersetujui bersama anda sebelum bermula."
  },
  {
-  "zh": "<b>房晚（Room night）会过期：</b>今晚没卖出去或者卖便宜了的房，明天补不回来。",
-  "en": "<b>A room night expires:</b> a room unsold tonight, or sold too cheaply, cannot be made up tomorrow.",
-  "ms": "<b>Malam bilik (room night) luput:</b> bilik yang tidak terjual malam ini, atau terjual terlalu murah, tidak dapat ditebus esok."
+  "zh": "附 · 数据来源",
+  "en": "Appendix · Data sources",
+  "ms": "Lampiran · Sumber data"
  },
  {
-  "zh": "房费收入不是利润；净实收扣哪些项，试点前和您约定。",
-  "en": "Room revenue is not profit; what is deducted to reach net received is agreed with you before a pilot.",
-  "ms": "Hasil bilik bukan keuntungan; potongan bagi terimaan bersih dipersetujui dengan anda sebelum percubaan."
+  "zh": "数据来源",
+  "en": "Data sources",
+  "ms": "Sumber data"
  },
  {
-  "zh": "第二部分",
-  "en": "Part 2",
-  "ms": "Bahagian 2"
+  "zh": "行业研究讲的是行业里的情况，住小叮实测是我们自己酒店的记录。",
+  "en": "Industry research describes the industry; the 住小叮 figures are records from our own hotels.",
+  "ms": "Kajian industri menggambarkan industri; angka 住小叮 ialah rekod daripada hotel kami sendiri."
  },
  {
-  "zh": "<span class=\"nb\">HogentX 做什么：</span><span class=\"nb\">发现问题、给出建议，</span><span class=\"nb\">由人确认</span>",
-  "en": "What HogentX does: finds problems, suggests actions, people confirm",
-  "ms": "Apa yang HogentX buat: kesan masalah, beri cadangan, manusia yang sahkan"
+  "zh": "入住率、平均房价、酒店与客房数",
+  "en": "Occupancy, average room rate, number of hotels and rooms",
+  "ms": "Kadar penghunian, purata harga bilik, bilangan hotel dan bilik"
  },
  {
-  "zh": "面向酒店的 AI 运营产品：减少房价、空房、渠道和执行造成的损失。",
-  "en": "An AI operations product for hotels: fewer losses from rates, empty rooms, channels and execution.",
-  "ms": "Produk operasi AI untuk hotel: mengurangkan kerugian akibat harga, bilik kosong, saluran dan pelaksanaan."
+  "zh": "Tourism Malaysia，Paid Accommodation Survey Performance，2026 年 1–6 月，对比 2025 年同期。“每间可售房的房费收入”和“平均 65 间房”是按其中的数字计算的。",
+  "en": "Tourism Malaysia, Paid Accommodation Survey Performance, January–June 2026, compared with the same period of 2025. Room revenue per available room and the 65-room average are calculated from its figures.",
+  "ms": "Tourism Malaysia, Paid Accommodation Survey Performance, Januari–Jun 2026, berbanding tempoh sama 2025. Hasil bilik bagi setiap bilik tersedia dan purata 65 bilik dikira daripada angkanya."
  },
  {
-  "zh": "您",
-  "en": "You",
-  "ms": "Anda"
+  "zh": "中国游客人次",
+  "en": "Tourists from China",
+  "ms": "Pelancong dari China"
  },
  {
-  "zh": "授权",
-  "en": "Authorise",
-  "ms": "Beri kebenaran"
+  "zh": "Tourism Malaysia，Malaysia Visitor Arrival Performance，2026 年 1–9 月；过夜游客，对比 2025 年同期。",
+  "en": "Tourism Malaysia, Malaysia Visitor Arrival Performance, January–September 2026; overnight tourists, compared with the same period of 2025.",
+  "ms": "Tourism Malaysia, Malaysia Visitor Arrival Performance, Januari–September 2026; pelancong bermalam, berbanding tempoh sama 2025."
  },
  {
-  "zh": "汇集您授权的数据。",
-  "en": "It brings together the data you authorise.",
-  "ms": "Ia mengumpulkan data yang anda benarkan."
+  "zh": "OTA 佣金、平台使用、订房时遇到的问题",
+  "en": "OTA commission, platform use, problems met when booking",
+  "ms": "Komisen OTA, penggunaan platform, masalah semasa menempah"
  },
  {
-  "zh": "发现异常",
-  "en": "Finds anomalies",
-  "ms": "Kesan kelainan"
+  "zh": "马来西亚竞争委员会（MyCC），Market Review on the Digital Economy Ecosystem under the Competition Act 2010，Book 4: Online Travel Agencies，2026。消费者调查 262 人，2025 年 6 月。",
+  "en": "Malaysia Competition Commission (MyCC), Market Review on the Digital Economy Ecosystem under the Competition Act 2010, Book 4: Online Travel Agencies, 2026. Consumer survey of 262 people, June 2025.",
+  "ms": "Suruhanjaya Persaingan Malaysia (MyCC), Market Review on the Digital Economy Ecosystem under the Competition Act 2010, Book 4: Online Travel Agencies, 2026. Tinjauan pengguna 262 orang, Jun 2025."
  },
  {
-  "zh": "<span class=\"nb\">房价、空房、渠道、</span><span class=\"nb\">执行上的异常。</span>",
-  "en": "In rates, empty rooms, channels and execution.",
-  "ms": "Pada harga, bilik kosong, saluran dan pelaksanaan."
+  "zh": "调价与每间可售房收入",
+  "en": "Price adjustment and revenue per available room",
+  "ms": "Pelarasan harga dan hasil bagi setiap bilik tersedia"
  },
  {
-  "zh": "给出建议或任务",
-  "en": "Gives suggestions or tasks",
-  "ms": "Beri cadangan atau tugas"
+  "zh": "Abrate、Nicolau、Viglia，The impact of dynamic price variability on revenue maximization，Tourism Management 74，2019。17 个欧洲城市 840 家酒店。",
+  "en": "Abrate, Nicolau and Viglia, The impact of dynamic price variability on revenue maximization, Tourism Management 74, 2019. 840 hotels in 17 European cities.",
+  "ms": "Abrate, Nicolau dan Viglia, The impact of dynamic price variability on revenue maximization, Tourism Management 74, 2019. 840 hotel di 17 bandar Eropah."
  },
  {
-  "zh": "例如调价建议、<span class=\"nb\">点评回复草稿。</span>",
-  "en": "Such as pricing suggestions and review reply drafts.",
-  "ms": "Contohnya cadangan harga dan draf balasan ulasan."
+  "zh": "收益管理的实地试点",
+  "en": "Field pilot of revenue management",
+  "ms": "Projek rintis lapangan pengurusan hasil"
  },
  {
-  "zh": "人",
-  "en": "People",
-  "ms": "Manusia"
+  "zh": "Chen、Xu、Yu、Zhang，A reinforcement learning approach for hotel revenue management with evidence from field experiments，Journal of Operations Management 69(7)，2023。一家经济型连锁酒店的试点。",
+  "en": "Chen, Xu, Yu and Zhang, A reinforcement learning approach for hotel revenue management with evidence from field experiments, Journal of Operations Management 69(7), 2023. A pilot at a budget hotel chain.",
+  "ms": "Chen, Xu, Yu dan Zhang, A reinforcement learning approach for hotel revenue management with evidence from field experiments, Journal of Operations Management 69(7), 2023. Projek rintis di sebuah rangkaian hotel bajet."
  },
  {
-  "zh": "确认并执行",
-  "en": "Confirm and carry out",
-  "ms": "Sahkan dan laksanakan"
+  "zh": "回复点评与评分",
+  "en": "Replying to reviews and ratings",
+  "ms": "Membalas ulasan dan penarafan"
  },
  {
-  "zh": "建议不等于自动执行。",
-  "en": "A suggestion is not automatic execution.",
-  "ms": "Cadangan bukan pelaksanaan automatik."
+  "zh": "Proserpio、Zervas，Online reputation management: Estimating the impact of management responses on consumer reviews，Marketing Science 36(5)，2017。美国得克萨斯州酒店。",
+  "en": "Proserpio and Zervas, Online reputation management: Estimating the impact of management responses on consumer reviews, Marketing Science 36(5), 2017. Hotels in Texas, United States.",
+  "ms": "Proserpio dan Zervas, Online reputation management: Estimating the impact of management responses on consumer reviews, Marketing Science 36(5), 2017. Hotel di Texas, Amerika Syarikat."
  },
  {
-  "zh": "HogentX 不是保证增收的工具",
-  "en": "HogentX is not a tool that guarantees more revenue",
-  "ms": "HogentX bukan alat yang menjamin peningkatan hasil"
+  "zh": "评分与房价",
+  "en": "Ratings and room rates",
+  "ms": "Penarafan dan harga bilik"
  },
  {
-  "zh": "有没有用，要拿您酒店自己的数据，对照着看。",
-  "en": "Whether it helps has to be judged on your own hotel's data, against a comparison.",
-  "ms": "Sama ada ia membantu perlu dinilai dengan data hotel anda sendiri, melalui perbandingan."
+  "zh": "Anderson，The Impact of Social Media on Lodging Performance，Cornell Hospitality Report 12(15)，2012。美国数据。",
+  "en": "Anderson, The Impact of Social Media on Lodging Performance, Cornell Hospitality Report 12(15), 2012. United States data.",
+  "ms": "Anderson, The Impact of Social Media on Lodging Performance, Cornell Hospitality Report 12(15), 2012. Data Amerika Syarikat."
  },
  {
-  "zh": "我们是谁",
-  "en": "Who we are",
-  "ms": "Siapa kami"
+  "zh": "旅客用 AI 规划行程",
+  "en": "Travellers planning trips with AI",
+  "ms": "Pelancong merancang perjalanan dengan AI"
  },
  {
-  "zh": "我们自己也有酒店品牌：住小叮",
-  "en": "We have a hotel brand of our own: 住小叮",
-  "ms": "Kami juga mempunyai jenama hotel sendiri: 住小叮"
+  "zh": "Agoda，2027 Asia Travel Pulse，2026 年 11 月。11 个亚洲市场 3,395 人，包括马来西亚和新加坡。",
+  "en": "Agoda, 2027 Asia Travel Pulse, November 2026. 3,395 people in 11 Asian markets, including Malaysia and Singapore.",
+  "ms": "Agoda, 2027 Asia Travel Pulse, November 2026. 3,395 orang di 11 pasaran Asia, termasuk Malaysia dan Singapura."
  },
  {
-  "zh": "也是这套产品的<span class=\"nb\">实际应用和反馈场景。</span>品牌规模：<span class=\"nowrap\">31 家已开业</span>；合计 56 家（包含已开业、已签约及筹建中）。",
-  "en": "It is also where this product is applied in practice and gets its feedback. Brand size: 31 hotels open; 56 in total (including open, signed and in preparation).",
-  "ms": "Di situlah produk ini digunakan secara praktikal dan mendapat maklum balas. Saiz jenama: 31 hotel telah dibuka; 56 kesemuanya (termasuk yang telah dibuka, ditandatangani dan dalam persiapan)."
- },
- {
-  "zh": "家数是品牌规模，不是接入 HogentX 的酒店数或客户数。",
-  "en": "These figures are the size of the brand, not the number of hotels connected to HogentX or of its customers.",
-  "ms": "Angka ini ialah saiz jenama, bukan bilangan hotel yang disambungkan kepada HogentX atau bilangan pelanggannya."
- },
- {
-  "zh": "<span class=\"nb\">现在能用什么：</span><span class=\"nb\">已有的、要核对的、还没有的，</span><span class=\"nb\">一页分清</span>",
-  "en": "What you can use now: in the product, to be checked, not there yet",
-  "ms": "Yang boleh digunakan sekarang: sudah ada, perlu disemak, belum ada"
- },
- {
-  "zh": "01、02、03 对应您刚才的三个问题。",
-  "en": "01, 02 and 03 are the three questions you just answered.",
-  "ms": "01, 02 dan 03 ialah tiga soalan yang baru anda jawab."
- },
- {
-  "zh": "产品界面已有",
-  "en": "In the product",
-  "ms": "Ada dalam produk"
- },
- {
-  "zh": "可演示；<b>≠ 您的酒店已接通</b>",
-  "en": "Can be shown; <b>≠ connected for your hotel</b>",
-  "ms": "Boleh ditunjukkan; <b>≠ sudah disambung untuk hotel anda</b>"
- },
- {
-  "zh": "<b>智能收益</b>：调价建议、预订进度提醒",
-  "en": "<b>Smart Revenue</b>: pricing suggestions, booking-pace alerts",
-  "ms": "<b>Hasil Pintar</b>: cadangan harga, amaran kadar tempahan"
- },
- {
-  "zh": "房态与开售核对",
-  "en": "Availability check",
-  "ms": "Semakan ketersediaan"
- },
- {
-  "zh": "<span class=\"nb\"><b>经营报表与早安简报</b>、</span><span class=\"nb\"><b>点评回复草稿</b>、</span><span class=\"nb\"><b>质检与整改</b>、</span><span class=\"nb\"><b>四位数字员工</b></span><small>三个方案都含；见附页</small>",
-  "en": "<b>Operations reports and Morning Brief</b>, <b>review reply drafts</b>, <b>quality checks and follow-up</b>, <b>four digital staff</b><small>Included in all three plans; see appendix</small>",
-  "ms": "<b>Laporan operasi dan Taklimat Pagi</b>, <b>draf balasan ulasan</b>, <b>pemeriksaan kualiti dan tindakan susulan</b>, <b>empat pekerja digital</b><small>Termasuk dalam ketiga-tiga pelan; lihat lampiran</small>"
- },
- {
-  "zh": "按酒店核对",
-  "en": "Checked per hotel",
-  "ms": "Disemak ikut hotel"
- },
- {
-  "zh": "核对后才能确认",
-  "en": "Confirmed only after checking",
-  "ms": "Disahkan hanya selepas disemak"
- },
- {
-  "zh": "<b>AI 浏览器</b>：<span class=\"nb\">多个 OTA，</span><span class=\"nb\">一个工作台</span>",
-  "en": "<b>AI Browser</b>: several OTAs, one workspace",
-  "ms": "<b>Pelayar AI</b>: beberapa OTA, satu ruang kerja"
- },
- {
-  "zh": "<b>AI 获客</b>：<span class=\"nb\">ChatGPT 预订、</span><span class=\"nb\">生成酒店官网、</span><span class=\"nb\">GEO 优化</span><small>见附页</small>",
-  "en": "<b>AI Guest Acquisition</b>: ChatGPT booking, hotel website generation, GEO optimisation<small>See appendix</small>",
-  "ms": "<b>Pemerolehan Tetamu AI</b>: tempahan ChatGPT, penjanaan laman web hotel, pengoptimuman GEO<small>Lihat lampiran</small>"
- },
- {
-  "zh": "<span class=\"nb\">两项都从专人陪跑方案</span><span class=\"nb\">（RM 2,499）起包含</span>",
-  "en": "Both are included from the Specialist Coaching plan (RM 2,499)",
-  "ms": "Kedua-duanya termasuk bermula daripada pelan Bimbingan Pakar (RM 2,499)"
- },
- {
-  "zh": "未上线",
-  "en": "Not launched",
-  "ms": "Belum dilancarkan"
- },
- {
-  "zh": "没有可承诺的日期",
-  "en": "No date we can commit to",
-  "ms": "Tiada tarikh yang dapat dijanjikan"
- },
- {
-  "zh": "独立、实时的收益报表",
-  "en": "Standalone, real-time revenue report",
-  "ms": "Laporan hasil berasingan dan masa nyata"
- },
- {
-  "zh": "试点时先用对照表",
-  "en": "In a pilot, use the comparison table first",
-  "ms": "Dalam percubaan, guna jadual perbandingan dahulu"
- },
- {
-  "zh": "按日看未来预计收益",
-  "en": "Expected future revenue by day",
-  "ms": "Jangkaan hasil masa depan mengikut hari"
- },
- {
-  "zh": "<b>200+ OTA</b>：渠道拓展计划",
-  "en": "<b>200+ OTA</b>: a channel expansion plan",
-  "ms": "<b>200+ OTA</b>: rancangan peluasan saluran"
- },
- {
-  "zh": "人工服务",
-  "en": "Human service",
-  "ms": "Khidmat manusia"
- },
- {
-  "zh": "<b>专人陪跑、OTA 全托管</b>由专人提供；<b>≠ 托管全部平台</b>。见“三个方案”一页。",
-  "en": "<b>Specialist Coaching and Full OTA Management</b> are provided by a dedicated specialist; <b>≠ managing every platform</b>. See \"Three plans\".",
-  "ms": "<b>Bimbingan Pakar dan Pengurusan Penuh OTA</b> disediakan oleh pakar khusus; <b>≠ mengurus semua platform</b>. Lihat \"Tiga pelan\"."
- },
- {
-  "zh": "<b>前提：</b>凡是用到 OTA 数据的功能，都从您授权、我们逐项核对开始。",
-  "en": "<b>The condition:</b> every function that uses OTA data starts with your authorisation and our item-by-item check.",
-  "ms": "<b>Syaratnya:</b> setiap fungsi yang menggunakan data OTA bermula dengan kebenaran anda dan semakan kami satu demi satu."
- },
- {
-  "zh": "AI 浏览器",
-  "en": "AI Browser",
-  "ms": "Pelayar AI"
- },
- {
-  "zh": "<span class=\"nb\">多个 OTA，</span><span class=\"nb\">一个工作台：</span><span class=\"nb\">先逐个核对，</span><span class=\"nb\">能接的再接通</span>",
-  "en": "Several OTAs, one workspace: check each one, then connect what can be",
-  "ms": "Beberapa OTA, satu ruang kerja: semak dahulu, sambung yang boleh"
- },
- {
-  "zh": "经酒店授权、登录产品支持的 OTA 后，在同一工作台查看和监测数据，并按约定的权限管理。",
-  "en": "Once the hotel authorises and logs in to the OTAs the product supports, you can view and monitor the data in one workspace and manage it within the agreed permissions.",
-  "ms": "Selepas hotel memberi kebenaran dan log masuk ke OTA yang disokong produk, anda boleh melihat dan memantau data dalam satu ruang kerja serta mengurusnya mengikut kebenaran yang dipersetujui."
- },
- {
-  "zh": "您现在用哪几个 OTA？",
-  "en": "Which OTAs do you use today?",
-  "ms": "OTA manakah yang anda gunakan sekarang?"
- },
- {
-  "zh": "现场可填",
-  "en": "Fill in now",
-  "ms": "Isi sekarang"
- },
- {
-  "zh": "可直接填写",
-  "en": "You can type here",
-  "ms": "Boleh diisi terus"
- },
- {
-  "zh": "后面每一项，都从这些账号的授权和核对开始。",
-  "en": "Everything that follows starts with authorising and checking these accounts.",
-  "ms": "Semua yang berikutnya bermula dengan kebenaran dan semakan akaun-akaun ini."
- },
- {
-  "zh": "接通前逐项核对：酒店、账号、权限、可接渠道。",
-  "en": "Checked item by item before connecting: hotel, account, permissions, connectable channels.",
-  "ms": "Disemak satu demi satu sebelum disambungkan: hotel, akaun, kebenaran, saluran yang boleh disambung."
- },
- {
-  "zh": "哪些能接、各自能做到哪一步（只查看，还是也能按权限管理），逐个核对后才能确认。",
-  "en": "Which ones can be connected, and how far each can go (view only, or also manage within permissions), is confirmed only after checking them one by one.",
-  "ms": "OTA mana yang boleh disambung, dan sejauh mana setiap satu boleh pergi (lihat sahaja, atau juga urus ikut kebenaran), hanya disahkan selepas disemak satu demi satu."
- },
- {
-  "zh": "包含在哪个方案",
-  "en": "Which plan includes it",
-  "ms": "Pelan mana yang merangkuminya"
- },
- {
-  "zh": "AI 浏览器从<b>专人陪跑</b>方案<span class=\"nb\">（RM 2,499）起包含；</span><span class=\"nb\">工具授权（RM 699）不含。</span>",
-  "en": "The AI Browser is included from the <b>Specialist Coaching</b> plan (RM 2,499). The Tool Licence (RM 699) does not include it.",
-  "ms": "Pelayar AI termasuk bermula daripada pelan <b>Bimbingan Pakar</b> (RM 2,499). Lesen Alat (RM 699) tidak merangkuminya."
- },
- {
-  "zh": "计划 · 未上线",
-  "en": "Plan · not launched",
-  "ms": "Rancangan · belum dilancarkan"
- },
- {
-  "zh": "200+ OTA 是渠道拓展计划",
-  "en": "200+ OTA is a channel expansion plan",
-  "ms": "200+ OTA ialah rancangan peluasan saluran"
- },
- {
-  "zh": "方向是逐步扩大可管理的渠道，让酒店未来可以在一个工作台集中管理更多渠道。",
-  "en": "The direction is to widen, step by step, the channels that can be managed, so that hotels can later manage more channels from one workspace.",
-  "ms": "Hala tujunya ialah meluaskan saluran yang boleh diurus secara berperingkat, supaya hotel kelak dapat mengurus lebih banyak saluran dari satu ruang kerja."
- },
- {
-  "zh": "它不是当前可接渠道，不在任何方案的权益里，<span class=\"nb\">也没有交付日期。</span>",
-  "en": "It is not what can be connected today, it is not part of any plan, and it has no delivery date.",
-  "ms": "Ia bukan saluran yang boleh disambungkan hari ini, bukan sebahagian daripada mana-mana pelan, dan tiada tarikh penyerahan."
- },
- {
-  "zh": "智能收益",
-  "en": "Smart Revenue",
-  "ms": "Hasil Pintar"
- },
- {
-  "zh": "<span class=\"nb\">满房时还有没有提价空间？</span><span class=\"nb\">先看预订进度，</span><span class=\"nb\">再给调价建议</span>",
-  "en": "Can you raise rates when full? Booking pace first, then price suggestions",
-  "ms": "Naikkan harga apabila penuh? Kadar tempahan dahulu, kemudian cadangan"
- },
- {
-  "zh": "<span class=\"qref\">问题 1</span> 是不是卖得太便宜？哪些日期容易少收？",
-  "en": "<span class=\"qref\">Question 1</span> Are you selling too cheaply? On which dates do you tend to earn less than you could?",
-  "ms": "<span class=\"qref\">Soalan 1</span> Adakah anda menjual terlalu murah? Pada tarikh manakah hasil cenderung kurang daripada sepatutnya?"
- },
- {
-  "zh": "历史界面截图 · 2026-11-12",
-  "en": "Earlier interface · 2026-11-12",
-  "ms": "Antara muka terdahulu · 2026-11-12"
- },
- {
-  "zh": "设置页 · 数值已遮盖",
-  "en": "Settings page · values masked",
-  "ms": "Halaman tetapan · nilai disembunyikan"
- },
- {
-  "zh": "放大",
-  "en": "Enlarge",
-  "ms": "Besarkan"
- },
- {
-  "zh": "<b>调价安全边界</b> 原界面展示房型调价范围设置；保护区间并非真实报价。",
-  "en": "<b>Pricing guardrails</b> The earlier interface shows price range settings by room type; the protected range is not a real quoted rate.",
-  "ms": "<b>Had keselamatan harga</b> Antara muka terdahulu menunjukkan tetapan julat harga mengikut jenis bilik; julat perlindungan bukan harga sebenar."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 19 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 19.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 19.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "按酒店核对 · 先核对数据来源",
-  "en": "Checked per hotel · data sources first",
-  "ms": "Disemak ikut hotel · sumber data dahulu"
- },
- {
-  "zh": "<b>先看见</b>：订得偏快、偏慢的日期，<span class=\"nb\">按规则提醒酒店团队。</span>",
-  "en": "<b>See it first</b>: dates filling faster or slower than usual trigger an alert to the hotel team, by rule.",
-  "ms": "<b>Nampak dahulu</b>: tarikh yang ditempah lebih cepat atau perlahan daripada biasa mencetuskan amaran kepada pasukan hotel, mengikut peraturan."
- },
- {
-  "zh": "<b>再建议</b>：结合可卖房量、周边同类酒店和平台数据，<span class=\"nb\">给出调价建议。</span>",
-  "en": "<b>Then a suggestion</b>: pricing suggestions based on rooms left to sell, comparable hotels nearby and platform data.",
-  "ms": "<b>Kemudian cadangan</b>: cadangan harga berdasarkan bilik yang masih boleh dijual, hotel setara berdekatan dan data platform."
- },
- {
-  "zh": "<b>有边界</b>：原界面可按房型设置<span class=\"nb\">最低价、最高价和单次涨跌幅</span>（见左图）。",
-  "en": "<b>Within limits</b>: the earlier interface could set a lowest price, a highest price and a maximum single change per room type (see image).",
-  "ms": "<b>Ada had</b>: antara muka terdahulu boleh menetapkan harga terendah, harga tertinggi dan had perubahan sekali bagi setiap jenis bilik (lihat imej)."
- },
- {
-  "zh": "超出范围时先提示，核对后再确认。",
-  "en": "A change outside the range is flagged first and confirmed only after checking.",
-  "ms": "Perubahan di luar julat diberi amaran dahulu dan disahkan hanya selepas disemak."
- },
- {
-  "zh": "<b>顺带核对</b>：划线价（展示原价，不是成交价）和异常低价。",
-  "en": "<b>Also checked</b>: strikethrough prices (the original price shown, not the selling price) and unusually low prices.",
-  "ms": "<b>Turut disemak</b>: harga potong (harga asal yang dipaparkan, bukan harga jualan) dan harga luar biasa rendah."
- },
- {
-  "zh": "<b>建议不等于自动执行。</b>谁确认、谁执行，<span class=\"nb\">见“开始之前”一页。</span>",
-  "en": "<b>A suggestion is not automatic execution.</b> Who confirms and who carries it out: see \"Before we start\".",
-  "ms": "<b>Cadangan bukan pelaksanaan automatik.</b> Siapa mengesahkan dan siapa melaksanakan: lihat \"Sebelum bermula\"."
- },
- {
-  "zh": "图中金额单位“元”是历史界面当时的设置；本方案价格以马币（RM）计。<span class=\"nb\">截图是中文历史界面，</span><span class=\"nb\">产品界面支持中文、English、Bahasa Melayu。</span>",
-  "en": "The currency unit \"元\" in the image is how the earlier interface was set up; prices here are in Malaysian ringgit (RM). The screenshots show the earlier Chinese interface; the product interface supports Chinese, English and Bahasa Melayu.",
-  "ms": "Unit mata wang \"元\" dalam imej ialah tetapan antara muka terdahulu; harga di sini dalam ringgit Malaysia (RM). Tangkapan skrin menunjukkan antara muka bahasa Cina terdahulu; antara muka produk menyokong bahasa Cina, English dan Bahasa Melayu."
- },
- {
-  "zh": "<span class=\"nb\">有房却没在卖？</span><span class=\"nb\">核对房态与开售</span>",
-  "en": "Rooms available but not on sale? Check room status against sales",
-  "ms": "Bilik ada tetapi tidak dijual? Semak status bilik berbanding jualan"
- },
- {
-  "zh": "<span class=\"qref\">问题 2</span> 把酒店实际可卖的房，和渠道上是否在卖，对一遍；对不上的，提醒酒店团队。",
-  "en": "<span class=\"qref\">Question 2</span> Compares the rooms the hotel can actually sell with what is on sale on the channels; mismatches alert the hotel team.",
-  "ms": "<span class=\"qref\">Soalan 2</span> Membandingkan bilik yang benar-benar boleh dijual hotel dengan yang dijual di saluran; jika tidak sepadan, pasukan hotel dimaklumkan."
- },
- {
-  "zh": "设置页 · 巡检开关为关闭",
-  "en": "Settings page · check switch off",
-  "ms": "Halaman tetapan · suis semakan tertutup"
- },
- {
-  "zh": "<b>房态与开售核对</b> 原界面展示房态差异巡检、<span class=\"nb\">数据来源及触发设置。</span>",
-  "en": "<b>Availability check</b> The earlier interface shows the room status difference check, its data sources and trigger settings.",
-  "ms": "<b>Semakan ketersediaan</b> Antara muka terdahulu menunjukkan semakan perbezaan status bilik, sumber data dan tetapan pencetus."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 10 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 10.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 10.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "有房已关",
-  "en": "Rooms left, but closed",
-  "ms": "Bilik ada, tetapi ditutup"
- },
- {
-  "zh": "酒店还有房，渠道上却订不到。",
-  "en": "The hotel still has rooms, but they cannot be booked on the channel.",
-  "ms": "Hotel masih ada bilik, tetapi tidak dapat ditempah di saluran."
- },
- {
-  "zh": "满房未关",
-  "en": "Full, but still open",
-  "ms": "Penuh, tetapi masih dibuka"
- },
- {
-  "zh": "酒店已经没房，渠道上还在卖。",
-  "en": "The hotel has no rooms left, but the channel is still selling.",
-  "ms": "Hotel sudah tiada bilik, tetapi saluran masih menjual."
- },
- {
-  "zh": "图中的渠道是历史界面当时的设置，<b>不代表马来西亚的可接渠道</b>。核对要两边的数据：<span class=\"nb\">酒店的可卖房量（图中取自 PMS，即酒店管理系统）</span>和 <span class=\"nb\">OTA 上的开售状态。</span>",
-  "en": "The channels in the image are how the earlier interface was set up; they <b>do not represent the channels that can be connected in Malaysia</b>. The check needs data from both sides: the hotel's sellable rooms (from the PMS, the property management system, in the image) and the on-sale status on the OTAs.",
-  "ms": "Saluran dalam imej ialah tetapan antara muka terdahulu; ia <b>tidak mewakili saluran yang boleh disambungkan di Malaysia</b>. Semakan memerlukan data dari dua pihak: bilik hotel yang boleh dijual (dalam imej daripada PMS, iaitu sistem pengurusan hartanah) dan status jualan di OTA."
- },
- {
-  "zh": "经营报表",
-  "en": "Operations reports",
-  "ms": "Laporan operasi"
- },
- {
-  "zh": "<span class=\"nb\">随时看收入：</span><span class=\"nb\">实时报表还没上线，</span><span class=\"nb\">现在能看这些</span>",
-  "en": "Seeing revenue any time: real-time report not launched; what exists now",
-  "ms": "Lihat hasil bila-bila masa: laporan masa nyata belum dilancarkan; yang ada kini"
- },
- {
-  "zh": "这可能是您特别关心的一件事，所以把现在有的和还没有的分开说清楚。",
-  "en": "This may be something you care about a great deal, so we separate clearly what exists now from what does not yet.",
-  "ms": "Ini mungkin perkara yang sangat anda ambil berat, jadi kami asingkan dengan jelas apa yang sudah ada dan apa yang belum."
- },
- {
-  "zh": "现在有的",
-  "en": "What exists now",
-  "ms": "Yang sudah ada"
- },
- {
-  "zh": "经营报表：入住率、按小时和按房晚的数据、<span class=\"nb\">点评分析。</span>",
-  "en": "Operations reports: occupancy, hourly and room-night data, review analysis.",
-  "ms": "Laporan operasi: kadar penghunian, data mengikut jam dan malam bilik, analisis ulasan."
- },
- {
-  "zh": "早安简报：每日经营数据和当天要处理的事。",
-  "en": "Morning Brief: daily operating data and what needs handling that day.",
-  "ms": "Taklimat Pagi: data operasi harian dan perkara yang perlu ditangani pada hari itu."
- },
- {
-  "zh": "需求反馈 · 未上线",
-  "en": "Requested · not launched",
-  "ms": "Permintaan · belum dilancarkan"
- },
- {
-  "zh": "现在还没有的",
-  "en": "What does not exist yet",
-  "ms": "Yang belum ada"
- },
- {
-  "zh": "独立、实时的收益报表。",
-  "en": "A standalone, real-time revenue report.",
-  "ms": "Laporan hasil berasingan dan masa nyata."
- },
- {
-  "zh": "按日看未来预计收益。",
-  "en": "Expected future revenue by day.",
-  "ms": "Jangkaan hasil masa depan mengikut hari."
- },
- {
-  "zh": "两项都是酒店方提出的需求，目前不能使用，<span class=\"nb\">也没有可以承诺的上线时间。</span>",
-  "en": "Both were requested by hotels. They cannot be used at present, and there is no launch date we can commit to.",
-  "ms": "Kedua-duanya diminta oleh pihak hotel. Ia belum boleh digunakan, dan tiada tarikh pelancaran yang dapat kami janjikan."
- },
- {
-  "zh": "<span class=\"qref\">问题 3</span> <b>在这之前，“每间房最后实收多少”这样回答：</b>试点时先用对照表，按同一口径对一次渠道佣金和净实收；<span class=\"nb\">数字由酒店提供。</span>",
-  "en": "<span class=\"qref\">Question 3</span> <b>Until then, how to answer \"what do I actually receive per room\":</b> in a pilot, use the comparison table first to work out channel commission and net received on one agreed basis; the hotel provides the figures.",
-  "ms": "<span class=\"qref\">Soalan 3</span> <b>Sebelum itu, cara menjawab \"berapa yang benar-benar diterima bagi setiap bilik\":</b> dalam percubaan, guna jadual perbandingan dahulu untuk mengira komisen saluran dan terimaan bersih atas satu asas yang dipersetujui; angka disediakan oleh hotel."
- },
- {
-  "zh": "状态标记",
-  "en": "Status key",
-  "ms": "Petunjuk status"
- },
- {
-  "zh": "第三部分",
-  "en": "Part 3",
-  "ms": "Bahagian 3"
- },
- {
-  "zh": "<span class=\"nb\">三个方案，</span><span class=\"nb\">差别在：</span><span class=\"nb\">建议出来以后，</span><span class=\"nb\">谁来做</span>",
-  "en": "Three plans. The difference: once a suggestion is made, who does the work",
-  "ms": "Tiga pelan. Bezanya: selepas cadangan dibuat, siapa yang melakukannya"
- },
- {
-  "zh": "价格以马币（RM）计，按每家酒店、每月收取。后一个方案包含前一个方案的全部内容。",
-  "en": "Prices are in Malaysian ringgit (RM), charged per hotel, per month. Each plan includes everything in the plan before it.",
-  "ms": "Harga dalam ringgit Malaysia (RM), bagi setiap hotel, setiap bulan. Setiap pelan merangkumi semua kandungan pelan sebelumnya."
- },
- {
-  "zh": "方案",
-  "en": "Plan",
-  "ms": "Pelan"
- },
- {
-  "zh": "月费 · 每家酒店 / 每月",
-  "en": "Monthly fee · per hotel",
-  "ms": "Yuran bulanan · setiap hotel"
- },
- {
-  "zh": "包含",
-  "en": "Includes",
-  "ms": "Merangkumi"
- },
- {
-  "zh": "谁来做",
-  "en": "Who does the work",
-  "ms": "Siapa yang melakukannya"
- },
- {
-  "zh": "不含 · 边界",
-  "en": "Not included · limits",
-  "ms": "Tidak termasuk · had"
- },
- {
-  "zh": "工具授权",
-  "en": "Tool Licence",
-  "ms": "Lesen Alat"
- },
- {
-  "zh": "<span class=\"nb\">软件使用权，</span><span class=\"nb\">酒店自己操作</span>",
-  "en": "Software licence; the hotel operates it",
-  "ms": "Lesen perisian; hotel yang mengendalikan"
- },
- {
-  "zh": "/ 每家酒店 · 每月",
-  "en": "/ per hotel · per month",
-  "ms": "/ setiap hotel · setiap bulan"
- },
- {
-  "zh": "基础运营工具（如调价建议、点评回复草稿、质检整改、经营报表），<span class=\"nb\">含早安简报和四位数字员工</span>",
-  "en": "Basic operations tools (such as pricing suggestions, review reply drafts, quality checks and follow-up, operations reports), with the Morning Brief and four digital staff",
-  "ms": "Alat operasi asas (seperti cadangan harga, draf balasan ulasan, pemeriksaan kualiti dan tindakan susulan, laporan operasi), berserta Taklimat Pagi dan empat pekerja digital"
- },
- {
-  "zh": "酒店自行决策和执行",
-  "en": "The hotel decides and carries out",
-  "ms": "Hotel membuat keputusan dan melaksanakan"
- },
- {
-  "zh": "不含 AI 浏览器",
-  "en": "No AI Browser",
-  "ms": "Tiada Pelayar AI"
- },
- {
-  "zh": "不含 AI 获客",
-  "en": "No AI Guest Acquisition",
-  "ms": "Tiada Pemerolehan Tetamu AI"
- },
- {
-  "zh": "不含人工代运营",
-  "en": "No operations done for you",
-  "ms": "Tiada operasi bagi pihak anda"
- },
- {
-  "zh": "专人陪跑",
-  "en": "Specialist Coaching",
-  "ms": "Bimbingan Pakar"
- },
- {
-  "zh": "<span class=\"nb\">专人协助和指导，</span><span class=\"nb\">酒店团队操作</span>",
-  "en": "A specialist assists and guides; the hotel team operates",
-  "ms": "Pakar membantu dan membimbing; pasukan hotel mengendalikan"
- },
- {
-  "zh": "工具授权的全部内容，另加",
-  "en": "Everything in Tool Licence, plus",
-  "ms": "Semua dalam Lesen Alat, serta"
- },
- {
-  "zh": "<span class=\"plus\">+</span> AI 浏览器：多个 OTA，一个工作台",
-  "en": "<span class=\"plus\">+</span> AI Browser: several OTAs, one workspace",
-  "ms": "<span class=\"plus\">+</span> Pelayar AI: beberapa OTA, satu ruang kerja"
- },
- {
-  "zh": "<span class=\"plus\">+</span> AI 获客三项：ChatGPT 预订<span class=\"nb\">（面向符合条件的合作酒店）、</span><span class=\"nb\">生成酒店官网、GEO 优化</span>",
-  "en": "<span class=\"plus\">+</span> Three AI Guest Acquisition items: ChatGPT booking (for eligible partner hotels), hotel website generation, GEO optimisation",
-  "ms": "<span class=\"plus\">+</span> Tiga perkara Pemerolehan Tetamu AI: tempahan ChatGPT (untuk hotel rakan kongsi yang layak), penjanaan laman web hotel, pengoptimuman GEO"
- },
- {
-  "zh": "<span class=\"plus\">+</span> 专人协助配置和运营指导",
-  "en": "<span class=\"plus\">+</span> A dedicated specialist helps with setup and gives operating guidance",
-  "ms": "<span class=\"plus\">+</span> Pakar khusus membantu konfigurasi dan memberi panduan operasi"
- },
- {
-  "zh": "<span class=\"nb\">酒店团队负责</span><span class=\"nb\">日常运营与执行</span>",
-  "en": "The hotel team handles daily operations and execution",
-  "ms": "Pasukan hotel mengendalikan operasi harian dan pelaksanaan"
- },
- {
-  "zh": "<span class=\"nb\">专人不代运营、</span><span class=\"nb\">不代改价</span>",
-  "en": "The specialist does not operate or change prices for you",
-  "ms": "Pakar tidak mengendalikan operasi atau mengubah harga bagi pihak anda"
- },
- {
-  "zh": "OTA 全托管",
-  "en": "Full OTA Management",
-  "ms": "Pengurusan Penuh OTA"
- },
- {
-  "zh": "<span class=\"nb\">约定范围内，</span><span class=\"nb\">专人代为操作</span>",
-  "en": "A specialist operates for you, within the agreed scope",
-  "ms": "Pakar mengendalikan bagi pihak anda, dalam skop dipersetujui"
- },
- {
-  "zh": "专人陪跑的全部内容，另加",
-  "en": "Everything in Specialist Coaching, plus",
-  "ms": "Semua dalam Bimbingan Pakar, serta"
- },
- {
-  "zh": "<span class=\"plus\">+</span> 专人接管双方约定的<span class=\"nb\">线上 OTA 运营</span>",
-  "en": "<span class=\"plus\">+</span> A dedicated specialist takes over the online OTA operations agreed by both sides",
-  "ms": "<span class=\"plus\">+</span> Pakar khusus mengambil alih operasi OTA dalam talian yang dipersetujui kedua-dua pihak"
- },
- {
-  "zh": "<span class=\"nb\">专人，仅按约定渠道、</span><span class=\"nb\">已开通权限及</span><span class=\"nb\">批准的操作范围执行</span>",
-  "en": "A dedicated specialist, only on the agreed channels, with permissions already granted, within the approved scope of actions",
-  "ms": "Pakar khusus, hanya pada saluran yang dipersetujui, dengan kebenaran yang telah diberikan, dalam skop tindakan yang diluluskan"
- },
- {
-  "zh": "不是托管全部平台",
-  "en": "Not management of every platform",
-  "ms": "Bukan pengurusan semua platform"
- },
- {
-  "zh": "<span class=\"nb\">酒店现场和财务</span><span class=\"nb\">仍由酒店负责</span>",
-  "en": "On-site operations and finance stay with the hotel",
-  "ms": "Operasi di lokasi dan kewangan kekal dengan hotel"
- },
- {
-  "zh": "凡是用到 OTA 数据的功能，都以您授权和逐项核对为前提。GEO 优化不承诺排名、曝光或订单量。",
-  "en": "Functions that use OTA data need your authorisation and an item-by-item check. GEO optimisation does not promise rankings, exposure or booking volume.",
-  "ms": "Fungsi data OTA memerlukan kebenaran dan semakan anda. GEO tidak menjanjikan kedudukan, pendedahan atau jumlah tempahan."
- },
- {
-  "zh": "<span class=\"nb\">值不值，</span><span class=\"nb\">用同一把尺子量；</span><span class=\"nb\">没有对照，</span><span class=\"nb\">不谈增收</span>",
-  "en": "Worth it? Use one ruler: without a comparison, no claim of extra revenue",
-  "ms": "Berbaloikah? Satu pembaris: tanpa perbandingan, tiada dakwaan hasil tambahan"
- },
- {
-  "zh": "先看成本：月费摊到每个房晚",
-  "en": "First the cost: fee per room night sold",
-  "ms": "Kos dahulu: yuran bagi setiap malam bilik terjual"
- },
- {
-  "zh": "这家酒店每月卖出的房晚",
-  "en": "Room nights this hotel sells per month",
-  "ms": "Malam bilik yang dijual hotel ini sebulan"
- },
- {
-  "zh": "方案 · 月费",
-  "en": "Plan · monthly fee",
-  "ms": "Pelan · yuran bulanan"
- },
- {
-  "zh": "摊到每个卖出的房晚",
-  "en": "Fee per room night sold",
-  "ms": "Yuran bagi setiap malam bilik terjual"
- },
- {
-  "zh": "工具授权 · RM 699",
-  "en": "Tool Licence · RM 699",
-  "ms": "Lesen Alat · RM 699"
- },
- {
-  "zh": "专人陪跑 · RM 2,499",
-  "en": "Specialist Coaching · RM 2,499",
-  "ms": "Bimbingan Pakar · RM 2,499"
- },
- {
-  "zh": "OTA 全托管 · RM 9,980",
-  "en": "Full OTA Management · RM 9,980",
-  "ms": "Pengurusan Penuh OTA · RM 9,980"
- },
- {
-  "zh": "算法：月费 ÷ 每月卖出的房晚 ＝ 摊到每个卖出的房晚。月费分别是 RM 699、RM 2,499、RM 9,980。",
-  "en": "How it is worked out: monthly fee ÷ room nights sold per month = fee per room night sold. The monthly fees are RM 699, RM 2,499 and RM 9,980.",
-  "ms": "Cara kiraan: yuran bulanan ÷ malam bilik terjual sebulan = yuran bagi setiap malam bilik terjual. Yuran bulanan ialah RM 699, RM 2,499 dan RM 9,980."
- },
- {
-  "zh": "只是成本换算，<span class=\"nb\">不代表用了以后会多卖、多收。</span>",
-  "en": "A cost conversion only; it does not mean you will sell more or earn more after using it.",
-  "ms": "Hanya penukaran kos; ia tidak bermakna anda akan menjual lebih atau memperoleh lebih selepas menggunakannya."
- },
- {
-  "zh": "<b>收入之外，还可以先数这些：</b>提示了多少处异常，酒店确认属实的有多少，采纳了多少条建议。<span class=\"nb\">是否写进验收标准，</span><span class=\"nb\">由双方另定。</span>",
-  "en": "<b>Besides revenue, these can be counted first:</b> how many anomalies were flagged, how many the hotel confirmed as real, and how many suggestions were adopted. Whether they go into the acceptance criteria is for both sides to agree.",
-  "ms": "<b>Selain hasil, perkara ini boleh dikira dahulu:</b> berapa kelainan yang dikesan, berapa yang disahkan benar oleh hotel, dan berapa cadangan yang diterima pakai. Sama ada ia dimasukkan dalam kriteria penerimaan dipersetujui oleh kedua-dua pihak."
- },
- {
-  "zh": "再看值不值：对照表",
-  "en": "Then the value: the comparison table",
-  "ms": "Kemudian nilainya: jadual perbandingan"
- },
- {
-  "zh": "数字由酒店提供 · 试点时填",
-  "en": "Figures provided by the hotel · filled in during the pilot",
-  "ms": "Angka disediakan oleh hotel · diisi semasa percubaan"
- },
- {
-  "zh": "刚才这一题还没有数据可看：从这张表开始",
-  "en": "This question has no data to look at yet: start with this table",
-  "ms": "Soalan ini belum ada data untuk dilihat: mulakan dengan jadual ini"
- },
- {
-  "zh": "六个数",
-  "en": "Six numbers",
-  "ms": "Enam angka"
- },
- {
-  "zh": "对照期",
-  "en": "Comparison period",
-  "ms": "Tempoh perbandingan"
- },
- {
-  "zh": "试点期",
-  "en": "Pilot period",
-  "ms": "Tempoh percubaan"
- },
- {
-  "zh": "对照期＝拿来和试点期比较的一段时间；取哪一段、扣哪些项，<span class=\"nb\">试点前由双方约定。</span>",
-  "en": "Comparison period = a period used to compare against the pilot period; which period to take and what is deducted are agreed by both sides before the pilot.",
-  "ms": "Tempoh perbandingan = satu tempoh yang dibandingkan dengan tempoh percubaan; tempoh mana yang diambil dan apa yang dipotong dipersetujui oleh kedua-dua pihak sebelum percubaan."
- },
- {
-  "zh": "房费收入不是利润；HogentX 不是保证增收的工具。",
-  "en": "Room revenue is not profit; HogentX is not a tool that guarantees more revenue.",
-  "ms": "Hasil bilik bukan keuntungan; HogentX bukan alat yang menjamin peningkatan hasil."
- },
- {
-  "zh": "<span class=\"nb\">开始之前先说清楚三件事：</span><span class=\"nb\">数据、权限、</span><span class=\"nb\">出了问题找谁</span>",
-  "en": "Three things to be clear on before we start: data, permissions, who to call",
-  "ms": "Tiga perkara dijelaskan sebelum bermula: data, kebenaran, siapa dihubungi"
- },
- {
-  "zh": "数据取自哪里",
-  "en": "Where the data comes from",
-  "ms": "Dari mana data diambil"
- },
- {
-  "zh": "<span class=\"nb\">取自您授权的来源，</span><span class=\"nb\">从您选定的那家酒店</span><span class=\"nb\">已在用的 OTA 账号开始。</span>",
-  "en": "From sources you authorise, starting with the OTA accounts already used by the hotel you choose.",
-  "ms": "Daripada sumber yang anda benarkan, bermula dengan akaun OTA yang sudah digunakan oleh hotel pilihan anda."
- },
- {
-  "zh": "每个数据来源都先核对，再使用。",
-  "en": "Every data source is checked before it is used.",
-  "ms": "Setiap sumber data disemak sebelum digunakan."
- },
- {
-  "zh": "<span class=\"nb\">谁能动价格、</span><span class=\"nb\">谁能发布内容</span>",
-  "en": "Who can change prices, who can publish content",
-  "ms": "Siapa boleh mengubah harga, siapa boleh menerbitkan kandungan"
- },
- {
-  "zh": "改价、发布都由酒店自己决定和操作",
-  "en": "The hotel decides and makes every price change and post itself",
-  "ms": "Hotel sendiri memutuskan dan membuat setiap perubahan harga dan penerbitan"
- },
- {
-  "zh": "专人协助和指导，<span class=\"nb\">不代运营、不代改价；</span><span class=\"nb\">改价、发布由酒店团队操作</span>",
-  "en": "A specialist assists and guides, but does not operate or change prices for you; the hotel team changes prices and publishes",
-  "ms": "Pakar membantu dan membimbing, tetapi tidak mengendalikan operasi atau mengubah harga bagi pihak anda; pasukan hotel yang mengubah harga dan menerbitkan"
- },
- {
-  "zh": "专人操作，<span class=\"nb\">仅限约定渠道、</span><span class=\"nb\">已开通权限及</span><span class=\"nb\">批准的操作范围</span>",
-  "en": "A specialist operates, only on the agreed channels, with permissions already granted, within the approved scope of actions",
-  "ms": "Pakar mengendalikan, hanya pada saluran yang dipersetujui, dengan kebenaran yang telah diberikan, dalam skop tindakan yang diluluskan"
- },
- {
-  "zh": "<span class=\"nb\">点评回复是草稿，不默认自动发布；</span><span class=\"nb\">数字员工不做无人值守自动改价。</span>",
-  "en": "Review replies are drafts and are not published automatically by default; the digital staff do not change prices automatically and unattended.",
-  "ms": "Balasan ulasan ialah draf dan tidak diterbitkan secara automatik secara lalai; pekerja digital tidak mengubah harga secara automatik tanpa pengawasan."
- },
- {
-  "zh": "出了问题谁来处理",
-  "en": "Who handles it when something goes wrong",
-  "ms": "Siapa yang menangani jika berlaku masalah"
- },
- {
-  "zh": "试点开始前写进约定：<span class=\"nb\">双方各指定一位对接人，</span><span class=\"nb\">并写明出问题时怎么处理。</span>",
-  "en": "Written into the agreement before the pilot starts: each side names one contact person, and how problems are handled is set out.",
-  "ms": "Ditulis dalam persetujuan sebelum percubaan bermula: setiap pihak menamakan seorang pegawai perhubungan, dan cara menangani masalah dinyatakan."
- },
- {
-  "zh": "<b>不管选哪个方案，</b>酒店现场和财务都由酒店负责。",
-  "en": "<b>Whichever plan you choose,</b> on-site hotel operations and finance remain the hotel's responsibility.",
-  "ms": "<b>Mana-mana pelan yang dipilih,</b> operasi hotel di lokasi dan kewangan kekal tanggungjawab hotel."
- },
- {
-  "zh": "<span class=\"nb\">怎么试：</span><span class=\"nb\">一家酒店、</span><span class=\"nb\">已有的 OTA、</span><span class=\"nb\">一件事</span>",
-  "en": "How to try it: one hotel, the OTAs you already use, one task",
-  "ms": "Cara mencuba: satu hotel, OTA yang sudah digunakan, satu tugas"
- },
- {
-  "zh": "不用一开始就把所有酒店、所有 OTA 都放进来。先挑一件对您有价值的事，在一家您愿意授权的酒店验证。",
-  "en": "No need to bring in every hotel and every OTA at the start. Pick one task that matters to you and test it at one hotel you are willing to authorise.",
-  "ms": "Tidak perlu memasukkan semua hotel dan semua OTA dari awal. Pilih satu tugas yang bernilai dan uji di satu hotel yang anda sedia beri kebenaran."
- },
- {
-  "zh": "挑一件事来验证",
-  "en": "Pick one task to test",
-  "ms": "Pilih satu tugas untuk diuji"
- },
- {
-  "zh": "点一下，填进右边",
-  "en": "Click one to fill in the sheet",
-  "ms": "Klik satu untuk mengisi borang"
- },
- {
-  "zh": "01 满房时的提价空间",
-  "en": "01 Room to raise rates when full",
-  "ms": "01 Ruang naikkan harga apabila penuh"
- },
- {
-  "zh": "预订进度提醒＋调价建议",
-  "en": "Booking-pace alerts + pricing suggestions",
-  "ms": "Amaran kadar tempahan + cadangan harga"
- },
- {
-  "zh": "刚才这一题：还没有数据可看",
-  "en": "From your earlier answer: no data to look at yet",
-  "ms": "Daripada jawapan anda tadi: belum ada data untuk dilihat"
- },
- {
-  "zh": "02 有房却漏卖",
-  "en": "02 Rooms available but unsold",
-  "ms": "02 Bilik ada tetapi tidak terjual"
- },
- {
-  "zh": "03 渠道成本和净实收",
-  "en": "03 Channel cost and net received",
-  "ms": "03 Kos saluran dan terimaan bersih"
- },
- {
-  "zh": "对照表：按同一口径对一次",
-  "en": "Comparison table: worked out once, on one basis",
-  "ms": "Jadual perbandingan: dikira sekali, atas satu asas"
- },
- {
-  "zh": "多个 OTA 一处看 · 专人陪跑起包含",
-  "en": "Several OTAs in one place · from Specialist Coaching",
-  "ms": "Beberapa OTA di satu tempat · dari Bimbingan Pakar"
- },
- {
-  "zh": "AI 浏览器：查看和监测",
-  "en": "AI Browser: view and monitor",
-  "ms": "Pelayar AI: lihat dan pantau"
- },
- {
-  "zh": "口碑与每天的执行",
-  "en": "Reputation and daily execution",
-  "ms": "Reputasi dan pelaksanaan harian"
- },
- {
-  "zh": "点评回复草稿／早安简报＋质检与整改",
-  "en": "Review reply drafts / Morning Brief + quality checks and follow-up",
-  "ms": "Draf balasan ulasan / Taklimat Pagi + pemeriksaan kualiti dan tindakan susulan"
- },
- {
-  "zh": "能不能在您的酒店验证，以授权和接入核对的结果为准。",
-  "en": "Whether a task can be tested at your hotel depends on the outcome of the authorisation and connection check.",
-  "ms": "Sama ada sesuatu tugas boleh diuji di hotel anda bergantung pada hasil semakan kebenaran dan sambungan."
- },
- {
-  "zh": "<b>这次不验证：</b>独立、实时的收益报表（未上线）；200+ OTA（计划）；<span class=\"nb\">口述后自动建站（设想）。</span>",
-  "en": "<b>Not tested this time:</b> the standalone, real-time revenue report (not launched); 200+ OTA (a plan); a website built automatically from a spoken briefing (an idea).",
-  "ms": "<b>Tidak diuji kali ini:</b> laporan hasil berasingan dan masa nyata (belum dilancarkan); 200+ OTA (rancangan); laman web yang dibina secara automatik daripada penerangan lisan (idea)."
- },
- {
-  "zh": "ChatGPT 预订只在酒店符合条件并核对接入情况后才列入。",
-  "en": "ChatGPT booking is added only if the hotel is eligible and its connection has been checked.",
-  "ms": "Tempahan ChatGPT hanya dimasukkan jika hotel layak dan sambungannya telah disemak."
- },
- {
-  "zh": "今天先定这三项",
-  "en": "Three things to settle today",
-  "ms": "Tiga perkara untuk ditetapkan hari ini"
- },
- {
-  "zh": "哪家酒店",
-  "en": "Hotel",
-  "ms": "Hotel"
- },
- {
-  "zh": "哪些 OTA",
-  "en": "OTAs",
-  "ms": "OTA"
- },
- {
-  "zh": "验证哪件事",
-  "en": "Task to test",
-  "ms": "Tugas diuji"
- },
- {
-  "zh": "<b>其余由双方另定，写进试点约定：</b>范围、时间、验收标准、费用安排；谁能改价和发布；<span class=\"nb\">出了问题怎么处理。</span>",
-  "en": "<b>The rest is agreed by both sides and written into the pilot agreement:</b> scope, timing, acceptance criteria, fees; who can change prices and publish; how problems are handled.",
-  "ms": "<b>Selebihnya dipersetujui oleh kedua-dua pihak dan ditulis dalam persetujuan percubaan:</b> skop, tempoh, kriteria penerimaan, bayaran; siapa boleh mengubah harga dan menerbitkan; cara menangani masalah."
- },
- {
-  "zh": "填写的内容只留在这一页，不会上传；关闭后不保存，需要留存请截图。",
-  "en": "What you type stays on this page only and is not uploaded. It is not saved when you close the page; take a screenshot if you want to keep it.",
-  "ms": "Apa yang anda taip hanya kekal di halaman ini dan tidak dimuat naik. Ia tidak disimpan apabila halaman ditutup; ambil tangkapan skrin jika ingin menyimpannya."
- },
- {
-  "zh": "下一步",
-  "en": "Next step",
-  "ms": "Langkah seterusnya"
- },
- {
-  "zh": "<span class=\"nb\">如果您愿意试，</span><span class=\"nb\">下一步只有三步</span>",
-  "en": "If you would like to try, there are just three steps",
-  "ms": "Jika anda ingin mencuba, hanya ada tiga langkah"
- },
- {
-  "zh": "您来定",
-  "en": "You decide",
-  "ms": "Anda tentukan"
- },
- {
-  "zh": "<span class=\"nb\">哪家酒店、哪些 OTA、</span><span class=\"nb\">先验证哪件事，</span><span class=\"nb\">和一位对接人</span>",
-  "en": "Which hotel, which OTAs, which task to test first, and one contact person",
-  "ms": "Hotel mana, OTA mana, tugas mana diuji dahulu, dan seorang pegawai perhubungan"
- },
- {
-  "zh": "我们核对",
-  "en": "We check",
-  "ms": "Kami semak"
- },
- {
-  "zh": "逐项核对：<span class=\"nb\">酒店、账号、</span><span class=\"nb\">权限、可接渠道</span>",
-  "en": "Check item by item: hotel, accounts, permissions, connectable channels",
-  "ms": "Semak satu demi satu: hotel, akaun, kebenaran, saluran yang boleh disambung"
- },
- {
-  "zh": "一起约定",
-  "en": "We agree together",
-  "ms": "Kita persetujui bersama"
- },
- {
-  "zh": "其余事项写进试点约定，<span class=\"nb\">约定清楚后开始</span>",
-  "en": "The rest goes into the pilot agreement; we start once everything is agreed",
-  "ms": "Selebihnya ditulis dalam persetujuan percubaan; kita mula setelah semuanya dipersetujui"
- },
- {
-  "zh": "想量化价值的话，再准备对照期的几个数（见对照表）。",
-  "en": "If you want to measure the value, also prepare a few figures for the comparison period (see the comparison table).",
-  "ms": "Jika ingin mengukur nilainya, sediakan juga beberapa angka bagi tempoh perbandingan (lihat jadual perbandingan)."
- },
- {
-  "zh": "面向酒店的 AI 运营产品 · INTENT COMPUTING PTE. LTD.（新加坡）",
-  "en": "AI operations product for hotels · INTENT COMPUTING PTE. LTD. (Singapore)",
-  "ms": "Produk operasi AI untuk hotel · INTENT COMPUTING PTE. LTD. (Singapura)"
- },
- {
-  "zh": "产品界面语言：中文 / English / Bahasa Melayu",
-  "en": "Product interface languages: Chinese / English / Bahasa Melayu",
-  "ms": "Bahasa antara muka produk: Cina / English / Bahasa Melayu"
- },
- {
-  "zh": "准备好了，或还有问题，请联系我们",
-  "en": "Ready, or still have questions? Contact us",
-  "ms": "Sudah bersedia, atau masih ada soalan? Hubungi kami"
- },
- {
-  "zh": "附",
-  "en": "Appendix",
-  "ms": "Lampiran"
- },
- {
-  "zh": "其他能力",
-  "en": "Other capabilities",
-  "ms": "Keupayaan lain"
- },
- {
-  "zh": "<span class=\"nb\">预订进度提醒：</span><span class=\"nb\">两个规则设置界面</span>",
-  "en": "Booking-pace alerts: two rule-setting screens",
-  "ms": "Amaran kadar tempahan: dua skrin tetapan peraturan"
- },
- {
-  "zh": "给未来的日期设规则：<span class=\"nb\">预订进度偏高或偏低时，</span><span class=\"nb\">提醒酒店团队。</span>",
-  "en": "Set rules for future dates: when booking pace runs high or low, the hotel team is alerted.",
-  "ms": "Tetapkan peraturan untuk tarikh akan datang: apabila kadar tempahan terlalu tinggi atau rendah, pasukan hotel dimaklumkan."
- },
- {
-  "zh": "按小时看订房变化，满足条件时提醒。",
-  "en": "Watch booking changes by the hour, with an alert when a condition is met.",
-  "ms": "Pantau perubahan tempahan mengikut jam, dengan amaran apabila syarat dipenuhi."
- },
- {
-  "zh": "提醒发给谁、多久提醒一次，可以设置。",
-  "en": "You can set who receives the alert and how often.",
-  "ms": "Anda boleh menetapkan siapa yang menerima amaran dan berapa kerap."
- },
- {
-  "zh": "图中“出租率”即入住率，“间夜”即房晚；灰色块是遮盖掉的数值。<span class=\"nb\">产品界面支持中文、English、Bahasa Melayu。</span>",
-  "en": "In the screenshots, \"出租率\" is occupancy and \"间夜\" is room night; grey blocks are masked values. The product interface supports Chinese, English and Bahasa Melayu.",
-  "ms": "Dalam tangkapan skrin, \"出租率\" ialah kadar penghunian dan \"间夜\" ialah malam bilik; blok kelabu ialah nilai yang disembunyikan. Antara muka produk menyokong bahasa Cina, English dan Bahasa Melayu."
- },
- {
-  "zh": "规则设置页，不是监测结果",
-  "en": "Rule-setting page, not monitoring results",
-  "ms": "Halaman tetapan, bukan hasil pemantauan"
- },
- {
-  "zh": "<b>出租率监测</b> 原界面可配置预订进度<span class=\"nb\">偏高或偏低的提醒规则。</span>",
-  "en": "<b>Occupancy monitoring</b> The earlier interface could set alert rules for booking pace running high or low.",
-  "ms": "<b>Pemantauan kadar penghunian</b> Antara muka terdahulu boleh menetapkan peraturan amaran apabila kadar tempahan tinggi atau rendah."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 4 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 4.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 4.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "规则设置页 · 数值已遮盖",
-  "en": "Rule-setting page · values masked",
-  "ms": "Halaman tetapan · nilai disembunyikan"
- },
- {
-  "zh": "<b>小时级订房监测</b> 原界面可配置<span class=\"nb\">小时级变化的监测规则。</span>",
-  "en": "<b>Hourly booking monitoring</b> The earlier interface could set monitoring rules for hourly changes.",
-  "ms": "<b>Pemantauan tempahan mengikut jam</b> Antara muka terdahulu boleh menetapkan peraturan pemantauan perubahan mengikut jam."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 7 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 7.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 7.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "每天怎么用",
-  "en": "Day-to-day use",
-  "ms": "Kegunaan harian"
- },
- {
-  "zh": "<span class=\"nb\">每天早上一页：</span><span class=\"nb\">今天要处理什么，</span><span class=\"nb\">放在一起</span>",
-  "en": "One page every morning: what needs handling today, in one place",
-  "ms": "Satu halaman setiap pagi: apa yang perlu ditangani hari ini, di satu tempat"
- },
- {
-  "zh": "简报页 · 数值已遮盖",
-  "en": "Brief page · values masked",
-  "ms": "Halaman taklimat · nilai disembunyikan"
- },
- {
-  "zh": "<b>早安简报</b> 原界面展示每日经营信号和待处理任务。",
-  "en": "<b>Morning Brief</b> The earlier interface shows daily operating signals and tasks waiting to be handled.",
-  "ms": "<b>Taklimat Pagi</b> Antara muka terdahulu menunjukkan isyarat operasi harian dan tugas yang menunggu tindakan."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 25 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 25.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 25.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "三个方案都含",
-  "en": "Included in all three plans",
-  "ms": "Termasuk dalam ketiga-tiga pelan"
- },
- {
-  "zh": "<b>早安简报</b>把每日经营数据、划线价核对、调价建议、点评回复、质检整改和高风险待办放在一起。",
-  "en": "The <b>Morning Brief</b> puts daily operating data, strikethrough price checks, pricing suggestions, review replies, quality follow-up and high-risk to-dos in one place.",
-  "ms": "<b>Taklimat Pagi</b> menghimpunkan data operasi harian, semakan harga potong, cadangan harga, balasan ulasan, tindakan susulan kualiti dan tugasan berisiko tinggi di satu tempat."
- },
- {
-  "zh": "简报里有什么内容，取决于您酒店已授权并接通的数据。",
-  "en": "What the brief contains depends on the data your hotel has authorised and connected.",
-  "ms": "Kandungan taklimat bergantung pada data yang telah dibenarkan dan disambungkan oleh hotel anda."
- },
- {
-  "zh": "四位数字员工",
-  "en": "Four digital staff",
-  "ms": "Empat pekerja digital"
- },
- {
-  "zh": "数字收益",
-  "en": "Digital Revenue",
-  "ms": "Hasil Digital"
- },
- {
-  "zh": "数字宾客关系",
-  "en": "Digital Guest Relations",
-  "ms": "Perhubungan Tetamu Digital"
- },
- {
-  "zh": "数字质检",
-  "en": "Digital Quality",
-  "ms": "Kualiti Digital"
- },
- {
-  "zh": "数字总经理",
-  "en": "Digital General Manager",
-  "ms": "Pengurus Besar Digital"
- },
- {
-  "zh": "产品里可以对话的四个角色：可发起任务、归纳数据或生成内容。角色权限按酒店配置；<b class=\"nowrap\">数字员工不做无人值守自动改价</b>。",
-  "en": "Four roles you can talk to in the product: they can start tasks, summarise data or generate content. Role permissions are set per hotel; <b>the digital staff do not change prices automatically and unattended</b>.",
-  "ms": "Empat peranan yang boleh diajak berbual dalam produk: boleh memulakan tugas, merumuskan data atau menjana kandungan. Kebenaran peranan ditetapkan ikut hotel; <b>pekerja digital tidak mengubah harga secara automatik tanpa pengawasan</b>."
- },
- {
-  "zh": "图中“评价回复”即点评回复，“ADR”即平均成交房价；划线价是展示原价，不是成交价。",
-  "en": "In the image, \"评价回复\" means review replies and \"ADR\" is the average daily rate; a strikethrough price is the original price shown, not the selling price.",
-  "ms": "Dalam imej, \"评价回复\" bermaksud balasan ulasan dan \"ADR\" ialah kadar harian purata; harga potong ialah harga asal yang dipaparkan, bukan harga jualan."
- },
- {
-  "zh": "口碑与现场",
-  "en": "Reputation and on-site work",
-  "ms": "Reputasi dan kerja di lokasi"
- },
- {
-  "zh": "<span class=\"nb\">点评：</span><span class=\"nb\">先出草稿，</span><span class=\"nb\">人来定稿。</span><span class=\"nb\">质检：</span><span class=\"nb\">任务有派有收</span>",
-  "en": "Reviews: a draft, then a person decides. Quality: tasks out, results in",
-  "ms": "Ulasan: draf dahulu, manusia memutuskan. Kualiti: tugas diagih, hasil dikutip"
- },
- {
-  "zh": "点评回复草稿",
-  "en": "Review reply drafts",
-  "ms": "Draf balasan ulasan"
- },
- {
-  "zh": "跨 OTA 生成回复草稿",
-  "en": "Drafts replies across OTAs",
-  "ms": "Menjana draf balasan merentas OTA"
- },
- {
-  "zh": "审核、修改",
-  "en": "Review and edit",
-  "ms": "Semak dan sunting"
- },
- {
-  "zh": "确认后再发布",
-  "en": "Publish after confirming",
-  "ms": "Terbit selepas disahkan"
- },
- {
-  "zh": "<b>不是默认自动发布。</b>谁审核、谁发布，按方案约定；能为哪些 OTA 的点评生成草稿，按您酒店的可接渠道核对。",
-  "en": "<b>Not published automatically by default.</b> Who reviews and who publishes depends on the plan; which OTAs' reviews can get drafts is checked against your hotel's connectable channels.",
-  "ms": "<b>Tidak diterbitkan secara automatik secara lalai.</b> Siapa yang menyemak dan siapa yang menerbitkan bergantung pada pelan; ulasan OTA mana yang boleh dijana drafnya disemak mengikut saluran yang boleh disambung bagi hotel anda."
- },
- {
-  "zh": "质检与整改",
-  "en": "Quality checks and follow-up",
-  "ms": "Pemeriksaan kualiti dan tindakan susulan"
- },
- {
-  "zh": "质检＝客房与服务检查；整改＝发现问题后跟进改正",
-  "en": "Quality checks = room and service inspections; follow-up = fixing the problems found",
-  "ms": "Pemeriksaan kualiti = pemeriksaan bilik dan perkhidmatan; tindakan susulan = membetulkan masalah yang ditemui"
- },
- {
-  "zh": "总览页 · 数值已遮盖",
-  "en": "Overview page · values masked",
-  "ms": "Halaman ringkasan · nilai disembunyikan"
- },
- {
-  "zh": "创建和指派检查任务，回收结果。",
-  "en": "Create and assign inspection tasks, and collect the results.",
-  "ms": "Cipta dan agihkan tugas pemeriksaan, serta kumpulkan hasilnya."
- },
- {
-  "zh": "不合格项可生成整改任务。",
-  "en": "Failed items can generate follow-up tasks.",
-  "ms": "Perkara yang gagal boleh menjana tugas susulan."
- },
- {
-  "zh": "可看周期评价和质检看板。",
-  "en": "Periodic evaluations and a quality dashboard can be viewed.",
-  "ms": "Penilaian berkala dan papan pemuka kualiti boleh dilihat."
- },
- {
-  "zh": "<b>质检工作台</b> 原界面展示质检任务和整改管理入口。",
-  "en": "<b>Quality workbench</b> The earlier interface shows the entry points for quality tasks and follow-up management.",
-  "ms": "<b>Ruang kerja kualiti</b> Antara muka terdahulu menunjukkan pintu masuk bagi tugas kualiti dan pengurusan tindakan susulan."
- },
- {
-  "zh": "<b>来源：2026-11-12 产品进展汇报，第 23 页。</b><span class=\"nb\">历史实拍，已脱敏。</span><span class=\"nb\">用于理解产品界面，</span><span class=\"nb\">不证明马来西亚门店</span><span class=\"nb\">当前接入或实际运营结果。</span>",
-  "en": "<b>Source: product progress briefing, 2026-11-12, page 23.</b> Historical capture, sensitive values masked. For understanding the interface only; not evidence that any hotel in Malaysia is connected today, or of actual operating results.",
-  "ms": "<b>Sumber: taklimat kemajuan produk, 2026-11-12, hlm. 23.</b> Tangkapan sejarah, nilai sensitif disembunyikan. Untuk memahami antara muka sahaja; bukan bukti mana-mana hotel di Malaysia kini disambungkan atau hasil operasi sebenar."
- },
- {
-  "zh": "AI 获客",
-  "en": "AI Guest Acquisition",
-  "ms": "Pemerolehan Tetamu AI"
- },
- {
-  "zh": "<span class=\"nb\">AI 获客：</span><span class=\"nb\">三项能力，</span><span class=\"nb\">逐家配置和接入</span>",
-  "en": "AI Guest Acquisition: three items, set up and connected hotel by hotel",
-  "ms": "Pemerolehan Tetamu AI: tiga perkara, dikonfigurasi dan disambung ikut hotel"
- },
- {
-  "zh": "从专人陪跑方案（RM 2,499）起包含；工具授权（RM 699）不含。",
-  "en": "Included from the Specialist Coaching plan (RM 2,499). The Tool Licence (RM 699) does not include it.",
-  "ms": "Termasuk bermula daripada pelan Bimbingan Pakar (RM 2,499). Lesen Alat (RM 699) tidak merangkuminya."
- },
- {
-  "zh": "ChatGPT 预订",
-  "en": "ChatGPT booking",
-  "ms": "Tempahan ChatGPT"
- },
- {
-  "zh": "面向符合条件的合作酒店。预订路径按您酒店的实际接入情况展示。",
-  "en": "For eligible partner hotels. The booking path is shown according to how your hotel is actually connected.",
-  "ms": "Untuk hotel rakan kongsi yang layak. Laluan tempahan ditunjukkan mengikut keadaan sambungan sebenar hotel anda."
- },
- {
-  "zh": "不是签约后马上就能接受预订；能否开通、预订怎么走，按您酒店的接入情况核对后确认。",
-  "en": "It is not the case that bookings can be taken right after signing. Whether it can be switched on, and how a booking flows, is confirmed after checking your hotel's connection.",
-  "ms": "Tempahan tidak semestinya boleh diterima sebaik sahaja menandatangani. Sama ada ia boleh diaktifkan, dan bagaimana aliran tempahannya, disahkan selepas menyemak sambungan hotel anda."
- },
- {
-  "zh": "生成酒店官网",
-  "en": "Hotel website generation",
-  "ms": "Penjanaan laman web hotel"
- },
- {
-  "zh": "围绕酒店自己的素材生成；现有流程需要配置。",
-  "en": "Generated from the hotel's own material; the current process needs setup.",
-  "ms": "Dijana daripada bahan hotel sendiri; proses semasa memerlukan konfigurasi."
- },
- {
-  "zh": "未经许可，不抓取或转用第三方图片。",
-  "en": "Third-party images are not scraped or reused without permission.",
-  "ms": "Imej pihak ketiga tidak diambil atau digunakan semula tanpa kebenaran."
- },
- {
-  "zh": "“开场口述、自动取图取资料、结束即出预览”是演示/产品改进设想，<span class=\"nb\">不是现有流程。</span>",
-  "en": "\"Speak a briefing, pictures and details are fetched automatically, a preview appears at the end\" is a demo and a product improvement idea, not the current process.",
-  "ms": "\"Beri penerangan lisan, gambar dan maklumat diambil secara automatik, pratonton muncul pada akhirnya\" ialah demo dan idea penambahbaikan produk, bukan proses semasa."
- },
- {
-  "zh": "GEO 优化",
-  "en": "GEO optimisation",
-  "ms": "Pengoptimuman GEO"
- },
- {
-  "zh": "提高酒店在 AI 搜索中被发现的机会。",
-  "en": "Raises the hotel's chances of being found in AI search.",
-  "ms": "Meningkatkan peluang hotel ditemui dalam carian AI."
- },
- {
-  "zh": "不承诺排名、曝光或订单量。",
-  "en": "No promise of rankings, exposure or booking volume.",
-  "ms": "Tidak menjanjikan kedudukan, pendedahan atau jumlah tempahan."
- },
- {
-  "zh": "ChatGPT 预订的技术方式：A2A、MCP。",
-  "en": "Technical basis of ChatGPT booking: A2A, MCP.",
-  "ms": "Asas teknikal tempahan ChatGPT: A2A, MCP."
- },
- {
-  "zh": "在线订房平台，即客人在网上订房用的平台。",
-  "en": "Online travel agency: a platform where guests book rooms online.",
-  "ms": "Agensi pelancongan dalam talian: platform tempat tetamu menempah bilik dalam talian."
- },
- {
-  "zh": "房晚 <span class=\"en\">Room night</span>",
-  "en": "Room night",
-  "ms": "Malam bilik <span class=\"en\">Room night</span>"
- },
- {
-  "zh": "一间房住一晚。截图里的“间夜”是同一个意思。",
-  "en": "One room occupied for one night. \"间夜\" in the screenshots means the same thing.",
-  "ms": "Satu bilik dihuni selama satu malam. \"间夜\" dalam tangkapan skrin membawa maksud yang sama."
- },
- {
-  "zh": "可售房晚 <span class=\"en\">Available room nights</span>",
-  "en": "Available room nights",
-  "ms": "Malam bilik tersedia <span class=\"en\">Available room nights</span>"
- },
- {
-  "zh": "可以卖的房间数 × 天数。",
-  "en": "Number of rooms that can be sold × number of days.",
-  "ms": "Bilangan bilik yang boleh dijual × bilangan hari."
- },
- {
-  "zh": "入住率 <span class=\"en\">Occupancy</span>",
-  "en": "Occupancy",
-  "ms": "Kadar penghunian <span class=\"en\">Occupancy</span>"
- },
- {
-  "zh": "卖出的房晚 ÷ 可售房晚。截图里叫“出租率”。",
-  "en": "Room nights sold ÷ available room nights. Called \"出租率\" in the screenshots.",
-  "ms": "Malam bilik terjual ÷ malam bilik tersedia. Disebut \"出租率\" dalam tangkapan skrin."
- },
- {
-  "zh": "平均成交房价 <span class=\"en\">ADR</span>",
-  "en": "Average daily rate <span class=\"en\">ADR</span>",
-  "ms": "Kadar harian purata <span class=\"en\">ADR</span>"
- },
- {
-  "zh": "实际卖出的平均房价，不是划线价。",
-  "en": "The average rate actually sold at, not the strikethrough price.",
-  "ms": "Purata harga jualan sebenar, bukan harga potong."
- },
- {
-  "zh": "划线价",
-  "en": "Strikethrough price",
-  "ms": "Harga potong"
- },
- {
-  "zh": "OTA 页面上展示的原价，不是成交价。",
-  "en": "The original price shown on an OTA page, not the selling price.",
-  "ms": "Harga asal yang dipaparkan pada halaman OTA, bukan harga jualan."
- },
- {
-  "zh": "房费收入 <span class=\"en\">Room revenue</span>",
-  "en": "Room revenue",
-  "ms": "Hasil bilik <span class=\"en\">Room revenue</span>"
- },
- {
-  "zh": "房费总额，还没有扣渠道佣金。不是利润。",
-  "en": "Total room charges, before channel commission. Not profit.",
-  "ms": "Jumlah caj bilik, sebelum komisen saluran. Bukan keuntungan."
- },
- {
-  "zh": "净实收 <span class=\"en\">Net</span>",
-  "en": "Net received",
-  "ms": "Terimaan bersih <span class=\"en\">Net</span>"
- },
- {
-  "zh": "扣除渠道佣金后，酒店实际收到的房费。具体扣项在试点前约定。",
-  "en": "Room charges the hotel actually receives after channel commission. What is deducted is agreed before the pilot.",
-  "ms": "Caj bilik yang benar-benar diterima hotel selepas komisen saluran. Potongannya dipersetujui sebelum percubaan."
- },
- {
-  "zh": "客房与服务检查；发现问题后的跟进改正。",
-  "en": "Room and service inspections; fixing the problems found.",
-  "ms": "Pemeriksaan bilik dan perkhidmatan; membetulkan masalah yang ditemui."
- },
- {
-  "zh": "用来和试点期比较的一段时间；取哪一段，试点前由双方约定。",
-  "en": "A period used to compare against the pilot period; which period to take is agreed by both sides before the pilot.",
-  "ms": "Satu tempoh yang digunakan untuk dibandingkan dengan tempoh percubaan; tempoh mana yang diambil dipersetujui oleh kedua-dua pihak sebelum percubaan."
- },
- {
-  "zh": "经酒店授权、登录产品支持的 OTA 后，在同一工作台查看、监测，并按约定的权限管理。",
-  "en": "Once the hotel authorises and logs in to the OTAs the product supports: view and monitor them in one workspace, and manage within the agreed permissions.",
-  "ms": "Selepas hotel memberi kebenaran dan log masuk ke OTA yang disokong produk: lihat dan pantau dalam satu ruang kerja, serta urus mengikut kebenaran yang dipersetujui."
- },
- {
-  "zh": "基础运营工具的软件使用权；由酒店自行决策和执行。",
-  "en": "The right to use the basic operations tools; the hotel decides and carries out.",
-  "ms": "Hak menggunakan alat operasi asas; hotel membuat keputusan dan melaksanakan."
- },
- {
-  "zh": "专人协助配置、指导运营；日常操作仍由酒店团队负责。",
-  "en": "A dedicated specialist helps with setup and guides operations; daily work is still done by the hotel team.",
-  "ms": "Pakar khusus membantu konfigurasi dan membimbing operasi; kerja harian masih dilakukan oleh pasukan hotel."
- },
- {
-  "zh": "在约定渠道、已开通权限及批准的操作范围内，由专人代为操作线上 OTA 运营。",
-  "en": "A dedicated specialist operates online OTA work on the hotel's behalf, on the agreed channels, with permissions already granted and within the approved scope of actions.",
-  "ms": "Pakar khusus mengendalikan kerja OTA dalam talian bagi pihak hotel, pada saluran yang dipersetujui, dengan kebenaran yang telah diberikan dan dalam skop tindakan yang diluluskan."
- },
- {
-  "zh": "提高酒店在 AI 搜索中被发现的机会；不承诺排名、曝光或订单量。",
-  "en": "Raises the hotel's chances of being found in AI search; no promise of rankings, exposure or booking volume.",
-  "ms": "Meningkatkan peluang hotel ditemui dalam carian AI; tidak menjanjikan kedudukan, pendedahan atau jumlah tempahan."
- },
- {
-  "zh": "酒店管理系统，截图里出现的缩写。",
-  "en": "Property management system; the abbreviation appears in the screenshots.",
-  "ms": "Sistem pengurusan hartanah; singkatan ini muncul dalam tangkapan skrin."
+  "zh": "住小叮内部计时与核对记录，2026 年 11 月。计时按一位经理管两家酒店统计；核对为一家酒店、未来 90 天、3 个平台。",
+  "en": "住小叮 internal timing and check records, November 2026. Timing is based on one manager running two hotels; the check covers one hotel, the next 90 days and 3 platforms.",
+  "ms": "Catatan masa dan rekod semakan dalaman 住小叮, November 2026. Catatan masa berdasarkan seorang pengurus yang mengurus dua hotel; semakan meliputi satu hotel, 90 hari akan datang dan 3 platform."
  },
  {
   "zh": "全屏",
@@ -1615,104 +1330,79 @@
   "ms": "Ketik imej untuk membesarkannya ke saiz asal dan seret untuk bergerak; ketik sekali lagi untuk kembali."
  },
  {
-  "zh": "HogentX 给马来西亚酒店的说明：现在能用什么，值不值得试。",
-  "en": "HogentX briefing for hotels in Malaysia: what you can use now, and whether it is worth a trial.",
-  "ms": "Taklimat HogentX untuk hotel di Malaysia: apa yang boleh digunakan sekarang, dan berbaloikah dicuba."
+  "zh": "HogentX 给马来西亚酒店的 20 分钟汇报：每一间房，每一晚，只能卖一次。",
+  "en": "A 20-minute briefing from HogentX for hotels in Malaysia: every room, every night, can be sold only once.",
+  "ms": "Taklimat 20 minit daripada HogentX untuk hotel di Malaysia: setiap bilik, setiap malam, hanya boleh dijual sekali."
  },
  {
-  "zh": "即使经常满房，也有三笔账值得算清楚",
-  "en": "Even when you are often full, three sums are worth working out",
-  "ms": "Walaupun hotel sering penuh, ada tiga kiraan yang wajar dijelaskan"
+  "zh": "每一间房，每一晚，只能卖一次",
+  "en": "Every room, every night, can be sold only once",
+  "ms": "Setiap bilik, setiap malam, hanya boleh dijual sekali"
  },
  {
-  "zh": "今天讲三件事",
-  "en": "Three things today",
-  "ms": "Tiga perkara hari ini"
+  "zh": "2026 年上半年，全马酒店入住率和房价都在降",
+  "en": "Malaysia, first half of 2026: occupancy and room rates both fell",
+  "ms": "Malaysia, separuh pertama 2026: penghunian dan harga bilik sama-sama turun"
  },
  {
-  "zh": "快速跳转",
-  "en": "Quick links",
-  "ms": "Pautan pantas"
+  "zh": "同一家酒店，钱常漏在三个地方",
+  "en": "One hotel, three places where money leaks",
+  "ms": "Satu hotel, tiga tempat wang bocor"
  },
  {
-  "zh": "三笔账：您现在靠数据回答，还是靠经验？",
-  "en": "Three sums: do you answer from data, or from experience?",
-  "ms": "Tiga kiraan: anda menjawab dengan data, atau dengan pengalaman?"
+  "zh": "按您的酒店，算一笔",
+  "en": "Run the numbers for your hotel",
+  "ms": "Kira angka untuk hotel anda"
  },
  {
-  "zh": "满房时的提价空间，您现在怎么回答",
-  "en": "Room to raise rates when full: how do you answer this today",
-  "ms": "Ruang naikkan harga apabila penuh: bagaimana anda menjawabnya hari ini"
+  "zh": "平均房价（RM）",
+  "en": "Average room rate (RM)",
+  "ms": "Purata harga bilik (RM)"
  },
  {
-  "zh": "有房漏卖，您现在怎么回答",
-  "en": "Rooms available but unsold: how do you answer this today",
-  "ms": "Bilik ada tetapi tidak terjual: bagaimana anda menjawabnya hari ini"
+  "zh": "入住率（%）",
+  "en": "Occupancy (%)",
+  "ms": "Kadar penghunian (%)"
  },
  {
-  "zh": "渠道订单成本，您现在怎么回答",
-  "en": "Cost of channel bookings: how do you answer this today",
-  "ms": "Kos tempahan saluran: bagaimana anda menjawabnya hari ini"
+  "zh": "HogentX：替您盯着这三笔账",
+  "en": "HogentX watches all three for you",
+  "ms": "HogentX memantau ketiga-tiganya untuk anda"
  },
  {
-  "zh": "HogentX 做什么：发现问题、给出建议，由人确认",
-  "en": "What HogentX does: finds problems, suggests actions, people confirm",
-  "ms": "Apa yang HogentX buat: kesan masalah, beri cadangan, manusia yang sahkan"
+  "zh": "有房，就要在卖：每个平台、每一天都核对",
+  "en": "Rooms on sale, checked on every platform, every day",
+  "ms": "Bilik dijual, disemak di setiap platform, setiap hari"
  },
  {
-  "zh": "现在能用什么：已有的、要核对的、还没有的，一页分清",
-  "en": "What you can use now: in the product, to be checked, not there yet",
-  "ms": "Yang boleh digunakan sekarang: sudah ada, perlu disemak, belum ada"
+  "zh": "订得快，提价；订得慢，早动手",
+  "en": "Filling fast? Raise the rate. Slow? Act early",
+  "ms": "Cepat penuh? Naikkan harga. Perlahan? Bertindak awal"
  },
  {
-  "zh": "多个 OTA，一个工作台：先逐个核对，能接的再接通",
-  "en": "Several OTAs, one workspace: check each one, then connect what can be",
-  "ms": "Beberapa OTA, satu ruang kerja: semak dahulu, sambung yang boleh"
+  "zh": "收了多少、到手多少：一笔一笔算清楚",
+  "en": "What came in, what you keep: every ringgit counted",
+  "ms": "Berapa masuk, berapa tinggal: setiap ringgit dikira"
  },
  {
-  "zh": "填写",
-  "en": "Type here",
-  "ms": "Isi di sini"
+  "zh": "RM 100 的房费里，净实收 RM 80–83，OTA 佣金 RM 17–20。",
+  "en": "Out of RM 100 in room charges, RM 80–83 is net received and RM 17–20 is OTA commission.",
+  "ms": "Daripada RM 100 caj bilik, RM 80–83 ialah terimaan bersih dan RM 17–20 ialah komisen OTA."
  },
  {
-  "zh": "OTA 名称 1",
-  "en": "OTA name 1",
-  "ms": "Nama OTA 1"
+  "zh": "6 项日常工作，每周用时少了 64%",
+  "en": "6 routine tasks: 64% less time each week",
+  "ms": "6 tugas rutin: 64% kurang masa setiap minggu"
  },
  {
-  "zh": "OTA 名称 2",
-  "en": "OTA name 2",
-  "ms": "Nama OTA 2"
+  "zh": "守住口碑，让 AI 也找得到您",
+  "en": "Protect your reputation, and let AI find you too",
+  "ms": "Jaga reputasi, dan biar AI turut menemui anda"
  },
  {
-  "zh": "OTA 名称 3",
-  "en": "OTA name 3",
-  "ms": "Nama OTA 3"
- },
- {
-  "zh": "OTA 名称 4",
-  "en": "OTA name 4",
-  "ms": "Nama OTA 4"
- },
- {
-  "zh": "满房时还有没有提价空间？先看预订进度，再给调价建议",
-  "en": "Can you raise rates when full? Booking pace first, then price suggestions",
-  "ms": "Naikkan harga apabila penuh? Kadar tempahan dahulu, kemudian cadangan"
- },
- {
-  "zh": "放大查看：调价安全边界",
-  "en": "Enlarge: pricing guardrails",
-  "ms": "Besarkan: had keselamatan harga"
- },
- {
-  "zh": "历史界面截图：调价安全设置页，表头为统一房型、最低允许价格、最高允许价格、单次最大涨跌幅，表内数值已全部遮盖。",
-  "en": "Earlier interface screenshot: the pricing safety settings page, with columns for room type, lowest allowed price, highest allowed price and maximum single change; all values in the table are masked.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman tetapan keselamatan harga, dengan lajur jenis bilik, harga terendah dibenarkan, harga tertinggi dibenarkan dan had perubahan sekali; semua nilai dalam jadual disembunyikan."
- },
- {
-  "zh": "有房却没在卖？核对房态与开售",
-  "en": "Rooms available but not on sale? Check room status against sales",
-  "ms": "Bilik ada tetapi tidak dijual? Semak status bilik berbanding jualan"
+  "zh": "我们自己就开酒店：产品先在自己的店里用",
+  "en": "We run hotels too: our own hotels use it first",
+  "ms": "Kami juga mengusahakan hotel: hotel kami guna dahulu"
  },
  {
   "zh": "放大查看：房态与开售核对",
@@ -1720,164 +1410,29 @@
   "ms": "Besarkan: semakan ketersediaan"
  },
  {
-  "zh": "历史界面截图：房态巡检设置页，可见满房未关、有房已关两类异常的定义，剩余房量免提醒阈值，以及巡检渠道勾选项，部分内容已遮盖。",
-  "en": "Earlier interface screenshot: the room status check settings page, showing the definitions of the two anomalies (full but still open, rooms left but closed), the remaining-rooms threshold below which no alert is sent, and tick boxes for the channels checked; some content is masked.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman tetapan semakan status bilik, menunjukkan takrif dua kelainan (penuh tetapi masih dibuka, bilik ada tetapi ditutup), ambang baki bilik yang tidak memerlukan amaran, dan kotak pilihan saluran yang disemak; sebahagian kandungan disembunyikan."
+  "zh": "产品界面截图：房态巡检设置页，可见满房未关、有房已关两类异常的定义和巡检渠道勾选项，部分内容已脱敏。",
+  "en": "Product screenshot: the room status check settings page, showing the definitions of the two anomalies (open with no rooms, closed with rooms left) and tick boxes for the channels checked; some content is masked.",
+  "ms": "Tangkapan skrin produk: halaman tetapan semakan status bilik, menunjukkan takrif dua kelainan (dibuka walaupun penuh, ditutup walaupun ada bilik) dan kotak pilihan saluran yang disemak; sebahagian kandungan disembunyikan."
  },
  {
-  "zh": "随时看收入：实时报表还没上线，现在能看这些",
-  "en": "Seeing revenue any time: real-time report not launched; what exists now",
-  "ms": "Lihat hasil bila-bila masa: laporan masa nyata belum dilancarkan; yang ada kini"
+  "zh": "三个方案：从工具，到有人带，到替您做",
+  "en": "Three plans: tools, coaching, or done for you",
+  "ms": "Tiga pelan: alat, bimbingan, atau diuruskan untuk anda"
  },
  {
-  "zh": "三个方案，差别在：建议出来以后，谁来做",
-  "en": "Three plans. The difference: once a suggestion is made, who does the work",
-  "ms": "Tiga pelan. Bezanya: selepas cadangan dibuat, siapa yang melakukannya"
+  "zh": "今天只定一件事：先从哪家酒店开始",
+  "en": "One decision today: which hotel to start with",
+  "ms": "Satu keputusan hari ini: hotel mana untuk bermula"
  },
  {
-  "zh": "值不值，用同一把尺子量；没有对照，不谈增收",
-  "en": "Worth it? Use one ruler: without a comparison, no claim of extra revenue",
-  "ms": "Berbaloikah? Satu pembaris: tanpa perbandingan, tiada dakwaan hasil tambahan"
+  "zh": "酒店名称",
+  "en": "Hotel name",
+  "ms": "Nama hotel"
  },
  {
-  "zh": "请填",
-  "en": "Enter",
-  "ms": "Isi"
- },
- {
-  "zh": "对照期可售房晚",
-  "en": "Comparison period: available room nights",
-  "ms": "Tempoh perbandingan: malam bilik tersedia"
- },
- {
-  "zh": "试点期可售房晚",
-  "en": "Pilot period: available room nights",
-  "ms": "Tempoh percubaan: malam bilik tersedia"
- },
- {
-  "zh": "对照期入住率",
-  "en": "Comparison period: occupancy",
-  "ms": "Tempoh perbandingan: kadar penghunian"
- },
- {
-  "zh": "试点期入住率",
-  "en": "Pilot period: occupancy",
-  "ms": "Tempoh percubaan: kadar penghunian"
- },
- {
-  "zh": "对照期平均成交房价",
-  "en": "Comparison period: ADR",
-  "ms": "Tempoh perbandingan: ADR"
- },
- {
-  "zh": "试点期平均成交房价",
-  "en": "Pilot period: ADR",
-  "ms": "Tempoh percubaan: ADR"
- },
- {
-  "zh": "对照期房费收入",
-  "en": "Comparison period: room revenue",
-  "ms": "Tempoh perbandingan: hasil bilik"
- },
- {
-  "zh": "试点期房费收入",
-  "en": "Pilot period: room revenue",
-  "ms": "Tempoh percubaan: hasil bilik"
- },
- {
-  "zh": "对照期渠道佣金",
-  "en": "Comparison period: channel commission",
-  "ms": "Tempoh perbandingan: komisen saluran"
- },
- {
-  "zh": "试点期渠道佣金",
-  "en": "Pilot period: channel commission",
-  "ms": "Tempoh percubaan: komisen saluran"
- },
- {
-  "zh": "对照期净实收",
-  "en": "Comparison period: net received",
-  "ms": "Tempoh perbandingan: terimaan bersih"
- },
- {
-  "zh": "试点期净实收",
-  "en": "Pilot period: net received",
-  "ms": "Tempoh percubaan: terimaan bersih"
- },
- {
-  "zh": "开始之前先说清楚三件事：数据、权限、出了问题找谁",
-  "en": "Three things to be clear on before we start: data, permissions, who to call",
-  "ms": "Tiga perkara dijelaskan sebelum bermula: data, kebenaran, siapa dihubungi"
- },
- {
-  "zh": "怎么试：一家酒店、已有的 OTA、一件事",
-  "en": "How to try it: one hotel, the OTAs you already use, one task",
-  "ms": "Cara mencuba: satu hotel, OTA yang sudah digunakan, satu tugas"
- },
- {
-  "zh": "渠道佣金与净实收对照",
-  "en": "Channel commission and net received comparison",
-  "ms": "Perbandingan komisen saluran dan terimaan bersih"
- },
- {
-  "zh": "AI 浏览器：多个 OTA 在一处查看和监测",
-  "en": "AI Browser: view and monitor several OTAs in one place",
-  "ms": "Pelayar AI: lihat dan pantau beberapa OTA di satu tempat"
- },
- {
-  "zh": "试点约定单",
-  "en": "Pilot agreement sheet",
-  "ms": "Borang persetujuan percubaan"
- },
- {
-  "zh": "一家您愿意授权的酒店",
-  "en": "One hotel you will authorise",
-  "ms": "Satu hotel yang anda benarkan"
- },
- {
-  "zh": "这家酒店已在用的 OTA",
-  "en": "OTAs this hotel already uses",
-  "ms": "OTA yang sudah digunakan hotel ini"
- },
- {
-  "zh": "一件对您有价值的事",
-  "en": "One task that matters to you",
-  "ms": "Satu tugas yang bernilai"
- },
- {
-  "zh": "如果您愿意试，下一步只有三步",
-  "en": "If you would like to try, there are just three steps",
-  "ms": "Jika anda ingin mencuba, hanya ada tiga langkah"
- },
- {
-  "zh": "附：预订进度提醒的两个规则设置界面",
-  "en": "Appendix: booking-pace alerts, two rule-setting screens",
-  "ms": "Lampiran: amaran kadar tempahan, dua skrin tetapan peraturan"
- },
- {
-  "zh": "放大查看：出租率监测",
-  "en": "Enlarge: occupancy monitoring",
-  "ms": "Besarkan: pemantauan kadar penghunian"
- },
- {
-  "zh": "历史界面截图：出租率监测设置页，可见相邻日期比较、偏高和偏低阈值、通知频率、通知接收人等设置项，数值已遮盖。",
-  "en": "Earlier interface screenshot: the occupancy monitoring settings page, showing settings such as comparison with adjacent dates, high and low thresholds, notification frequency and recipients; values are masked.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman tetapan pemantauan kadar penghunian, menunjukkan tetapan seperti perbandingan dengan tarikh bersebelahan, ambang tinggi dan rendah, kekerapan pemberitahuan dan penerima; nilai disembunyikan."
- },
- {
-  "zh": "放大查看：小时级订房监测",
-  "en": "Enlarge: hourly booking monitoring",
-  "ms": "Besarkan: pemantauan tempahan mengikut jam"
- },
- {
-  "zh": "历史界面截图：小时级间夜监测设置页，可见配置名称、监测数据和两条以间夜为单位的预警规则，数值已遮盖。",
-  "en": "Earlier interface screenshot: the hourly room-night monitoring settings page, showing the configuration name, the data monitored and two alert rules measured in room nights; values are masked.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman tetapan pemantauan malam bilik mengikut jam, menunjukkan nama konfigurasi, data yang dipantau dan dua peraturan amaran dalam unit malam bilik; nilai disembunyikan."
- },
- {
-  "zh": "附：每天早上一页，今天要处理什么放在一起",
-  "en": "Appendix: one page every morning, what needs handling today in one place",
-  "ms": "Lampiran: satu halaman setiap pagi, apa yang perlu ditangani hari ini di satu tempat"
+  "zh": "附：产品界面实拍",
+  "en": "Appendix: product screenshots",
+  "ms": "Lampiran: tangkapan skrin produk"
  },
  {
   "zh": "放大查看：早安简报",
@@ -1885,14 +1440,39 @@
   "ms": "Besarkan: Taklimat Pagi"
  },
  {
-  "zh": "历史界面截图：早安简报页，可见待处理、高风险等计数位（数值已遮盖），以及上门客价格异常监控、划线价不一致、调价、评价回复四张待办卡片。",
-  "en": "Earlier interface screenshot: the Morning Brief page, showing counters such as pending and high-risk (values masked) and four to-do cards: walk-in price anomaly monitoring, strikethrough price mismatch, price adjustment and review replies.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman Taklimat Pagi, menunjukkan pembilang seperti belum selesai dan berisiko tinggi (nilai disembunyikan) serta empat kad tugasan: pemantauan kelainan harga tetamu walk-in, harga potong tidak sepadan, pelarasan harga dan balasan ulasan."
+  "zh": "产品界面截图：早安简报页，可见待处理、高风险等计数位（数值已脱敏）和四张待办卡片。",
+  "en": "Product screenshot: the Morning Brief page, showing counters such as pending and high-risk (values masked) and four to-do cards.",
+  "ms": "Tangkapan skrin produk: halaman Taklimat Pagi, menunjukkan pembilang seperti belum selesai dan berisiko tinggi (nilai disembunyikan) serta empat kad tugasan."
  },
  {
-  "zh": "附：点评先出草稿、人来定稿；质检任务有派有收",
-  "en": "Appendix: reviews are drafted, then a person decides; quality tasks go out and results come in",
-  "ms": "Lampiran: ulasan didraf, kemudian manusia memutuskan; tugas kualiti diagih dan hasil dikutip"
+  "zh": "放大查看：调价范围设置",
+  "en": "Enlarge: price range settings",
+  "ms": "Besarkan: tetapan julat harga"
+ },
+ {
+  "zh": "产品界面截图：调价安全设置页，表头为房型、最低允许价格、最高允许价格、单次最大涨跌幅，数值已脱敏。",
+  "en": "Product screenshot: the pricing safety settings page, with columns for room type, lowest allowed price, highest allowed price and maximum single change; values are masked.",
+  "ms": "Tangkapan skrin produk: halaman tetapan keselamatan harga, dengan lajur jenis bilik, harga terendah dibenarkan, harga tertinggi dibenarkan dan had perubahan sekali; nilai disembunyikan."
+ },
+ {
+  "zh": "放大查看：预订进度提醒",
+  "en": "Enlarge: booking-pace alerts",
+  "ms": "Besarkan: amaran kadar tempahan"
+ },
+ {
+  "zh": "产品界面截图：出租率监测设置页，可见偏高和偏低阈值、通知频率、通知接收人等设置项，数值已脱敏。",
+  "en": "Product screenshot: the occupancy monitoring settings page, showing settings such as high and low thresholds, notification frequency and recipients; values are masked.",
+  "ms": "Tangkapan skrin produk: halaman tetapan pemantauan kadar penghunian, menunjukkan tetapan seperti ambang tinggi dan rendah, kekerapan pemberitahuan dan penerima; nilai disembunyikan."
+ },
+ {
+  "zh": "放大查看：小时级订房监测",
+  "en": "Enlarge: hourly booking monitoring",
+  "ms": "Besarkan: pemantauan tempahan mengikut jam"
+ },
+ {
+  "zh": "产品界面截图：小时级间夜监测设置页，可见监测数据和两条预警规则，数值已脱敏。",
+  "en": "Product screenshot: the hourly room-night monitoring settings page, showing the data monitored and two alert rules; values are masked.",
+  "ms": "Tangkapan skrin produk: halaman tetapan pemantauan malam bilik mengikut jam, menunjukkan data yang dipantau dan dua peraturan amaran; nilai disembunyikan."
  },
  {
   "zh": "放大查看：质检工作台",
@@ -1900,19 +1480,84 @@
   "ms": "Besarkan: ruang kerja kualiti"
  },
  {
-  "zh": "历史界面截图：质检总览页，可见本月、城市、门店筛选，以及质检得分、首检一次通过率、任务完成率、整改销项率、待跟进整改项、红线问题等指标卡，数值已遮盖。",
-  "en": "Earlier interface screenshot: the quality overview page, showing filters for this month, city and hotel, and indicator cards such as quality score, first-inspection pass rate, task completion rate, follow-up closure rate, follow-up items pending and red-line issues; values are masked.",
-  "ms": "Tangkapan skrin antara muka terdahulu: halaman ringkasan kualiti, menunjukkan penapis bulan ini, bandar dan hotel, serta kad penunjuk seperti skor kualiti, kadar lulus pemeriksaan pertama, kadar penyiapan tugas, kadar penutupan tindakan susulan, perkara susulan tertunggak dan isu garis merah; nilai disembunyikan."
+  "zh": "产品界面截图：质检总览页，可见质检得分、任务完成率、整改等指标卡，数值已脱敏。",
+  "en": "Product screenshot: the quality overview page, showing indicator cards such as quality score, task completion rate and follow-up; values are masked.",
+  "ms": "Tangkapan skrin produk: halaman ringkasan kualiti, menunjukkan kad penunjuk seperti skor kualiti, kadar penyiapan tugas dan tindakan susulan; nilai disembunyikan."
  },
  {
-  "zh": "附：AI 获客三项，逐家配置和接入",
-  "en": "Appendix: the three AI Guest Acquisition items, set up and connected hotel by hotel",
-  "ms": "Lampiran: tiga perkara Pemerolehan Tetamu AI, dikonfigurasi dan disambung ikut hotel"
+  "zh": "附：谁来做，谁说了算",
+  "en": "Appendix: who does the work, who decides",
+  "ms": "Lampiran: siapa yang melakukannya, siapa yang memutuskan"
  },
  {
-  "zh": "附：名词对照",
-  "en": "Appendix: glossary",
-  "ms": "Lampiran: glosari"
+  "zh": "附：效果怎么量",
+  "en": "Appendix: how results are measured",
+  "ms": "Lampiran: cara hasil diukur"
+ },
+ {
+  "zh": "开始前：可售房晚",
+  "en": "Before: available room nights",
+  "ms": "Sebelum: malam bilik tersedia"
+ },
+ {
+  "zh": "开始后：可售房晚",
+  "en": "After: available room nights",
+  "ms": "Selepas: malam bilik tersedia"
+ },
+ {
+  "zh": "开始前：入住率",
+  "en": "Before: occupancy",
+  "ms": "Sebelum: kadar penghunian"
+ },
+ {
+  "zh": "开始后：入住率",
+  "en": "After: occupancy",
+  "ms": "Selepas: kadar penghunian"
+ },
+ {
+  "zh": "开始前：平均成交房价",
+  "en": "Before: ADR",
+  "ms": "Sebelum: ADR"
+ },
+ {
+  "zh": "开始后：平均成交房价",
+  "en": "After: ADR",
+  "ms": "Selepas: ADR"
+ },
+ {
+  "zh": "开始前：房费收入",
+  "en": "Before: room revenue",
+  "ms": "Sebelum: hasil bilik"
+ },
+ {
+  "zh": "开始后：房费收入",
+  "en": "After: room revenue",
+  "ms": "Selepas: hasil bilik"
+ },
+ {
+  "zh": "开始前：渠道佣金",
+  "en": "Before: channel commission",
+  "ms": "Sebelum: komisen saluran"
+ },
+ {
+  "zh": "开始后：渠道佣金",
+  "en": "After: channel commission",
+  "ms": "Selepas: komisen saluran"
+ },
+ {
+  "zh": "开始前：净实收",
+  "en": "Before: net received",
+  "ms": "Sebelum: terimaan bersih"
+ },
+ {
+  "zh": "开始后：净实收",
+  "en": "After: net received",
+  "ms": "Selepas: terimaan bersih"
+ },
+ {
+  "zh": "附：数据来源",
+  "en": "Appendix: data sources",
+  "ms": "Lampiran: sumber data"
  },
  {
   "zh": "上一页",

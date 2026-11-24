@@ -25,7 +25,7 @@ LANGS = ("zh", "en", "ms")
 HTML_LANG = {"zh": "zh-CN", "en": "en", "ms": "ms"}
 
 VOID = {"br", "img", "input", "meta", "link", "hr", "use", "path", "circle", "source", "wbr"}
-SKIP_SUBTREE = {"script", "style", "svg"}
+SKIP_SUBTREE = {"script", "style"}  # 图表（svg）里的 <text>、<title>、<desc> 也要翻译
 CONTAINER_ONLY = {"html", "head", "body", "main"}
 ATTRS = ("placeholder", "aria-label", "alt", "data-title", "data-label", "data-fill", "title")
 CJK = re.compile(r"[㐀-鿿豈-﫿]")

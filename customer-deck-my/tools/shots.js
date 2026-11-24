@@ -7,7 +7,7 @@ const fs = require('fs');
   fs.mkdirSync(outDir, { recursive: true });
   const base = 'file://' + path.resolve(src);
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: +w, height: +h }, deviceScaleFactor: 1 });
+  const ctx = await browser.newContext({ viewport: { width: +w, height: +h }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   const blocked = [], errors = [];
   await page.route('**/*', (r) => { const u = r.request().url(); if (/^(file|data|blob|about):/.test(u)) return r.continue(); blocked.push(u); return r.abort(); });

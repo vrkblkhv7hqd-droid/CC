@@ -1,4 +1,4 @@
-/* HogentX 客户汇报：投屏翻页、手机阅读、三语切换、放大截图、打印、现场填写。无任何外部请求。 */
+/* HogentX 客户汇报：投屏翻页（含分步出现）、手机阅读、三语切换、按您的数字算账、放大截图、打印。无任何外部请求。 */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -13,6 +13,7 @@
   var printFlat = params.get('print') === '1';
   /* 触屏设备（手机、平板）默认竖向阅读；有鼠标的宽屏默认投屏 */
   var wideQuery = window.matchMedia('(min-width: 1000px) and (min-aspect-ratio: 5/4) and (hover: hover) and (pointer: fine)');
+  var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
 
   root.classList.add('js');
@@ -21,9 +22,9 @@
   var LANGS = ['zh', 'en', 'ms'];
   var HTML_LANG = { zh: 'zh-CN', en: 'en', ms: 'ms' };
   var UI = {
-    zh: { rail: ['可售房晚', '入住率', '平均成交房价', '房费收入', '渠道佣金', '净实收'], present: '投屏模式', read: '阅读模式' },
-    en: { rail: ['Available room nights', 'Occupancy', 'ADR', 'Room revenue', 'Channel commission', 'Net received'], present: 'Present', read: 'Reading view' },
-    ms: { rail: ['Malam bilik tersedia', 'Kadar penghunian', 'ADR', 'Hasil bilik', 'Komisen saluran', 'Terimaan bersih'], present: 'Mod pembentangan', read: 'Mod bacaan' }
+    zh: { present: '投屏模式', read: '阅读模式', timer: '已用时间 / 讲完这一页的计划时间。点击归零。' },
+    en: { present: 'Present', read: 'Reading view', timer: 'Time used / planned time by the end of this slide. Click to reset.' },
+    ms: { present: 'Mod pembentangan', read: 'Mod bacaan', timer: 'Masa digunakan / masa dirancang pada akhir slaid ini. Klik untuk set semula.' }
   };
   var I18N = null;
   try {
@@ -51,7 +52,7 @@
   function markLang() {
     root.lang = HTML_LANG[lang];
     root.setAttribute('data-lang', lang);
-    each(document.querySelectorAll('[data-lang-btn], .lang-switch button'), function (b) {
+    each(document.querySelectorAll('.lang-switch button'), function (b) {
       b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
     });
   }
@@ -60,9 +61,9 @@
     lang = l;
     applyStrings(l);
     markLang();
-    buildRails();
     buildToc();
     updateModeLabel();
+    recalc();
     try {
       var u = new URL(location.href);
       u.searchParams.set('lang', l);
@@ -77,39 +78,8 @@
     if (page) page.textContent = (i + 1) + ' / ' + total;
     if (!s.id) s.id = 's' + (i + 1);
   });
-
   function titleOf(s) {
     return s.getAttribute('data-title') || (s.querySelector('.slide-title, .cover-title') || {}).textContent || '';
-  }
-
-  /* ---------- 公式导航条：同一把尺子，标出这一页说的是哪个数 ---------- */
-  var RAIL_KEYS = ['avail', 'occ', 'adr', 'rev', 'comm', 'net'];
-  var RAIL_OPS = ['×', '×', '=', '−', '='];
-  function buildRails() {
-    var names = UI[lang].rail;
-    each(document.querySelectorAll('.rail'), function (rail) {
-      while (rail.firstChild) rail.removeChild(rail.firstChild);
-      var on = (rail.getAttribute('data-on') || '').split(' ').filter(Boolean);
-      /* 这一页不对应公式里的某个数：不放公式条，只显示栏目名 */
-      rail.classList.toggle('rail--off', on.length === 0);
-      if (on.length === 0) return;
-      RAIL_KEYS.forEach(function (key, k) {
-        var sp = document.createElement('span');
-        sp.textContent = names[k];
-        if (on.indexOf(key) >= 0) sp.className = 'on';
-        rail.appendChild(sp);
-        if (k < RAIL_OPS.length) { var op = document.createElement('i'); op.textContent = RAIL_OPS[k]; rail.appendChild(op); }
-      });
-      var kicker = rail.parentNode.querySelector('.kicker');
-      if (kicker) {
-        var parts = Array.prototype.filter.call(kicker.querySelectorAll('span'), function (x) { return !x.classList.contains('sep') && x.textContent.trim(); }).map(function (x) { return x.textContent.trim(); });
-        /* 英文、马来文的栏目名较长：三段时只留首尾两段 */
-        if (lang !== 'zh' && parts.length === 3) parts = [parts[0], parts[2]];
-        var sec = document.createElement('b'); sec.className = 'rail-sec'; sec.textContent = parts.join(' · ');
-        rail.appendChild(sec);
-      }
-      rail.setAttribute('aria-hidden', 'true');
-    });
   }
 
   /* ---------- 模式 ---------- */
@@ -120,13 +90,13 @@
     return wideQuery.matches;
   }
   function isPresent() { return root.classList.contains('present'); }
+  function isPrint() { return root.classList.contains('print-flat'); }
 
   function fit() {
-    if (!isPresent() || root.classList.contains('print-flat')) return;
+    if (!isPresent() || isPrint()) return;
     var s = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
     root.style.setProperty('--scale', String(s));
   }
-
   function nearestSlideInView() {
     var best = 0, bestDist = Infinity;
     slides.forEach(function (s, i) {
@@ -135,20 +105,20 @@
     });
     return best;
   }
-
   function updateModeLabel() {
     var toggle = document.getElementById('modeToggle');
     if (toggle) toggle.textContent = isPresent() ? UI[lang].read : UI[lang].present;
   }
-
   function applyMode() {
     var present = wantPresent();
     if (present && !isPresent()) {
       current = nearestSlideInView();
       root.classList.add('present');
-      show(current, true);
+      show(current, { silent: true, steps: 'all' });
+      keepAwake();
     } else if (!present && isPresent()) {
-      root.classList.remove('present', 'hud-on');
+      root.classList.remove('present', 'hud-on', 'is-blackout', 'cursor-idle');
+      letSleep();
       slides.forEach(function (s) { s.classList.remove('is-current'); });
       var target = slides[current];
       if (target && target.scrollIntoView) target.scrollIntoView();
@@ -157,23 +127,89 @@
     updateModeLabel();
   }
 
+  /* ---------- 分步出现：同一页里一条一条讲 ---------- */
+  var stepNow = 0;
+  function stepsOf(s) {
+    var seen = {}, list = [];
+    each(s.querySelectorAll('[data-step]'), function (el) {
+      var k = el.getAttribute('data-step');
+      if (!seen[k]) { seen[k] = true; list.push(+k); }
+    });
+    return list.sort(function (a, b) { return a - b; });
+  }
+  function setSteps(s, n, animate) {
+    var order = stepsOf(s);
+    each(s.querySelectorAll('[data-step]'), function (el) {
+      var on = order.indexOf(+el.getAttribute('data-step')) < n;
+      var was = el.classList.contains('is-on');
+      el.classList.toggle('is-on', on);
+      if (animate && on && !was) countUp(el);
+    });
+    stepNow = Math.max(0, Math.min(order.length, n));
+  }
+
+  /* ---------- 数字跳动：进入页面时从 0 数到位（打印、阅读模式、减少动态时不做） ---------- */
+  function fmtInt(v) { return Math.round(v).toLocaleString('en-MY'); }
+  function countUp(scope) {
+    if (!isPresent() || isPrint() || calmMotion.matches) return;
+    each(scope.querySelectorAll('[data-count]'), function (el) {
+      if (el.closest('[data-step]') && !el.closest('[data-step]').classList.contains('is-on')) return;
+      var raw = el.getAttribute('data-count');
+      var end = parseFloat(raw);
+      if (!isFinite(end)) return;
+      var finalText = el.getAttribute('data-final') || el.textContent;
+      el.setAttribute('data-final', finalText);
+      var decimals = (raw.split('.')[1] || '').length;
+      var t0 = null, dur = 700;
+      function mid(v) {
+        var a = Math.abs(v);
+        return (v < 0 ? '−' : '') + (decimals ? a.toFixed(decimals) : fmtInt(a));
+      }
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = p < 1 ? mid(end * e) : finalText;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
   /* ---------- 翻页 ---------- */
-  function show(i, silent) {
+  function show(i, opts) {
+    opts = opts || {};
+    var prev = current;
     current = Math.max(0, Math.min(total - 1, i));
     slides.forEach(function (s, k) { s.classList.toggle('is-current', k === current); });
+    var s = slides[current];
+    setSteps(s, opts.steps === 'none' ? 0 : stepsOf(s).length);
+    if (prev !== current || opts.fresh) countUp(s);
     var count = document.getElementById('hudCount');
     if (count) count.textContent = (current + 1) + ' / ' + total;
-    if (!silent) {
+    var bar = document.getElementById('progressBar');
+    if (bar) bar.style.width = (((current + 1) / total) * 100).toFixed(2) + '%';
+    if (root.classList.contains('timer-on')) paintTimer();
+    if (!opts.silent) {
       try { history.replaceState(history.state, '', '#' + (current + 1)); } catch (e) { /* 本地文件个别环境不允许，忽略 */ }
     }
   }
   function go(delta) {
-    if (isPresent()) { show(current + delta); return; }
-    var i = Math.max(0, Math.min(total - 1, nearestSlideInView() + delta));
-    slides[i].scrollIntoView({ behavior: 'smooth' });
+    if (!isPresent()) {
+      var i = Math.max(0, Math.min(total - 1, nearestSlideInView() + delta));
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    var s = slides[current], n = stepsOf(s).length;
+    if (delta > 0) {
+      if (stepNow < n) setSteps(s, stepNow + 1, true);
+      else if (current < total - 1) show(current + 1, { steps: 'none' });
+    } else {
+      if (stepNow > 0) setSteps(s, stepNow - 1);
+      else if (current > 0) show(current - 1, { steps: 'all' });
+    }
   }
   function jump(i) {
-    if (isPresent()) show(i);
+    if (isPresent()) show(i, { steps: 'all' });
     else { current = i; slides[i].scrollIntoView(); }
   }
   function fromHash() {
@@ -209,12 +245,16 @@
     if (k === 'm' || k === 'M') { openToc(); e.preventDefault(); return; }
     if (k === 'f' || k === 'F') { toggleFullscreen(); e.preventDefault(); return; }
     if (k === 'l' || k === 'L') { cycleLang(); e.preventDefault(); return; }
+    if (k === 't' || k === 'T') { toggleTimer(); e.preventDefault(); return; }
     if (!isPresent()) return;
+    /* 黑屏：想让大家看人、不看屏幕时按 B 或句号；再按任意键恢复 */
+    if (root.classList.contains('is-blackout')) { root.classList.remove('is-blackout'); e.preventDefault(); return; }
+    if (k === 'b' || k === 'B' || k === '.') { root.classList.add('is-blackout'); e.preventDefault(); return; }
     var onButton = e.target && (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.getAttribute('role') === 'button');
     if (k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown' || ((k === ' ' || k === 'Enter') && !onButton && !e.shiftKey)) { go(1); e.preventDefault(); }
     else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || (k === ' ' && !onButton && e.shiftKey) || k === 'Backspace') { go(-1); e.preventDefault(); }
-    else if (k === 'Home') { show(0); e.preventDefault(); }
-    else if (k === 'End') { show(total - 1); e.preventDefault(); }
+    else if (k === 'Home') { show(0, { steps: 'all' }); e.preventDefault(); }
+    else if (k === 'End') { show(total - 1, { steps: 'all' }); e.preventDefault(); }
   });
 
   /* 触屏左右滑动（仅投屏模式） */
@@ -238,8 +278,29 @@
     clearTimeout(hudTimer);
     hudTimer = setTimeout(function () { root.classList.remove('hud-on'); }, 2600);
   }
-  document.addEventListener('mousemove', pokeHud);
+  var cursorTimer = null;
+  function pokeCursor() {
+    root.classList.remove('cursor-idle');
+    clearTimeout(cursorTimer);
+    if (isPresent()) cursorTimer = setTimeout(function () { root.classList.add('cursor-idle'); }, 3000);
+  }
+  document.addEventListener('mousemove', function () { pokeHud(); pokeCursor(); });
   document.addEventListener('touchstart', pokeHud, { passive: true });
+  document.addEventListener('click', function () { if (root.classList.contains('is-blackout')) root.classList.remove('is-blackout'); });
+
+  /* 投屏时请求屏幕常亮（浏览器不支持或不允许时忽略） */
+  var wakeLock = null;
+  function keepAwake() {
+    if (!isPresent() || isPrint() || wakeLock || !navigator.wakeLock || document.visibilityState !== 'visible') return;
+    try {
+      navigator.wakeLock.request('screen').then(function (lock) {
+        wakeLock = lock;
+        lock.addEventListener('release', function () { wakeLock = null; });
+      }).catch(function () { /* 忽略 */ });
+    } catch (e) { /* 忽略 */ }
+  }
+  function letSleep() { if (wakeLock) { try { wakeLock.release(); } catch (e) { /* 忽略 */ } wakeLock = null; } }
+  document.addEventListener('visibilitychange', keepAwake);
 
   function toggleFullscreen() {
     var el = document.documentElement;
@@ -248,6 +309,38 @@
       else if (document.exitFullscreen) document.exitFullscreen();
     } catch (e) { /* 忽略 */ }
   }
+
+  /* ---------- 计时：按 T 显示讲了多久（默认不显示，免得客户看到） ---------- */
+  var timerEl = document.getElementById('timer'), timerStart = null, timerTick = null;
+  function clock(sec) {
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  /* 每页的计划用时写在 data-sec 上：讲到这一页结束时应该用了多久 */
+  function plannedThrough(i) {
+    var sum = 0;
+    for (var k = 0; k <= i && k < total; k++) sum += parseInt(slides[k].getAttribute('data-sec'), 10) || 0;
+    return sum;
+  }
+  function paintTimer() {
+    if (!timerEl || timerStart === null) return;
+    var sec = Math.floor((Date.now() - timerStart) / 1000);
+    var plan = plannedThrough(current);
+    timerEl.textContent = clock(sec) + (plan ? ' / ' + clock(plan) : '');
+    timerEl.classList.toggle('is-late', plan > 0 && sec > plan + 30);
+    timerEl.title = UI[lang].timer;
+  }
+  function toggleTimer() {
+    if (!timerEl) return;
+    var on = !root.classList.contains('timer-on');
+    root.classList.toggle('timer-on', on);
+    if (on) {
+      if (timerStart === null) timerStart = Date.now();
+      paintTimer();
+      timerTick = setInterval(paintTimer, 1000);
+    } else { clearInterval(timerTick); }
+  }
+  if (timerEl) timerEl.addEventListener('click', function () { timerStart = Date.now(); paintTimer(); });
 
   /* ---------- 浮层：目录与放大图 ---------- */
   var openOverlay = null, lastFocus = null;
@@ -350,69 +443,39 @@
     b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
   });
 
-  /* ---------- 现场可点：三个问题 → 后面先验证哪件事 ---------- */
-  var picks = {};
-  each(document.querySelectorAll('.choice'), function (group) {
-    var key = group.getAttribute('data-q');
-    group.addEventListener('click', function (e) {
-      var b = e.target.closest ? e.target.closest('button') : null;
-      if (!b) return;
-      var was = b.getAttribute('aria-pressed') === 'true';
-      each(group.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
-      if (!was) b.setAttribute('aria-pressed', 'true');
-      picks[key] = was ? null : b.getAttribute('data-v');
-      /* 鼠标点完把焦点放开，接着按空格或翻页笔可以直接翻页 */
-      if (e.detail > 0) b.blur();
-      each(document.querySelectorAll('.job[data-q]'), function (job) {
-        var keys = (job.getAttribute('data-q') || '').split(' ');
-        var hit = keys.some(function (k2) { return picks[k2] === 'no' || picks[k2] === 'exp'; });
-        job.classList.toggle('is-picked', hit);
-      });
-    });
-  });
-
-  /* 试点页：点一下事项卡片，填进“验证哪件事”；渠道核对表里填过的 OTA 带到试点单 */
-  var p3 = document.getElementById('p3'), p2 = document.getElementById('p2');
-  each(document.querySelectorAll('#pilot .job[data-fill]'), function (job) {
-    job.setAttribute('role', 'button');
-    job.setAttribute('tabindex', '0');
-    function pick() {
-      each(document.querySelectorAll('#pilot .job'), function (j) { j.classList.remove('is-chosen'); });
-      job.classList.add('is-chosen');
-      if (p3) p3.value = job.getAttribute('data-fill');
-    }
-    job.addEventListener('click', pick);
-    job.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { pick(); e.preventDefault(); e.stopPropagation(); }
-    });
-  });
-  var otaInputs = document.querySelectorAll('#multi-ota input.fill'), p2Auto = '';
-  each(otaInputs, function (inp) {
-    inp.addEventListener('input', function () {
-      var names = Array.prototype.map.call(otaInputs, function (x) { return x.value.trim(); }).filter(Boolean).join(lang === 'zh' ? '、' : ', ');
-      if (p2 && (p2.value === '' || p2.value === p2Auto)) { p2.value = names; p2Auto = names; }
-    });
-  });
-
-  /* ---------- 现场可填：把月费摊到每个卖出的房晚 ---------- */
-  var nightsEl = document.getElementById('calcNights');
+  /* ---------- 按您的数字算一笔：三个数填一次，后面的方案页跟着算 ---------- */
+  var inRooms = document.getElementById('cRooms'), inAdr = document.getElementById('cAdr'), inOcc = document.getElementById('cOcc');
   function num(el) {
     if (!el) return NaN;
     var v = parseFloat(String(el.value).replace(/[^0-9.]/g, ''));
     return isFinite(v) && v > 0 ? v : NaN;
   }
-  function fmt(v, digits) {
-    return v.toLocaleString('en-MY', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  function money(v) { return 'RM ' + Math.round(v).toLocaleString('en-MY'); }
+
+  function put(key, text) {
+    each(document.querySelectorAll('[data-out="' + key + '"]'), function (el) { el.textContent = text; });
   }
   function recalc() {
-    var nights = num(nightsEl);
+    var rooms = num(inRooms), adr = num(inAdr), occ = num(inOcc);
+    if (occ > 100) occ = 100;
+    var ok = !(isNaN(rooms) || isNaN(adr) || isNaN(occ));
+    var nights = ok ? rooms * 365 * occ / 100 : NaN;      /* 一年卖出的房晚 */
+    var rev = ok ? nights * adr : NaN;                    /* 一年房费收入 */
+    var emptyPerNight = ok ? rooms * (1 - occ / 100) : NaN; /* 平均每晚空着的房 */
+    put('nights', ok ? fmtInt(nights) : '—');
+    put('rev', ok ? money(rev) : '—');
+    put('empty', ok ? fmtInt(emptyPerNight) : '—');
+    put('emptyMonth', ok ? fmtInt(emptyPerNight * 365 / 12) : '—'); /* 每月空着的房晚 */
+    put('occ1', ok ? money(rooms * 365 * 0.01 * adr) : '—'); /* 入住率每多 1 个百分点 */
+    put('adr5', ok ? money(nights * 5) : '—');            /* 每个房晚多卖 RM 5 */
     each(document.querySelectorAll('[data-fee]'), function (row) {
       var fee = parseFloat(row.getAttribute('data-fee'));
-      var per = row.querySelector('[data-out="per"]');
-      if (per) per.textContent = isNaN(nights) ? '—' : 'RM ' + fmt(fee / nights, 2);
+      var eq = row.querySelector('[data-eq]');
+      if (eq) eq.textContent = ok ? fmtInt(Math.ceil(fee / adr)) : '—'; /* 月费折成几个房晚的房费 */
     });
+    root.classList.toggle('calc-ready', ok);
   }
-  if (nightsEl) nightsEl.addEventListener('input', recalc);
+  [inRooms, inAdr, inOcc].forEach(function (el) { if (el) el.addEventListener('input', recalc); });
   recalc();
 
   /* ---------- 打印 / 导出 PDF ---------- */
@@ -422,13 +485,14 @@
     root.classList.add('present', 'print-flat');
     root.classList.remove('hud-on');
     root.style.setProperty('--scale', '1');
+    slides.forEach(function (s) { each(s.querySelectorAll('[data-step]'), function (el) { el.classList.add('is-on'); }); });
   }
   function leavePrint() {
     if (printFlat) return;
     root.classList.remove('print-flat');
     if (!beforePrintWasPresent) root.classList.remove('present');
     applyMode();
-    if (isPresent()) show(current, true);
+    if (isPresent()) show(current, { silent: true, steps: 'all' });
   }
   window.addEventListener('beforeprint', enterPrint);
   window.addEventListener('afterprint', leavePrint);
@@ -437,19 +501,18 @@
   var wantLang = params.get('lang');
   if (I18N && wantLang && LANGS.indexOf(wantLang) >= 0 && wantLang !== lang) { lang = wantLang; applyStrings(lang); }
   markLang();
-  buildRails();
   buildToc();
   var start = fromHash();
   if (start !== null) current = start;
   if (printFlat) {
     enterPrint();
   } else {
-    if (wantPresent()) { root.classList.add('present'); show(current, true); }
+    if (wantPresent()) { root.classList.add('present'); show(current, { silent: true, steps: start === null ? 'none' : 'all', fresh: true }); keepAwake(); }
     else if (start !== null) { slides[current].scrollIntoView(); }
     applyMode();
   }
-  window.addEventListener('resize', function () { if (!root.classList.contains('print-flat')) applyMode(); });
-  if (wideQuery.addEventListener) wideQuery.addEventListener('change', function () { if (!root.classList.contains('print-flat')) applyMode(); });
+  window.addEventListener('resize', function () { if (!isPrint()) applyMode(); });
+  if (wideQuery.addEventListener) wideQuery.addEventListener('change', function () { if (!isPrint()) applyMode(); });
   window.addEventListener('hashchange', function () {
     var i = fromHash();
     if (i !== null) jump(i);

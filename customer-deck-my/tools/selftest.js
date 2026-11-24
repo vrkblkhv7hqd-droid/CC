@@ -1,6 +1,6 @@
 // 功能自测：node tools/selftest.js
-// 在无网络的条件下打开三份成品文件，检查翻页、目录、三语切换、放大截图、现场填写、
-// 手机阅读、无脚本阅读和打印排版。需要 Playwright（Chromium）。
+// 在断网条件下打开三份成品文件，检查：翻页与分步出现、目录、三语切换、按酒店数字算账、计时与黑屏、
+// 放大截图、手机阅读、无脚本阅读、打印排版，以及每一页在三种语言下都不溢出。需要 Playwright（Chromium）。
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
@@ -13,16 +13,16 @@ const FILES = {
 };
 const URLS = Object.fromEntries(Object.entries(FILES).map(([k, f]) => [k, 'file://' + f]));
 const NAMES = { zh: '中文', en: 'English', ms: 'Bahasa Melayu' };
-// 投屏时文字的最小字号（已折算缩放）：中文 20px；英文、马来文句子更长，不小于 18px
-const MIN_STAGE = { zh: 20, en: 18, ms: 18 };
-// 英文、马来文里允许保留的中文：品牌名，以及引用截图里出现的界面用词
-const CJK_OK = /住小叮|出租率|间夜|评价回复|元|中文/g;
+const HTML_LANG = { zh: 'zh-CN', en: 'en', ms: 'ms' };
+const TOTAL = 17;
+const IDS = ['cover', 'shift', 'leaks', 'math', 'what', 'avail', 'price', 'net', 'daily', 'grow', 'us', 'plans', 'start', 'screens', 'who', 'measure', 'sources'];
+const MIN_FONT = 20; // 投屏时任何文字不小于 20px（按 1920 宽计）
 
 const results = [];
 const ok = (name, pass, detail) => { results.push({ name, pass: !!pass, detail: detail || '' }); };
 
 async function newPage(browser, viewport, extra) {
-  const ctx = await browser.newContext(Object.assign({ viewport }, extra || {}));
+  const ctx = await browser.newContext(Object.assign({ viewport, reducedMotion: 'reduce' }, extra || {}));
   const page = await ctx.newPage();
   page._external = []; page._errors = [];
   await page.route('**/*', (route) => {
@@ -34,270 +34,283 @@ async function newPage(browser, viewport, extra) {
   page.on('console', (m) => { if (m.type() === 'error') page._errors.push(m.text()); });
   return page;
 }
+const text = (page, sel) => page.evaluate((s) => { const el = document.querySelector(s); return el ? el.textContent.trim() : null; }, sel);
+const currentId = (page) => page.evaluate(() => { const s = document.querySelector('.slide.is-current'); return s ? s.id : null; });
+const stepsOn = (page) => page.evaluate(() => document.querySelectorAll('.slide.is-current [data-step].is-on').length);
+const htmlLang = (page) => page.evaluate(() => document.documentElement.lang);
 
-// 逐页量版面：内容是否压到页脚、是否出右边界、最小字号（折算缩放后）
-function measureLayout() {
-  return (async () => {
+// 逐页量版面：内容不压页脚、不出右边界、不压标题，字号不小于下限
+async function measure(page) {
+  return page.evaluate(async (minFont) => {
     const out = [];
     const slides = Array.from(document.querySelectorAll('.slide'));
-    const zoomOf = (el) => { let z = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) { const v = parseFloat(getComputedStyle(n).zoom); if (v && v !== 1) z *= v; } return z; };
     for (let i = 0; i < slides.length; i++) {
       location.hash = '#' + (i + 1);
-      await new Promise((r) => setTimeout(r, 60));
-      const s = slides[i]; const sr = s.getBoundingClientRect();
-      const scale = sr.width / 1920;
+      await new Promise((r) => setTimeout(r, 50));
+      const s = slides[i], sr = s.getBoundingClientRect(), scale = sr.width / 1920;
       const foot = s.querySelector('.slide-foot');
       const footTop = foot ? (foot.getBoundingClientRect().top - sr.top) / scale : 1080;
-      const headBottom = (() => { const h = s.querySelector('.slide-head'); return h ? (h.getBoundingClientRect().bottom - sr.top) / scale : 0; })();
+      const head = s.querySelector('.slide-head');
+      const headBottom = head ? (head.getBoundingClientRect().bottom - sr.top) / scale : 0;
       const body = s.querySelector('.slide-body');
       const bodyTop = body && body.firstElementChild ? (body.firstElementChild.getBoundingClientRect().top - sr.top) / scale : 9999;
-      let bottom = 0, right = 0, minFont = 99;
-      s.querySelectorAll('.card, .note, .sheet, .shot-frame, .shot-label, .table-wrap, .money, p, li, h2, h3, td, th, dd, dt, span, b, label, input, button').forEach((el) => {
-        if (el.closest('.slide-foot')) return;
+      let bottom = 0, right = 0, small = 99, who = '';
+      s.querySelectorAll('*').forEach((el) => {
+        if (el.closest('.slide-foot') || el.closest('svg')) return;
+        const cs = getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden') return;
         const r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
-        bottom = Math.max(bottom, (r.bottom - sr.top) / scale); right = Math.max(right, (r.right - sr.left) / scale);
         const hasText = Array.from(el.childNodes).some((c) => c.nodeType === 3 && c.textContent.trim());
-        if (hasText) minFont = Math.min(minFont, parseFloat(getComputedStyle(el).fontSize) * zoomOf(el));
+        if (!hasText && !/^(IMG|INPUT|BUTTON)$/.test(el.tagName) && !el.matches('.card, .viz, .plan, .leak, .callout')) return;
+        bottom = Math.max(bottom, (r.bottom - sr.top) / scale);
+        right = Math.max(right, (r.right - sr.left) / scale);
+        if (hasText) { const f = parseFloat(cs.fontSize); if (f < small) { small = f; who = (el.className || el.tagName) + ':' + el.textContent.trim().slice(0, 12); } }
       });
-      const footNote = foot ? foot.querySelector('.foot-note') : null;
-      const footLines = footNote ? Math.round(footNote.getBoundingClientRect().height / scale / parseFloat(getComputedStyle(footNote).lineHeight)) : 1;
-      out.push({ id: s.id, over: Math.round(bottom - footTop), right: Math.round(right), minFont: Math.round(minFont * 10) / 10, headOverlap: Math.round(headBottom - bodyTop), footLines });
+      // 图表里的文字：按图在舞台上的实际缩放折算
+      s.querySelectorAll('svg text').forEach((t) => {
+        const svg = t.ownerSVGElement, vb = svg.viewBox.baseVal;
+        if (!vb || !vb.width) return;
+        const f = parseFloat(getComputedStyle(t).fontSize) * (svg.getBoundingClientRect().width / scale) / vb.width;
+        if (f < small) { small = f; who = 'svg:' + t.textContent.trim().slice(0, 12); }
+      });
+      out.push({ id: s.id, over: Math.round(bottom - footTop), right: Math.round(right), headClash: Math.round(headBottom - bodyTop), small: Math.round(small * 10) / 10, who, tooSmall: small < minFont });
     }
+    location.hash = '#1';
     return out;
-  })();
+  }, MIN_FONT);
 }
 
 (async () => {
   for (const f of Object.values(FILES)) if (!fs.existsSync(f)) { console.error('先运行 python3 tools/build.py'); process.exit(1); }
   const browser = await chromium.launch();
 
-  // ---------- 投屏模式（中文文件） ----------
-  let page = await newPage(browser, { width: 1920, height: 1080 });
-  await page.goto(URLS.zh, { waitUntil: 'load' });
-  await page.evaluate(() => document.fonts.ready);
-  const total = await page.evaluate(() => document.querySelectorAll('.slide').length);
-  ok('宽屏自动进入投屏模式', await page.evaluate(() => document.documentElement.classList.contains('present')));
-  ok('舞台里只有幻灯片，没有游离内容', await page.evaluate(() => Array.from(document.getElementById('deck').children).every((c) => c.classList.contains('slide'))));
-  ok('第一页可见，其余隐藏', await page.evaluate(() => document.querySelectorAll('.slide.is-current').length === 1 && document.querySelector('.slide').classList.contains('is-current')));
-  const cur = () => page.evaluate(() => Array.prototype.indexOf.call(document.querySelectorAll('.slide'), document.querySelector('.slide.is-current')) + 1);
-  const gotoId = async (id) => { await page.evaluate((x) => { const s = document.getElementById(x); location.hash = '#' + (Array.prototype.indexOf.call(document.querySelectorAll('.slide'), s) + 1); }, id); await page.waitForTimeout(150); };
-  await page.keyboard.press('ArrowRight'); await page.keyboard.press('PageDown'); await page.keyboard.press('Space');
-  ok('方向键、PageDown、空格向后翻页', (await cur()) === 4, '当前页 ' + (await cur()));
-  await page.keyboard.press('ArrowLeft');
-  ok('左方向键向前翻页', (await cur()) === 3);
-  await page.keyboard.press('End');
-  ok('End 跳到最后一页', (await cur()) === total);
-  await page.keyboard.press('ArrowRight');
-  ok('最后一页再往后不越界', (await cur()) === total);
-  await page.keyboard.press('Home');
-  ok('Home 回到第一页', (await cur()) === 1);
-  await page.evaluate(() => { location.hash = '#9'; });
-  await page.waitForTimeout(200);
-  ok('网址加 #9 直达第 9 页（三个方案）', (await cur()) === 9 && (await page.evaluate(() => document.querySelector('.slide.is-current').id)) === 'plans');
-
-  // 简洁：投屏时每页要读的字数有上限（主线＝标题不以“附”开头的页）
-  const load = await page.evaluate(() => Array.from(document.querySelectorAll('.slide')).map((s) => {
-    let n = 0;
-    const walker = document.createTreeWalker(s, NodeFilter.SHOW_TEXT);
-    while (walker.nextNode()) {
-      const t = walker.currentNode; const el = t.parentElement;
-      if (!t.textContent.trim() || el.closest('.rail, .foot-brand, .foot-page, .foot-legend, .shot-zoom')) continue;
-      let hidden = false;
-      for (let e = el; e && e !== s; e = e.parentElement) { if (getComputedStyle(e).display === 'none') { hidden = true; break; } }
-      if (!hidden) n += t.textContent.replace(/\s+/g, '').length;
-    }
-    return { id: s.id, appendix: /^附/.test(s.getAttribute('data-title') || ''), chars: n };
-  }));
-  const mainLoad = load.filter((l) => !l.appendix);
-  const avg = Math.round(mainLoad.reduce((a, l) => a + l.chars, 0) / mainLoad.length);
-  const heavy = mainLoad.filter((l) => l.chars > 400);
-  ok('主线 13 页，其余为附页', mainLoad.length === 13 && load.length === 18, mainLoad.length + ' / ' + load.length);
-  ok('投屏主线每页不超过 400 字', heavy.length === 0, heavy.map((l) => l.id + ':' + l.chars).join(' '));
-  ok('投屏主线平均每页不超过 300 字', avg <= 300, '平均 ' + avg);
-
-  // 目录
-  await page.evaluate(() => { location.hash = '#1'; });
-  await page.keyboard.press('m');
-  ok('按 M 打开目录', await page.evaluate(() => document.getElementById('toc').classList.contains('is-open')));
-  ok('目录条数等于页数', (await page.evaluate(() => document.querySelectorAll('#tocList button').length)) === total);
-  await page.click('#tocList li:nth-child(5) button');
-  ok('点目录第 5 条跳到第 5 页并关闭目录', (await cur()) === 5 && !(await page.evaluate(() => document.getElementById('toc').classList.contains('is-open'))));
-
-  // 放大截图：标注跟着一起出现，字号跟着舞台缩放
-  await gotoId('pace');
-  await page.click('.slide.is-current .shot-frame');
-  const lb = await page.evaluate(() => ({ open: document.getElementById('lightbox').classList.contains('is-open'), cap: document.getElementById('lightboxCap').textContent, label: parseFloat(getComputedStyle(document.querySelector('#lightboxCap .shot-label')).fontSize) }));
-  ok('点击截图可放大', lb.open);
-  ok('放大后仍带来源与验证范围', /来源：2026-11-12/.test(lb.cap) && /不证明马来西亚门店当前接入或实际运营结果/.test(lb.cap));
-  ok('放大后的标注字号不小于 20px', lb.label >= 20, String(lb.label));
-  await page.keyboard.press('Escape');
-  ok('Esc 关闭放大图', !(await page.evaluate(() => document.getElementById('lightbox').classList.contains('is-open'))));
-
-  // 现场可填
-  await gotoId('measure');
-  const before = await cur();
-  await page.fill('#calcNights', '1000');
-  await page.focus('#calcNights'); await page.keyboard.press('ArrowRight');
-  ok('在输入框里按方向键不会翻页', (await cur()) === before);
-  const calc = () => page.evaluate(() => Array.from(document.querySelectorAll('[data-fee]')).map((r) => r.querySelector('[data-out="per"]').textContent));
-  let c = await calc();
-  ok('换算：699÷1000=0.70、2,499÷1000=2.50、9,980÷1000=9.98', c[0] === 'RM 0.70' && c[1] === 'RM 2.50' && c[2] === 'RM 9.98', JSON.stringify(c));
-  await page.fill('#calcNights', '1,500 晚'); c = await calc();
-  ok('带逗号或单位的数字也能算（1,500）', c[0] === 'RM 0.47', JSON.stringify(c));
-  await page.fill('#calcNights', 'abc'); c = await calc();
-  ok('没填或填错时显示“—”，不显示错误数字', c.every((x) => x === '—'));
-  ok('换算表只有“摊到每个卖出的房晚”，没有回本类数字', await page.evaluate(() => document.querySelectorAll('.calc-table thead th').length === 2 && !document.getElementById('calcNet')));
-  await page.focus('#calcNights'); await page.keyboard.press('PageDown');
-  ok('填写时按翻页笔（PageDown）可以直接翻到下一页', (await cur()) === before + 1);
-
-  // 三个问题 → 后面先验证哪件事
-  await page.evaluate(() => { location.hash = '#2'; });
-  await page.waitForTimeout(150);
-  await page.click('.choice[data-q="avail"] button[data-v="exp"]');
-  ok('选“凭经验”也会在后面标出对应的事', await page.evaluate(() => document.querySelector('#pilot .job[data-q="avail"]').classList.contains('is-picked') && !document.querySelector('#pilot .job[data-q="price"]').classList.contains('is-picked')));
-  await page.keyboard.press('Space');
-  ok('点完选项按空格直接翻页，选项不被取消', (await cur()) === 3 && (await page.evaluate(() => document.querySelector('.choice[data-q="avail"] button[data-v="exp"]').getAttribute('aria-pressed') === 'true')));
-  await page.evaluate(() => { location.hash = '#2'; });
-  await page.waitForTimeout(150);
-  await page.click('.choice[data-q="cost"] button[data-v="no"]');
-  ok('问题 3 选“说不准”，试点页和对照表都标出', await page.evaluate(() => document.querySelector('#pilot .job[data-q="cost"]').classList.contains('is-picked') && document.querySelector('#measure .job[data-q="cost"]').classList.contains('is-picked')));
-
-  // 渠道核对表 → 试点单；点事项卡片 → 试点单
-  await gotoId('multi-ota');
-  await page.fill('#multi-ota input.fill >> nth=0', '平台甲'); await page.fill('#multi-ota input.fill >> nth=1', '平台乙');
-  await gotoId('pilot');
-  ok('渠道核对表里填的 OTA 自动带到试点约定单', (await page.inputValue('#p2')) === '平台甲、平台乙', await page.inputValue('#p2'));
-  await page.click('#pilot .job[data-q="avail"]');
-  ok('点一下事项卡片，填进“验证哪件事”', (await page.inputValue('#p3')) === '房态与开售核对');
-
-  // 三语切换
-  await page.evaluate(() => { location.hash = '#3'; });
-  await page.waitForTimeout(120);
-  await page.keyboard.press('l');
-  let st = await page.evaluate(() => ({ lang: document.documentElement.lang, title: document.querySelector('#what .slide-title').textContent, rail: document.querySelector('#availability .rail').textContent, toc: document.querySelector('#tocList li:nth-child(3)').textContent }));
-  ok('按 L 切到 English：标题、公式条、目录一起换', st.lang === 'en' && /What HogentX does/.test(st.title) && /Occupancy/.test(st.rail) && /What HogentX does/.test(st.toc), JSON.stringify(st));
-  ok('切换语言后已填内容和所在页不变', (await cur()) === 3 && (await page.inputValue('#p3')) === '房态与开售核对');
-  await page.keyboard.press('l');
-  st = await page.evaluate(() => ({ lang: document.documentElement.lang, title: document.querySelector('#what .slide-title').textContent, ph: document.getElementById('p1').getAttribute('placeholder') }));
-  ok('再按 L 切到 Bahasa Melayu（含输入框提示字）', st.lang === 'ms' && /Apa yang HogentX buat/.test(st.title) && /hotel/i.test(st.ph) && !/[一-鿿]/.test(st.ph), JSON.stringify(st));
-  await page.keyboard.press('l');
-  st = await page.evaluate(() => ({ lang: document.documentElement.lang, title: document.querySelector('#what .slide-title').textContent }));
-  ok('第三次按 L 回到中文', st.lang === 'zh-CN' && /HogentX 做什么/.test(st.title), JSON.stringify(st));
-  ok('中文文件投屏没有外部请求和脚本错误', page._external.length === 0 && page._errors.length === 0, page._external.concat(page._errors).join(' | '));
-  await page.context().close();
-
-  // ---------- 三种语言逐页量版面 ----------
+  // ------------------------------------------------------------------ 三份文件：加载、默认语言、版面
   for (const lang of ['zh', 'en', 'ms']) {
-    page = await newPage(browser, { width: 1920, height: 1080 });
-    await page.goto(URLS[lang], { waitUntil: 'load' });
+    const page = await newPage(browser, { width: 1920, height: 1080 });
+    await page.goto(URLS[lang] + '?mode=present', { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);
-    ok(`${NAMES[lang]} 文件打开即为 ${NAMES[lang]}`, (await page.evaluate(() => document.documentElement.getAttribute('data-lang'))) === lang);
-    const layout = await page.evaluate(measureLayout);
-    const overflow = layout.filter((l) => l.over > 0 || l.right > 1920 || l.headOverlap > 0);
-    ok(`${NAMES[lang]}：每页内容都在标题之下、页脚之上，不出右边界`, overflow.length === 0, overflow.map((l) => `${l.id}:${l.over}/${l.headOverlap}`).join(' '));
-    const small = layout.filter((l) => l.minFont < MIN_STAGE[lang] - 0.05);
-    ok(`${NAMES[lang]}：投屏文字不小于 ${MIN_STAGE[lang]}px`, small.length === 0, small.map((l) => l.id + ':' + l.minFont).join(' '));
-    const twoLine = layout.filter((l) => l.footLines > 1);
-    ok(`${NAMES[lang]}：页脚说明都在一行内`, twoLine.length === 0, twoLine.map((l) => l.id).join(' '));
+    const n = await page.evaluate(() => document.querySelectorAll('.slide').length);
+    ok(`[${NAMES[lang]}] 共 ${TOTAL} 页`, n === TOTAL, '实际 ' + n);
+    const ids = await page.evaluate(() => Array.from(document.querySelectorAll('.slide')).map((s) => s.id));
+    ok(`[${NAMES[lang]}] 页面顺序`, JSON.stringify(ids) === JSON.stringify(IDS), ids.join(','));
+    ok(`[${NAMES[lang]}] 打开时的语言`, (await htmlLang(page)) === HTML_LANG[lang]);
+    const layout = await measure(page);
+    const bad = layout.filter((r) => r.over > 0 || r.right > 1920 - 100 || r.headClash > 0);
+    ok(`[${NAMES[lang]}] 每页内容不压页脚、不出边界、不压标题`, bad.length === 0, bad.map((r) => `${r.id}: 超出 ${r.over}px, 右 ${r.right}, 压标题 ${r.headClash}`).join('; '));
+    const tiny = layout.filter((r) => r.tooSmall);
+    ok(`[${NAMES[lang]}] 投屏时文字不小于 ${MIN_FONT}px`, tiny.length === 0, tiny.map((r) => `${r.id}: ${r.small}px（${r.who}）`).join('; '));
     if (lang !== 'zh') {
-      const stray = await page.evaluate((okSrc) => {
-        const re = new RegExp(okSrc, 'g'); const bad = [];
-        document.querySelectorAll('.slide, .topbar, .hud, .overlay').forEach((root) => {
-          if (root.closest('[data-noi18n]')) return;
-          const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-          while (walker.nextNode()) {
-            const n = walker.currentNode; if (n.parentElement.closest('[data-noi18n], script, style')) continue;
-            const t = n.textContent.replace(re, '');
-            if (/[㐀-鿿]/.test(t)) bad.push(t.trim().slice(0, 24));
-          }
-          root.querySelectorAll('[placeholder], [aria-label], [alt], [data-title], [data-label], [data-fill]').forEach((el) => {
-            if (el.closest('[data-noi18n]')) return;
-            ['placeholder', 'aria-label', 'alt', 'data-title', 'data-label', 'data-fill'].forEach((a) => { const v = (el.getAttribute(a) || '').replace(re, ''); if (/[㐀-鿿]/.test(v)) bad.push(a + '=' + v.slice(0, 20)); });
+      const cjk = await page.evaluate(() => {
+        const left = [];
+        document.querySelectorAll('.slide *').forEach((el) => {
+          if (el.closest('[data-noi18n]')) return;
+          Array.from(el.childNodes).forEach((c) => {
+            if (c.nodeType !== 3) return;
+            const t = c.textContent.replace(/住小叮/g, '');
+            if (/[\u3400-\u9fff]/.test(t)) left.push(t.trim().slice(0, 14));
           });
         });
-        return bad;
-      }, CJK_OK.source);
-      ok(`${NAMES[lang]}：页面上没有漏翻的中文`, stray.length === 0, stray.slice(0, 5).join(' | '));
-    }
-    ok(`${NAMES[lang]}：没有外部请求和脚本错误`, page._external.length === 0 && page._errors.length === 0, page._external.concat(page._errors).join(' | '));
-    await page.context().close();
-  }
-
-  // 网址参数切换语言
-  page = await newPage(browser, { width: 1920, height: 1080 });
-  await page.goto(URLS.zh + '?lang=ms#9', { waitUntil: 'load' });
-  ok('网址加 ?lang=ms 直接以马来文打开', await page.evaluate(() => document.documentElement.lang === 'ms' && /Tiga pelan/.test(document.querySelector('#plans .slide-title').textContent)));
-  await page.context().close();
-
-  // ---------- 手机阅读（三种语言） ----------
-  for (const lang of ['zh', 'en', 'ms']) {
-    for (const width of [390, 320]) {
-      page = await newPage(browser, { width, height: 844 }, { deviceScaleFactor: 2, isMobile: true, hasTouch: true });
-      await page.goto(URLS[lang], { waitUntil: 'load' });
-      const m = await page.evaluate(() => {
-        let minBody = 99, minAny = 99;
-        document.querySelectorAll('.slide p, .slide li, .slide dd, .slide td').forEach((el) => {
-          const cs = getComputedStyle(el); if (cs.display === 'none' || !el.textContent.trim() || !el.getClientRects().length) return;
-          const f = parseFloat(cs.fontSize); minAny = Math.min(minAny, f);
-          if (!el.closest('.tiny, .kicker, .shot-cap, .formula-line, thead') && !el.classList.contains('tiny')) minBody = Math.min(minBody, f);
-        });
-        return { present: document.documentElement.classList.contains('present'), sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, allVisible: Array.from(document.querySelectorAll('.slide')).every((s) => s.getBoundingClientRect().height > 100), minBody, minAny, footNotes: Array.from(document.querySelectorAll('.slide-foot .foot-note:not(.foot-legend)')).filter((n) => n.getClientRects().length).length };
+        return left;
       });
-      ok(`${NAMES[lang]} · 手机 ${width}px：竖向阅读，没有横向滚动`, !m.present && m.allVisible && m.sw <= m.cw, m.sw + ' > ' + m.cw);
-      if (width === 390) {
-        ok(`${NAMES[lang]} · 手机：正文不小于 16px，标注不小于 14px`, m.minBody >= 16 && m.minAny >= 14, m.minBody + ' / ' + m.minAny);
-        ok(`${NAMES[lang]} · 手机：各页页脚里的说明文字都显示`, m.footNotes >= 14, String(m.footNotes));
-      }
-      if (lang === 'zh' && width === 390) {
-        await page.tap('.lang-switch button[data-lang="en"]');
-        ok('手机顶栏点 EN 切到英文', await page.evaluate(() => document.documentElement.lang === 'en' && /three sums/i.test(document.querySelector('.cover-title').textContent)));
-        await page.tap('.lang-switch button[data-lang="zh"]');
-        const img = page.locator('#pace .shot-frame').first();
-        await img.scrollIntoViewIfNeeded(); await img.tap();
-        const z0 = await page.evaluate(() => document.getElementById('lightboxImg').getBoundingClientRect().width);
-        await page.tap('#lightboxImg');
-        const z1 = await page.evaluate(() => document.getElementById('lightboxImg').getBoundingClientRect().width);
-        ok('手机上点截图再点一下，放大到原始大小', z1 > z0 * 2, z0 + ' → ' + z1);
-        await page.goBack();
-        ok('手机“返回”键只关掉放大图，不离开页面', await page.evaluate(() => !document.getElementById('lightbox').classList.contains('is-open') && document.querySelectorAll('.slide').length > 0));
-      }
-      ok(`${NAMES[lang]} · 手机 ${width}px：没有外部请求和脚本错误`, page._external.length === 0 && page._errors.length === 0, page._errors.join(' | '));
-      await page.context().close();
+      ok(`[${NAMES[lang]}] 页面上除“住小叮”外没有中文`, cjk.length === 0, cjk.slice(0, 5).join(' | '));
     }
-  }
-
-  // 触屏平板横放：默认竖向阅读，不进投屏
-  page = await newPage(browser, { width: 1180, height: 820 }, { isMobile: true, hasTouch: true });
-  await page.goto(URLS.zh, { waitUntil: 'load' });
-  ok('平板横放默认是阅读模式（可手动切投屏）', await page.evaluate(() => !document.documentElement.classList.contains('present')));
-  await page.context().close();
-
-  // ---------- 关闭脚本也能读（三份文件各显示自己的语言） ----------
-  for (const lang of ['zh', 'en', 'ms']) {
-    page = await newPage(browser, { width: 390, height: 844 }, { javaScriptEnabled: false });
-    await page.goto(URLS[lang], { waitUntil: 'load' });
-    const nojs = await page.evaluate(() => ({
-      visible: Array.from(document.querySelectorAll('.slide')).every((s) => s.getBoundingClientRect().height > 100),
-      imgs: Array.from(document.images).filter((i) => i.getAttribute('src')).every((i) => i.naturalWidth > 0),
-      sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth,
-      dead: Array.from(document.querySelectorAll('.choice button, .topbar-actions button, .shot-zoom, #calcNights')).filter((el) => el.getClientRects().length).length,
-      title: document.querySelector('#plans .slide-title').textContent, lang: document.documentElement.lang,
-    }));
-    const want = { zh: /三个方案/, en: /Three plans/, ms: /Tiga pelan/ }[lang];
-    ok(`${NAMES[lang]} · 关闭脚本：所有页面和图片可读，显示 ${NAMES[lang]}，不留点不动的按钮`, nojs.visible && nojs.imgs && nojs.sw <= nojs.cw && nojs.dead === 0 && want.test(nojs.title), JSON.stringify(nojs));
+    ok(`[${NAMES[lang]}] 没有外部请求`, page._external.length === 0, page._external.join(', '));
+    ok(`[${NAMES[lang]}] 没有脚本报错`, page._errors.length === 0, page._errors.join(' | '));
     await page.context().close();
   }
 
-  // ---------- 打印排版 ----------
-  page = await newPage(browser, { width: 1920, height: 1080 });
-  await page.goto(URLS.zh + '?print=1', { waitUntil: 'load' });
-  const pr = await page.evaluate(() => Array.from(document.querySelectorAll('.slide')).map((s) => { const r = s.getBoundingClientRect(); return [Math.round(r.width), Math.round(r.height)]; }));
-  ok('打印排版：每页 1920×1080', pr.every((x) => x[0] === 1920 && x[1] === 1080), JSON.stringify(pr.slice(0, 3)));
-  await page.context().close();
+  // ------------------------------------------------------------------ 投屏：翻页与分步出现
+  {
+    const page = await newPage(browser, { width: 1920, height: 1080 });
+    await page.goto(URLS.zh + '?mode=present', { waitUntil: 'load' });
+    ok('投屏：从封面开始', (await currentId(page)) === 'cover');
+    await page.keyboard.press('ArrowRight');
+    ok('投屏：→ 到第 2 页，要点先不出现', (await currentId(page)) === 'shift' && (await stepsOn(page)) === 0);
+    for (let k = 1; k <= 4; k++) { await page.keyboard.press('ArrowRight'); }
+    ok('投屏：再按 4 次，4 条依次出现，仍在第 2 页', (await currentId(page)) === 'shift' && (await stepsOn(page)) === 4);
+    await page.keyboard.press('PageDown');
+    ok('投屏：翻页笔（PageDown）到第 3 页', (await currentId(page)) === 'leaks');
+    await page.keyboard.press('ArrowLeft');
+    ok('投屏：← 回到第 2 页，内容全部可见', (await currentId(page)) === 'shift' && (await stepsOn(page)) === 4);
+    await page.keyboard.press('End');
+    ok('投屏：End 到最后一页', (await currentId(page)) === 'sources');
+    await page.keyboard.press('Home');
+    ok('投屏：Home 回到封面', (await currentId(page)) === 'cover');
+    await page.evaluate(() => { location.hash = '#plans'; });
+    await page.waitForTimeout(80);
+    ok('投屏：#plans 直达方案页', (await currentId(page)) === 'plans');
+    await page.evaluate(() => { location.hash = '#13'; });
+    await page.waitForTimeout(80);
+    ok('投屏：#13 直达收尾页', (await currentId(page)) === 'start');
+    const pageNo = await text(page, '.slide.is-current .foot-page');
+    ok('投屏：页码显示 13 / 17', pageNo === '13 / 17', pageNo);
+    const bar = await page.evaluate(() => document.getElementById('progressBar').style.width);
+    ok('投屏：进度条跟着走', Math.abs(parseFloat(bar) - (13 / 17) * 100) < 0.5, bar);
+
+    // 目录
+    await page.keyboard.press('m');
+    const tocN = await page.evaluate(() => document.querySelectorAll('#toc.is-open #tocList button').length);
+    ok('目录：按 M 打开，列出全部页面', tocN === TOTAL, '实际 ' + tocN);
+    await page.click('#tocList li:nth-child(4) button');
+    ok('目录：点第 4 项跳到“算一笔”', (await currentId(page)) === 'math');
+
+    // 按酒店数字算账
+    const calc = async () => page.evaluate(() => {
+      const g = (k) => { const el = document.querySelector('[data-out="' + k + '"]'); return el ? el.textContent : null; };
+      return { rev: g('rev'), nights: g('nights'), empty: g('empty'), occ1: g('occ1'), adr5: g('adr5'), emptyMonth: g('emptyMonth'),
+        eq: Array.from(document.querySelectorAll('[data-eq]')).map((e) => e.textContent) };
+    });
+    let c = await calc();
+    ok('算一笔：默认是全马平均（65 间、RM 231.3、51.2%）', c.rev === 'RM 2,809,647' && c.nights === '12,147' && c.empty === '32' && c.occ1 === 'RM 54,876' && c.adr5 === 'RM 60,736', JSON.stringify(c));
+    ok('算一笔：月费折成房晚 4 / 11 / 44，每月空着 965 个房晚', c.eq.join('/') === '4/11/44' && c.emptyMonth === '965', JSON.stringify(c));
+    await page.fill('#cRooms', '100'); await page.fill('#cAdr', '200'); await page.fill('#cOcc', '70');
+    c = await calc();
+    ok('算一笔：改成 100 间、RM 200、70% 后跟着变', c.rev === 'RM 5,110,000' && c.nights === '25,550' && c.empty === '30' && c.occ1 === 'RM 73,000' && c.adr5 === 'RM 127,750' && c.eq.join('/') === '4/13/50' && c.emptyMonth === '913', JSON.stringify(c));
+    await page.fill('#cOcc', '');
+    c = await calc();
+    ok('算一笔：没填全时显示“—”，不出现 NaN', c.rev === '—' && c.eq.every((x) => x === '—') && !JSON.stringify(c).includes('NaN'), JSON.stringify(c));
+    await page.fill('#cOcc', '70');
+    await page.focus('#cRooms');
+    await page.keyboard.press('ArrowRight');
+    ok('算一笔：在输入框里按方向键不翻页', (await currentId(page)) === 'math');
+    await page.keyboard.press('PageDown');
+    ok('算一笔：在输入框里用翻页笔可以翻页', (await currentId(page)) === 'what');
+
+    // 计时与黑屏
+    await page.keyboard.press('Home');
+    await page.keyboard.press('t');
+    let timer = await text(page, '#timer');
+    ok('计时：按 T 显示“已用 / 计划”，封面计划 00:30', /^\d\d:\d\d \/ 00:30$/.test(timer || '') && await page.isVisible('#timer'), timer);
+    await page.keyboard.press('ArrowRight');
+    timer = await text(page, '#timer');
+    ok('计时：到第 2 页，计划时间变成 02:00', /\/ 02:00$/.test(timer || ''), timer);
+    await page.evaluate(() => { location.hash = '#13'; });
+    await page.waitForTimeout(80);
+    timer = await text(page, '#timer');
+    ok('计时：讲到收尾页，计划时间 19:30', /\/ 19:30$/.test(timer || ''), timer);
+    await page.keyboard.press('t');
+    ok('计时：再按 T 隐藏', !(await page.isVisible('#timer')));
+    await page.keyboard.press('b');
+    ok('黑屏：按 B 画面全黑', await page.isVisible('.blackout'));
+    await page.keyboard.press('ArrowRight');
+    ok('黑屏：再按任意键恢复，页面不动', !(await page.isVisible('.blackout')) && (await currentId(page)) === 'start');
+
+    // 放大截图
+    await page.evaluate(() => { location.hash = '#us'; });
+    await page.waitForTimeout(80);
+    await page.click('#us .shot-frame');
+    ok('截图：点一下放大', await page.isVisible('#lightbox.is-open #lightboxImg'));
+    const cap = await text(page, '#lightboxCap');
+    ok('截图：放大后带着图注', (cap || '').length > 4, cap);
+    await page.keyboard.press('Escape');
+    ok('截图：Esc 关闭', !(await page.isVisible('#lightbox.is-open')));
+
+    // 三语切换
+    await page.evaluate(() => { location.hash = '#2'; });
+    await page.waitForTimeout(80);
+    const tZh = await text(page, '#shift .slide-title');
+    await page.keyboard.press('l');
+    const tEn = await text(page, '#shift .slide-title');
+    ok('三语：按 L 切到 English', (await htmlLang(page)) === 'en' && tEn !== tZh && /occupancy/i.test(tEn || ''), tEn);
+    const svgEn = await page.evaluate(() => document.querySelector('#price svg .vz-direct').textContent);
+    ok('三语：图表里的文字也跟着换', /booked/i.test(svgEn || ''), svgEn);
+    c = await calc();
+    ok('三语：切换后算出来的数字还在', c.rev === 'RM 5,110,000' && c.eq.join('/') === '4/13/50', JSON.stringify(c));
+    await page.keyboard.press('l');
+    ok('三语：再按 L 切到 Bahasa Melayu', (await htmlLang(page)) === 'ms' && /penghunian/i.test((await text(page, '#shift .slide-title')) || ''));
+    await page.keyboard.press('l');
+    ok('三语：第三次回到中文', (await htmlLang(page)) === 'zh-CN' && (await text(page, '#shift .slide-title')) === tZh);
+    ok('投屏流程：没有外部请求、没有脚本报错', page._external.length === 0 && page._errors.length === 0, page._external.concat(page._errors).join(' | '));
+    await page.context().close();
+  }
+
+  // ------------------------------------------------------------------ 数字跳动：动画结束后是准确数字
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+    const page = await ctx.newPage();
+    await page.goto(URLS.zh + '?mode=present', { waitUntil: 'load' });
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(1100);
+    const v1 = await text(page, '#shift .fact:nth-child(1) .num');
+    await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(1100);
+    const v3 = await text(page, '#shift .fact:nth-child(3) .num');
+    ok('数字跳动：停下来是 51.2 和 −7.6', v1 === '51.2' && v3 === '\u22127.6', v1 + ' / ' + v3);
+    await ctx.close();
+  }
+
+  // ------------------------------------------------------------------ 地址栏参数
+  {
+    const page = await newPage(browser, { width: 1920, height: 1080 });
+    await page.goto(URLS.zh + '?mode=present&lang=ms#plans', { waitUntil: 'load' });
+    ok('参数：?lang=ms#plans 直接以马来文打开方案页', (await htmlLang(page)) === 'ms' && (await currentId(page)) === 'plans');
+    await page.context().close();
+  }
+
+  // ------------------------------------------------------------------ 手机阅读
+  for (const lang of ['zh', 'en', 'ms']) {
+    const page = await newPage(browser, { width: 390, height: 844 }, { isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+    await page.goto(URLS[lang], { waitUntil: 'load' });
+    const m = await page.evaluate(() => ({ present: document.documentElement.classList.contains('present'), sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth,
+      hiddenSteps: Array.from(document.querySelectorAll('[data-step]')).filter((e) => getComputedStyle(e).opacity !== '1').length,
+      small: Array.from(document.querySelectorAll('.slide p, .slide li, .slide b, .slide span, .slide td, .slide th')).filter((e) => e.offsetParent && Array.from(e.childNodes).some((c) => c.nodeType === 3 && c.textContent.trim()) && parseFloat(getComputedStyle(e).fontSize) < 12).length }));
+    ok(`[手机 · ${NAMES[lang]}] 默认是竖向阅读`, !m.present);
+    ok(`[手机 · ${NAMES[lang]}] 没有横向滚动`, m.sw <= m.cw, `${m.sw} > ${m.cw}`);
+    ok(`[手机 · ${NAMES[lang]}] 分步内容全部直接可见`, m.hiddenSteps === 0, '隐藏 ' + m.hiddenSteps);
+    ok(`[手机 · ${NAMES[lang]}] 文字不小于 12px`, m.small === 0, '偏小 ' + m.small);
+    if (lang === 'zh') {
+      await page.fill('#cRooms', '80');
+      ok('[手机] 算一笔可以直接填', (await text(page, '[data-out="rev"]')) === 'RM 3,458,028', await text(page, '[data-out="rev"]'));
+      await page.click('.lang-switch button[data-lang="en"]');
+      ok('[手机] 顶栏可以切换语言', (await htmlLang(page)) === 'en');
+      await page.click('#tocBtn');
+      ok('[手机] 目录可以打开', await page.isVisible('#toc.is-open'));
+      await page.goBack();
+      ok('[手机] 按返回键只关掉目录，不离开页面', !(await page.isVisible('#toc.is-open')) && page.url().startsWith('file://'));
+      await page.evaluate(() => document.querySelector('#screens').scrollIntoView());
+      await page.waitForTimeout(400);
+      const loaded = await page.evaluate(() => Array.from(document.querySelectorAll('#screens img')).filter((i) => i.complete && i.naturalWidth > 0).length);
+      ok('[手机] 滚到附页时截图能显示', loaded >= 2, '已加载 ' + loaded);
+    }
+    ok(`[手机 · ${NAMES[lang]}] 没有外部请求、没有脚本报错`, page._external.length === 0 && page._errors.length === 0, page._external.concat(page._errors).join(' | '));
+    await page.context().close();
+  }
+
+  // ------------------------------------------------------------------ 无脚本（邮件、聊天工具里的预览）
+  {
+    const page = await newPage(browser, { width: 390, height: 844 }, { javaScriptEnabled: false });
+    await page.goto(URLS.en, { waitUntil: 'load' });
+    const title = await page.locator('.cover-title').textContent();
+    const shown = await page.locator('.needs-js').evaluateAll((els) => els.filter((e) => e.offsetParent).length);
+    const note = await page.locator('.no-js-note').evaluateAll((els) => els.some((e) => e.offsetParent));
+    const widths = await page.locator('html').evaluate((el) => [el.scrollWidth, el.clientWidth]);
+    ok('无脚本：英文版仍显示英文内容', /Every room/.test(title || ''), title);
+    ok('无脚本：需要脚本的控件收起，换成文字说明', shown === 0 && note, `控件 ${shown}，说明 ${note}`);
+    ok('无脚本：没有横向滚动', widths[0] <= widths[1], widths.join(' > '));
+    await page.context().close();
+  }
+
+  // ------------------------------------------------------------------ 打印 / 导出 PDF
+  {
+    const page = await newPage(browser, { width: 1920, height: 1080 });
+    await page.goto(URLS.zh + '?print=1', { waitUntil: 'load' });
+    const m = await page.evaluate(() => {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      return { n: slides.length, sizes: slides.every((s) => Math.round(s.getBoundingClientRect().width) === 1920 && Math.round(s.getBoundingClientRect().height) === 1080),
+        steps: Array.from(document.querySelectorAll('[data-step]')).every((e) => getComputedStyle(e).opacity === '1'),
+        hud: ['.hud', '.progress', '.timer', '.blackout'].every((s) => { const e = document.querySelector(s); return !e || getComputedStyle(e).display === 'none'; }),
+        nums: document.querySelector('#shift .num').textContent };
+    });
+    ok('打印：每页 1920×1080，共 17 页', m.n === TOTAL && m.sizes, JSON.stringify(m));
+    ok('打印：分步内容全部印出，数字是最终值', m.steps && m.nums === '51.2', JSON.stringify(m));
+    ok('打印：控制条、进度条、计时不印出', m.hud);
+    await page.context().close();
+  }
 
   await browser.close();
   const failed = results.filter((r) => !r.pass);
-  results.forEach((r) => console.log((r.pass ? '  ✓ ' : '  ✗ ') + r.name + (r.pass || !r.detail ? '' : '  →  ' + r.detail)));
-  console.log(failed.length ? `未通过 ${failed.length} 项（共 ${results.length} 项）` : `全部通过（${results.length} 项，${total} 页 × 3 种语言）`);
+  for (const r of results) console.log((r.pass ? '  ✓ ' : '  ✗ ') + r.name + (r.pass || !r.detail ? '' : '  →  ' + r.detail));
+  console.log(`\n${results.length - failed.length} / ${results.length} 项通过`);
   process.exit(failed.length ? 1 : 0);
 })().catch((e) => { console.error(e); process.exit(1); });
